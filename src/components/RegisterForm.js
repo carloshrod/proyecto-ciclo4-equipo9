@@ -1,17 +1,18 @@
+import React from 'react';
 import '../App.css';
 import { Link } from "react-router-dom";
 
 function Register() {
   return (
-    <main>
+    <>
     <div class="container">
 
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container pt-5">
+      <section class="section register d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container pt-2">
           <div class="row justify-content-center">
             <div class="col-lg-10 col-md-8 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="card mb-3">
+              <div class="card mb-3 form-1">
 
                 <div class="card-body">
 
@@ -46,14 +47,17 @@ function Register() {
 
                     <div class="col-6">
                       <label for="yourName" class="form-label">Número de Documento</label>
-                      <input type="number" name="name" class="form-control" id="yourName" required/>
-                      <div class="invalid-feedback">Por favor, ingresa tu número de documento!</div>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-fingerprint"></i></span>
+                        <input type="number" name="name" class="form-control" id="yourName" required/>
+                        <div class="invalid-feedback">Por favor, ingresa tu número de documento!</div>
+                      </div>
                     </div>
 
                     <div class="col-6">
                       <label for="yourUsername" class="form-label">Correo Electrónico</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-envelope-fill"></i></span>
                         <input type="email" name="email" class="form-control" id="yourEmail" required/>
                         <div class="invalid-feedback">Por favor, ingresa un correo electrónico válido!</div>
                       </div>
@@ -61,8 +65,11 @@ function Register() {
 
                     <div class="col-6">
                       <label for="yourPassword" class="form-label">Contraseña</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required/>
-                      <div class="invalid-feedback">Por favor ingresa tu contraseña!</div>
+                      <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock-fill"></i></span>
+                        <input type="password" name="password" class="form-control" id="yourPassword" required/>
+                        <div class="invalid-feedback">Por favor ingresa tu contraseña!</div>
+                      </div>
                     </div>
 
                     <div class="col-12">
@@ -73,24 +80,20 @@ function Register() {
                       </div>
                     </div>
                     <div class="col-4 m-auto mt-3">
-                      <button class="btn btn-primary w-100" type="submit">Crear Cuenta</button>
+                      <button class="btn btn-primary rounded-pill w-100" type="submit">Crear Cuenta</button>
                     </div>
                     <div class="col-12 text-center">
-                      <p class="small mb-0">¿Ya tienes una cuenta? <Link to="/login">Inicia sesión aquí</Link></p>
+                      <p class="small mb-0">¿Ya tienes una cuenta? <Link to="/login" style={{fontWeight: 'bold'}}>Inicia sesión aquí</Link></p>
                     </div>
                   </form>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </section>
-
     </div>
-    {/* <!-- End #main --> */}
-  </main>
+  </>
   );
 }
 

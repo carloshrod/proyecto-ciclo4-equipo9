@@ -1,0 +1,13 @@
+.logo-body-home {
+  width: 360px;
+  margin-top: 30px;
+}
+
+.card-home {
+  border-radius: 10px;
+  background-color: rgb(255,255,255, .5);
+}
+
+.form-1 {
+  border-radius: 20px;
+}
