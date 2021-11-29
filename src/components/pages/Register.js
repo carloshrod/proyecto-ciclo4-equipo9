@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from "../Header";
+import HeaderSystemOut from "../HeaderSystemOut";
 import Footer from "../Footer";
-import RegisterForm from "../RegisterForm";
+import FormRegister from "../FormRegister";
 
 function Register() {
     return (
         <>
-        <Header/>
-        <RegisterForm/>
+        <HeaderSystemOut/>
+        <FormRegister/>
         <Footer/>
         </>
     )

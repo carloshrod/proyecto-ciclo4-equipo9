@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from "../Header";
+import HeaderSystemOut from "../HeaderSystemOut";
 import Footer from "../Footer";
-import ForgotPasswordForm from "../ForgotPasswordForm";
+import FormForgotPassword from "../FormForgotPassword";
 
 function ForgotPassword() {
     return (
         <>
-        <Header/>
-        <ForgotPasswordForm/>
+        <HeaderSystemOut/>
+        <FormForgotPassword/>
         <Footer/>
         </>
     )

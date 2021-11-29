@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from "../Header";
+import HeaderSystemOut from "../HeaderSystemOut";
 import Footer from "../Footer";
-import LoginForm from "../LoginForm";
+import FormLogin from "../FormLogin";
 
 function Login() {
     return (
         <>
-        <Header/>
-        <LoginForm/>
+        <HeaderSystemOut/>
+        <FormLogin/>
         <Footer/>
         </>
     )

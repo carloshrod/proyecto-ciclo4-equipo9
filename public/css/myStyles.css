@@ -1,6 +1,6 @@
 body {
     background-image: url('/img/background.png');
-    background-size: cover, center;
+    background-size: cover;
   }
 
 #header {

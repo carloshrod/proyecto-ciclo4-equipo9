@@ -1,12 +1,13 @@
-import Header from "../Header";
+import React from 'react';
+import HeaderSystemOut from "../HeaderSystemOut";
 import Footer from "../Footer";
-import Body from "../Body";
+import BodyLandingPage from "../BodyLandingPage";
 
 function App() {
   return (
     <>
-    <Header/>
-    <Body/>
+    <HeaderSystemOut/>
+    <BodyLandingPage/>
     <Footer/>
   </>  
   );

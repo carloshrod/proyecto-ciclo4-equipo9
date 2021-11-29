@@ -1,11 +1,11 @@
 import React from 'react';
-import './MyStyles.css'; 
+import './CompStyles.css'; 
 import { Link } from "react-router-dom";
 
-function Body() {
+function BodyLandingPage() {
     return (
         <>
-        <div className="container" >
+        <div id="container-100vh" className="container" >
 
             <div className="" style={{marginTop: '50px'}}>
                 <h1 className="text-center font-weight-bold">Plataforma de Gestión Catastral</h1>
@@ -39,4 +39,4 @@ function Body() {
     )
 }
 
-export default Body;
+export default BodyLandingPage;
