@@ -13,7 +13,7 @@ function ManageUsers() {
         <main id="main" className="main">
             {/* <AdminTitle/> */}
             <div className="pagetitle">
-                <h1>Gestionar Usuarios</h1>
+                <h1>Gestionar Usuarios</h1>s
                 <nav>
                     <ol className="breadcrumb">
                     <li className="breadcrumb-item"><a href="/home_admin">Home</a></li>
