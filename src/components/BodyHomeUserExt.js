@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 function BodyHomeUserExt() {
     return (
         <>
-        <div id="container-100vh" className="container" >
+        <div className="container min-vh-100" >
 
-            <div className="" style={{marginTop: '50px'}}>
+            <div className="mg-t-50px">
                 <h1 className="text-center font-weight-bold">Plataforma de Gestión Catastral</h1>
             </div>{/* <!-- End Page Title --> */}
 
-            <div className="mx-auto logo-body-home" style={{marginTop: '70px'}}>
+            <div className="mx-auto logo-body-home mg-t-50px">
                 <img src="img/logo-escudo.png" alt=""/>
             </div>
 
-            <section className="section mb-4" style={{marginTop: '70px'}}>
+            <section className="section mb-4 mg-t-75px">
                 <div className="row">
                     <div className="col-lg-6 px-5">
                         <div className="card card-home">
@@ -34,7 +34,7 @@ function BodyHomeUserExt() {
                     </div>
 
                 </div>
-                <div className="row justify-content-center" style={{marginTop: '30px'}}>
+                <div className="row justify-content-center mg-t-25px">
                     <div className="col-lg-6 px-5">
                         <div className="card card-home">
                         <Link to="/convenio">

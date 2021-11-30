@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 function BodyLandingPage() {
     return (
         <>
-        <div id="container-100vh" className="container" >
+        <div className="container min-vh-100" >
 
-            <div className="" style={{marginTop: '50px'}}>
+            <div className="mg-t-50px">
                 <h1 className="text-center font-weight-bold">Plataforma de Gestión Catastral</h1>
             </div>{/* <!-- End Page Title --> */}
 

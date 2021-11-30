@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
-function Table() {
+function TableUsers() {
     return (
         <>
-        <section className="section">
+        <section className="section min-vh-100">
             <div className="row">
                 <div className="col-lg-12">
 
@@ -44,6 +45,9 @@ function Table() {
                             <th scope="col" data-sortable="" style={{width: "19.2835%;"}}>
                                 <a href="#" className="dataTable-sorter">Start Date</a>
                             </th>
+                            <th scope="col" data-sortable="" style={{width: "5.6902%;"}}>
+                                <a href="#" className=""></a>
+                            </th>                        
                         </tr>
                         </thead>
                         <tbody>
@@ -53,6 +57,15 @@ function Table() {
                             <td>Designer</td>
                             <td>28</td>
                             <td>2016-05-25</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">2</th>
@@ -60,6 +73,16 @@ function Table() {
                             <td>Developer</td>
                             <td>35</td>
                             <td>2014-12-05</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
+
                         </tr>
                         <tr>
                             <th scope="row">3</th>
@@ -67,6 +90,15 @@ function Table() {
                             <td>Finance</td>
                             <td>45</td>
                             <td>2011-08-12</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">4</th>
@@ -74,6 +106,15 @@ function Table() {
                             <td>HR</td>
                             <td>34</td>
                             <td>2012-06-11</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">5</th>
@@ -81,6 +122,15 @@ function Table() {
                             <td>Dynamic Division Officer</td>
                             <td>47</td>
                             <td>2011-04-19</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">6</th>
@@ -88,6 +138,15 @@ function Table() {
                             <td>Designer</td>
                             <td>28</td>
                             <td>2016-05-25</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">7</th>
@@ -95,6 +154,15 @@ function Table() {
                             <td>Developer</td>
                             <td>35</td>
                             <td>2014-12-05</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">8</th>
@@ -102,6 +170,15 @@ function Table() {
                             <td>Finance</td>
                             <td>45</td>
                             <td>2011-08-12</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">9</th>
@@ -109,6 +186,15 @@ function Table() {
                             <td>HR</td>
                             <td>34</td>
                             <td>2012-06-11</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         <tr>
                             <th scope="row">10</th>
@@ -116,6 +202,15 @@ function Table() {
                             <td>Dynamic Division Officer</td>
                             <td>47</td>
                             <td>2011-04-19</td>
+                            <td align="center">
+                                <Link to="/home_admin/manage_users/edit">
+                                    <i className="bi bi-pencil-fill"></i> 
+                                </Link>                                                             
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <Link to="/delete">
+                                    <i className="bi bi-trash-fill"></i> 
+                                </Link>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -140,4 +235,4 @@ function Table() {
     )
 }
 
-export default Table;
+export default TableUsers;

@@ -7,12 +7,12 @@ function Register() {
     <>
     <div className="container">
 
-      <section className="section register d-flex flex-column align-items-center justify-content-center py-4">
+      <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div className="container pt-2">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-md-8 d-flex flex-column align-items-center justify-content-center">
 
-              <div className="card mb-3 form-1">
+              <div className="card form-1">
 
                 <div className="card-body">
 

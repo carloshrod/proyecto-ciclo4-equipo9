@@ -17,7 +17,24 @@
   border-radius: 20px;
 }
 
-#container-100vh {
+.center-img {
+  margin: auto;
+  display: block;
+}
+
+/* #container-100vh {
   min-height:100vh;
   position:relative;
+} */
+
+.mg-t-25px {
+  margin-top: 25px;
+}
+
+.mg-t-50px {
+  margin-top: 50px;
+}
+
+.mg-t-75px {
+  margin-top: 75px;
 }

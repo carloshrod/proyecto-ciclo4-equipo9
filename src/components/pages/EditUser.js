@@ -1,11 +1,12 @@
 import React from 'react';
-import HeaderAdmin from "../HeaderAdmin";
-import Sidebar from "../Sidebar";
-import AdminTitle from "../AdminTitle";
-import FooterAdmin from "../FooterAdmin";
-import TableUsers from "../TableUsers";
+import HeaderAdmin from '../HeaderAdmin';
+import AdminTitle from '../AdminTitle';
+import Sidebar from '../Sidebar';
+import FooterAdmin from '../FooterAdmin';
+import FormEditUser from '../FormEditUser';
 
-function ManageUsers() {
+
+function EditUser() {
     return (
         <>
         <HeaderAdmin/>
@@ -13,7 +14,7 @@ function ManageUsers() {
         <main id="main" className="main">
             {/* <AdminTitle/> */}
             <div className="pagetitle">
-                <h1>Gestionar Usuarios</h1>
+                <h1>Nombre del Usuario</h1>
                 <nav>
                     <ol className="breadcrumb">
                     <li className="breadcrumb-item"><a href="/home_admin">Home</a></li>
@@ -23,13 +24,13 @@ function ManageUsers() {
             </div>
             <section className="section dashboard">
                 <div className="row">
-                    <TableUsers/>
+                    <FormEditUser/>
                 </div>
             </section>
         </main>{/* <!-- End #main --> */}
-        <FooterAdmin/>            
+        <FooterAdmin/>
         </>
     )
 }
 
-export default ManageUsers;
+export default EditUser;
