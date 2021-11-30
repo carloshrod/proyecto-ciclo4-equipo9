@@ -26,7 +26,7 @@ function Sidebar() {
             {/* <!-- End Profile Page Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="pages-faq.html">
+                <a className="nav-link collapsed" href="/home_admin/CreatePredio">
                 <i className="bi bi-plus-circle-fill"></i>
                 <i className="bi bi-building"></i>
                 <span>Crear Predios</span>
@@ -35,7 +35,7 @@ function Sidebar() {
             {/* <!-- End F.A.Q Page Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="pages-contact.html">
+                <a className="nav-link collapsed" href="/home_admin/managePredio">
                 <i className="bi bi-pencil-fill"></i>
                 <i className="bi bi-building"></i>
                 <span>Gestionar Predios</span>

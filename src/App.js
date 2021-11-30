@@ -8,6 +8,9 @@ import HomeAdmin from "./components/pages/HomeAdmin";
 import ManageUsers from "./components/pages/ManageUsers";
 import HomeUserExt from "./components/pages/HomeUserExt";
 import PagarImpuestos from "./components/pages/PagarImpuestos";
+import CreatePredio from "./components/pages/CreatePredio";
+import ManagePredio from "./components/pages/ManagePredio";
+
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
         <Route path="/home_admin/manage_users" element={<ManageUsers/>} />
         <Route path="/home_user_ext" element={<HomeUserExt/>} />
         <Route path="/home_user_ext/PagarImpuestos" element={<PagarImpuestos/>} />
+        <Route path="/home_admin/CreatePredio" element={<CreatePredio/>} />
+        <Route path="/home_admin/ManagePredio" element={<ManagePredio/>} />
+
 
       </Routes>
       
