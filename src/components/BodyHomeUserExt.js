@@ -19,7 +19,7 @@ function BodyHomeUserExt() {
                 <div className="row">
                     <div className="col-lg-6 px-5">
                         <div className="card card-home">
-                            <Link to="/pagar">
+                            <Link to="/home-user-ext/pagar">
                                 <h5 className="card-title text-center">Pagar impuesto predial</h5>
                             </Link>
                         </div>

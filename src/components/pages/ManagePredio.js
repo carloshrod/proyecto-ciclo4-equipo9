@@ -12,10 +12,10 @@ export default function ManagePredio(){
         <main id="main" className="main">
             {/* <AdminTitle/> */}
             <div className="pagetitle">
-                <h1>Gestionar Predios</h1>s
+                <h1>Gestionar Predios</h1>
                 <nav>
                     <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="/home_admin">Home</a></li>
+                    <li className="breadcrumb-item"><a href="/home-admin">Home</a></li>
                     <li className="breadcrumb-item active">Gestionar Predios</li>
                     </ol>
                 </nav>

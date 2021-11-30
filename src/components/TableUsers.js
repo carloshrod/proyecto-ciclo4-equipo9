@@ -58,7 +58,7 @@ function TableUsers() {
                             <td>28</td>
                             <td>2016-05-25</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -74,7 +74,7 @@ function TableUsers() {
                             <td>35</td>
                             <td>2014-12-05</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -91,7 +91,7 @@ function TableUsers() {
                             <td>45</td>
                             <td>2011-08-12</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -107,7 +107,7 @@ function TableUsers() {
                             <td>34</td>
                             <td>2012-06-11</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -123,7 +123,7 @@ function TableUsers() {
                             <td>47</td>
                             <td>2011-04-19</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -139,7 +139,7 @@ function TableUsers() {
                             <td>28</td>
                             <td>2016-05-25</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -155,7 +155,7 @@ function TableUsers() {
                             <td>35</td>
                             <td>2014-12-05</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -171,7 +171,7 @@ function TableUsers() {
                             <td>45</td>
                             <td>2011-08-12</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -187,7 +187,7 @@ function TableUsers() {
                             <td>34</td>
                             <td>2012-06-11</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -203,7 +203,7 @@ function TableUsers() {
                             <td>47</td>
                             <td>2011-04-19</td>
                             <td align="center">
-                                <Link to="/home_admin/manage_users/edit">
+                                <Link to="/home-admin/manage-users/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

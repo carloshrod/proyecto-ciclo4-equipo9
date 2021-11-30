@@ -16,7 +16,7 @@ function ManageUsers() {
                 <h1>Gestionar Usuarios</h1>
                 <nav>
                     <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="/home_admin">Home</a></li>
+                    <li className="breadcrumb-item"><a href="/home-admin">Home</a></li>
                     <li className="breadcrumb-item active">Gestionar Usuarios</li>
                     </ol>
                 </nav>

@@ -53,7 +53,7 @@ function Login() {
                       <p className="small mb-0">¿No tienes una cuenta? <Link to="/register" style={{fontWeight: 'bold'}}>Registrate aquí!</Link></p>
                     </div>
                     <div className="col-10 text-center">
-                      <p className="small mb-0">¿Olvidaste tu contraseña? <Link to="/forgotPassword" style={{fontWeight: 'bold'}}>Recuperala aquí!</Link></p>
+                      <p className="small mb-0">¿Olvidaste tu contraseña? <Link to="/forgot-password" style={{fontWeight: 'bold'}}>Recuperala aquí!</Link></p>
                     </div>
                   </form>
                 </div>

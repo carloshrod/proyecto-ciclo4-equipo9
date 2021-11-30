@@ -21,15 +21,15 @@ function App() {
         <Route exact path="/" element={<LandingPage/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
-        <Route path="/forgotPassword" element={<ForgotPassword/>} />
-        <Route path="/home_admin" element={<HomeAdmin/>} />
-        <Route path="/home_admin/manage_users" element={<ManageUsers/>} />
-        <Route path="/home_admin/manage_users/edit" element={<EditUser/>} />
-        <Route path="/home_user_int" element={<HomeUserInt/>} />
-        <Route path="/home_admin/CreatePredio" element={<CreatePredio/>} />
-        <Route path="/home_admin/ManagePredio" element={<ManagePredio/>} />
-        <Route path="/home_user_ext" element={<HomeUserExt/>} />
-        <Route path="/home_user_ext/PagarImpuestos" element={<PagarImpuestos/>} />
+        <Route path="/forgot-password" element={<ForgotPassword/>} />
+        <Route path="/home-admin" element={<HomeAdmin/>} />
+        <Route path="/home-admin/manage-users" element={<ManageUsers/>} />
+        <Route path="/home-admin/manage-users/edit" element={<EditUser/>} />
+        <Route path="/home-user-int" element={<HomeUserInt/>} />
+        <Route path="/home-admin/create-predio" element={<CreatePredio/>} />
+        <Route path="/home-admin/manage-predio" element={<ManagePredio/>} />
+        <Route path="/home-user-ext" element={<HomeUserExt/>} />
+        <Route path="/home-user-ext/pagar" element={<PagarImpuestos/>} />
       </Routes>
     </Router>
     </>

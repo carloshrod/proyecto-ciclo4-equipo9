@@ -9,6 +9,16 @@ export default function CreatePredio(){
         <HeaderAdmin/>
         <Sidebar/>
         <main id="main" className="main">
+            {/* <AdminTitle/> */}
+            <div className="pagetitle">
+                <h1>Crear Predios</h1>
+                <nav>
+                    <ol className="breadcrumb">
+                    <li className="breadcrumb-item"><a href="/home-admin">Home</a></li>
+                    <li className="breadcrumb-item active">Crear Predios</li>
+                    </ol>
+                </nav>
+            </div>
             <section className="section dashboard">
                 <div className="row">
                 <FormCrearPredio/>

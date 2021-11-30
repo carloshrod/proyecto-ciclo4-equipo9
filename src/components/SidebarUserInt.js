@@ -10,7 +10,7 @@ function SidebarUserInt() {
             <ul className="sidebar-nav" id="sidebar-nav">
 
             <li className="nav-item">
-                <Link to="/home_user_int">
+                <Link to="/home-user-int">
                     <a className="nav-link">
                         <i className="bi bi-grid"></i>
                         <span>Dashboard</span>
@@ -29,7 +29,7 @@ function SidebarUserInt() {
             {/* <!-- End Profile Page Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="pages-faq.html">
+                <a className="nav-link collapsed" href="/home-admin/create-predio">
                 <i className="bi bi-plus-circle-fill"></i>
                 <i className="bi bi-building"></i>
                 <span>Crear Predios</span>
@@ -38,7 +38,7 @@ function SidebarUserInt() {
             {/* <!-- End F.A.Q Page Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="pages-contact.html">
+                <a className="nav-link collapsed" href="/home-admin/manage-predio">
                 <i className="bi bi-pencil-fill"></i>
                 <i className="bi bi-building"></i>
                 <span>Gestionar Predios</span>
