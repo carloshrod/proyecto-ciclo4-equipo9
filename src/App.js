@@ -10,6 +10,8 @@ import EditUser from "./components/pages/EditUser";
 import HomeUserInt from "./components/pages/HomeUserInt";
 import CreatePredio from "./components/pages/CreatePredio";
 import ManagePredio from "./components/pages/ManagePredio";
+import EditPredio from "./components/pages/EditPredio";
+import FechaPagoDcto from "./components/pages/FechaPagoDcto";
 import HomeUserExt from "./components/pages/HomeUserExt";
 import PagarImpuestos from "./components/pages/PagarImpuestos";
 
@@ -28,6 +30,8 @@ function App() {
         <Route path="/home-user-int" element={<HomeUserInt/>} />
         <Route path="/home-admin/create-predio" element={<CreatePredio/>} />
         <Route path="/home-admin/manage-predio" element={<ManagePredio/>} />
+        <Route path="/home-admin/manage-predio/edit" element={<EditPredio/>} />
+        <Route path="/home-admin/manage-predio/fecha-pago-descuentos" element={<FechaPagoDcto/>} />
         <Route path="/home-user-ext" element={<HomeUserExt/>} />
         <Route path="/home-user-ext/pagar" element={<PagarImpuestos/>} />
       </Routes>

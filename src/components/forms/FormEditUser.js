@@ -3,7 +3,7 @@ import React from 'react';
 function FormEditUser() {
     return (
         <>
-        <section className="section min-vh-100">
+        <section className="section min-vh-100 container-center center-v">
             <div className="row">
                 <div className="col-lg-12">
 
@@ -16,9 +16,9 @@ function FormEditUser() {
                                 <div className="col-12">
                                     <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle center-img"/>
                                     <div className="pt-2 text-center m-2">
-                                    <a href="#" className="btn btn-primary" title="Upload new profile image"><i className="bi bi-upload"></i></a>
+                                    <a href="#" className="btn btn-primary" title="Subir nueva imagen de perfil"><i className="bi bi-upload"></i></a>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="#" className="btn btn-danger" title="Remove    profile image"><i className="bi bi-trash"></i></a>
+                                    <a href="#" className="btn btn-danger" title="Eliminar imagen de perfil"><i className="bi bi-trash"></i></a>
                                     </div>
                                 </div>
 
@@ -31,7 +31,7 @@ function FormEditUser() {
 
                                 <div className="col-6">
                                     <label for="yourName" className="form-label">Apellidos</label>
-                                    <input type="text" name="name" className="form-control" id="yourName" required/>
+                                    <input type="text" name="lastname" className="form-control" id="yourLastname" required/>
                                     <div className="invalid-feedback">Por favor, ingresa tus apellidos!</div>
                                 </div>
 
@@ -57,14 +57,14 @@ function FormEditUser() {
                                     <label for="yourName" className="form-label">Teléfono</label>
                                     <div className="input-group has-validation">
                                     <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-telephone-fill"></i></span>
-                                    <input type="tel" name="name" className="form-control" id="yourName" required/>
+                                    <input type="tel" name="phone" className="form-control" id="yourPhone" required/>
                                     <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
                                     </div>
                                 </div>
 
                                 <div className="col-6">
                                     <label for="yourName" className="form-label">Dirección</label>
-                                    <input type="text" name="name" className="form-control" id="yourName" required/>
+                                    <input type="text" name="adress" className="form-control" id="yourAdress" required/>
                                     <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
                                 </div>
 

@@ -1,11 +1,10 @@
 import React from 'react';
 import HeaderAdmin from '../HeaderAdmin';
-import AdminTitle from '../AdminTitle';
 import Sidebar from '../Sidebar';
-import FormEditUser from '../forms/FormEditUser';
+import FormFechaPagoDcto from '../forms/FormFechaPagoDcto';
 import FooterAdmin from '../FooterAdmin';
 
-function EditUser() {
+function FechaPagoDcto() {
     return (
         <>
         <HeaderAdmin/>
@@ -13,23 +12,23 @@ function EditUser() {
         <main id="main" className="main">
             {/* <AdminTitle/> */}
             <div className="pagetitle">
-                <h1>Nombre del Usuario</h1>
+                <h1>Definir Fecha de Pago / Descuentos</h1>
                 <nav>
                     <ol className="breadcrumb">
                     <li className="breadcrumb-item"><a href="/home_admin">Home</a></li>
-                    <li className="breadcrumb-item active">Gestionar Usuarios</li>
+                    <li className="breadcrumb-item active">Definir Fecha de Pago / Descuentos</li>
                     </ol>
                 </nav>
             </div>
             <section className="section dashboard">
                 <div className="row">
-                    <FormEditUser/>
+                    <FormFechaPagoDcto/>
                 </div>
             </section>
         </main>{/* <!-- End #main --> */}
         <FooterAdmin/>
         </>
     )
-}
+};
 
-export default EditUser;
+export default FechaPagoDcto;
