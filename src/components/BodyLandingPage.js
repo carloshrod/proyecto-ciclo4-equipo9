@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 function BodyLandingPage() {
     return (
         <>
-        <div className="container min-vh-100" >
+        <div className="container container-center center-v min-vh-100" >
+            <div className="container">
 
-            <div className="mg-t-50px">
+            <div>
                 <h1 className="text-center font-weight-bold">Plataforma de Gestión Catastral</h1>
             </div>{/* <!-- End Page Title --> */}
 
@@ -34,6 +35,7 @@ function BodyLandingPage() {
                     </div>
                 </div>
             </section>
+            </div>
         </div>
         </>
     )

@@ -6,11 +6,9 @@ import BodyPagarImpuestos from "../BodyPagarImpuestos";
 function PagarImpuestos() {
     return (
         <>
-        <div>
         <HeaderUserExt/>
         <BodyPagarImpuestos/>
         <Footer/>
-        </div>
         </>
     )
 }

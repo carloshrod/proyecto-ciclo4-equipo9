@@ -3,8 +3,6 @@ import React from 'react';
 function ForgotPassword() {
   return (
     <>
-    <div className="container">
-
       <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div className="container">
           <div className="row justify-content-center">
@@ -14,7 +12,7 @@ function ForgotPassword() {
 
                 <div className="card-body">
 
-                  <div className="pt-4 pb-2">
+                  <div className="col-8 pt-4 pb-2 m-auto">
                     <h5 className="card-title text-center pb-0 fs-4">¿Olvidaste tu contraseña?</h5>
                     <p className="text-center small">Ingresa tu correo electrónico a continuación y te enviaremos un enlace para restablecer tu contraseña</p>
                   </div>
@@ -40,9 +38,7 @@ function ForgotPassword() {
           </div>
         </div>
       </section>
-    </div>
-    {/* <!-- End #main --> */}
-  </>
+    </>
   );
 }
 

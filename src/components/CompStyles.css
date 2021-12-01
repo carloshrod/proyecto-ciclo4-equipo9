@@ -38,3 +38,12 @@
 .mg-t-75px {
   margin-top: 75px;
 }
+
+.center-v {
+  align-items: center;
+}
+
+.container-center {
+  display: flex;
+  /* align-items por defecto tiene el valor `stretch` */
+}

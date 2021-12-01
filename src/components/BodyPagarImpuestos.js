@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 function BodyPagarImpuestos() {
     return (
         <>
-        <div className="container min-vh-100 mg-t-50px" >
+        <div className="container container-center center-v min-vh-100" >
+            <div className="container">
 
-            <div className="mg-t-50px">
+            <div className="">
                 <h1 className="text-center font-weight-bold">Portal de Pagos</h1>
             </div>{/* <!-- End Page Title --> */}
 
-            <div className="card mg-t-50px">
+            <div className="card mg-t-25px">
                 <div className="card-body">
                 <h5 className="card-title">CC Propietario: 123456789</h5>                    
 
@@ -156,6 +157,7 @@ function BodyPagarImpuestos() {
                 </div>
 
                 </div>
+            </div>
             </div>
         </div>
         </>
