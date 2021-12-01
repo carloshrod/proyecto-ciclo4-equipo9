@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderSystemOut from "../HeaderSystemOut";
 import Footer from "../Footer";
-import FormRegister from "../FormRegister";
+import FormRegister from "../forms/FormRegister";
 
 function Register() {
     return (

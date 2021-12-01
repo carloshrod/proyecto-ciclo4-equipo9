@@ -1,7 +1,7 @@
 import React from 'react';
 import HeaderSystemOut from "../HeaderSystemOut";
 import Footer from "../Footer";
-import FormForgotPassword from "../FormForgotPassword";
+import FormForgotPassword from "../forms/FormForgotPassword";
 
 function ForgotPassword() {
     return (

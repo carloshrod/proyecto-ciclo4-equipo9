@@ -3,8 +3,7 @@ import HeaderAdmin from '../HeaderAdmin';
 import AdminTitle from '../AdminTitle';
 import Sidebar from '../Sidebar';
 import FooterAdmin from '../FooterAdmin';
-import FormEditUser from '../FormEditUser';
-
+import FormEditUser from '../forms/FormEditUser';
 
 function EditUser() {
     return (

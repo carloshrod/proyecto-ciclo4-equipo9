@@ -1,6 +1,6 @@
 import HeaderAdmin from "../HeaderAdmin";
 import Sidebar from "../Sidebar";
-import FormCrearPredio  from "../FormCrearPredio";
+import FormCrearPredio  from "../forms/FormCrearPredio";
 import FooterAdmin from "../FooterAdmin";
 
 export default function CreatePredio(){
