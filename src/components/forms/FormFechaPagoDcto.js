@@ -3,7 +3,7 @@ import React from 'react';
 function FormFechaPagoDcto() {
     return (
         <>
-                <section className="section min-vh-100 mt-3">
+            <section className="section min-vh-100 mt-3">
             <div className="row">
                 <div className="col-lg-12">
 
@@ -47,6 +47,7 @@ function FormFechaPagoDcto() {
                             </form>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </section>

@@ -14,6 +14,7 @@ import EditPredio from "./components/pages/EditPredio";
 import FechaPagoDcto from "./components/pages/FechaPagoDcto";
 import HomeUserExt from "./components/pages/HomeUserExt";
 import PagarImpuestos from "./components/pages/PagarImpuestos";
+import EjecutarAlgoritmo from "./components/pages/EjecutarAlgoritmo";
 
 function App() {
   return (
@@ -32,8 +33,10 @@ function App() {
         <Route path="/home-admin/manage-predio" element={<ManagePredio/>} />
         <Route path="/home-admin/manage-predio/edit" element={<EditPredio/>} />
         <Route path="/home-admin/manage-predio/fecha-pago-descuentos" element={<FechaPagoDcto/>} />
+        <Route path="/home-admin/manage-predio/Ejecutar-Algoritmos" element={<EjecutarAlgoritmo/>} />
         <Route path="/home-user-ext" element={<HomeUserExt/>} />
         <Route path="/home-user-ext/pagar" element={<PagarImpuestos/>} />
+
       </Routes>
     </Router>
     </>
