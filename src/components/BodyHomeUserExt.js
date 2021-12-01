@@ -28,7 +28,7 @@ function BodyHomeUserExt() {
 
                     <div className="col-lg-6 px-5">
                         <div className="card card-home">
-                        <Link to="/asociar">
+                        <Link to="/home-user-ext/asociar-predios">
                             <h5 className="card-title text-center">Asociar predios</h5>
                         </Link>                
                         </div>
@@ -38,7 +38,7 @@ function BodyHomeUserExt() {
                 <div className="row justify-content-center mg-t-25px">
                     <div className="col-lg-6 px-5">
                         <div className="card card-home">
-                        <Link to="/convenio">
+                        <Link to="/home-user-ext/convenio">
                             <h5 className="card-title text-center">Solicitar convenio de pago</h5>
                         </Link>                
                         </div>
