@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function SidebarItems({ linkTo, icono, titulo }) {
+function SidebarItem({ linkTo, icono, titulo }) {
     return (
         <>
             <Link to={linkTo} className="nav-link collapsed">
@@ -12,4 +12,4 @@ function SidebarItems({ linkTo, icono, titulo }) {
     )
 };
 
-export default SidebarItems;
+export default SidebarItem;
