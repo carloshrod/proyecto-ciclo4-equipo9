@@ -5,6 +5,7 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import ForgotPassword from "./components/pages/ForgotPassword";
 import HomeAdmin from "./components/pages/HomeAdmin";
+import CreateUser from "./components/pages/CreateUser";
 import MyProfileAdmin from "./components/pages/MyProfileAdmin";
 import ManageUsers from "./components/pages/ManageUsers";
 import EditUser from "./components/pages/EditUser";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/home-admin" element={<HomeAdmin/>} />
         <Route path="/home-admin/my-profile" element={<MyProfileAdmin/>} />
+        <Route path="/home-admin/create-user" element={<CreateUser/>} />
         <Route path="/home-admin/manage-users" element={<ManageUsers/>} />
         <Route path="/home-admin/manage-users/edit" element={<EditUser/>} />
         <Route path="/home-user-int" element={<HomeUserInt/>} />

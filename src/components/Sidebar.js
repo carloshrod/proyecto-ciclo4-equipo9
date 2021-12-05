@@ -26,6 +26,14 @@ function Sidebar() {
             {/* <!-- End My Profile --> */}
 
             <li className="nav-item">
+                <Link to="/home-admin/create-user" className="nav-link collapsed">
+                <i class="bi bi-person-plus-fill"></i>
+                <span>Crear Usuarios</span>
+                </Link>
+            </li>
+            {/* <!-- End Create User --> */}
+
+            <li className="nav-item">
                 <Link to="/home-admin/manage-users" className="nav-link collapsed">
                 <i className="bi bi-pencil-fill"></i>
                 <i className="bi bi-people-fill"></i>

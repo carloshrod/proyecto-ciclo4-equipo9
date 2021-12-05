@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FormEditUser() {
+function FormCreateUser() {
     return (
         <>
         <section className="section min-vh-100 container-center center-v">
@@ -9,7 +9,7 @@ function FormEditUser() {
 
                     <div className="card">
                         <div className="card-body">
-                        <h5 className="card-title">Nombre del Usuario</h5>
+                        <h5 className="card-title">Ingrese los datos del usuario</h5>
                         
                             <form className="row g-3 needs-validation" novalidate>
 
@@ -69,7 +69,7 @@ function FormEditUser() {
                                 </div>
 
                                 <div className="col-4 m-auto mt-3">
-                                    <button className="btn btn-primary rounded-pill w-100" type="submit">Editar</button>
+                                    <button className="btn btn-primary rounded-pill w-100" type="submit">Crear</button>
                                 </div>
                             </form>
                         </div>
@@ -81,4 +81,4 @@ function FormEditUser() {
     )
 }
 
-export default FormEditUser;
+export default FormCreateUser;
