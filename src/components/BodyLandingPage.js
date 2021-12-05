@@ -5,12 +5,6 @@ import { Link } from "react-router-dom";
 function BodyLandingPage() {
     return (
         <>
-        <div className="container container-center center-v min-vh-100" >
-            <div className="container">
-
-            <div>
-                <h1 className="text-center font-weight-bold">Plataforma de Gestión Catastral</h1>
-            </div>{/* <!-- End Page Title --> */}
 
             <div className="mx-auto logo-body-home">
                 <img src="img/logo-escudo-cauca.png" alt=""/>
@@ -35,8 +29,6 @@ function BodyLandingPage() {
                     </div>
                 </div>
             </section>
-            </div>
-        </div>
         </>
     )
 }

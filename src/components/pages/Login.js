@@ -1,14 +1,17 @@
 import React from 'react';
 import HeaderSystemOut from "../HeaderSystemOut";
+import Container from '../Container';
+import FormLogin from "../forms/FormLogin"; 
 import Footer from "../Footer";
-import FormLogin from "../forms/FormLogin";
 
 function Login() {
     return (
         <>
-        <HeaderSystemOut/>
-        <FormLogin/>
-        <Footer/>
+            <HeaderSystemOut />
+            <Container>
+                <FormLogin /> {/* Children */}
+            </Container>
+            <Footer />
         </>
     )
 }

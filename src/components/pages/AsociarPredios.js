@@ -1,14 +1,17 @@
 import React from 'react'
 import HeaderUserExt from '../HeaderUserExt';
-import Footer from "../Footer";
+import Container from '../Container';
 import TableAsociarPredios from "../TableAsociarPredios";
+import Footer from "../Footer";
 
 function AsociarPredios() {
     return (
         <>
-        <HeaderUserExt/>
-        <TableAsociarPredios/>
-        <Footer/>
+            <HeaderUserExt />
+            <Container titulo="Plataforma de Gestión Catastral">
+                <TableAsociarPredios /> {/* Children */}
+            </Container>
+            <Footer />
         </>
     )
 }

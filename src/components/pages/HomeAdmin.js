@@ -1,9 +1,8 @@
 import React from 'react';
 import HeaderAdmin from "../HeaderAdmin";
 import Sidebar from "../Sidebar";
-import AdminTitle from "../AdminTitle";
-import ColumnLeftDashboard from "../ColumnLeftDashboard";
-import ColumnRightDashboard from "../ColumnRightDashboard";
+import ContainerAdmin from '../ContainerAdmin';
+import Dashboard from '../Dashboard';
 import FooterAdmin from "../FooterAdmin";
 
 function HomeAdmin() {
@@ -11,15 +10,9 @@ function HomeAdmin() {
         <>
         <HeaderAdmin/>
         <Sidebar/>
-        <main id="main" className="main">
-            <AdminTitle/>
-            <section className="section dashboard">
-                <div className="row">
-                    <ColumnLeftDashboard/>
-                    <ColumnRightDashboard/>
-                </div>
-            </section>
-        </main>{/* <!-- End #main --> */}
+        <ContainerAdmin titulo="Dashboard" subtitulo="Dashboard">
+            <Dashboard/> {/* Children */}
+        </ContainerAdmin>
         <FooterAdmin/>
         </>
     )

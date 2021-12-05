@@ -9,41 +9,46 @@ function Sidebar() {
 
             <ul className="sidebar-nav" id="sidebar-nav">
 
-            <Link to="/home-admin">
             <li className="nav-item">
-                <a className="nav-link collapsed" href="/home-admin">
+                <Link to="/home-admin" className="nav-link collapsed">
                 <i className="bi bi-grid"></i>
                 <span>Dashboard</span>
-                </a>
+                </Link>
             </li>
-            </Link>
-    
             {/* <!-- End Dashboard Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="/home-admin/manage-users">
+                <Link to="/home-admin/my-profile" className="nav-link collapsed">
+                <i class="bi bi-person-circle"></i>
+                <span>Mi Perfil</span>
+                </Link>
+            </li>
+            {/* <!-- End My Profile --> */}
+
+            <li className="nav-item">
+                <Link to="/home-admin/manage-users" className="nav-link collapsed">
                 <i className="bi bi-pencil-fill"></i>
                 <i className="bi bi-people-fill"></i>
                 <span>Gestionar Usuarios</span>
-                </a>
+                </Link>
             </li>
             {/* <!-- End Profile Page Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="/home-admin/create-predio">
+                <Link to="/home-admin/create-predio" className="nav-link collapsed">
                 <i className="bi bi-plus-circle-fill"></i>
                 <i className="bi bi-building"></i>
                 <span>Crear Predios</span>
-                </a>
+                </Link>
             </li>
             {/* <!-- End F.A.Q Page Nav --> */}
 
             <li className="nav-item">
-                <a className="nav-link collapsed" href="/home-admin/manage-predio">
+                <Link to="/home-admin/manage-predio" className="nav-link collapsed">
                 <i className="bi bi-pencil-fill"></i>
                 <i className="bi bi-building"></i>
                 <span>Gestionar Predios</span>
-                </a>
+                </Link>
             </li>
             {/* <!-- End Contact Page Nav --> */}
 

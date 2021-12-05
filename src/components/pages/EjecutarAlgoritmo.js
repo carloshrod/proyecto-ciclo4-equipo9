@@ -12,7 +12,7 @@ export default function EjecutarAlgoritmo(){
         <main id="main" className="main">
             {/* <AdminTitle/> */}
             <div className="pagetitle">
-                <h1>Definir Fecha de Pago / Descuentos</h1>
+                <h1>Ejecutar Algoritmos</h1>
                 <nav>
                     <ol className="breadcrumb">
                     <li className="breadcrumb-item"><a href="/home_admin">Home</a></li>

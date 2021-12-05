@@ -1,14 +1,17 @@
 import React from 'react';
 import HeaderSystemOut from "../HeaderSystemOut";
-import Footer from "../Footer";
+import Container from '../Container';
 import FormForgotPassword from "../forms/FormForgotPassword";
+import Footer from "../Footer";
 
 function ForgotPassword() {
     return (
         <>
-        <HeaderSystemOut/>
-        <FormForgotPassword/>
-        <Footer/>
+            <HeaderSystemOut />
+            <Container>
+                <FormForgotPassword /> {/* Children */}
+            </Container>
+            <Footer />
         </>
     )
 }

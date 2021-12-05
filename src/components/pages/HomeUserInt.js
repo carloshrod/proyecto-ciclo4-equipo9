@@ -2,8 +2,7 @@ import React from 'react';
 import HeaderAdmin from "../HeaderAdmin";
 import SidebarUserInt from "../SidebarUserInt";
 import AdminTitle from "../AdminTitle";
-import ColumnLeftDashboard from "../ColumnLeftDashboard";
-import ColumnRightDashboard from "../ColumnRightDashboard";
+import Dashboard from '../Dashboard';
 import FooterAdmin from "../FooterAdmin";
 
 function HomeUserInt() {
@@ -15,8 +14,7 @@ function HomeUserInt() {
             <AdminTitle/>
             <section className="section dashboard">
                 <div className="row">
-                    <ColumnLeftDashboard/>
-                    <ColumnRightDashboard/>
+                    <Dashboard/>
                 </div>
             </section>
         </main>{/* <!-- End #main --> */}
