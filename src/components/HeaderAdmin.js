@@ -34,7 +34,7 @@ function HeaderAdmin() {
                     </li>
 
                     <li>
-                    <a className="dropdown-item d-flex align-items-center" href="users-profile.html">
+                    <a className="dropdown-item d-flex align-items-center" href="">
                         <i className="bi bi-person"></i>
                         <span>My Profile</span>
                     </a>

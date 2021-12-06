@@ -1,25 +1,18 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import LandingPage from "./components/pages/LandingPage";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import ForgotPassword from "./components/pages/ForgotPassword";
+import SystemOutPage from "./components/pages/SystemOutPage";
 import AdminUserIntPage from "./components/pages/AdminUserIntPage";
-import HomeUserExt from "./components/pages/HomeUserExt";
-import MyProfile from "./components/pages/MyProfile";
-import AsociarPredios from "./components/pages/AsociarPredios";
-import PagarImpuestos from "./components/pages/PagarImpuestos";
-import Convenio from "./components/pages/Convenio";
+import UserExtPage from "./components/pages/UserExtPage";
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Fuera del Sistema */}
-        <Route exact path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route exact path="/" element={<SystemOutPage page="landingPage" />} />
+        <Route path="/login" element={<SystemOutPage page="login" />} />
+        <Route path="/register" element={<SystemOutPage page="register" />} />
+        <Route path="/forgot-password" element={<SystemOutPage page="forgotPassword" />} />
         {/* Fin - Fuera del Sistema */}
 
         {/* Administrador */}
@@ -46,11 +39,11 @@ function App() {
         {/* Fin - Usuario Interno */}
 
         {/* Usuario Externo */}
-        <Route path="/home-user-ext" element={<HomeUserExt />} />
-        <Route path="/home-user-ext/profile" element={<MyProfile />} />
-        <Route path="/home-user-ext/asociar-predios" element={<AsociarPredios />} />
-        <Route path="/home-user-ext/convenio" element={<Convenio />} />
-        <Route path="/home-user-ext/pagar" element={<PagarImpuestos />} />
+        <Route path="/home-user-ext" element={<UserExtPage page="home" />} />
+        <Route path="/home-user-ext/profile" element={<UserExtPage page="myProfile" />} />
+        <Route path="/home-user-ext/pagar" element={<UserExtPage page="pagar" />} />
+        <Route path="/home-user-ext/asociar-predios" element={<UserExtPage page="asociarPredios" />} />
+        <Route path="/home-user-ext/convenio" element={<UserExtPage page="convenio" />} />
         {/* Fin - Usuario Externo */}
       </Routes>
     </Router>
