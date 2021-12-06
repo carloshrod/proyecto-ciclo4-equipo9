@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function TablePredio(){
+function TablePredioUserInt(){
     return(
         <>
         <section className="section">
@@ -62,15 +62,15 @@ function TablePredio(){
                             <td>Calle 70</td>
                             <td>$ 150000</td>
                             <td align="center">
-                                <Link to="/home-admin/manage-predio/edit">
+                                <Link to="/home-user-int/manage-predio/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/fecha-pago-descuentos">
+                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
                                     <i className="bi bi-calendar-check"></i>
                                 </Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/ejecutar-algoritmos">
+                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
                                 <i className="bi bi-cpu"></i>
                                 </Link>
                             </td>
@@ -83,15 +83,15 @@ function TablePredio(){
                             <td>Calle 40 carrera 52</td>
                             <td>$ 95000</td>
                             <td align="center">
-                                <Link to="/home-admin/manage-predio/edit">
+                                <Link to="/home-user-int/manage-predio/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/fecha-pago-descuentos">
+                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
                                     <i className="bi bi-calendar-check"></i>
                                 </Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/ejecutar-algoritmos">
+                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
                                 <i className="bi bi-cpu"></i>
                                 </Link>
                             </td>
@@ -104,15 +104,15 @@ function TablePredio(){
                             <td>Calle 80</td>
                             <td>$ 450000</td>
                             <td align="center">
-                                <Link to="/home-admin/manage-predio/edit">
+                                <Link to="/home-user-int/manage-predio/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/fecha-pago-descuentos">
+                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
                                     <i className="bi bi-calendar-check"></i>
                                 </Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/ejecutar-algoritmos">
+                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
                                 <i className="bi bi-cpu"></i>
                                 </Link>
                             </td>
@@ -126,15 +126,15 @@ function TablePredio(){
                             <td>Calle 5 carrera 70</td>
                             <td>$ 650000</td>
                             <td align="center">
-                                <Link to="/home-admin/manage-predio/edit">
+                                <Link to="/home-user-int/manage-predio/edit">
                                     <i className="bi bi-pencil-fill"></i> 
                                 </Link>                                                             
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/fecha-pago-descuentos">
+                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
                                     <i className="bi bi-calendar-check"></i>
                                 </Link>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-admin/manage-predio/ejecutar-algoritmos">
+                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
                                 <i className="bi bi-cpu"></i>
                                 </Link>
                             </td>
@@ -163,4 +163,4 @@ function TablePredio(){
     )
 }
 
-export default TablePredio;
+export default TablePredioUserInt;

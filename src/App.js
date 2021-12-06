@@ -9,7 +9,6 @@ import CreateUser from "./components/pages/CreateUser";
 import MyProfileAdmin from "./components/pages/MyProfileAdmin";
 import ManageUsers from "./components/pages/ManageUsers";
 import EditUser from "./components/pages/EditUser";
-import HomeUserInt from "./components/pages/HomeUserInt";
 import CreatePredio from "./components/pages/CreatePredio";
 import ManagePredio from "./components/pages/ManagePredio";
 import EditPredio from "./components/pages/EditPredio";
@@ -25,26 +24,43 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<LandingPage/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/forgot-password" element={<ForgotPassword/>} />
-        <Route path="/home-admin" element={<HomeAdmin/>} />
-        <Route path="/home-admin/my-profile" element={<MyProfileAdmin/>} />
-        <Route path="/home-admin/create-user" element={<CreateUser/>} />
-        <Route path="/home-admin/manage-users" element={<ManageUsers/>} />
-        <Route path="/home-admin/manage-users/edit" element={<EditUser/>} />
-        <Route path="/home-user-int" element={<HomeUserInt/>} />
-        <Route path="/home-admin/create-predio" element={<CreatePredio/>} />
-        <Route path="/home-admin/manage-predio" element={<ManagePredio/>} />
-        <Route path="/home-admin/manage-predio/edit" element={<EditPredio/>} />
-        <Route path="/home-admin/manage-predio/fecha-pago-descuentos" element={<FechaPagoDcto/>} />
-        <Route path="/home-admin/manage-predio/Ejecutar-Algoritmos" element={<EjecutarAlgoritmo/>} />
-        <Route path="/home-user-ext" element={<HomeUserExt/>} />
-        <Route path="/home-user-ext/profile" element={<MyProfile/>} />
-        <Route path="/home-user-ext/asociar-predios" element={<AsociarPredios/>} />
-        <Route path="/home-user-ext/convenio" element={<Convenio/>} />
-        <Route path="/home-user-ext/pagar" element={<PagarImpuestos/>} />
+        {/* Fuera del Sistema */}
+        <Route exact path="/" element={<LandingPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        {/* Fin - Fuera del Sistema */}
+
+        {/* Administrador */}
+        <Route path="/home-admin" element={<HomeAdmin tipo="admin" />} />  {/* Home - Admin */}
+        <Route path="/home-admin/my-profile" element={<MyProfileAdmin tipo="admin" />} />  {/* Mi Perfil - Admin */}
+        <Route path="/home-admin/create-user" element={<CreateUser />} />  {/* Crear Usuario - Admin */}
+        <Route path="/home-admin/manage-users" element={<ManageUsers />} />  {/* Gestionar Usuarios - Admin */}
+        <Route path="/home-admin/manage-users/edit" element={<EditUser />} />  {/* Editar Usuariop - Admin */}
+        <Route path="/home-admin/create-predio" element={<CreatePredio tipo="admin" />} />  {/* Crear Predio - Admin */}
+        <Route path="/home-admin/manage-predio" element={<ManagePredio tipo="admin" />} />  {/* Gestionar Predios - Admin */}
+        <Route path="/home-admin/manage-predio/edit" element={<EditPredio tipo="admin" />} />  {/* Editar Predio - Admin */}
+        <Route path="/home-admin/manage-predio/fecha-pago-descuentos" element={<FechaPagoDcto tipo="admin" />} />  {/* Definir Fechas de Pago / Dctos - Admin */}
+        <Route path="/home-admin/manage-predio/ejecutar-algoritmos" element={<EjecutarAlgoritmo tipo="admin" />} /> {/* Ejecutar Algoritmos - Admin */}
+        {/* Fin - Administrador */}
+
+        {/* Usuario Interno */}
+        <Route path="/home-user-int" element={<HomeAdmin />} />  {/* Home - Usuario Interno */}
+        <Route path="/home-user-int/my-profile" element={<MyProfileAdmin />} />  {/* Mi Perfil - Usuario Interno */}
+        <Route path="/home-user-int/create-predio" element={<CreatePredio />} />  {/* Crear Predio - Usaurio Interno */}
+        <Route path="/home-user-int/manage-predio" element={<ManagePredio />} />  {/* Gestionar Predios - Usuario Interno */}
+        <Route path="/home-user-int/manage-predio/edit" element={<EditPredio />} />  {/* Editar Predio - Usuario Interno */}
+        <Route path="/home-user-int/manage-predio/fecha-pago-descuentos" element={<FechaPagoDcto />} />  {/* Definir Fechas de Pago / Dctos - Usuario Interno */}
+        <Route path="/home-user-int/manage-predio/ejecutar-algoritmos" element={<EjecutarAlgoritmo />} />  {/* Ejecutar Algoritmos - Usuario Interno */}
+        {/* Fin - Usuario Interno */}
+
+        {/* Usuario Externo */}
+        <Route path="/home-user-ext" element={<HomeUserExt />} />
+        <Route path="/home-user-ext/profile" element={<MyProfile />} />
+        <Route path="/home-user-ext/asociar-predios" element={<AsociarPredios />} />
+        <Route path="/home-user-ext/convenio" element={<Convenio />} />
+        <Route path="/home-user-ext/pagar" element={<PagarImpuestos />} />
+        {/* Fin - Usuario Externo */}
       </Routes>
     </Router>
   );

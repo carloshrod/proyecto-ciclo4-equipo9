@@ -8,7 +8,7 @@ function ContainerAdmin({ titulo, subtitulo, subtitulo2, children }) {
                     <h1>{titulo}</h1>
                     <nav>
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="/home-admin">Home</a></li>
+                            <li className="breadcrumb-item active">Home</li>
                             <li className="breadcrumb-item active">{subtitulo}</li>
                             <li className="breadcrumb-item active">{subtitulo2}</li>
                         </ol>
