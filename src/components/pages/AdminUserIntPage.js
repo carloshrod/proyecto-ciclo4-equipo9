@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderAdmin from "../HeaderAdmin";
+import HeaderUserInt from '../HeaderUserInt';
 import { SidebarAdmin, SidebarUserInt } from "../Sidebar";
 import ContainerAdmin from '../ContainerAdmin';
 import FooterAdmin from "../FooterAdmin";
@@ -14,13 +15,19 @@ import TablePredioUserInt from '../TablePredioUserInt';
 import FormEditPredio from '../forms/FormEditPredio';
 import FormFechaPagoDcto from '../forms/FormFechaPagoDcto';
 import FormEjecutarAlgoritmo from '../forms/FormEjecutarAlgoritmo';
+import USERS from '../Mocks/Users';
+import PREDIOS from '../Mocks/Predios';
 
 function AdminUserIntPage({ tipo, page }) {
 
     return (
         <>
             <HeaderAdmin />
-            {tipo === "admin" ? SidebarAdmin : SidebarUserInt}
+            {tipo === "admin" ?
+                <> <HeaderAdmin /> 
+                {SidebarAdmin} </> : 
+                <> <HeaderUserInt /> 
+                {SidebarUserInt} </>}
 
             {page === "home" &&
                 <ContainerAdmin titulo="Dashboard" subtitulo="Dashboard">
@@ -39,7 +46,7 @@ function AdminUserIntPage({ tipo, page }) {
 
             {page === "manageUsers" &&
                 <ContainerAdmin titulo="Gestionar Usuarios" subtitulo="Gestionar Usuarios">
-                    <TableUsers />  {/* Children */}
+                    <TableUsers data={USERS} />  {/* Children */}
                 </ContainerAdmin>}
 
             {page === "editUser" &&
@@ -53,7 +60,7 @@ function AdminUserIntPage({ tipo, page }) {
                 </ContainerAdmin>}
 
             {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" subtitulo="Gestionar Predios">
-                {tipo === "admin" ? <TablePredio /> : <TablePredioUserInt />}  {/* Children */}
+                {tipo === "admin" ? <TablePredio data={PREDIOS} /> : <TablePredioUserInt data={PREDIOS} />}  {/* Children */}
             </ContainerAdmin>}
 
             {page === "editPredio" &&

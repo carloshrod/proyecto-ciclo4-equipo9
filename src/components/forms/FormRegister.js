@@ -72,7 +72,7 @@ function Register() {
                     <div className="col-12">
                       <div className="form-check">
                         <input className="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required />
-                        <label className="form-check-label" htmlFor="acceptTerms">Estoy de acuerdo y acepto los <a href="#">términos y condiciones</a></label>
+                        <label className="form-check-label" htmlFor="acceptTerms">Estoy de acuerdo y acepto los <Link to="">términos y condiciones</Link></label>
                         <div className="invalid-feedback">Debes aceptar los términos y condiciones antes de continuar.</div>
                       </div>
                     </div>

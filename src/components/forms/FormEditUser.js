@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function FormEditUser() {
     return (
@@ -16,9 +17,9 @@ function FormEditUser() {
                                 <div className="col-12">
                                     <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle center-img"/>
                                     <div className="pt-2 text-center m-2">
-                                    <a href="#" className="btn btn-primary" title="Subir nueva imagen de perfil"><i className="bi bi-upload"></i></a>
+                                    <Link to="" className="btn btn-primary" title="Subir nueva imagen de perfil"><i className="bi bi-upload"></i></Link>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="#" className="btn btn-danger" title="Eliminar imagen de perfil"><i className="bi bi-trash"></i></a>
+                                    <Link to="" className="btn btn-danger" title="Eliminar imagen de perfil"><i className="bi bi-trash"></i></Link>
                                     </div>
                                 </div>
 

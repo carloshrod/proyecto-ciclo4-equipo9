@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function TableUsers() {
+function TableUsers(props) {
+    const { data } = props;
+
     return (
         <>
         <section className="section min-vh-100">
@@ -17,8 +19,8 @@ function TableUsers() {
                     <div className="dataTable-top">
                         <div className="dataTable-dropdown">
                             <label><select className="dataTable-selector">
-                                <option value="5">5</option>
-                                <option value="10" selected="true">10</option>
+                                <option value="5" selected="true">5</option>
+                                <option value="10">10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
                                 <option value="25">25</option>
@@ -31,187 +33,46 @@ function TableUsers() {
                         <thead>
                         <tr>
                             <th scope="col" data-sortable="" style={{width: "5.6902%;"}}>
-                                <a href="#" className="dataTable-sorter">#</a>
+                                <Link to="" className="dataTable-sorter">#</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "28.0295%;"}}>
-                                <a href="#" className="dataTable-sorter">Name</a>
+                                <Link to="" className="dataTable-sorter">Nombre</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "37.7239%;"}}>
-                                <a href="#" className="dataTable-sorter">Position</a>
+                                <Link to="" className="dataTable-sorter">Nro. Documento</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "9.27292%;"}}>
-                                <a href="#" className="dataTable-sorter">Age</a>
+                                <Link to="" className="dataTable-sorter">Email</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "19.2835%;"}}>
-                                <a href="#" className="dataTable-sorter">Start Date</a>
+                                <Link to="" className="dataTable-sorter">Teléfono</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "5.6902%;"}}>
-                                <a href="#" className=""></a>
+                                <Link to="" className=""></Link>
                             </th>                        
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Brandon Jacob</td>
-                            <td>Designer</td>
-                            <td>28</td>
-                            <td>2016-05-25</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Bridie Kessler</td>
-                            <td>Developer</td>
-                            <td>35</td>
-                            <td>2014-12-05</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Ashleigh Langosh</td>
-                            <td>Finance</td>
-                            <td>45</td>
-                            <td>2011-08-12</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Angus Grady</td>
-                            <td>HR</td>
-                            <td>34</td>
-                            <td>2012-06-11</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Raheem Lehner</td>
-                            <td>Dynamic Division Officer</td>
-                            <td>47</td>
-                            <td>2011-04-19</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td>Brandon Jacob</td>
-                            <td>Designer</td>
-                            <td>28</td>
-                            <td>2016-05-25</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">7</th>
-                            <td>Bridie Kessler</td>
-                            <td>Developer</td>
-                            <td>35</td>
-                            <td>2014-12-05</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">8</th>
-                            <td>Ashleigh Langosh</td>
-                            <td>Finance</td>
-                            <td>45</td>
-                            <td>2011-08-12</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">9</th>
-                            <td>Angus Grady</td>
-                            <td>HR</td>
-                            <td>34</td>
-                            <td>2012-06-11</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">10</th>
-                            <td>Raheem Lehner</td>
-                            <td>Dynamic Division Officer</td>
-                            <td>47</td>
-                            <td>2011-04-19</td>
-                            <td align="center">
-                                <Link to="/home-admin/manage-users/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/delete">
-                                    <i className="bi bi-trash-fill"></i> 
-                                </Link>
-                            </td>
-                        </tr>
+                            {data.map(user => {
+                                return (
+                                    <tr>
+                                    <th scope="row">{user.id}</th>
+                                        <td>{user.nombre}</td>
+                                        <td>{user.nro_doc}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.telefono}</td>
+                                        <td align="center">
+                                            <Link to="/home-admin/manage-users/edit">
+                                                <i className="bi bi-pencil-fill"></i> 
+                                            </Link>                                                             
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <Link to="/delete">
+                                                <i className="bi bi-trash-fill"></i> 
+                                            </Link>
+                                        </td>
+                                    </tr>        
+                                )
+                            })}
                         </tbody>
                     </table>
                     {/* <!-- End Table with stripped rows --> */}

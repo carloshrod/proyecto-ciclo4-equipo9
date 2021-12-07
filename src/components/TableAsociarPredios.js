@@ -2,7 +2,9 @@ import React from 'react'
 import './CompStyles.css';
 import { Link } from "react-router-dom";
 
-function TableAsociarPredios() {
+function TableAsociarPredios(props) {
+    const { data } = props;
+
     return (
         <>
             <div className="card">
@@ -28,102 +30,50 @@ function TableAsociarPredios() {
                                 <thead>
                                     <tr>
                                         <th scope="col" data-sortable="" style={{ width: "2%" }}>
-                                            <a href="#" className=""></a>
+                                            <span className=""></span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "5%" }}>
-                                            <a href="#" className="dataTable-sorter">#</a>
+                                            <span className="dataTable-sorter">#</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "15%" }}>
-                                            <a href="#" className="dataTable-sorter">Código</a>
+                                            <span className="dataTable-sorter">Código</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "20%" }}>
-                                            <a href="#" className="dataTable-sorter">CC del Propietario</a>
+                                            <span className="dataTable-sorter">CC del Propietario</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "20%" }}>
-                                            <a href="#" className="dataTable-sorter">Dirección</a>
+                                            <span className="dataTable-sorter">Dirección</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "20%" }}>
-                                            <a href="#" className="dataTable-sorter">Barrio</a>
+                                            <span className="dataTable-sorter">Barrio</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "15%" }}>
-                                            <a href="#" className="dataTable-sorter">Total a pagar</a>
+                                            <span className="dataTable-sorter">Total a pagar</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "3%" }}>
-                                            <a href="#" className=""></a>
+                                            <span className=""></span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
-                                        <th scope="row">1</th>
-                                        <td>PD46842354</td>
-                                        <td>1147893052</td>
-                                        <td>Calle Falsa 123</td>
-                                        <td>Los Olivos</td>
-                                        <td>$523.890</td>
-                                        <td align="center">
-                                            <Link to="">
-                                                <i className="bi bi-link"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
-                                        <th scope="row">2</th>
-                                        <td>PD16542342</td>
-                                        <td>1147893052</td>
-                                        <td>Calle Falsa 456</td>
-                                        <td>Boston</td>
-                                        <td>$705.900</td>
-                                        <td align="center">
-                                            <Link to="">
-                                                <i className="bi bi-link"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
-                                        <th scope="row">3</th>
-                                        <td>PD43852690</td>
-                                        <td>75896015</td>
-                                        <td>Calle Falsa 789</td>
-                                        <td>Recreo</td>
-                                        <td>$675.900</td>
-                                        <td align="center">
-                                            <Link to="">
-                                                <i className="bi bi-link"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
-                                        <th scope="row">4</th>
-                                        <td>PD43458104</td>
-                                        <td>1045804932</td>
-                                        <td>Calle Falsa 410</td>
-                                        <td>Prado</td>
-                                        <td>$1'280.900</td>
-                                        <td align="center">
-                                            <Link to="">
-                                                <i className="bi bi-link"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
-                                        <th scope="row">5</th>
-                                        <td>PD36816700</td>
-                                        <td>1045804932</td>
-                                        <td>Calle Falsa 816</td>
-                                        <td>Miramar</td>
-                                        <td>$1'780.700</td>
-                                        <td align="center">
-                                            <Link to="">
-                                                <i className="bi bi-link"></i>
-                                            </Link>
-                                        </td>
-                                    </tr>
+                                    {data.map(predio => {
+                                        return (
+                                            <tr>
+                                                <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
+                                                <th scope="row">{predio.id}</th>
+                                                <td>{predio.codigo}</td>
+                                                <td>{predio.nom_prop}</td>
+                                                <td>{predio.cc_prop}</td>
+                                                <td>{predio.direccion}</td>
+                                                <td>{predio.total}</td>
+                                                <td align="center">
+                                                    <Link to="">
+                                                        <i className="bi bi-link"></i>
+                                                    </Link>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                             {/* <!-- End Table with stripped rows --> */}
@@ -134,17 +84,17 @@ function TableAsociarPredios() {
                                 <ul className="dataTable-pagination-list"></ul>
                                 <ul className="pagination">
                                     <li className="page-item">
-                                        <a className="page-link" href="#" aria-label="Previous">
+                                        <Link to="" className="page-link" aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
-                                        </a>
+                                        </Link>
                                     </li>
-                                    <li className="page-item"><a className="page-link" href="#">1</a></li>
-                                    <li className="page-item"><a className="page-link" href="#">2</a></li>
-                                    <li className="page-item"><a className="page-link" href="#">3</a></li>
+                                    <li className="page-item"><Link to="" className="page-link">1</Link ></li>
+                                    <li className="page-item"><Link to="" className="page-link">2</Link ></li>
+                                    <li className="page-item"><Link to="" className="page-link">3</Link ></li>
                                     <li className="page-item">
-                                        <a className="page-link" href="#" aria-label="Next">
+                                        <Link to="" className="page-link" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </nav>

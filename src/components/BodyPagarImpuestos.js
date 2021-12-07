@@ -28,25 +28,25 @@ function BodyPagarImpuestos() {
                                 <thead>
                                     <tr>
                                         <th scope="col" data-sortable="" style={{ width: "5.6902%;" }}>
-                                            <a href="#" className="dataTable-sorter">#</a>
+                                            <span className="dataTable-sorter">#</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "28.0295%;" }}>
-                                            <a href="#" className="dataTable-sorter">Código</a>
+                                            <span className="dataTable-sorter">Código</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "37.7239%;" }}>
-                                            <a href="#" className="dataTable-sorter">Nombre del Propietario</a>
+                                            <span className="dataTable-sorter">Nombre del Propietario</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "9.27292%;" }}>
-                                            <a href="#" className="dataTable-sorter">Dirección del Predio</a>
+                                            <span className="dataTable-sorter">Dirección del Predio</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "19.2835%;" }}>
-                                            <a href="#" className="dataTable-sorter">Barrio</a>
+                                            <span className="dataTable-sorter">Barrio</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "19.2835%;" }}>
-                                            <a href="#" className="dataTable-sorter">Total a pagar</a>
+                                            <span className="dataTable-sorter">Total span pagar</span>
                                         </th>
                                         <th scope="col" data-sortable="" style={{ width: "5.6902%;" }}>
-                                            <a href="#" className=""></a>
+                                            <span className=""></span>
                                         </th>
                                     </tr>
                                 </thead>

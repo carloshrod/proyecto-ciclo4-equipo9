@@ -22,11 +22,6 @@
   display: block;
 }
 
-/* #container-100vh {
-  min-height:100vh;
-  position:relative;
-} */
-
 .mg-t-25px {
   margin-top: 25px;
 }
@@ -45,5 +40,4 @@
 
 .container-center {
   display: flex;
-  /* align-items por defecto tiene el valor `stretch` */
 }

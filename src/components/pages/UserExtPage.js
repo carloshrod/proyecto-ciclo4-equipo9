@@ -7,6 +7,7 @@ import BodyPagarImpuestos from '../BodyPagarImpuestos';
 import TableAsociarPredios from '../TableAsociarPredios';
 import FormConvenio from '../forms/FormConvenio';
 import Footer from "../Footer";
+import PREDIOS from '../Mocks/Predios';
 
 function UserExtPage({ page }) {
     return (
@@ -30,7 +31,7 @@ function UserExtPage({ page }) {
 
             {page === "asociarPredios" &&
                 <Container titulo="Asociar Predios">
-                    <TableAsociarPredios />  {/* Children */}
+                    <TableAsociarPredios data={PREDIOS} />  {/* Children */}
                 </Container>}
 
             {page === "convenio" &&

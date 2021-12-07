@@ -3,7 +3,7 @@ import React from 'react';
 function ContainerAdmin({ titulo, subtitulo, subtitulo2, children }) {
     return (
         <>
-            <main id="main" className="main">
+            <main id="main" className="main min-vh-100">
                 <div className="pagetitle">
                     <h1>{titulo}</h1>
                     <nav>

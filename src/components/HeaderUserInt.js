@@ -1,29 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function HeaderUserExt() {
+function HeaderUserInt() {
     return (
         <>
-            {/* <!-- ======= Header ======= --> */}
-            <header id="header" className="header d-flex align-items-center">
+            {/* {/* <!-- ======= Header ======= --> */}
+            <header id="header" className="header fixed-top d-flex align-items-center">
 
                 <div className="d-flex align-items-center justify-content-between">
-                    <Link to="/home-user-ext" className="d-flex align-items-center">
-                        <img src="/img/logo-gov-co.png" alt="" />
-                        <span className="d-none d-lg-block"></span>
-                    </Link>
-                </div> {/*!-- End Logo -->*/}
+                    <img src="/img/logo-gov-co.png" alt="" />
+                    <i className="bi bi-list toggle-sidebar-btn"></i>
+                </div>
+                {/* <!-- End Logo --> */}
 
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
 
                         <li className="nav-item dropdown pe-3">
 
-                            <Link className="nav-link nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
+                            <Link to="" className="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
                                 <span className="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-                            </Link>
-                            {/* End Profile Image Icon */}
+                            </Link>{/* <!-- End Profile Image Icon --> */}
 
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li className="dropdown-header">
@@ -35,7 +33,7 @@ function HeaderUserExt() {
                                 </li>
 
                                 <li>
-                                    <Link className="dropdown-item d-flex align-items-center" to="/home-user-ext/profile">
+                                    <Link to="/home-user-int/my-profile" className="dropdown-item d-flex align-items-center">
                                         <i className="bi bi-person"></i>
                                         <span>Mi Perfil</span>
                                     </Link>
@@ -47,31 +45,20 @@ function HeaderUserExt() {
 
                                 <li>
                                     <Link to="" className="dropdown-item d-flex align-items-center">
-                                        <i className="bi bi-gear"></i>
-                                        <span>Configuración</span>
-                                    </Link>
-                                </li>
-
-                                <li>
-                                    <Link to="" className="dropdown-item d-flex align-items-center">
                                         <i className="bi bi-box-arrow-right"></i>
                                         <span>Salir</span>
                                     </Link>
                                 </li>
 
-                            </ul>
-                            {/* End Profile Dropdown Items */}
-                        </li>
-                        {/* End Profile Nav */}
+                            </ul>{/* <!-- End Profile Dropdown Items --> */}
+                        </li>{/* <!-- End Profile Nav --> */}
 
                     </ul>
-                </nav>
-                {/* End Icons Navigation */}
+                </nav>{/* <!-- End Icons Navigation --> */}
 
-            </header>
-            {/* End Header      */}
+            </header>{/* <!-- End Header --> */}
         </>
     )
 }
 
-export default HeaderUserExt;
+export default HeaderUserInt;

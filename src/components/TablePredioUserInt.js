@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function TablePredioUserInt(){
+function TablePredioUserInt(props){
+    const { data } = props;
+
     return(
         <>
         <section className="section">
@@ -17,8 +19,8 @@ function TablePredioUserInt(){
                     <div className="dataTable-top">
                         <div className="dataTable-dropdown">
                             <label><select className="dataTable-selector">
-                                <option value="5">5</option>
-                                <option value="10" selected="true">10</option>
+                                <option value="5" selected="true">5</option>
+                                <option value="10">10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
                                 <option value="25">25</option>
@@ -31,115 +33,54 @@ function TablePredioUserInt(){
                         <thead>
                         <tr>
                             <th scope="col" data-sortable="" style={{width: "5.6902%;"}}>
-                                <a href="#" className="dataTable-sorter">#</a>
+                                <Link to="" className="dataTable-sorter">#</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "28.0295%;"}}>
-                                <a href="#" className="dataTable-sorter">Codigo</a>
+                                <Link to="" className="dataTable-sorter">Codigo</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "37.7239%;"}}>
-                                <a href="#" className="dataTable-sorter">Nombre Propietario</a>
+                                <Link to="" className="dataTable-sorter">Nombre Propietario</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "9.27292%;"}}>
-                                <a href="#" className="dataTable-sorter">C.C Propietario</a>
+                                <Link to="" className="dataTable-sorter">C.C Propietario</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "19.2835%;"}}>
-                                <a href="#" className="dataTable-sorter">Direccion</a>
+                                <Link to="" className="dataTable-sorter">Direccion</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "19.2835%;"}}>
-                                <a href="#" className="dataTable-sorter">Total</a>
+                                <Link to="" className="dataTable-sorter">Total</Link>
                             </th>
                             <th scope="col" data-sortable="" style={{width: "19.2835%;"}}>
-                                <a href="#" className="dataTable-sorter">Opciones</a>
+                                <Link to="" className="dataTable-sorter">Opciones</Link>
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>101010</td>
-                            <td>Brandon</td>
-                            <td>12345</td>
-                            <td>Calle 70</td>
-                            <td>$ 150000</td>
-                            <td align="center">
-                                <Link to="/home-user-int/manage-predio/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
-                                    <i className="bi bi-calendar-check"></i>
-                                </Link>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
-                                <i className="bi bi-cpu"></i>
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>202071</td>
-                            <td>Andres</td>
-                            <td>53843</td>
-                            <td>Calle 40 carrera 52</td>
-                            <td>$ 95000</td>
-                            <td align="center">
-                                <Link to="/home-user-int/manage-predio/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
-                                    <i className="bi bi-calendar-check"></i>
-                                </Link>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
-                                <i className="bi bi-cpu"></i>
-                                </Link>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>20184</td>
-                            <td>Mario</td>
-                            <td>9896</td>
-                            <td>Calle 80</td>
-                            <td>$ 450000</td>
-                            <td align="center">
-                                <Link to="/home-user-int/manage-predio/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
-                                    <i className="bi bi-calendar-check"></i>
-                                </Link>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
-                                <i className="bi bi-cpu"></i>
-                                </Link>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>404010</td>
-                            <td>Julio</td>
-                            <td>129845</td>
-                            <td>Calle 5 carrera 70</td>
-                            <td>$ 650000</td>
-                            <td align="center">
-                                <Link to="/home-user-int/manage-predio/edit">
-                                    <i className="bi bi-pencil-fill"></i> 
-                                </Link>                                                             
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
-                                    <i className="bi bi-calendar-check"></i>
-                                </Link>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
-                                <i className="bi bi-cpu"></i>
-                                </Link>
-                            </td>
-                        </tr>
-                        
+                            {data.map(predio => {
+                                return (
+                                    <tr>
+                                    <th scope="row">{predio.id}</th>
+                                    <td>{predio.codigo}</td>
+                                    <td>{predio.nom_prop}</td>
+                                    <td>{predio.cc_prop}</td>
+                                    <td>{predio.direccion}</td>
+                                    <td>{predio.total}</td>
+                                    <td align="center">
+                                        <Link to="/home-user-int/manage-predio/edit">
+                                            <i className="bi bi-pencil-fill"></i> 
+                                        </Link>                                                             
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Link to="/home-user-int/manage-predio/fecha-pago-descuentos">
+                                            <i className="bi bi-calendar-check"></i>
+                                        </Link>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <Link to="/home-user-int/manage-predio/ejecutar-algoritmos">
+                                        <i className="bi bi-cpu"></i>
+                                        </Link>
+                                    </td>
+                                </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                     {/* <!-- End Table with stripped rows --> */}

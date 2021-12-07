@@ -14,10 +14,10 @@ function BodyMyProfile() {
                                 <h2>Kevin Anderson</h2>
                                 <h3>Web Designer</h3>
                                 <div className="social-links mt-2">
-                                    <a href="#" className="twitter"><i className="bi bi-twitter"></i></a>
-                                    <a href="#" className="facebook"><i className="bi bi-facebook"></i></a>
-                                    <a href="#" className="instagram"><i className="bi bi-instagram"></i></a>
-                                    <a href="#" className="linkedin"><i className="bi bi-linkedin"></i></a>
+                                    <a href="https://twitter.com" className="twitter"><i className="bi bi-twitter"></i></a>
+                                    <a href="https://es-la.facebook.com" className="facebook"><i className="bi bi-facebook"></i></a>
+                                    <a href="https://www.instagram.com" className="instagram"><i className="bi bi-instagram"></i></a>
+                                    <a href="https://www.linkedin.com" className="linkedin"><i className="bi bi-linkedin"></i></a>
                                 </div>
                             </div>
                         </div>
