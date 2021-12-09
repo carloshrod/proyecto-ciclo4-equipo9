@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
-import TableUsersRow from './TableUsersRow';
+import TablePrediosRow from "./TablePrediosRow";
 
-function TableUsers({ data, setDataToEdit, deleteData }) {
+function TablePredios({data, setDataToEdit, deleteData}) {
 
     return (
         <>
@@ -12,7 +12,7 @@ function TableUsers({ data, setDataToEdit, deleteData }) {
 
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Usuarios Registrados</h5>
+                                <h5 className="card-title">Predios Registrados</h5>
 
                                 <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                                     {/* <!-- Table with stripped rows --> */}
@@ -32,40 +32,43 @@ function TableUsers({ data, setDataToEdit, deleteData }) {
                                         <table className="table datatable">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" data-sortable="" >
+                                                    <th scope="col" data-sortable="">
                                                         <Link to="" className="dataTable-sorter">#</Link>
                                                     </th>
-                                                    <th scope="col" data-sortable="" >
-                                                        <Link to="" className="dataTable-sorter">Nombre</Link>
+                                                    <th scope="col" data-sortable="">
+                                                        <Link to="" className="dataTable-sorter">Codigo</Link>
                                                     </th>
-                                                    <th scope="col" data-sortable="" >
-                                                        <Link to="" className="dataTable-sorter">Nro. Documento</Link>
+                                                    <th scope="col" data-sortable="">
+                                                        <Link to="" className="dataTable-sorter">Nombre Propietario</Link>
                                                     </th>
-                                                    <th scope="col" data-sortable="" >
-                                                        <Link to="" className="dataTable-sorter">Email</Link>
+                                                    <th scope="col" data-sortable="">
+                                                        <Link to="" className="dataTable-sorter">C.C Propietario</Link>
                                                     </th>
-                                                    <th scope="col" data-sortable="" >
-                                                        <Link to="" className="dataTable-sorter">Teléfono</Link>
+                                                    <th scope="col" data-sortable="">
+                                                        <Link to="" className="dataTable-sorter">Direccion</Link>
                                                     </th>
-                                                    <th scope="col" data-sortable="" >
-                                                        <Link to="" className=""></Link>
+                                                    <th scope="col" data-sortable="">
+                                                        <Link to="" className="dataTable-sorter">Barrio</Link>
+                                                    </th>
+                                                    <th scope="col" data-sortable="">
+                                                        <Link to="" className="dataTable-sorter">Opciones</Link>
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {data.length > 0 ?
-                                                    data.map(user => {
+                                                    data.map(predio => {
                                                         return (
-                                                            <TableUsersRow
-                                                                key={user.id}
-                                                                user={user}
-                                                                setDataToEdit={setDataToEdit}
-                                                                deleteData={deleteData}
+                                                            <TablePrediosRow
+                                                            key={predio.id}
+                                                            predio={predio}
+                                                            setDataToEdit={setDataToEdit}
+                                                            deleteData={deleteData}
                                                             />
                                                         )
                                                     }) : (
                                                         <tr>
-                                                            <td colSpan={6}><h2 className="text-center">No hay información</h2></td>
+                                                            <td colSpan={7}><h2 className="text-center">No hay información</h2></td>
                                                         </tr>
                                                     )
                                                 }
@@ -92,4 +95,4 @@ function TableUsers({ data, setDataToEdit, deleteData }) {
     )
 }
 
-export default TableUsers;
+export default TablePredios;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import HeaderUserExt from '../HeaderUserExt';
 import Container from '../Container';
 import BodyHomeUserExt from "../BodyHomeUserExt";
@@ -7,9 +7,19 @@ import BodyPagarImpuestos from '../BodyPagarImpuestos';
 import TableAsociarPredios from '../TableAsociarPredios';
 import FormConvenio from '../forms/FormConvenio';
 import Footer from "../Footer";
-import PREDIOS from '../Mocks/Predios';
+import prediosDB from '../../mocks/predios';
 
 function UserExtPage({ page }) {
+
+    // API predios:
+    const [predios, setPredios] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3004/predios')
+            .then(response => response.json())
+            .then(data => setPredios(data));
+    }, []);
+
     return (
         <>
             <HeaderUserExt />
@@ -31,7 +41,7 @@ function UserExtPage({ page }) {
 
             {page === "asociarPredios" &&
                 <Container titulo="Asociar Predios">
-                    <TableAsociarPredios data={PREDIOS} />  {/* Children */}
+                    <TableAsociarPredios data={prediosDB} />  {/* Children */}
                 </Container>}
 
             {page === "convenio" &&

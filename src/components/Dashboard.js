@@ -25,11 +25,11 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Sales <span>| Today</span></h5>
+                                <h5 className="card-title">Usuarios Internos <span>| Today</span></h5>
 
                                 <div className="d-flex align-items-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i className="bi bi-cart"></i>
+                                        <i className="bi bi-people"></i>
                                     </div>
                                     <div className="ps-3">
                                         <h6>145</h6>
@@ -60,14 +60,14 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Revenue <span>| This Month</span></h5>
+                                <h5 className="card-title">Usuarios Externos <span>| This Month</span></h5>
 
                                 <div className="d-flex align-items-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i className="bi bi-currency-dollar"></i>
+                                        <i className="bi bi-people"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>$3,264</h6>
+                                        <h6>964</h6>
                                         <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span>
 
                                     </div>
@@ -96,11 +96,11 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Customers <span>| This Year</span></h5>
+                                <h5 className="card-title">Predios <span>| This Year</span></h5>
 
                                 <div className="d-flex align-items-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i className="bi bi-people"></i>
+                                        <i className="bi bi-building"></i>
                                     </div>
                                     <div className="ps-3">
                                         <h6>1244</h6>
@@ -132,7 +132,7 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Reports <span>/Today</span></h5>
+                                <h5 className="card-title">Reportes <span>/Today</span></h5>
 
                                 {/* <!-- Line Chart --> */}
                                 <div id="reportsChart"></div>
@@ -163,7 +163,7 @@ function Dashboard() {
                     </div>
 
                     <div className="card-body">
-                        <h5 className="card-title">Recent Activity <span>| Today</span></h5>
+                        <h5 className="card-title">Actividad Reciente <span>| Today</span></h5>
 
                         <div className="activity">
 

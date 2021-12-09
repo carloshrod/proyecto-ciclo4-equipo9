@@ -1,4 +1,4 @@
-const USERS = [
+const usersDB = [
     {
         id: 1,
         nombre: 'Carlos',
@@ -40,4 +40,4 @@ const USERS = [
     }
 ];
 
-export default USERS;
+export default usersDB;

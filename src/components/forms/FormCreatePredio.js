@@ -1,76 +1,129 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-function FormCreatePredio() {
+export const initialForm = {
+    codigo: "",
+    nom_prop: "",
+    doc_prop: "",
+    area_c: "",
+    area_t: "",
+    direccion: "",
+    barrio: "",
+    telefono: ""
+};
+
+function FormCreatePredio({ createData }) {
+
+    const [form, setForm] = useState(initialForm);
+
+    useEffect(() => {
+        setForm(initialForm)
+    }, []);
+
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.direccion || !form.barrio) {
+            alert("Datos incompletos");
+            return;
+        } createData(form);
+
+        handleReset();
+    };
+
+    const handleReset = (e) => {
+        setForm(initialForm);
+    };
+
     return (
         <>
-            <section className="section ">
+            <section className="section min-vh-100 mt-3">
                 <div className="row">
                     <div className="col-lg-12">
 
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title text-center pb-0 fs-4">Crea Predio</h5>
+                                <h5 className="card-title">Código del Predio</h5>
 
-                                <form className="row g-3 needs-validation" novalidate>
-                                    <div className="form-floating col-6">
-                                        <input className="form-control" id="codigo" type="text" placeholder="Codigo" data-sb-validations="required" />
-                                        <label for="codigo">Codigo</label>
-                                        <div className="invalid-feedback" data-sb-feedback="codigo:required">Codigo is required.</div>
+                                <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
+
+                                    <div className="col-6">
+                                        <label htmlFor="yourName" className="form-label">Código</label>
+                                        <input type="text" name="codigo" className="form-control" id="yourCodigo" onChange={handleChange} value={form.codigo} required />
+                                        <div className="invalid-feedback">Por favor, ingresa un número de documento del propietario!</div>
                                     </div>
 
-                                    <div className="form-floating col-6">
-                                        <input className="form-control" id="nombrePropietario" type="text" placeholder="Nombre Propietario" data-sb-validations="required" />
-                                        <label for="nombrePropietario">Nombre Propietario</label>
-                                        <div className="invalid-feedback" data-sb-feedback="nombrePropietario:required">Nombre Propietario is required.</div>
+                                    <div className="col-6">
+                                        <label htmlFor="yourName" className="form-label">Nombre del Propietario</label>
+                                        <input type="text" name="nom_prop" className="form-control" id="yourNom_prop" onChange={handleChange} value={form.nom_prop} required />
+                                        <div className="invalid-feedback">Por favor, ingresa nombre del propetario!</div>
                                     </div>
 
-                                    <div className="form-floating col-6">
-                                        <select className="form-select" id="tipoDeDocumento" aria-label="Tipo de Documento">
-                                            <option value="C.C">C.C</option>
-                                            <option value="C.E">C.E</option>
-                                        </select>
-                                        <label for="tipoDeDocumento">Tipo de Documento</label>
+                                    <div className="col-6">
+                                        <label htmlFor="yourName" className="form-label">Nro. Documento del Propietario</label>
+                                        <input type="number" name="doc_prop" className="form-control" id="yourDoc_prop" onChange={handleChange} value={form.doc_prop} required />
+                                        <div className="invalid-feedback">Por favor, ingresa un número de documento del propietario!</div>
                                     </div>
 
-                                    <div className="form-floating col-6">
-                                        <input className="form-control" id="numeroDeDocumento" type="text" placeholder="Numero de Documento" data-sb-validations="required" />
-                                        <label for="numeroDeDocumento">Numero de Documento</label>
-                                        <div className="invalid-feedback" data-sb-feedback="numeroDeDocumento:required">Numero de Documento is required.</div>
+                                    <div className="col-6">
+                                        <label htmlFor="yourUsername" className="form-label">Área Construida</label>
+                                        <div className="input-group has-validation">
+                                            <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-building"></i></span>
+                                            <input type="number" name="area_c" className="form-control" id="yourArea_c" onChange={handleChange} value={form.area_c} required />
+                                            <div className="invalid-feedback">Por favor, ingresa área construida del predio!</div>
+                                        </div>
                                     </div>
 
-                                    <div className="form-floating">
-                                        <input className="form-control" id="areaConstruida" type="text" placeholder="Area Construida" data-sb-validations="required" />
-                                        <label for="areaConstruida">Area Construida</label>
-                                        <div className="invalid-feedback" data-sb-feedback="areaConstruida:required">Area Construida is required.</div>
+                                    <div className="col-6">
+                                        <label htmlFor="yourUsername" className="form-label">Área Total</label>
+                                        <div className="input-group has-validation">
+                                            <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-building"></i></span>
+                                            <input type="number" name="area_t" className="form-control" id="yourArea_t" onChange={handleChange} value={form.area_t} required />
+                                            <div className="invalid-feedback">Por favor, ingresa área total del predio!</div>
+                                        </div>
                                     </div>
 
-                                    <div className="form-floating">
-                                        <input className="form-control" id="areaTotal" type="text" placeholder="Area Total" data-sb-validations="required" />
-                                        <label for="areaTotal">Area Total</label>
-                                        <div className="invalid-feedback" data-sb-feedback="areaTotal:required">Area Total is required.</div>
+                                    <div className="col-6">
+                                        <label htmlFor="yourName" className="form-label">Dirección</label>
+                                        <div className="input-group has-validation">
+                                            <input type="text" name="direccion" className="form-control" id="yourDireccion" onChange={handleChange} value={form.direccion} required />
+                                            <div className="invalid-feedback">Por favor, ingresa dirección del predio!</div>
+                                        </div>
                                     </div>
 
-                                    <div className="form-floating">
-                                        <input className="form-control" id="direccion" type="text" placeholder="Direccion" data-sb-validations="required" />
-                                        <label for="direccion">Direccion</label>
-                                        <div className="invalid-feedback" data-sb-feedback="direccion:required">Direccion is required.</div>
+                                    <div className="col-6">
+                                        <label htmlFor="yourName" className="form-label">Barrio</label>
+                                        <div className="input-group has-validation">
+                                            <input type="text" name="barrio" className="form-control" id="yourBarrio" onChange={handleChange} value={form.barrio} required />
+                                            <div className="invalid-feedback">Por favor, ingresa dirección del predio!</div>
+                                        </div>
                                     </div>
 
-                                    <div className="form-floating mb-3">
-                                        <input className="form-control" id="barrio" type="text" placeholder="Barrio" data-sb-validations="required" />
-                                        <label for="barrio">Barrio</label>
-                                        <div className="invalid-feedback" data-sb-feedback="barrio:required">Barrio is required.</div>
+                                    <div className="col-6">
+                                        <label htmlFor="yourName" className="form-label">Teléfono</label>
+                                        <div className="input-group has-validation">
+                                            <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-telephone-fill"></i></span>
+                                            <input type="tel" name="telefono" className="form-control" id="yourTelefono" onChange={handleChange} value={form.telefono} required />
+                                            <div className="invalid-feedback">Por favor, ingresa número de teléfono del propietario!</div>
+                                        </div>
                                     </div>
 
                                     <div className="col-4 m-auto mt-3">
-                                        <button className="btn btn-primary w-100" type="submit">Crear Predio</button>
+                                        <button className="btn btn-primary rounded-pill w-100" type="submit">Crear</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>{/* <!-- End #main --> */}
+            </section>
         </>
     )
 }

@@ -2,8 +2,7 @@ import React from 'react'
 import './CompStyles.css';
 import { Link } from "react-router-dom";
 
-function TableAsociarPredios(props) {
-    const { data } = props;
+function TableAsociarPredios({ data, setDataToEdit, deleteData }) {
 
     return (
         <>

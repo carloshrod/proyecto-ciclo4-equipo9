@@ -3,7 +3,7 @@ import React from 'react';
 function BodyMyProfile() {
     return (
         <>
-            <section className="section profile">
+            <section className="section profile min-vh-100">
                 <div className="row">
                     <div className="col-xl-4">
 
@@ -83,23 +83,23 @@ function BodyMyProfile() {
                                         {/* <!-- Change Password Form --> */}
                                         <form>
 
-                                            <div className="row mb-3">
-                                                <label for="currentPassword" className="col-md-4 col-lg-3 col-form-label">Contraseña Actual</label>
-                                                <div className="col-md-8 col-lg-9">
+                                            <div className="row mb-3 justify-content-center">
+                                                <label for="currentPassword" className="col-md-5 col-lg-4 col-form-label">Contraseña Actual</label>
+                                                <div className="col-md-5 col-lg-6">
                                                     <input name="password" type="password" className="form-control" id="currentPassword" />
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
-                                                <label for="newPassword" className="col-md-4 col-lg-3 col-form-label">Contraseña Nueva</label>
-                                                <div className="col-md-8 col-lg-9">
+                                            <div className="row mb-3 justify-content-center">
+                                                <label for="newPassword" className="col-md-5 col-lg-4 col-form-label">Contraseña Nueva</label>
+                                                <div className="col-md-5 col-lg-6">
                                                     <input name="newpassword" type="password" className="form-control" id="newPassword" />
                                                 </div>
                                             </div>
 
-                                            <div className="row mb-3">
-                                                <label for="renewPassword" className="col-md-4 col-lg-3 col-form-label">Reingresar Contraseña Nueva</label>
-                                                <div className="col-md-8 col-lg-9">
+                                            <div className="row mb-3 justify-content-center">
+                                                <label for="renewPassword" className="col-md-5 col-lg-4 col-form-label">Reingresar Contraseña Nueva</label>
+                                                <div className="col-md-5 col-lg-6">
                                                     <input name="renewpassword" type="password" className="form-control" id="renewPassword" />
                                                 </div>
                                             </div>
