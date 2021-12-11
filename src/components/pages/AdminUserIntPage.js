@@ -6,32 +6,80 @@ import ContainerAdmin from '../ContainerAdmin';
 import FooterAdmin from "../FooterAdmin";
 import Dashboard from '../Dashboard';
 import BodyMyProfile from '../BodyMyProfile';
-import FormCreateUser from '../forms/FormCreateUser';
+import FormUser from '../forms/FormUser';
 import TableUsers from '../TableUsers';
-import FormEditUser from '../forms/FormEditUser';
-import FormCreatePredio from '../forms/FormCreatePredio';
+import FormPredio from '../forms/FormPredio';
 import TablePredios from '../TablePredios';
-import FormEditPredio from '../forms/FormEditPredio';
 import FormFechaPagoDcto from '../forms/FormFechaPagoDcto';
 import FormEjecutarAlgoritmo from '../forms/FormEjecutarAlgoritmo';
-import prediosDB from '../../mocks/predios';
-import usersDB from '../../mocks/users';
+import { helpHttp } from '../../helpers/helpHttp';
+import Loader from '../Loader';
+import Message from '../Message';
 
 function AdminUserIntPage({ tipo, page }) {
 
-    // CRUD Users:
-    const [usersData, setUsersData] = useState(usersDB)
+    // ******************** CRUD Users ********************
+    const [usersDb, setUsersDb] = useState([])
     const [userToEdit, setUserToEdit] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const createUser = (data) => {
-        data.id = Date.now();
-        //console.log(data);
-        setUsersData([...usersData, data]);
+    let api = helpHttp();
+    let url = "http://localhost:3004/users";
+
+    useEffect(() => {
+        setLoading(true);
+        helpHttp()
+            .get(url)
+            .then((res) => {
+                //console.log(res);
+                if (!res.err) {
+                    setUsersDb(res);
+                    setError(null);
+                } else {
+                    setUsersDb(null);
+                    setError(res);
+                }
+                setLoading(false);
+            });
+    }, [url]);
+
+    const createUser = (user) => {
+        user.id = usersDb.length + 1;
+
+        let options = {
+            body: user,
+            headers: { "content-type": "application/json" },
+        };
+
+        api.post(url, options).then((res) => {
+            //console.log(res);
+            if (!res.err) {
+                setUsersDb([...usersDb, res]);
+            } else {
+                setError(res);
+            }
+        });
     };
 
     const updateUser = (data) => {
-        let newData = usersData.map((user) => (user.id === data.id ? data : user));
-        setUsersData(newData);
+        let endpoint = `${url}/${data.id}`;
+
+        let options = {
+            body: data,
+            headers: { "content-type": "application/json" },
+        };
+
+        api.put(endpoint, options).then((res) => {
+            //console.log(res);
+            if (!res.err) {
+                let newData = usersDb.map((user) => (user.id === data.id ? data : user));
+                setUsersDb(newData);
+            } else {
+                setError(res);
+            }
+        });
+
     };
 
     const deleteUser = (id) => {
@@ -40,26 +88,81 @@ function AdminUserIntPage({ tipo, page }) {
         );
 
         if (isDelete) {
-            let newData = usersData.filter((user) => user.id !== id);
-            setUsersData(newData);
+            let endpoint = `${url}/${id}`;
+            let options = {
+                headers: { "content-type": "application/json" },
+            };
+
+            api.del(endpoint, options).then((res) => {
+                if (!res.err) {
+                    let newData = usersDb.filter((el) => el.id !== id);
+                    setUsersDb(newData);
+                } else {
+                    setError(res);
+                }
+            });
         } else {
             return;
         }
-    };
 
-    // CRUD predios:
-    const [prediosData, setPrediosData] = useState(prediosDB)
+    };
+    // ******************** End CRUD Users ********************
+
+    // ********************* CRUD predios *********************
+    const [prediosDb, setPrediosDb] = useState([])
     const [predioToEdit, setPredioToEdit] = useState(null);
 
-    const createPredio = (data) => {
-        data.id = Date.now();
-        //console.log(data);
-        setPrediosData([...prediosData, data]);
+    let urlPredios = "http://localhost:3004/predios";
+
+    useEffect(() => {
+        setLoading(true);
+        helpHttp()
+            .get(urlPredios)
+            .then((res) => {
+                if (!res.err) {
+                    setPrediosDb(res);
+                    setError(null);
+                } else {
+                    setPrediosDb(null);
+                    setError(res);
+                }
+                setLoading(false);
+            });
+    }, [urlPredios]);
+
+    const createPredio = (predio) => {
+        predio.id = prediosDb.length + 1;
+
+        let options = {
+            body: predio,
+            headers: { "content-type": "application/json" },
+        };
+
+        api.post(urlPredios, options).then((res) => {
+            if (!res.err) {
+                setPrediosDb([...prediosDb, res]);
+            } else {
+                setError(res);
+            }
+        });
     };
 
     const updatePredio = (data) => {
-        let newData = prediosData.map((predio) => (predio.id === data.id ? data : predio));
-        setPrediosData(newData);
+        let endpoint = `${urlPredios}/${data.id}`;
+
+        let options = {
+            body: data,
+            headers: { "content-type": "application/json" },
+        };
+
+        api.put(endpoint, options).then((res) => {
+            if (!res.err) {
+                let newData = prediosDb.map((predio) => (predio.id === data.id ? data : predio));
+                setPrediosDb(newData);
+            } else {
+                setError(res);
+            }
+        });
     };
 
     const deletePredio = (id) => {
@@ -68,29 +171,25 @@ function AdminUserIntPage({ tipo, page }) {
         );
 
         if (isDelete) {
-            let newData = prediosData.filter((predio) => predio.id !== id);
-            setPrediosData(newData);
+            let endpoint = `${urlPredios}/${id}`;
+            let options = {
+                headers: { "content-type": "application/json" },
+            };
+
+            api.del(endpoint, options).then((res) => {
+                //console.log(res);
+                if (!res.err) {
+                    let newData = prediosDb.filter((el) => el.id !== id);
+                    setPrediosDb(newData);
+                } else {
+                    setError(res);
+                }
+            });
         } else {
             return;
         }
     };
-
-
-    // API Users:
-    // useEffect(() => {
-    //     fetch('http://localhost:3004/users')
-    //         .then(response => response.json())
-    //         .then(data => setUsers(data));
-    // }, []);
-
-    // // API predios:
-    // const [prediosApi, setPrediosApi] = useState([]);
-
-    // useEffect(() => {
-    //     fetch('http://localhost:3004/predios')
-    //         .then(response => response.json())
-    //         .then(data => setPrediosApi(data));
-    // }, []);
+    // ******************* End CRUD predios *******************
 
     return (
         <>
@@ -113,50 +212,84 @@ function AdminUserIntPage({ tipo, page }) {
 
             {page === "createUser" &&
                 <ContainerAdmin titulo="Crear Usuario" subtitulo="Crear Usuario">
-                    <FormCreateUser
-                        createData={createUser}
+                    <FormUser
+                        titulo="Ingrese los datos del usuario"
+                        createUser={createUser}
+                        updateUser={updateUser}
+                        userToEdit={userToEdit}
+                        setUserToEdit={setUserToEdit}
+                        btn_text="Crear"
                     />  {/* Children */}
                 </ContainerAdmin>}
 
             {page === "manageUsers" &&
                 <ContainerAdmin titulo="Gestionar Usuarios" subtitulo="Gestionar Usuarios">
-                    <TableUsers
-                        data={usersData}
-                        setDataToEdit={setUserToEdit}
-                        deleteData={deleteUser}
-                    />  {/* Children */}
+                    {loading && <Loader />}
+                    {error && (
+                        <Message
+                            msg={`Error ${error.status}: ${error.statusText}`}
+                            bgColor="#dc3545"
+                        />
+                    )}
+                    {usersDb && (
+                        <TableUsers
+                            users={usersDb}
+                            setUserToEdit={setUserToEdit}
+                            deleteUser={deleteUser}
+                        />
+                    )}
                 </ContainerAdmin>}
 
             {page === "editUser" &&
                 <ContainerAdmin titulo="Editar Usuario" subtitulo="Gestionar Usuarios" subtitulo2="Editar Usuario">
-                    <FormEditUser
-                        updateData={updateUser}
-                        dataToEdit={userToEdit}
-                        setDataToEdit={setUserToEdit}
+                    <FormUser
+                        titulo="Datos del usuario a editar"
+                        createUser={createUser}
+                        updateUser={updateUser}
+                        userToEdit={userToEdit}
+                        setUserToEdit={setUserToEdit}
+                        btn_text="Editar"
                     />  {/* Children */}
                 </ContainerAdmin>}
 
             {page === "createPredio" &&
                 <ContainerAdmin titulo="Crear Predio" subtitulo="Crear Predio">
-                    <FormCreatePredio
-                        createData={createPredio}
+                    <FormPredio
+                        titulo="Ingrese los datos del predio"
+                        createPredio={createPredio}
+                        updatePredio={updatePredio}
+                        predioToEdit={predioToEdit}
+                        setPredioToEdit={setPredioToEdit}
+                        btn_text="Crear"
                     />  {/* Children */}
                 </ContainerAdmin>}
 
             {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" subtitulo="Gestionar Predios">
-                <TablePredios
-                    data={prediosData}
-                    setDataToEdit={setPredioToEdit}
-                    deleteData={deletePredio}
-                /> {/* Children */}
+                {loading && <Loader />}
+                {error && (
+                    <Message
+                        msg={`Error ${error.status}: ${error.statusText}`}
+                        bgColor="#dc3545"
+                    />
+                )}
+                {usersDb && (
+                    <TablePredios
+                        predios={prediosDb}
+                        setPredioToEdit={setPredioToEdit}
+                        deletePredio={deletePredio}
+                    />
+                )}
             </ContainerAdmin>}
 
             {page === "editPredio" &&
                 <ContainerAdmin titulo="Editar Predio" subtitulo="Gestionar Predios" subtitulo2="Editar Predio">
-                    <FormEditPredio
-                        updateData={updatePredio}
-                        dataToEdit={predioToEdit}
-                        setDataToEdit={setPredioToEdit}
+                    <FormPredio
+                        titulo="Datos del predio a editar"
+                        createPredio={createPredio}
+                        updatePredio={updatePredio}
+                        predioToEdit={predioToEdit}
+                        setPredioToEdit={setPredioToEdit}
+                        btn_text="Editar"
                     />  {/* Children */}
                 </ContainerAdmin>}
 

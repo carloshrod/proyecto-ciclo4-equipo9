@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import TableUsersRow from './TableUsersRow';
 
-function TableUsers({ data, setDataToEdit, deleteData }) {
+function TableUsers({ users, setUserToEdit, deleteUser }) {
 
     return (
         <>
@@ -53,14 +53,14 @@ function TableUsers({ data, setDataToEdit, deleteData }) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {data.length > 0 ?
-                                                    data.map(user => {
+                                                {users.length > 0 ?
+                                                    users.map(user => {
                                                         return (
                                                             <TableUsersRow
                                                                 key={user.id}
                                                                 user={user}
-                                                                setDataToEdit={setDataToEdit}
-                                                                deleteData={deleteData}
+                                                                setDataToEdit={setUserToEdit}
+                                                                deleteData={deleteUser}
                                                             />
                                                         )
                                                     }) : (

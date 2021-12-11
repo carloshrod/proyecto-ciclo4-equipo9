@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const initialForm = {
-    // id: null,
+    id: null,
     nombre: "",
     apellidos: "",
     email: "",
@@ -11,22 +11,17 @@ export const initialForm = {
     direccion: "",
 };
 
-function FormCreateUser({ createData }) {
+function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
     
     const [form, setForm] = useState(initialForm);
 
-    // useEffect(() => {
-    //     if (dataToEdit) {
-    //         setForm(dataToEdit);
-    //     } else {
-    //         setForm(initialForm);
-    //     }
-    // }, [dataToEdit]);
-
     useEffect(() => {
-        setForm(initialForm)  
-    },[]);
-
+        if (userToEdit) {
+            setForm(userToEdit);
+        } else {
+            setForm(initialForm);
+        }
+    }, [userToEdit]);
 
     const handleChange = (e) => {
         setForm({
@@ -41,20 +36,20 @@ function FormCreateUser({ createData }) {
         if (!form.nombre || !form.apellidos || !form.email || !form.nro_doc || !form.telefono || !form.direccion) {
             alert("Datos incompletos");
             return;
-        }createData(form);
+        };
 
-        // if (form.id === null) {
-        //     createData(form);
-        // } else {
-        //     updateData(form);
-        // }
+        if (form.id === null) {
+            createUser(form);
+        } else {
+            updateUser(form);
+        }
 
         handleReset();
     };
 
     const handleReset = (e) => {
         setForm(initialForm);
-        // setDataToEdit(null);
+        setUserToEdit(null);
     };
 
     return (
@@ -65,9 +60,9 @@ function FormCreateUser({ createData }) {
 
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Ingrese los datos del usuario</h5>
+                                <h5 className="card-title">{titulo}</h5>
 
-                                <form className="row g-3 needs-validation" onSubmit={handleSubmit} novalidate>
+                                <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
 
                                     <div className="col-12">
                                         <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle center-img" />
@@ -125,7 +120,7 @@ function FormCreateUser({ createData }) {
                                     </div>
 
                                     <div className="col-4 m-auto mt-3">
-                                        <button className="btn btn-primary rounded-pill w-100" type="submit">Crear</button>
+                                        <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
                                 </form>
                             </div>

@@ -20,11 +20,11 @@ const TablePrediosRow = ({ predio, setDataToEdit, deleteData }) => {
                 <button className="btn btn-danger" onClick={() => deleteData(id)}><i className="bi bi-trash"></i></button>
                 &nbsp;
                 <Link to="/home-admin/manage-predio/fecha-pago-descuentos">
-                    <i className="bi bi-calendar-check"></i>
+                <button className="btn btn-primary"><i className="bi bi-calendar-check"></i></button>
                 </Link>
-                &nbsp;&nbsp;&nbsp;
+                &nbsp;
                 <Link to="/home-admin/manage-predio/ejecutar-algoritmos">
-                    <i className="bi bi-cpu"></i>
+                <button className="btn btn-primary"><i className="bi bi-cpu"></i></button>
                 </Link>            </td>
         </tr>
     );

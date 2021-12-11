@@ -1,13 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { initialForm } from './FormCreatePredio';
+import React, { useEffect, useState } from "react";
 
-function FormEditPredio({ updateData, dataToEdit }) {
+export const initialForm = {
+    id: null,
+    codigo: "",
+    nom_prop: "",
+    doc_prop: "",
+    area_c: "",
+    area_t: "",
+    direccion: "",
+    barrio: "",
+    telefono: ""
+};
+
+function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
 
     const [form, setForm] = useState(initialForm);
 
     useEffect(() => {
-        setForm(dataToEdit)  
-    },[dataToEdit]);
+        if (predioToEdit) {
+            setForm(predioToEdit);
+        } else {
+            setForm(initialForm);
+        }
+    }, [predioToEdit]);
 
     const handleChange = (e) => {
         setForm({
@@ -19,16 +34,23 @@ function FormEditPredio({ updateData, dataToEdit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.area_c || !form.area_t || !form.direccion || !form.barrio || !form.telefono) {
+        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.direccion || !form.barrio) {
             alert("Datos incompletos");
             return;
-        }updateData(form);
+        };
+
+        if (form.id === null) {
+            createPredio(form);
+        } else {
+            updatePredio(form);
+        }
 
         handleReset();
     };
 
     const handleReset = (e) => {
         setForm(initialForm);
+        setPredioToEdit(null);
     };
 
     return (
@@ -39,7 +61,7 @@ function FormEditPredio({ updateData, dataToEdit }) {
 
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Código del Predio</h5>
+                                <h5 className="card-title">{titulo}</h5>
 
                                 <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
 
@@ -105,7 +127,7 @@ function FormEditPredio({ updateData, dataToEdit }) {
                                     </div>
 
                                     <div className="col-4 m-auto mt-3">
-                                        <button className="btn btn-primary rounded-pill w-100" type="submit">Crear</button>
+                                        <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
                                 </form>
                             </div>
@@ -117,4 +139,4 @@ function FormEditPredio({ updateData, dataToEdit }) {
     )
 }
 
-export default FormEditPredio;
+export default FormCreatePredio;

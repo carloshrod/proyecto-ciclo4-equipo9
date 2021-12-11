@@ -2,7 +2,7 @@ import React from 'react'
 import './CompStyles.css';
 import { Link } from "react-router-dom";
 
-function TableAsociarPredios({ data, setDataToEdit, deleteData }) {
+function TableAsociarPredios({ predios, setDataToEdit, deleteData }) {
 
     return (
         <>
@@ -15,7 +15,7 @@ function TableAsociarPredios({ data, setDataToEdit, deleteData }) {
                         <div className="dataTable-top">
                             <div className="dataTable-dropdown">
                                 <label><select className="dataTable-selector">
-                                    <option value="5" selected="true">5</option>
+                                    <option defaultValue="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
                                     <option value="20">20</option>
@@ -55,24 +55,30 @@ function TableAsociarPredios({ data, setDataToEdit, deleteData }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.map(predio => {
-                                        return (
+                                    {predios.length > 0 ?
+                                        predios.map(predio => {
+                                            return (
+                                                <tr key={predio.id}>
+                                                    <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
+                                                    <th scope="row">{predio.id}</th>
+                                                    <td>{predio.codigo}</td>
+                                                    <td>{predio.nom_prop}</td>
+                                                    <td>{predio.cc_prop}</td>
+                                                    <td>{predio.direccion}</td>
+                                                    <td>{predio.total}</td>
+                                                    <td align="center">
+                                                        <Link to="">
+                                                            <i className="bi bi-link"></i>
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }) : (
                                             <tr>
-                                                <td><input className="form-check-input" type="checkbox" id="gridCheck1" /></td>
-                                                <th scope="row">{predio.id}</th>
-                                                <td>{predio.codigo}</td>
-                                                <td>{predio.nom_prop}</td>
-                                                <td>{predio.cc_prop}</td>
-                                                <td>{predio.direccion}</td>
-                                                <td>{predio.total}</td>
-                                                <td align="center">
-                                                    <Link to="">
-                                                        <i className="bi bi-link"></i>
-                                                    </Link>
-                                                </td>
+                                                <td colSpan={7}><h2 className="text-center">No hay información</h2></td>
                                             </tr>
                                         )
-                                    })}
+                                    }
                                 </tbody>
                             </table>
                             {/* <!-- End Table with stripped rows --> */}

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TablePrediosRow from "./TablePrediosRow";
 
-function TablePredios({data, setDataToEdit, deleteData}) {
+function TablePredios({predios, setPredioToEdit, deletePredio}) {
 
     return (
         <>
@@ -56,14 +56,14 @@ function TablePredios({data, setDataToEdit, deleteData}) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {data.length > 0 ?
-                                                    data.map(predio => {
+                                                {predios.length > 0 ?
+                                                    predios.map(predio => {
                                                         return (
                                                             <TablePrediosRow
                                                             key={predio.id}
                                                             predio={predio}
-                                                            setDataToEdit={setDataToEdit}
-                                                            deleteData={deleteData}
+                                                            setDataToEdit={setPredioToEdit}
+                                                            deleteData={deletePredio}
                                                             />
                                                         )
                                                     }) : (

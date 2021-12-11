@@ -7,17 +7,17 @@ import BodyPagarImpuestos from '../BodyPagarImpuestos';
 import TableAsociarPredios from '../TableAsociarPredios';
 import FormConvenio from '../forms/FormConvenio';
 import Footer from "../Footer";
-import prediosDB from '../../mocks/predios';
+// import prediosDB from '../../mocks/predios';
 
 function UserExtPage({ page }) {
 
     // API predios:
-    const [predios, setPredios] = useState([]);
+    const [prediosDb, setPrediosDb] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:3004/predios')
             .then(response => response.json())
-            .then(data => setPredios(data));
+            .then(data => setPrediosDb(data));
     }, []);
 
     return (
@@ -41,7 +41,7 @@ function UserExtPage({ page }) {
 
             {page === "asociarPredios" &&
                 <Container titulo="Asociar Predios">
-                    <TableAsociarPredios data={prediosDB} />  {/* Children */}
+                    <TableAsociarPredios predios={prediosDb}/>  {/* Children */}
                 </Container>}
 
             {page === "convenio" &&
