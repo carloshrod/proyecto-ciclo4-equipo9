@@ -25,7 +25,7 @@ function AdminUserIntPage({ tipo, page }) {
     const [loading, setLoading] = useState(false);
 
     let api = helpHttp();
-    let url = "http://localhost:3004/users";
+    let url = "http://localhost:8080/users";
 
     useEffect(() => {
         setLoading(true);
@@ -112,7 +112,7 @@ function AdminUserIntPage({ tipo, page }) {
     const [prediosDb, setPrediosDb] = useState([])
     const [predioToEdit, setPredioToEdit] = useState(null);
 
-    let urlPredios = "http://localhost:3004/predios";
+    let urlPredios = "http://localhost:8080/predios";
 
     useEffect(() => {
         setLoading(true);

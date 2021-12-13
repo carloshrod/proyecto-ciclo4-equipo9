@@ -42,8 +42,11 @@
   display: flex;
 }
 
-/* Loader: */
+.container-bg {
+  background-color: #f3fcf3;
+}
 
+/* Loader: */
 .lds-ring {
   display: inline-block;
   position: relative;
