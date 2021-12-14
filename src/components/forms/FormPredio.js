@@ -9,7 +9,6 @@ export const initialForm = {
     area_t: "",
     direccion: "",
     barrio: "",
-    telefono: ""
 };
 
 function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
@@ -117,14 +116,14 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
                                         </div>
                                     </div>
 
-                                    <div className="col-6">
+                                    {/* <div className="col-6">
                                         <label htmlFor="yourName" className="form-label">Teléfono</label>
                                         <div className="input-group has-validation">
                                             <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-telephone-fill"></i></span>
                                             <input type="tel" name="telefono" className="form-control" id="yourTelefono" onChange={handleChange} value={form.telefono} required />
                                             <div className="invalid-feedback">Por favor, ingresa número de teléfono del propietario!</div>
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     <div className="col-4 m-auto mt-3">
                                         <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>

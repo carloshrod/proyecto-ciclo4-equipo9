@@ -25,16 +25,14 @@ function AdminUserIntPage({ tipo, page }) {
     const [loading, setLoading] = useState(false);
 
     let api = helpHttp();
-    let url = "http://localhost:8080/users";
+    let url = "http://localhost:8080";
 
     useEffect(() => {
         setLoading(true);
-        helpHttp()
-            .get(url)
+            api.get(`${url}/users/listar`)
             .then((res) => {
-                //console.log(res);
                 if (!res.err) {
-                    setUsersDb(res);
+                    setUsersDb(res.data);
                     setError(null);
                 } else {
                     setUsersDb(null);
@@ -42,7 +40,8 @@ function AdminUserIntPage({ tipo, page }) {
                 }
                 setLoading(false);
             });
-    }, [url]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const createUser = (user) => {
         user.id = usersDb.length + 1;
@@ -52,10 +51,10 @@ function AdminUserIntPage({ tipo, page }) {
             headers: { "content-type": "application/json" },
         };
 
-        api.post(url, options).then((res) => {
-            //console.log(res);
+        api.post(`${url}/users/guardar`, options).then((res) => {
+            console.log(res);
             if (!res.err) {
-                setUsersDb([...usersDb, res]);
+                setUsersDb([...usersDb, res.data]);
             } else {
                 setError(res);
             }
@@ -112,15 +111,15 @@ function AdminUserIntPage({ tipo, page }) {
     const [prediosDb, setPrediosDb] = useState([])
     const [predioToEdit, setPredioToEdit] = useState(null);
 
-    let urlPredios = "http://localhost:8080/predios";
 
     useEffect(() => {
         setLoading(true);
         helpHttp()
-            .get(urlPredios)
+            .get(`${url}/predios/listar`)
             .then((res) => {
+                // console.log(res)
                 if (!res.err) {
-                    setPrediosDb(res);
+                    setPrediosDb(res.data);
                     setError(null);
                 } else {
                     setPrediosDb(null);
@@ -128,7 +127,8 @@ function AdminUserIntPage({ tipo, page }) {
                 }
                 setLoading(false);
             });
-    }, [urlPredios]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const createPredio = (predio) => {
         predio.id = prediosDb.length + 1;
@@ -138,9 +138,9 @@ function AdminUserIntPage({ tipo, page }) {
             headers: { "content-type": "application/json" },
         };
 
-        api.post(urlPredios, options).then((res) => {
+        api.post(`${url}/predios/guardar`, options).then((res) => {
             if (!res.err) {
-                setPrediosDb([...prediosDb, res]);
+                setPrediosDb([...prediosDb, res.data]);
             } else {
                 setError(res);
             }
@@ -148,7 +148,7 @@ function AdminUserIntPage({ tipo, page }) {
     };
 
     const updatePredio = (data) => {
-        let endpoint = `${urlPredios}/${data.id}`;
+        let endpoint = `${url}/${data.id}`;
 
         let options = {
             body: data,
@@ -171,7 +171,7 @@ function AdminUserIntPage({ tipo, page }) {
         );
 
         if (isDelete) {
-            let endpoint = `${urlPredios}/${id}`;
+            let endpoint = `${url}/${id}`;
             let options = {
                 headers: { "content-type": "application/json" },
             };
