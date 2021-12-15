@@ -46,13 +46,14 @@ function AdminUserIntPage({ tipo, page }) {
     const createUser = (user) => {
         user.id = usersDb.length + 1;
 
+        let endpoint = `${url}/users/guardar/`;
+
         let options = {
             body: user,
             headers: { "content-type": "application/json" },
         };
 
-        api.post(`${url}/users/guardar`, options).then((res) => {
-            console.log(res);
+        api.post(endpoint, options).then((res) => {
             if (!res.err) {
                 setUsersDb([...usersDb, res.data]);
             } else {
@@ -62,17 +63,19 @@ function AdminUserIntPage({ tipo, page }) {
     };
 
     const updateUser = (data) => {
-        let endpoint = `${url}/${data.id}`;
+        let endpoint = `${url}/users/editar/`;
 
         let options = {
             body: data,
             headers: { "content-type": "application/json" },
         };
 
+        console.log(data)
+
         api.put(endpoint, options).then((res) => {
-            //console.log(res);
+            console.log(res);
             if (!res.err) {
-                let newData = usersDb.map((user) => (user.id === data.id ? data : user));
+                let newData = usersDb.map((user) => (user._id === data._id ? data : user));
                 setUsersDb(newData);
             } else {
                 setError(res);
@@ -87,7 +90,7 @@ function AdminUserIntPage({ tipo, page }) {
         );
 
         if (isDelete) {
-            let endpoint = `${url}/${id}`;
+            let endpoint = `${url}/users/eliminar/${id}`;
             let options = {
                 headers: { "content-type": "application/json" },
             };
@@ -148,7 +151,7 @@ function AdminUserIntPage({ tipo, page }) {
     };
 
     const updatePredio = (data) => {
-        let endpoint = `${url}/${data.id}`;
+        let endpoint = `${url}/predios/editar`;
 
         let options = {
             body: data,
@@ -157,7 +160,7 @@ function AdminUserIntPage({ tipo, page }) {
 
         api.put(endpoint, options).then((res) => {
             if (!res.err) {
-                let newData = prediosDb.map((predio) => (predio.id === data.id ? data : predio));
+                let newData = prediosDb.map((predio) => (predio._id === data._id ? data : predio));
                 setPrediosDb(newData);
             } else {
                 setError(res);
