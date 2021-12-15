@@ -38,7 +38,7 @@ function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, tit
             return;
         };
 
-        if (form.id === null) {
+        if (form.nombre === null) {
             createUser(form);
         } else {
             updateUser(form);

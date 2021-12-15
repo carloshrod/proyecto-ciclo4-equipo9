@@ -97,7 +97,7 @@ function AdminUserIntPage({ tipo, page }) {
 
             api.del(endpoint, options).then((res) => {
                 if (!res.err) {
-                    let newData = usersDb.filter((el) => el.id !== id);
+                    let newData = usersDb.filter((el) => el._id !== id);
                     setUsersDb(newData);
                 } else {
                     setError(res);
@@ -134,14 +134,15 @@ function AdminUserIntPage({ tipo, page }) {
     }, []);
 
     const createPredio = (predio) => {
-        predio.id = prediosDb.length + 1;
+        predio.nro_registro = prediosDb.length + 1;
 
         let options = {
             body: predio,
             headers: { "content-type": "application/json" },
         };
-
+        console.log(predio);
         api.post(`${url}/predios/guardar`, options).then((res) => {
+            console.log(res)
             if (!res.err) {
                 setPrediosDb([...prediosDb, res.data]);
             } else {
@@ -174,7 +175,7 @@ function AdminUserIntPage({ tipo, page }) {
         );
 
         if (isDelete) {
-            let endpoint = `${url}/${id}`;
+            let endpoint = `${url}/predios/eliminar/${id}`;
             let options = {
                 headers: { "content-type": "application/json" },
             };
@@ -182,7 +183,7 @@ function AdminUserIntPage({ tipo, page }) {
             api.del(endpoint, options).then((res) => {
                 //console.log(res);
                 if (!res.err) {
-                    let newData = prediosDb.filter((el) => el.id !== id);
+                    let newData = prediosDb.filter((el) => el._id !== id);
                     setPrediosDb(newData);
                 } else {
                     setError(res);
