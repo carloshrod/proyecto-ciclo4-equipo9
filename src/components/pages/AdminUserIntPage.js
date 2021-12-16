@@ -42,9 +42,22 @@ function AdminUserIntPage({ tipo, page }) {
             });
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    
+    
+    
+    
+    let newArray = [];
+    usersDb.forEach((u,i) => {
+        newArray.push({
+            ...u,
+            nro_registro: i+1
+        })
+    })
+
 
     const createUser = (user) => {
-        user.nro_registro = usersDb.length + 1;
+        let a = usersDb[usersDb.length-1]
+        user.nro_registro = a.nro_registro + 1;
         user.rol = 1; // Rol 1 -> Usuario Interno
         user.contraseña = "User_1234";
 
@@ -224,7 +237,6 @@ function AdminUserIntPage({ tipo, page }) {
                         titulo="Ingrese los datos del usuario"
                         createUser={createUser}
                         updateUser={updateUser}
-                        userToEdit={userToEdit}
                         setUserToEdit={setUserToEdit}
                         btn_text="Crear"
                     />  {/* Children */}

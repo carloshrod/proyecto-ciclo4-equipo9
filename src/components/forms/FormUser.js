@@ -24,6 +24,7 @@ function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, tit
             setForm(initialForm);
         }
     }, [userToEdit]);
+    
 
     const handleChange = (e) => {
         setForm({
@@ -50,6 +51,7 @@ function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, tit
     };
 
     const handleReset = (e) => {
+        
         setForm(initialForm);
         setUserToEdit(null);
     };
