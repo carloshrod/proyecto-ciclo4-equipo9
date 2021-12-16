@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export const initialForm = {
-    id: null,
+    nro_registro: null,
     codigo: "",
     nom_prop: "",
     doc_prop: "",
@@ -9,6 +9,9 @@ export const initialForm = {
     area_t: "",
     direccion: "",
     barrio: "",
+    fecha_pago: "",
+    fecha_pago2: "",
+    fecha_pago3: "",
 };
 
 function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
@@ -38,7 +41,7 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
             return;
         };
 
-        if (form.id === null) {
+        if (form.nro_registro === null) {
             createPredio(form);
         } else {
             updatePredio(form);
@@ -66,7 +69,7 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
 
                                     <div className="col-6">
                                         <label htmlFor="yourName" className="form-label">Código</label>
-                                        <input type="text" name="codigo" className="form-control" id="yourCodigo" onChange={handleChange} value={form.codigo} required />
+                                        <input type="string" name="codigo" className="form-control" id="yourCodigo" onChange={handleChange} value={form.codigo} required />
                                         <div className="invalid-feedback">Por favor, ingresa un número de documento del propietario!</div>
                                     </div>
 
@@ -108,7 +111,7 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
                                         </div>
                                     </div>
 
-                                    <div className="col-6">
+                                    <div className="col-6 mb-3">
                                         <label htmlFor="yourName" className="form-label">Barrio</label>
                                         <div className="input-group has-validation">
                                             <input type="text" name="barrio" className="form-control" id="yourBarrio" onChange={handleChange} value={form.barrio} required />
@@ -116,18 +119,42 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
                                         </div>
                                     </div>
 
-                                    {/* <div className="col-6">
-                                        <label htmlFor="yourName" className="form-label">Teléfono</label>
+                                    <hr className="divider"/>
+
+                                    <h5 className="card-title mt-0">Fecha de Pago / Descuentos</h5>
+
+                                    <div className="col-6 mt-3 mb-3">
+                                        <label htmlFor="idFecha_pago" className="form-label">Fecha de pago máxima:</label>
+                                    </div>
+
+                                    <div className="col-6 mt-3 mb-3">
+                                        <input type="date" name="fecha_pago" className="form-control" id="idFecha_pago" onChange={handleChange} value={form.fecha_pago} required />
+                                    </div>
+
+                                    <div className="col-6 mt-3 mb-3">
+                                        <label htmlFor="IdFecha_pago2" className="form-label">Fecha de pago máxima para tener descuento del 40%:</label>
+                                    </div>
+
+                                    <div className="col-6 mt-3 mb-3">
                                         <div className="input-group has-validation">
-                                            <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-telephone-fill"></i></span>
-                                            <input type="tel" name="telefono" className="form-control" id="yourTelefono" onChange={handleChange} value={form.telefono} required />
-                                            <div className="invalid-feedback">Por favor, ingresa número de teléfono del propietario!</div>
+                                            <input type="date" name="fecha_pago2" className="form-control" id="IdFecha_pago2" onChange={handleChange} value={form.fecha_pago2} required />
                                         </div>
-                                    </div> */}
+                                    </div>
+
+                                    <div className="col-6 mt-3 mb-3">
+                                        <label htmlFor="IdFecha_pago3" className="form-label">Fecha de pago máxima para tener descuento del 20%:</label>
+                                    </div>
+
+                                    <div className="col-6 mt-3 mb-3">
+                                        <div className="input-group has-validation">
+                                            <input type="date" name="fecha_pago3" className="form-control" id="IdFecha_pago3" onChange={handleChange} value={form.fecha_pago3} required />
+                                        </div>
+                                    </div>
 
                                     <div className="col-4 m-auto mt-3">
                                         <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
+
                                 </form>
                             </div>
                         </div>

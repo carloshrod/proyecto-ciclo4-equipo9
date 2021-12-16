@@ -57,7 +57,7 @@ function TableUsers({ users, setUserToEdit, deleteUser }) {
                                                     users.map(user => {
                                                         return (
                                                             <TableUsersRow
-                                                                key={user._id}
+                                                                key={user.nro_doc}
                                                                 user={user}
                                                                 setDataToEdit={setUserToEdit}
                                                                 deleteData={deleteUser}

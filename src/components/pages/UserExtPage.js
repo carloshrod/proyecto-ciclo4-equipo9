@@ -15,7 +15,7 @@ function UserExtPage({ page }) {
     const [prediosDb, setPrediosDb] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3004/predios')
+        fetch('http://localhost:8080/listar')
             .then(response => response.json())
             .then(data => setPrediosDb(data));
     }, []);

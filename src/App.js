@@ -24,7 +24,7 @@ function App() {
         <Route path="/home-admin/create-predio" element={<AdminUserIntPage tipo="admin" page="createPredio" />} />  {/* Crear Predio - Admin */}
         <Route path="/home-admin/manage-predio" element={<AdminUserIntPage tipo="admin" page="managePredio" />} />  {/* Gestionar Predios - Admin */}
         <Route path="/home-admin/manage-predio/edit" element={<AdminUserIntPage tipo="admin" page="editPredio" />} />  {/* Editar Predio - Admin */}
-        <Route path="/home-admin/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage tipo="admin" page="fechaPagoDcto" />} />  {/* Definir Fechas de Pago / Dctos - Admin */}
+        {/* <Route path="/home-admin/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage tipo="admin" page="fechaPagoDcto" />} />  Definir Fechas de Pago / Dctos - Admin */}
         <Route path="/home-admin/manage-predio/ejecutar-algoritmos" element={<AdminUserIntPage tipo="admin" page="algoritmos" />} /> {/* Ejecutar Algoritmos - Admin */}
         {/* Fin - Administrador */}
 
@@ -34,7 +34,7 @@ function App() {
         <Route path="/home-user-int/create-predio" element={<AdminUserIntPage page="createPredio" />} />  {/* Crear Predio - Usaurio Interno */}
         <Route path="/home-user-int/manage-predio" element={<AdminUserIntPage page="managePredio" />} />  {/* Gestionar Predios - Usuario Interno */}
         <Route path="/home-user-int/manage-predio/edit" element={<AdminUserIntPage page="editPredio" />} />  {/* Editar Predio - Usuario Interno */}
-        <Route path="/home-user-int/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage page="fechaPagoDcto" />} />  {/* Definir Fechas de Pago / Dctos - Usuario Interno */}
+        {/* <Route path="/home-user-int/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage page="fechaPagoDcto" />} />  Definir Fechas de Pago / Dctos - Usuario Interno */}
         <Route path="/home-user-int/manage-predio/ejecutar-algoritmos" element={<AdminUserIntPage page="algoritmos" />} />  {/* Ejecutar Algoritmos - Usuario Interno */}
         {/* Fin - Usuario Interno */}
 

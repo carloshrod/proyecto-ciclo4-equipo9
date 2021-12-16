@@ -1,7 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
-function Register() {
+export const initialForm = {
+  nro_registro: null,
+  nombres: "",
+  apellidos: "",
+  tipo_doc: "",
+  nro_doc: "",
+  email: "",
+  contraseña: "",
+  telefono: "",
+  direccion: "",
+};
+
+function Register({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+
+  const [form, setForm] = useState(initialForm);
+
+  useEffect(() => {
+    if (userToEdit) {
+      setForm(userToEdit);
+    } else {
+      setForm(initialForm);
+    }
+  }, [userToEdit]);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!form.nombres || !form.apellidos || !form.email || !form.nro_doc || !form.telefono || !form.direccion) {
+      alert("Datos incompletos");
+      return;
+    };
+
+    if (form.nro_registro === null) {
+      createUser(form);
+    } else {
+      updateUser(form);
+    }
+
+    handleReset();
+  };
+
+  const handleReset = (e) => {
+    setForm(initialForm);
+    setUserToEdit(null);
+  };
+
   return (
     <>
       <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -18,44 +70,44 @@ function Register() {
                     <p className="text-center small">Ingresa tu información personal para crear tu cuenta</p>
                   </div>
 
-                  <form className="row g-3 needs-validation" noValidate>
+                  <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
                     <div className="col-6">
                       <label htmlFor="yourName" className="form-label">Nombres</label>
-                      <input type="text" name="name" className="form-control" id="yourName" required />
+                      <input type="text" name="nombres" className="form-control" id="yourName" onChange={handleChange} value={form.nombres} required />
                       <div className="invalid-feedback">Por favor, ingresa tus nombres!</div>
                     </div>
 
                     <div className="col-6">
-                      <label htmlFor="yourName" className="form-label">Apellidos</label>
-                      <input type="text" name="name" className="form-control" id="yourName" required />
+                      <label htmlFor="yourLastname" className="form-label">Apellidos</label>
+                      <input type="text" name="apellidos" className="form-control" id="yourLastname" onChange={handleChange} value={form.apellidos} required />
                       <div className="invalid-feedback">Por favor, ingresa tus apellidos!</div>
                     </div>
 
                     <div className="col-6">
-                      <label htmlFor="yourName" className="form-label">Tipo de Documento</label>
-                      <select className="form-select" aria-label="Default select example">
+                      <label htmlFor="idTipoDoc" className="form-label">Tipo de Documento</label>
+                      <select className="form-select" name="tipo_doc" aria-label="Default select example" id="idTipoDoc" onChange={handleChange} value={form.tipo_doc} required>
                         <option defaultValue>Seleccionar</option>
                         <option value="1">CC</option>
-                        <option value="2">TI</option>
+                        <option value="2">CE</option>
                         <option value="3">Pasaporte</option>
                       </select>
                       <div className="invalid-feedback"></div>
                     </div>
 
                     <div className="col-6">
-                      <label htmlFor="yourName" className="form-label">Número de Documento</label>
+                      <label htmlFor="yourUsername" className="form-label">Nro. Documento</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-fingerprint"></i></span>
-                        <input type="number" name="name" className="form-control" id="yourName" required />
-                        <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
+                        <input type="number" name="nro_doc" className="form-control" id="yourUsername" onChange={handleChange} value={form.nro_doc} required />
+                        <div className="invalid-feedback">Por favor, ingresa tu usuario!</div>
                       </div>
                     </div>
 
                     <div className="col-6">
-                      <label htmlFor="yourUsername" className="form-label">Correo Electrónico</label>
+                      <label htmlFor="yourEmail" className="form-label">Correo Electrónico</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-envelope-fill"></i></span>
-                        <input type="email" name="email" className="form-control" id="yourEmail" required />
+                        <input type="email" name="email" className="form-control" id="yourEmail" onChange={handleChange} value={form.email} required />
                         <div className="invalid-feedback">Por favor, ingresa un correo electrónico válido!</div>
                       </div>
                     </div>
@@ -64,9 +116,24 @@ function Register() {
                       <label htmlFor="yourPassword" className="form-label">Contraseña</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
-                        <input type="password" name="password" className="form-control" id="yourPassword" required />
+                        <input type="password" name="contraseña" className="form-control" id="yourPassword" onChange={handleChange} value={form.contraseña} required />
                         <div className="invalid-feedback">Por favor ingresa tu contraseña!</div>
                       </div>
+                    </div>
+
+                    <div className="col-6">
+                      <label htmlFor="yourPhone" className="form-label">Teléfono</label>
+                      <div className="input-group has-validation">
+                        <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-telephone-fill"></i></span>
+                        <input type="number" name="telefono" className="form-control" id="yourPhone" onChange={handleChange} value={form.telefono} required />
+                        <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
+                      </div>
+                    </div>
+
+                    <div className="col-6">
+                      <label htmlFor="yourAdress" className="form-label">Dirección</label>
+                      <input type="text" name="direccion" className="form-control" id="yourAdress" onChange={handleChange} value={form.direccion} required />
+                      <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
                     </div>
 
                     <div className="col-12">
@@ -76,9 +143,11 @@ function Register() {
                         <div className="invalid-feedback">Debes aceptar los términos y condiciones antes de continuar.</div>
                       </div>
                     </div>
+
                     <div className="col-4 m-auto mt-3">
                       <button className="btn btn-primary rounded-pill w-100" type="submit">Crear Cuenta</button>
                     </div>
+
                     <div className="col-12 text-center">
                       <p className="small mb-0">¿Ya tienes una cuenta? <Link to="/login" style={{ fontWeight: 'bold' }}>Inicia sesión aquí</Link></p>
                     </div>

@@ -44,7 +44,9 @@ function AdminUserIntPage({ tipo, page }) {
     }, []);
 
     const createUser = (user) => {
-        user.id = usersDb.length + 1;
+        user.nro_registro = usersDb.length + 1;
+        user.rol = 1; // Rol 1 -> Usuario Interno
+        user.contraseña = "User_1234";
 
         let endpoint = `${url}/users/guardar/`;
 
@@ -84,20 +86,22 @@ function AdminUserIntPage({ tipo, page }) {
 
     };
 
-    const deleteUser = (id) => {
+    const deleteUser = (nro_doc) => {
         let isDelete = window.confirm(
-            `¿Estás seguro de eliminar el registro con el id '${id}'?`
+            `¿Estás seguro de eliminar el usuario con número de documento '${nro_doc}'?`
         );
 
         if (isDelete) {
-            let endpoint = `${url}/users/eliminar/${id}`;
+            let endpoint = `${url}/users/eliminar/${nro_doc}`;
             let options = {
                 headers: { "content-type": "application/json" },
             };
 
+            console.log(nro_doc)
+
             api.del(endpoint, options).then((res) => {
                 if (!res.err) {
-                    let newData = usersDb.filter((el) => el._id !== id);
+                    let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
                     setUsersDb(newData);
                 } else {
                     setError(res);
@@ -169,13 +173,13 @@ function AdminUserIntPage({ tipo, page }) {
         });
     };
 
-    const deletePredio = (id) => {
+    const deletePredio = (codigo) => {
         let isDelete = window.confirm(
-            `¿Estás seguro de eliminar el registro con el id '${id}'?`
+            `¿Estás seguro de eliminar el predio con codigo '${codigo}'?`
         );
 
         if (isDelete) {
-            let endpoint = `${url}/predios/eliminar/${id}`;
+            let endpoint = `${url}/predios/eliminar/${codigo}`;
             let options = {
                 headers: { "content-type": "application/json" },
             };
@@ -183,7 +187,7 @@ function AdminUserIntPage({ tipo, page }) {
             api.del(endpoint, options).then((res) => {
                 //console.log(res);
                 if (!res.err) {
-                    let newData = prediosDb.filter((el) => el._id !== id);
+                    let newData = prediosDb.filter((el) => el.codigo !== codigo);
                     setPrediosDb(newData);
                 } else {
                     setError(res);
@@ -303,7 +307,7 @@ function AdminUserIntPage({ tipo, page }) {
                 </ContainerAdmin>}
 
             {page === "algoritmos" &&
-                <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Gestionar Predios" subtitulo2="Ejecutar Algoritmos">
+                <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Ejecutar Algoritmos">
                     <FormEjecutarAlgoritmo />  {/* Children */}
                 </ContainerAdmin>}
 
