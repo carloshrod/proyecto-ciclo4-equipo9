@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const initialForm = {
-    nro_registro: null,
+    _id: null,
     nombres: "",
     apellidos: "",
     tipo_doc: "",
     nro_doc: "",
     email: "",
-    contraseña: "",
     telefono: "",
     direccion: "",
 };
 
-function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
 
     const [form, setForm] = useState(initialForm);
 
@@ -36,12 +35,12 @@ function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, tit
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!form.nombres || !form.apellidos || !form.email || !form.nro_doc || !form.telefono || !form.direccion) {
+        if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.telefono || !form.direccion) {
             alert("Datos incompletos");
             return;
         };
 
-        if (form.nro_registro === null) {
+        if (form._id === null) {
             createUser(form);
         } else {
             updateUser(form);
@@ -155,4 +154,4 @@ function FormCreateUser({ createUser, updateUser, userToEdit, setUserToEdit, tit
     )
 }
 
-export default FormCreateUser;
+export default FormUser;

@@ -52,10 +52,10 @@ function AdminUserIntPage({ tipo, page }) {
     // })
 
     const createUser = (user) => {
-        let a = usersDb[usersDb.length-1]
-        user.nro_registro = a.nro_registro + 1;
+        // let a = usersDb[usersDb.length-1]
+        // user.nro_registro = a.nro_registro + 1;
         user.rol = 2; // Rol 2 -> Usuario Interno
-        user.contraseña = "User_1234";
+        user.password = "User_1234";
 
         let endpoint = `${url}/users/guardar/`;
 
@@ -64,7 +64,10 @@ function AdminUserIntPage({ tipo, page }) {
             headers: { "content-type": "application/json" },
         };
 
+        console.log(user)
+
         api.post(endpoint, options).then((res) => {
+            console.log(res)
             if (!res.err) {
                 setUsersDb([...usersDb, res.data]);
             } else {
@@ -86,7 +89,7 @@ function AdminUserIntPage({ tipo, page }) {
         api.put(endpoint, options).then((res) => {
             console.log(res);
             if (!res.err) {
-                let newData = usersDb.map((user) => (user._id === data._id ? data : user));
+                let newData = usersDb.map((user) => (user.nro_doc === data.nro_doc ? data : user));
                 setUsersDb(newData);
             } else {
                 setError(res);
@@ -172,7 +175,10 @@ function AdminUserIntPage({ tipo, page }) {
             headers: { "content-type": "application/json" },
         };
 
+        console.log(data)
+
         api.put(endpoint, options).then((res) => {
+            console.log(res)
             if (!res.err) {
                 let newData = prediosDb.map((predio) => (predio._id === data._id ? data : predio));
                 setPrediosDb(newData);

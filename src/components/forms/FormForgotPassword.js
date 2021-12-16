@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ForgotPassword() {
+function FormForgotPassword() {
   return (
     <>
       <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -42,4 +42,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default FormForgotPassword;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export const initialForm = {
-    nro_registro: null,
+    _id: null,
     codigo: "",
     nom_prop: "",
     doc_prop: "",
@@ -14,7 +14,7 @@ export const initialForm = {
     fecha_pago3: "",
 };
 
-function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
+function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
 
     const [form, setForm] = useState(initialForm);
 
@@ -41,7 +41,7 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
             return;
         };
 
-        if (form.nro_registro === null) {
+        if (form._id === null) {
             createPredio(form);
         } else {
             updatePredio(form);
@@ -165,4 +165,4 @@ function FormCreatePredio({ createPredio, updatePredio, predioToEdit, setPredioT
     )
 }
 
-export default FormCreatePredio;
+export default FormPredio;

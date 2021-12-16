@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-function Login() {
+function FormLogin() {
 
   const [data, setData] = useState({
     usuario: "",
@@ -93,4 +93,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default FormLogin;

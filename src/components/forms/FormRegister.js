@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
 export const initialForm = {
-  nro_registro: null,
-  nombres: "",
+  nombres: null,
   apellidos: "",
   tipo_doc: "",
   nro_doc: "",
   email: "",
-  contraseña: "",
+  password: "",
   telefono: "",
   direccion: "",
 };
 
-function Register({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormRegister({ createUser, updateUser, userToEdit, setUserToEdit }) {
 
   const [form, setForm] = useState(initialForm);
 
@@ -35,12 +34,12 @@ function Register({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!form.nombres || !form.apellidos || !form.email || !form.nro_doc || !form.telefono || !form.direccion) {
+    if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono || !form.direccion) {
       alert("Datos incompletos");
       return;
     };
 
-    if (form.nro_registro === null) {
+    if (form.nombres === null) {
       createUser(form);
     } else {
       updateUser(form);
@@ -116,7 +115,7 @@ function Register({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                       <label htmlFor="yourPassword" className="form-label">Contraseña</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
-                        <input type="password" name="contraseña" className="form-control" id="yourPassword" onChange={handleChange} value={form.contraseña} required />
+                        <input type="password" name="password" className="form-control" id="yourPassword" onChange={handleChange} value={form.password} required />
                         <div className="invalid-feedback">Por favor ingresa tu contraseña!</div>
                       </div>
                     </div>
@@ -162,4 +161,4 @@ function Register({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
   );
 }
 
-export default Register;
+export default FormRegister;
