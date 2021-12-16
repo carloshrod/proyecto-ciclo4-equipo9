@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TablePrediosRow = ({ predio, setDataToEdit, deleteData }) => {
-    let { nro_registro, codigo, nom_prop, doc_prop, direccion, barrio } = predio || {};
+const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData }) => {
+    let { codigo, nom_prop, doc_prop, direccion, barrio } = predio || {};
 
     return (
         <tr>

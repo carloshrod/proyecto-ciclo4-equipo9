@@ -43,22 +43,18 @@ function AdminUserIntPage({ tipo, page }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-    
-    
-    
-    let newArray = [];
-    usersDb.forEach((u,i) => {
-        newArray.push({
-            ...u,
-            nro_registro: i+1
-        })
-    })
-
+    // let newArray = [];
+    // usersDb.forEach((u,i) => {
+    //     newArray.push({
+    //         ...u,
+    //         nro_registro: i+1
+    //     })
+    // })
 
     const createUser = (user) => {
         let a = usersDb[usersDb.length-1]
         user.nro_registro = a.nro_registro + 1;
-        user.rol = 1; // Rol 1 -> Usuario Interno
+        user.rol = 2; // Rol 2 -> Usuario Interno
         user.contraseña = "User_1234";
 
         let endpoint = `${url}/users/guardar/`;
@@ -278,7 +274,6 @@ function AdminUserIntPage({ tipo, page }) {
                         titulo="Ingrese los datos del predio"
                         createPredio={createPredio}
                         updatePredio={updatePredio}
-                        predioToEdit={predioToEdit}
                         setPredioToEdit={setPredioToEdit}
                         btn_text="Crear"
                     />  {/* Children */}

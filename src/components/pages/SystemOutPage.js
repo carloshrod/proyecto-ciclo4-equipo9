@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import HeaderSystemOut from "../HeaderSystemOut";
 import Container from '../Container';
 import FormLogin from '../forms/FormLogin'
@@ -12,31 +12,13 @@ function SystemOutPage({ page }) {
 
   const [usersDb, setUsersDb] = useState([])
   const [userToEdit, setUserToEdit] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   let api = helpHttp();
   let url = "http://localhost:8080";
 
-  useEffect(() => {
-    setLoading(true);
-        api.get(`${url}/users/listar`)
-        .then((res) => {
-            if (!res.err) {
-                setUsersDb(res.data);
-                setError(null);
-            } else {
-                setUsersDb(null);
-                setError(res);
-            }
-            setLoading(false);
-        });
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
-
+  // Registro de usuarios:
   const createUser = (user) => {
-    user.nro_registro = usersDb.length + 1;
-    user.rol = 2; // Rol 1 -> Usuario Interno
+    user.rol = 3; // Rol 3 -> Usuario Externo
 
     let endpoint = `${url}/users/guardar/`;
 
@@ -49,7 +31,7 @@ function SystemOutPage({ page }) {
       if (!res.err) {
         setUsersDb([...usersDb, res.data]);
       } else {
-        setError(res);
+        window.alert('Error, tu cuenta no pudo ser creada. Intentalo más tarde.');
       }
     });
   };

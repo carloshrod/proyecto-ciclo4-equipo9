@@ -54,10 +54,12 @@ function TableUsers({ users, setUserToEdit, deleteUser }) {
                                             </thead>
                                             <tbody>
                                                 {users.length > 0 ?
-                                                    users.map(user => {
+                                                    users.map((user, index) => {
+                                                        console.log(user)
                                                         return (
                                                             <TableUsersRow
                                                                 key={user.nro_doc}
+                                                                nro_registro={index + 1}
                                                                 user={user}
                                                                 setDataToEdit={setUserToEdit}
                                                                 deleteData={deleteUser}

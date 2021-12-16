@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TableUsersRow = ({ user, setDataToEdit, deleteData }) => {
-    let { nro_registro, nombres,apellidos, nro_doc, email, telefono } = user || {};
+const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
+    let { nombres,apellidos, nro_doc, email, telefono } = user || {};
 
     return (
         <tr>

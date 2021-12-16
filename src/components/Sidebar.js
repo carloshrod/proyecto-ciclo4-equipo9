@@ -7,7 +7,7 @@ export const SidebarAdmin = <Sidebar
                             item3={<SidebarItem linkTo="/home-admin/create-user" icono="bi bi-person-plus-fill" titulo="Crear Usuarios" />}
                             item4={<SidebarItem linkTo="/home-admin/manage-users" icono="bi bi-pencil-fill" titulo="Gestionar Usuarios" />}
                             item5={<SidebarItem linkTo="/home-admin/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
-                            item6={<SidebarItem linkTo="/home-admin/manage-predio" icono="bi bi-pencil-fill" titulo="Gestionar Predios" />}
+                            item6={<SidebarItem linkTo="/home-admin/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
                             item7={<SidebarItem linkTo="/home-admin/manage-predio/ejecutar-algoritmos" icono="bi bi-cpu" titulo="Ejecutar Algoritmos" />}
                             />
 
