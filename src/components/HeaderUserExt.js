@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeaderUserExt() {
+
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    }
+
     return (
         <>
             {/* <!-- ======= Header ======= --> */}
@@ -30,33 +36,32 @@ function HeaderUserExt() {
                                     <h6>Kevin Anderson</h6>
                                     <span>Web Designer</span>
                                 </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-
-                                <li>
-                                    <Link className="dropdown-item d-flex align-items-center" to="/home-user-ext/profile">
-                                        <i className="bi bi-person"></i>
-                                        <span>Mi Perfil</span>
-                                    </Link>
-                                </li>
 
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
 
                                 <li>
-                                    <Link to="" className="dropdown-item d-flex align-items-center">
-                                        <i className="bi bi-gear"></i>
-                                        <span>Configuración</span>
+                                    <Link to="/home-admin/my-profile">
+                                        <div className="dropdown-item d-flex align-items-center">
+                                            <span className="m-auto">
+                                                <i className="bi bi-person" />
+                                                Mi Perfil
+                                            </span>
+                                        </div>
                                     </Link>
+                                </li>
+                                <li>
+                                    <hr className="dropdown-divider" />
                                 </li>
 
                                 <li>
-                                    <Link to="" className="dropdown-item d-flex align-items-center">
-                                        <i className="bi bi-box-arrow-right"></i>
-                                        <span>Salir</span>
-                                    </Link>
+                                    <div className="dropdown-item d-flex align-items-center">
+                                        <button className="btn btn-100 btn-light btn-primary" type="button" onClick={logout}>
+                                            <i className="bi bi-box-arrow-right" />
+                                            Salir
+                                        </button>
+                                    </div>
                                 </li>
 
                             </ul>

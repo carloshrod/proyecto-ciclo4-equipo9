@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 
 export const initialForm = {
-  nombres: null,
+  nombres: "",
   apellidos: "",
   tipo_doc: "",
   nro_doc: "",
@@ -12,7 +12,7 @@ export const initialForm = {
   direccion: "",
 };
 
-function FormRegister({ createUser, updateUser, userToEdit, setUserToEdit }) {
+function FormRegister({ registerUser, userToEdit, setUserToEdit }) {
 
   const [form, setForm] = useState(initialForm);
 
@@ -34,17 +34,11 @@ function FormRegister({ createUser, updateUser, userToEdit, setUserToEdit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono || !form.direccion) {
+    if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono) {
       alert("Datos incompletos");
       return;
     };
-
-    if (form.nombres === null) {
-      createUser(form);
-    } else {
-      updateUser(form);
-    }
-
+    registerUser(form);
     handleReset();
   };
 
@@ -137,7 +131,7 @@ function FormRegister({ createUser, updateUser, userToEdit, setUserToEdit }) {
 
                     <div className="col-12">
                       <div className="form-check">
-                        <input className="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required />
+                        <input className="form-check-input" name="terminos" type="checkbox"  id="acceptTerms" required />
                         <label className="form-check-label" htmlFor="acceptTerms">Estoy de acuerdo y acepto los <Link to="">términos y condiciones</Link></label>
                         <div className="invalid-feedback">Debes aceptar los términos y condiciones antes de continuar.</div>
                       </div>

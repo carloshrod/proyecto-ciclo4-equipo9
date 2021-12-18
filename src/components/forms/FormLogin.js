@@ -1,36 +1,61 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 
 function FormLogin() {
 
   const [data, setData] = useState({
-    usuario: "",
-    contraseña: "",
+    email: "",
+    password: "",
     recordarme: false
   })
 
   const handleInputChange = (event) => {
     setData({
       ...data,
-      [event.target.name] : event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
   const handleInputChecked = (event) => {
     setData({
       ...data,
-      [event.target.name] : event.target.checked
+      [event.target.name]: event.target.checked
     })
   }
 
   const enviarDatos = (event) => {
     event.preventDefault();
-    console.log("Usuario: " + data.usuario + " - Contraseña: " + data.contraseña + " - Recordarme: " + data.recordarme)
+    console.log("Usuario: " + data.email + " - Contraseña: " + data.password + " - Recordarme: " + data.recordarme)
+  }
+
+  const [error, setError] = useState();
+  const [msgError, setMsgError] = useState();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  function login() {
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    fetch("http://localhost:8080/users/login", {
+      headers: { "content-type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ email, password })
+    }).then(res => res.json())
+      .then(res => {
+        if (res.estado === "ok") {
+          localStorage.setItem("token",res.token);
+          window.location.href = res.url;
+        } else {
+          setError(true)
+          setMsgError(res.msg);
+        }
+      })
   }
 
   return (
     <>
       <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        {error && <div className=" col-4 alert alert-danger text-center" role="alert">{msgError}</div>}
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-5 col-md-7 d-flex flex-column align-items-center justify-content-center">
@@ -48,10 +73,10 @@ function FormLogin() {
                   <form className="row g-3 needs-validation justify-content-center" onSubmit={enviarDatos} noValidate>
 
                     <div className="col-10">
-                      <label htmlFor="idUsername" className="form-label">Usuario</label>
+                      <label htmlFor="idUsuario" className="form-label">Usuario</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-person-fill"></i></span>
-                        <input type="text" name="usuario" className="form-control" id="idUsuario" value={data.usuario} onChange={handleInputChange} required/>
+                        <input ref={emailRef} type="text" name="email" className="form-control" id="idUsuario" value={data.email} onChange={handleInputChange} required />
                         <div className="invalid-feedback">Por favor, ingresa tu usuario!</div>
                       </div>
                     </div>
@@ -60,19 +85,19 @@ function FormLogin() {
                       <label htmlFor="idPassword" className="form-label">Contraseña</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
-                        <input type="password" name="contraseña" className="form-control" id="idContraseña" value={data.contraseña} onChange={handleInputChange} required/>
+                        <input ref={passwordRef} type="password" name="password" className="form-control" id="idPassword" value={data.password} onChange={handleInputChange} required />
                         <div className="invalid-feedback">Por favor, ingresa tu contraseña!</div>
                       </div>
                     </div>
 
                     <div className="col-10">
                       <div className="form-check">
-                        <input className="form-check-input" type="checkbox" name="recordarme" value={data.recordarme} id="idRecordarme" onChange={handleInputChecked}/>
+                        <input className="form-check-input" type="checkbox" name="recordarme" value={data.recordarme} id="idRecordarme" onChange={handleInputChecked} />
                         <label className="form-check-label" htmlFor="idRecordarme">Recordarme</label>
                       </div>
                     </div>
                     <div className="col-6">
-                      <button className="btn btn-primary rounded-pill w-100" type="submit">Iniciar Sesión</button>
+                      <button onClick={login} className="btn btn-primary rounded-pill w-100" type="submit">Iniciar Sesión</button>
                     </div>
                     <div className="col-10 text-center">
                       <p className="small mb-0">¿No tienes una cuenta? <Link to="/register" style={{ fontWeight: 'bold' }}>Registrate aquí!</Link></p>

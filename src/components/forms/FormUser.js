@@ -49,8 +49,7 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
         handleReset();
     };
 
-    const handleReset = (e) => {
-        
+    const handleReset = (e) => {       
         setForm(initialForm);
         setUserToEdit(null);
     };

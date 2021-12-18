@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeaderUserInt() {
+
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    }
+
     return (
         <>
             {/* {/* <!-- ======= Header ======= --> */}
@@ -28,6 +34,7 @@ function HeaderUserInt() {
                                     <h6>Kevin Anderson</h6>
                                     <span>Web Designer</span>
                                 </li>
+                                
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
@@ -44,10 +51,12 @@ function HeaderUserInt() {
                                 </li>
 
                                 <li>
-                                    <Link to="" className="dropdown-item d-flex align-items-center">
-                                        <i className="bi bi-box-arrow-right"></i>
-                                        <span>Salir</span>
-                                    </Link>
+                                    <div className="dropdown-item d-flex align-items-center">
+                                        <button className="btn btn-100 btn-light btn-primary" type="button" onClick={logout}>
+                                            <i className="bi bi-box-arrow-right"/>
+                                            Salir
+                                        </button>
+                                    </div>
                                 </li>
 
                             </ul>{/* <!-- End Profile Dropdown Items --> */}

@@ -60,7 +60,7 @@ function TablePredios({predios, setPredioToEdit, deletePredio}) {
                                                     predios.map((predio, index) => {
                                                         return (
                                                             <TablePrediosRow
-                                                            key={predio.codigo}
+                                                            key={predio._id}
                                                             nro_registro={index + 1}
                                                             predio={predio}
                                                             setDataToEdit={setPredioToEdit}

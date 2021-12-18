@@ -29,7 +29,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     useEffect(() => {
         setLoading(true);
-            api.get(`${url}/users/listar`)
+        api.get(`${url}/users/listar`)
             .then((res) => {
                 if (!res.err) {
                     setUsersDb(res.data);
@@ -40,9 +40,9 @@ function AdminUserIntPage({ tipo, page }) {
                 }
                 setLoading(false);
             });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-    
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [usersDb]);
+
     // let newArray = [];
     // usersDb.forEach((u,i) => {
     //     newArray.push({
@@ -63,12 +63,16 @@ function AdminUserIntPage({ tipo, page }) {
 
         let endpoint = `${url}/users/guardar/`;
 
+        const token = localStorage.getItem("token");
+        console.log(token)
+
         let options = {
             body: user,
-            headers: { "content-type": "application/json" },
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`,
+            },
         };
-
-        console.log(user)
 
         api.post(endpoint, options).then((res) => {
             console.log(res)
@@ -150,8 +154,8 @@ function AdminUserIntPage({ tipo, page }) {
                 }
                 setLoading(false);
             });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [prediosDb]);
 
     const cantidadPredios = prediosDb.length; 
 

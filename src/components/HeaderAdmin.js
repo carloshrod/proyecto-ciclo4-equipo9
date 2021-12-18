@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeaderAdmin() {
+
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+    }
+
     return (
         <>
             {/* {/* <!-- ======= Header ======= --> */}
@@ -15,7 +21,6 @@ function HeaderAdmin() {
 
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
-
                         <li className="nav-item dropdown pe-3">
 
                             <Link to="/" className="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
@@ -28,14 +33,19 @@ function HeaderAdmin() {
                                     <h6>Kevin Anderson</h6>
                                     <span>Web Designer</span>
                                 </li>
+
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
 
                                 <li>
-                                    <Link to="/home-admin/my-profile" className="dropdown-item d-flex align-items-center">
-                                        <i className="bi bi-person"></i>
-                                        <span>Mi Perfil</span>
+                                    <Link to="/home-admin/my-profile">
+                                        <div className="dropdown-item d-flex align-items-center">
+                                            <span className="m-auto">
+                                                <i className="bi bi-person" />
+                                                Mi Perfil
+                                            </span>
+                                        </div>
                                     </Link>
                                 </li>
                                 <li>
@@ -43,15 +53,17 @@ function HeaderAdmin() {
                                 </li>
 
                                 <li>
-                                    <Link to="" className="dropdown-item d-flex align-items-center">
-                                        <i className="bi bi-box-arrow-right"></i>
-                                        <span>Salir</span>
-                                    </Link>
+                                    <div className="dropdown-item d-flex align-items-center">
+                                        <button className="btn btn-100 btn-light btn-primary" type="button" onClick={logout}>
+                                            <i className="bi bi-box-arrow-right" />
+                                            Salir
+                                        </button>
+                                    </div>
                                 </li>
 
                             </ul>{/* <!-- End Profile Dropdown Items --> */}
-                        </li>{/* <!-- End Profile Nav --> */}
 
+                        </li>{/* <!-- End Profile Nav --> */}
                     </ul>
                 </nav>{/* <!-- End Icons Navigation --> */}
 

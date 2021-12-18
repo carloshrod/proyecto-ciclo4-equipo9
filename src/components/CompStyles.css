@@ -46,6 +46,14 @@
   background-color: #f3fcf3;
 }
 
+.none {
+  display: none;
+}
+
+.btn-100 {
+  width: 100%;
+}
+
 /* Loader: */
 .lds-ring {
   display: inline-block;

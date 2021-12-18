@@ -17,10 +17,10 @@ function SystemOutPage({ page }) {
   let url = "http://localhost:8080";
 
   // Registro de usuarios:
-  const createUser = (user) => {
+  const registerUser = (user) => {
     user.rol = 3; // Rol 3 -> Usuario Externo
 
-    let endpoint = `${url}/users/guardar/`;
+    let endpoint = `${url}/users/registro/`;
 
     let options = {
       body: user,
@@ -53,7 +53,7 @@ function SystemOutPage({ page }) {
       {page === "register" &&
         <Container>
           <FormRegister
-            createUser={createUser}
+            registerUser={registerUser}
             userToEdit={userToEdit}
             setUserToEdit={setUserToEdit}
           />  {/* Children */}

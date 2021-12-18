@@ -4,6 +4,8 @@ import TableUsersRow from './TableUsersRow';
 
 function TableUsers({ users, setUserToEdit, deleteUser }) {
 
+    let style = "none";
+
     return (
         <>
             <section className="section min-vh-100">
@@ -45,7 +47,7 @@ function TableUsers({ users, setUserToEdit, deleteUser }) {
                                                         <Link to="" className="dataTable-sorter">Email</Link>
                                                     </th>
                                                     <th scope="col" data-sortable="" >
-                                                        <Link to="" className="dataTable-sorter">Teléfono</Link>
+                                                        <Link to="" className="dataTable-sorter">Rol</Link>
                                                     </th>
                                                     <th scope="col" data-sortable="" >
                                                         <Link to="" className=""></Link>
@@ -55,11 +57,13 @@ function TableUsers({ users, setUserToEdit, deleteUser }) {
                                             <tbody>
                                                 {users.length > 0 ?
                                                     users.map((user, index) => {
-                                                        console.log(user)
+                                                        
+                                                        // console.log(user)
                                                         return (
                                                             <TableUsersRow
+                                                                style={index === 0 ? style : ""}
                                                                 key={user.nro_doc}
-                                                                nro_registro={index + 1}
+                                                                nro_registro={index}
                                                                 user={user}
                                                                 setDataToEdit={setUserToEdit}
                                                                 deleteData={deleteUser}
