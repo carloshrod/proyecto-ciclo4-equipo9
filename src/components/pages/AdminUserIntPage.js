@@ -51,6 +51,10 @@ function AdminUserIntPage({ tipo, page }) {
     //     })
     // })
 
+    const cantidadUsuarios = a => usersDb.filter((e) =>(
+        e.rol === a)).length; //cuenta los usuarios segun el rol
+
+
     const createUser = (user) => {
         // let a = usersDb[usersDb.length-1]
         // user.nro_registro = a.nro_registro + 1;
@@ -149,6 +153,8 @@ function AdminUserIntPage({ tipo, page }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const cantidadPredios = prediosDb.length; 
+
     const createPredio = (predio) => {
         predio.nro_registro = prediosDb.length + 1;
 
@@ -225,7 +231,7 @@ function AdminUserIntPage({ tipo, page }) {
 
             {page === "home" &&
                 <ContainerAdmin titulo="Dashboard" subtitulo="Dashboard">
-                    <Dashboard />  {/* Children */}
+                    <Dashboard cantidadUsuarios = {cantidadUsuarios} cantidadPredios = {cantidadPredios} />  {/* Children */}
                 </ContainerAdmin>}
 
             {page === "myProfile" &&

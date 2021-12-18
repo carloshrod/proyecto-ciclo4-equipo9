@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Dashboard() {
+function Dashboard(props) {
     return (
         <>
             {/* <!-- Left side columns --> */}
@@ -25,15 +25,15 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Usuarios Internos <span>| Today</span></h5>
+                                <h5 className="card-title">Usuarios Internos</h5>
 
                                 <div className="d-flex align-items-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i className="bi bi-people"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>145</h6>
-                                        <span className="text-success small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">increase</span>
+                                        <h6>{props.cantidadUsuarios(2)}</h6>
+                                        <span className="text-success small pt-1 fw-bold">Registrados</span>
 
                                     </div>
                                 </div>
@@ -60,15 +60,15 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Usuarios Externos <span>| This Month</span></h5>
+                                <h5 className="card-title">Usuarios Externos</h5>
 
                                 <div className="d-flex align-items-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i className="bi bi-people"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>964</h6>
-                                        <span className="text-success small pt-1 fw-bold">8%</span> <span className="text-muted small pt-2 ps-1">increase</span>
+                                        <h6>{props.cantidadUsuarios(3)}</h6>
+                                        <span className="text-success small pt-1 fw-bold">Registrados</span>
 
                                     </div>
                                 </div>
@@ -96,15 +96,15 @@ function Dashboard() {
                             </div>
 
                             <div className="card-body">
-                                <h5 className="card-title">Predios <span>| This Year</span></h5>
+                                <h5 className="card-title">Predios</h5>
 
                                 <div className="d-flex align-items-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i className="bi bi-building"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>1244</h6>
-                                        <span className="text-danger small pt-1 fw-bold">12%</span> <span className="text-muted small pt-2 ps-1">decrease</span>
+                                        <h6>{props.cantidadPredios}</h6>
+                                        <span className="text-danger small pt-1 fw-bold">Actuales</span> <span className="text-muted small pt-2 ps-1">decrease</span>
 
                                     </div>
                                 </div>
