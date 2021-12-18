@@ -5,7 +5,7 @@ function HeaderAdmin() {
 
     function logout() {
         localStorage.removeItem("token");
-        window.location.href = "/";
+        window.location.href = "/login";
     }
 
     return (
@@ -56,7 +56,7 @@ function HeaderAdmin() {
                                     <div className="dropdown-item d-flex align-items-center">
                                         <button className="btn btn-100 btn-light btn-primary" type="button" onClick={logout}>
                                             <i className="bi bi-box-arrow-right" />
-                                            Salir
+                                            Cerrar Sesión
                                         </button>
                                     </div>
                                 </li>
