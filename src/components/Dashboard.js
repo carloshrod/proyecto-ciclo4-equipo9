@@ -104,7 +104,7 @@ function Dashboard(props) {
                                     </div>
                                     <div className="ps-3">
                                         <h6>{props.cantidadPredios}</h6>
-                                        <span className="text-danger small pt-1 fw-bold">Actuales</span> <span className="text-muted small pt-2 ps-1">decrease</span>
+                                        <span className="text-danger small pt-1 fw-bold">Actuales</span>
 
                                     </div>
                                 </div>
