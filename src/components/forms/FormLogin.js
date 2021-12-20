@@ -25,7 +25,6 @@ function FormLogin() {
 
   const enviarDatos = (event) => {
     event.preventDefault();
-    console.log("Usuario: " + data.email + " - Contraseña: " + data.password + " - Recordarme: " + data.recordarme)
   }
 
   const [error, setError] = useState();

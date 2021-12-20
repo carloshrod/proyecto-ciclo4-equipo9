@@ -12,17 +12,13 @@ export const initialForm = {
   direccion: "",
 };
 
-function FormRegister({ registerUser, userToEdit, setUserToEdit }) {
+function FormRegister({ registerUser, userToRegister, setUserToRegister }) {
 
   const [form, setForm] = useState(initialForm);
 
   useEffect(() => {
-    if (userToEdit) {
-      setForm(userToEdit);
-    } else {
       setForm(initialForm);
-    }
-  }, [userToEdit]);
+  }, [userToRegister]);
 
   const handleChange = (e) => {
     setForm({
@@ -44,7 +40,7 @@ function FormRegister({ registerUser, userToEdit, setUserToEdit }) {
 
   const handleReset = (e) => {
     setForm(initialForm);
-    setUserToEdit(null);
+    setUserToRegister(null);
   };
 
   return (

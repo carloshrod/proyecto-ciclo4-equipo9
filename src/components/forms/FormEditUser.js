@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export const initialForm = {
-    estado: null,
-    nombres: "",
-    apellidos: "",
-    tipo_doc: "",
-    nro_doc: "",
-    email: "",
-    telefono: "",
-    direccion: "",
-};
+// export const initialForm = {
+//     nombres: "",
+//     apellidos: "",
+//     tipo_doc: "",
+//     nro_doc: "",
+//     email: "",
+//     telefono: "",
+//     direccion: "",
+// };
 
-function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormEditUser({ updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
 
-    const [form, setForm] = useState(initialForm);
+    const [form, setForm] = useState([]);
 
     useEffect(() => {
-        if (userToEdit) {
-            setForm(userToEdit);
-        } else {
-            setForm(initialForm);
-        }
+        setForm(userToEdit);
     }, [userToEdit]);
-    
+
 
     const handleChange = (e) => {
         setForm({
@@ -39,18 +34,12 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
             alert("Datos incompletos");
             return;
         };
-
-        if (form.estado === null) {
-            createUser(form);
-        } else {
-            updateUser(form);           
-        }
-
+        updateUser(form);
         handleReset();
     };
 
-    const handleReset = (e) => {       
-        setForm(initialForm);
+    const handleReset = (e) => {
+        setForm(null);
         setUserToEdit(null);
     };
 
@@ -153,4 +142,4 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
     )
 }
 
-export default FormUser;
+export default FormEditUser;

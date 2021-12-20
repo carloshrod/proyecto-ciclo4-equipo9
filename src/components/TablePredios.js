@@ -58,6 +58,7 @@ function TablePredios({predios, setPredioToEdit, deletePredio}) {
                                             <tbody>
                                                 {predios.length > 0 ?
                                                     predios.map((predio, index) => {
+                                                        console.log(predio)
                                                         return (
                                                             <TablePrediosRow
                                                             key={predio._id}

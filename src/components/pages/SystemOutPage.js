@@ -11,7 +11,7 @@ import { helpHttp } from '../../helpers/helpHttp';
 function SystemOutPage({ page }) {
 
   const [usersDb, setUsersDb] = useState([])
-  const [userToEdit, setUserToEdit] = useState(null);
+  const [userToRegister, setUserToRegister] = useState(null);
 
   let api = helpHttp();
   let url = "http://localhost:8080";
@@ -28,6 +28,8 @@ function SystemOutPage({ page }) {
     };
 
     api.post(endpoint, options).then((res) => {
+      console.log(res.data)
+      console.log(usersDb)
       if (!res.err) {
         setUsersDb([...usersDb, res.data]);
       } else {
@@ -54,8 +56,8 @@ function SystemOutPage({ page }) {
         <Container>
           <FormRegister
             registerUser={registerUser}
-            userToEdit={userToEdit}
-            setUserToEdit={setUserToEdit}
+            userToRegister={userToRegister}
+            setUserToRegister={setUserToRegister}
           />  {/* Children */}
         </Container>}
 

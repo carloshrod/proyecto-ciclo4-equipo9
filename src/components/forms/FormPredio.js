@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export const initialForm = {
-    _id: null,
+    estado: null,
     codigo: "",
     nom_prop: "",
     doc_prop: "",
@@ -36,12 +36,12 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.direccion || !form.barrio) {
+        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.area_c || !form.area_t || !form.direccion || !form.barrio || !form.fecha_pago || !form.fecha_pago2 || !form.fecha_pago3) {
             alert("Datos incompletos");
             return;
         };
 
-        if (form._id === null) {
+        if (form.estado === null) {
             createPredio(form);
         } else {
             updatePredio(form);
@@ -68,25 +68,25 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                 <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
 
                                     <div className="col-6">
-                                        <label htmlFor="yourName" className="form-label">Código</label>
-                                        <input type="string" name="codigo" className="form-control" id="yourCodigo" onChange={handleChange} value={form.codigo} required />
+                                        <label htmlFor="yourCodigo" className="form-label">Código</label>
+                                        <input type="text" name="codigo" className="form-control" id="yourCodigo" onChange={handleChange} value={form.codigo} required />
                                         <div className="invalid-feedback">Por favor, ingresa un número de documento del propietario!</div>
                                     </div>
 
                                     <div className="col-6">
-                                        <label htmlFor="yourName" className="form-label">Nombre del Propietario</label>
+                                        <label htmlFor="yourNom_prop" className="form-label">Nombre del Propietario</label>
                                         <input type="text" name="nom_prop" className="form-control" id="yourNom_prop" onChange={handleChange} value={form.nom_prop} required />
                                         <div className="invalid-feedback">Por favor, ingresa nombre del propetario!</div>
                                     </div>
 
                                     <div className="col-6">
-                                        <label htmlFor="yourName" className="form-label">Nro. Documento del Propietario</label>
+                                        <label htmlFor="yourDoc_prop" className="form-label">Nro. Documento del Propietario</label>
                                         <input type="number" name="doc_prop" className="form-control" id="yourDoc_prop" onChange={handleChange} value={form.doc_prop} required />
                                         <div className="invalid-feedback">Por favor, ingresa un número de documento del propietario!</div>
                                     </div>
 
                                     <div className="col-6">
-                                        <label htmlFor="yourUsername" className="form-label">Área Construida</label>
+                                        <label htmlFor="yourArea_c" className="form-label">Área Construida</label>
                                         <div className="input-group has-validation">
                                             <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-building"></i></span>
                                             <input type="number" name="area_c" className="form-control" id="yourArea_c" onChange={handleChange} value={form.area_c} required />
@@ -95,7 +95,7 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                     </div>
 
                                     <div className="col-6">
-                                        <label htmlFor="yourUsername" className="form-label">Área Total</label>
+                                        <label htmlFor="yourArea_t" className="form-label">Área Total</label>
                                         <div className="input-group has-validation">
                                             <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-building"></i></span>
                                             <input type="number" name="area_t" className="form-control" id="yourArea_t" onChange={handleChange} value={form.area_t} required />
@@ -104,7 +104,7 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                     </div>
 
                                     <div className="col-6">
-                                        <label htmlFor="yourName" className="form-label">Dirección</label>
+                                        <label htmlFor="yourDireccion" className="form-label">Dirección</label>
                                         <div className="input-group has-validation">
                                             <input type="text" name="direccion" className="form-control" id="yourDireccion" onChange={handleChange} value={form.direccion} required />
                                             <div className="invalid-feedback">Por favor, ingresa dirección del predio!</div>
@@ -112,7 +112,7 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                     </div>
 
                                     <div className="col-6 mb-3">
-                                        <label htmlFor="yourName" className="form-label">Barrio</label>
+                                        <label htmlFor="yourBarrio" className="form-label">Barrio</label>
                                         <div className="input-group has-validation">
                                             <input type="text" name="barrio" className="form-control" id="yourBarrio" onChange={handleChange} value={form.barrio} required />
                                             <div className="invalid-feedback">Por favor, ingresa dirección del predio!</div>

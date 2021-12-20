@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const initialForm = {
-    estado: null,
     nombres: "",
     apellidos: "",
     tipo_doc: "",
@@ -12,18 +11,18 @@ export const initialForm = {
     direccion: "",
 };
 
-function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormAddUser({ createUser, userToAdd, setUserToAdd, titulo, btn_text }) {
 
     const [form, setForm] = useState(initialForm);
 
     useEffect(() => {
-        if (userToEdit) {
-            setForm(userToEdit);
+        if (userToAdd) {
+            setForm(userToAdd);
         } else {
             setForm(initialForm);
         }
-    }, [userToEdit]);
-    
+    }, [userToAdd]);
+
 
     const handleChange = (e) => {
         setForm({
@@ -39,19 +38,13 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
             alert("Datos incompletos");
             return;
         };
-
-        if (form.estado === null) {
-            createUser(form);
-        } else {
-            updateUser(form);           
-        }
-
+        createUser(form);
         handleReset();
     };
 
-    const handleReset = (e) => {       
+    const handleReset = (e) => {
         setForm(initialForm);
-        setUserToEdit(null);
+        setUserToAdd(null);
     };
 
     return (
@@ -153,4 +146,4 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
     )
 }
 
-export default FormUser;
+export default FormAddUser;

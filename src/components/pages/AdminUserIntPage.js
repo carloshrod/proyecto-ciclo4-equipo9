@@ -29,6 +29,9 @@ function AdminUserIntPage({ tipo, page }) {
     let api = helpHttp();
     let url = "http://localhost:8080";
 
+    const cantidadUsuarios = a => usersDb.filter((e) =>
+        (e.rol === a)).length; //cuenta los usuarios segun el rol
+
     useEffect(() => {
         setLoading(true);
         api.get(`${url}/users/listar`)
@@ -43,64 +46,54 @@ function AdminUserIntPage({ tipo, page }) {
                 setLoading(false);
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [usersDb]);
+    }, []);
 
-    // let newArray = [];
-    // usersDb.forEach((u,i) => {
-    //     newArray.push({
-    //         ...u,
-    //         nro_registro: i+1
-    //     })
-    // })
-
-    const cantidadUsuarios = a => usersDb.filter((e) =>
-        (e.rol === a)).length; //cuenta los usuarios segun el rol
-
-
+    // ********** Crear Usuario **********
     const createUser = (user) => {
-        // let a = usersDb[usersDb.length-1]
-        // user.nro_registro = a.nro_registro + 1;
         user.rol = 2; // Rol 2 -> Usuario Interno
         user.password = "User_1234";
+        user.estado = 1;
 
         let endpoint = `${url}/users/guardar/`;
-
         const token = localStorage.getItem("token");
-        console.log(token)
-
         let options = {
             body: user,
             headers: {
                 "content-type": "application/json",
-                "authorization": `Bearer ${token}`,
+                "authorization": `Bearer ${token}`
             },
         };
 
         api.post(endpoint, options).then((res) => {
             console.log(res)
+            console.log(usersDb)
             if (!res.err) {
                 setUsersDb([...usersDb, res.data]);
+                console.log(usersDb)
             } else {
                 setError(res);
             }
         });
     };
 
-    const updateUser = (data) => {
+    // ********** Editar Usuario **********
+    const updateUser = (user) => {
         let endpoint = `${url}/users/editar/`;
-
+        const token = localStorage.getItem("token");
         let options = {
-            body: data,
-            headers: { "content-type": "application/json" },
+            body: user,
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
         };
-
-        console.log(data)
-
-        api.put(endpoint, options).then((res) => {
-            console.log(res);
+        api.post(endpoint, options).then((res) => {
+            console.log(res.data)
+            console.log(usersDb)
             if (!res.err) {
-                let newData = usersDb.map((user) => (user.nro_doc === data.nro_doc ? data : user));
+                let newData = usersDb.map((e) => (e._id === user._id ? user : e));
                 setUsersDb(newData);
+                console.log(newData)
             } else {
                 setError(res);
             }
@@ -108,6 +101,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     };
 
+    // ********** Borrar Usuario **********
     const deleteUser = (nro_doc) => {
         let isDelete = window.confirm(
             `¿Estás seguro de eliminar el usuario con número de documento '${nro_doc}'?`
@@ -115,8 +109,12 @@ function AdminUserIntPage({ tipo, page }) {
 
         if (isDelete) {
             let endpoint = `${url}/users/eliminar/${nro_doc}`;
+            const token = localStorage.getItem("token");
             let options = {
-                headers: { "content-type": "application/json" },
+                headers: {
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
             };
 
             console.log(nro_doc)
@@ -143,8 +141,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     useEffect(() => {
         setLoading(true);
-        helpHttp()
-            .get(`${url}/predios/listar`)
+        api.get(`${url}/predios/listar`)
             .then((res) => {
                 // console.log(res)
                 if (!res.err) {
@@ -157,20 +154,26 @@ function AdminUserIntPage({ tipo, page }) {
                 setLoading(false);
             });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [prediosDb]);
+    }, []);
 
     const cantidadPredios = prediosDb.length;
 
     const createPredio = (predio) => {
-        predio.nro_registro = prediosDb.length + 1;
+        predio.estado = 1;
 
+        let endpoint = `${url}/predios/guardar/`;
+        const token = localStorage.getItem("token");
         let options = {
             body: predio,
-            headers: { "content-type": "application/json" },
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            },
         };
         console.log(predio);
-        api.post(`${url}/predios/guardar`, options).then((res) => {
-            console.log(res)
+        api.post(endpoint, options).then((res) => {
+            console.log(prediosDb)
+            console.log(res.data)
             if (!res.err) {
                 setPrediosDb([...prediosDb, res.data]);
             } else {
@@ -179,20 +182,24 @@ function AdminUserIntPage({ tipo, page }) {
         });
     };
 
-    const updatePredio = (data) => {
+    const updatePredio = (predio) => {
         let endpoint = `${url}/predios/editar`;
+        const token = localStorage.getItem("token");
 
         let options = {
-            body: data,
-            headers: { "content-type": "application/json" },
+            body: predio,
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            },
         };
 
-        console.log(data)
+        console.log(predio)
 
-        api.put(endpoint, options).then((res) => {
+        api.post(endpoint, options).then((res) => {
             console.log(res)
             if (!res.err) {
-                let newData = prediosDb.map((predio) => (predio._id === data._id ? data : predio));
+                let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
             } else {
                 setError(res);
@@ -207,8 +214,12 @@ function AdminUserIntPage({ tipo, page }) {
 
         if (isDelete) {
             let endpoint = `${url}/predios/eliminar/${codigo}`;
+            const token = localStorage.getItem("token");
             let options = {
-                headers: { "content-type": "application/json" },
+                headers: {
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
             };
 
             api.del(endpoint, options).then((res) => {
@@ -345,7 +356,7 @@ function AdminUserIntPage({ tipo, page }) {
 
                 :
 
-                <Navigate to="/login"/>
+                <Navigate to="/login" />
 
             }
         </>
