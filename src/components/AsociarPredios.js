@@ -17,11 +17,11 @@ function AsociarPredios() {
         if (search === null) return;
 
         const fetchData = async () => {
-            const codigo = search;
+            
+
+            const {codigo} = search;
 
             let predioUrl = `${url}/predios/consultar/${codigo}`;
-
-            console.log(predioUrl);
 
             setLoading(true);
 
@@ -29,9 +29,9 @@ function AsociarPredios() {
                 helpHttp().get(predioUrl),
             ]);
 
-            console.log(predioRes)
+            const {data} = predioRes
 
-            setPredio(predioRes)
+            setPredio(data)
             setLoading(false);
         };
 
