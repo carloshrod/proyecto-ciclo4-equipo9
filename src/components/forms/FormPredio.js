@@ -7,6 +7,7 @@ export const initialForm = {
     doc_prop: "",
     area_c: "",
     area_t: "",
+    valor_predio: "",
     direccion: "",
     barrio: "",
     fecha_pago: "",
@@ -36,7 +37,7 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.area_c || !form.area_t || !form.direccion || !form.barrio || !form.fecha_pago || !form.fecha_pago2 || !form.fecha_pago3) {
+        if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.area_c || !form.area_t | !form.valor_predio || !form.direccion || !form.barrio || !form.fecha_pago || !form.fecha_pago2 || !form.fecha_pago3) {
             alert("Datos incompletos");
             return;
         };
@@ -99,6 +100,14 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                         <div className="input-group has-validation">
                                             <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-building"></i></span>
                                             <input type="number" name="area_t" className="form-control" id="yourArea_t" onChange={handleChange} value={form.area_t} required />
+                                            <div className="invalid-feedback">Por favor, ingresa área total del predio!</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-6">
+                                        <label htmlFor="idValor_predio" className="form-label">Valor del Predio</label>
+                                        <div className="input-group has-validation">
+                                            <input type="number" name="valor_predio" className="form-control" id="idValor_predio" onChange={handleChange} value={form.valor_predio} required />
                                             <div className="invalid-feedback">Por favor, ingresa área total del predio!</div>
                                         </div>
                                     </div>

@@ -3,10 +3,10 @@ import React from 'react';
 function PredioInfo({ predio }) {
     return (
         <>
-            <div className="card mt-3">
+            <div className="card mt-1 mb-2">
 
                 <div className="card-body">
-                    <h5 className="card-title">Código del Predio: {predio.codigo} &nbsp;&nbsp; - &nbsp;&nbsp; CC Propietario: {predio.nro_doc}</h5>
+                    <h5 className="card-title">Código del Predio: &nbsp; {predio.codigo} &nbsp;&nbsp; - &nbsp;&nbsp; CC Propietario: &nbsp; {predio.doc_prop}</h5>
 
                     <div className="tab-content pt-2">
 
@@ -25,8 +25,14 @@ function PredioInfo({ predio }) {
                                     <div className="col-lg-3 col-md-4 label mt-2">Área Total:</div>
                                     <div className="col-lg-3 col-md-8 mt-3">{predio.area_t}</div>
 
-                                    <div className="col-lg-2 col-md-4 label mt-3">Dirección del Predio:</div>
-                                    <div className="col-lg-4 col-md-8 mt-3">{predio.direccion}</div>
+                                    <div className="col-lg-3 col-md-4 label mt-2">Valor del predio:</div>
+                                    <div className="col-lg-3 col-md-8 mt-3">${predio.valor_predio}</div>
+
+                                    <div className="col-lg-3 col-md-4 label mt-2">Valor a pagar:</div>
+                                    <div className="col-lg-3 col-md-8 mt-3">${predio.valor_predial}</div>
+
+                                    <div className="col-lg-3 col-md-4 label mt-3">Dirección del Predio:</div>
+                                    <div className="col-lg-3 col-md-8 mt-3">{predio.direccion}</div>
 
                                     <div className="col-lg-3 col-md-4 label mt-3">Barrio:</div>
                                     <div className="col-lg-3 col-md-8 mt-3">{predio.barrio}</div>

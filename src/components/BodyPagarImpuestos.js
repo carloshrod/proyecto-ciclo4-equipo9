@@ -1,57 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { helpHttp } from '../helpers/helpHttp';
 import './CompStyles.css';
+import Loader from './Loader';
+import PagoDetails from './PagoDetails';
+import PredioDetails from './PredioDetails';
+import SearchForm from './SearchForm';
 
 function BodyPagarImpuestos() {
+
+    const [search, setSearch] = useState(null);
+    const [predio, setPredio] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const url = "http://localhost:8080"
+
+    useEffect(() => {
+        if (search === null) return;
+
+        const fetchData = async () => {
+            
+
+            const {codigo} = search;
+
+            let predioUrl = `${url}/predios/consultar/${codigo}`;
+
+            setLoading(true);
+
+            const [predioRes] = await Promise.all([
+                helpHttp().get(predioUrl),
+            ]);
+
+            const {data} = predioRes
+
+            setPredio(data)
+            setLoading(false);
+        };
+
+        fetchData();
+
+    }, [search]);
+
+    const handleSearch = (data) => {
+        console.log(data);
+        setSearch(data);
+    };
+
     return (
         <>
-            <section className="section profile">
+            <section className="section profile row">
 
-                <div className="card mt-3">
+            {loading && <Loader />}
 
-                    <div className="card-body">
-                        <h5 className="card-title">CC Propietario: 123456789 &nbsp;&nbsp; - &nbsp;&nbsp; Código del Predio: PD312654789</h5>
+                <SearchForm handleSearch={handleSearch} />
 
-                        <div className="tab-content pt-2">
+                <PagoDetails search={search} predio={predio}/>
 
-                            <div className="tab-pane fade show active profile-overview" id="profile-overview">
-
-                                <h5 className="card-title">Detalles del Predio</h5>
-
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col-lg-3 col-md-4 label">Nombre del Propietario:</div>
-                                        <div className="col-lg-3 col-md-8"> Carlos Hernández Rodríguez</div>
-
-                                        <div className="col-lg-3 col-md-4 label">Área Construída:</div>
-                                        <div className="col-lg-3 col-md-8">1500</div>
-
-                                        <div className="col-lg-3 col-md-4 label mt-2">Área Total:</div>
-                                        <div className="col-lg-3 col-md-8 mt-3">1800</div>
-
-                                        <div className="col-lg-2 col-md-4 label mt-3">Dirección del Predio:</div>
-                                        <div className="col-lg-4 col-md-8 mt-3">A108 Adam Street, New York, NY 535022</div>
-
-                                        <div className="col-lg-3 col-md-4 label mt-3">Barrio:</div>
-                                        <div className="col-lg-3 col-md-8 mt-3">Ciudad Jardín</div>
-
-                                        <div className="col-lg-3 col-md-4 label mt-3">Fecha de Pago max:</div>
-                                        <div className="col-lg-3 col-md-8 mt-3">2022-12-20</div>
-
-                                        <div className="col-lg-3 col-md-4 label mt-3">Fecha de Pago max (Dcto 40%):</div>
-                                        <div className="col-lg-3 col-md-8 mt-3">2022-03-20</div>
-
-                                        <div className="col-lg-3 col-md-4 label mt-3">Fecha de Pago max (Dcto 20%):</div>
-                                        <div className="col-lg-3 col-md-8 mt-3">2022-06-20</div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
             </section>
         </>
     )

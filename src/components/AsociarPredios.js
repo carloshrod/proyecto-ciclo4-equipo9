@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { helpHttp } from '../helpers/helpHttp';
+import Button from './Button';
 import './CompStyles.css';
 import Loader from './Loader';
 import PredioDetails from './PredioDetails';
@@ -44,7 +45,6 @@ function AsociarPredios() {
         setSearch(data);
     };
 
-
     return (
         <>
             <section className="section profile row">
@@ -57,7 +57,6 @@ function AsociarPredios() {
 
             </section>
         </>
-
     )
 }
 

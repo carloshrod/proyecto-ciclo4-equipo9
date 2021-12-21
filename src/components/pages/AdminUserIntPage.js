@@ -157,6 +157,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     const createPredio = (predio) => {
         predio.estado = 1;
+        predio.valor_predial = predio.valor_predio * 0.01;
 
         let endpoint = `${url}/predios/guardar/`;
         const token = localStorage.getItem("token");
@@ -180,6 +181,8 @@ function AdminUserIntPage({ tipo, page }) {
     };
 
     const updatePredio = (predio) => {
+        predio.valor_predial = predio.valor_predio * 0.01;
+        
         let endpoint = `${url}/predios/editar`;
         const token = localStorage.getItem("token");
 

@@ -33,14 +33,14 @@ function SearchForm({ handleSearch }) {
 
     return (
         <>
-            <div className="card col-8 m-auto mt-4 mb-4">
+            <div className="card col-8 m-auto mt-1 mb-4">
                 <div className="card-body">
                     <div className="search-bar mb-3">
                         <h5 className="card-title">Buscar Predios</h5>
                         <form onSubmit={handleSubmit} className="search-form d-flex align-items-center">
                             <label htmlFor="idCodigo">Ingrese el código del predio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                             <input className="form-control w-50" type="text" name="codigo" id="idCodigo" onChange={handleChange} value={form.codigo} />
-                            <input className="btn btn-primary m-2" type="submit" value="Enviar" />
+                            <input className="btn btn-primary m-2" type="submit" value="Buscar" />
                         </form>
                     </div>
                 </div>

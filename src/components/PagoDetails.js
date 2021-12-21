@@ -4,7 +4,7 @@ import Message from './Message';
 import Modal from './Modal';
 import PredioInfo from './PredioInfo';
 
-function PredioDetails({ search, predio }) {
+function PagoDetails({ search, predio }) {
     if (!predio) return null;
 
     return (
@@ -15,10 +15,10 @@ function PredioDetails({ search, predio }) {
                     <>
                         <PredioInfo predio={predio} />
                         <Button>
-                            Asociar predio
+                            Pagar ${predio.valor_predial}
                         </Button>
                         <Modal>
-                            El predio fue asociado exitosamente a su cuenta!!!
+                            Su pago fue procesado exitosamente!!!
                         </Modal>
                     </>
                 ) : (
@@ -32,4 +32,4 @@ function PredioDetails({ search, predio }) {
     )
 }
 
-export default PredioDetails;
+export default PagoDetails;

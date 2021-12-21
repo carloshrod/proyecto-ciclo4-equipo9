@@ -4,7 +4,7 @@ function Container({ titulo, className, children }) {
     return (
         <>
             <div className={className} >
-                <div className="container">
+                <div className="container mt-3">
                     <div>
                         <h1 className="text-center font-weight-bold">{titulo}</h1>
                         <div>{children}</div>
