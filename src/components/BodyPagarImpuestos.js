@@ -22,7 +22,7 @@ function BodyPagarImpuestos() {
 
             const {codigo} = search;
 
-            let predioUrl = `${url}/predios/consultar/${codigo}`;
+            let predioUrl = `${url}/predios/consultarP/${codigo}`;
 
             setLoading(true);
 
