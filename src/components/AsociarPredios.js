@@ -9,7 +9,7 @@ import SearchForm from './SearchForm';
 function AsociarPredios() {
 
     const [search, setSearch] = useState(null);
-    const [predio, setPredio] = useState(null);
+    const [predio, setPredio] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const url = "http://localhost:8080"
@@ -30,9 +30,9 @@ function AsociarPredios() {
                 helpHttp().get(predioUrl),
             ]);
 
-            const {data} = predioRes
+            const {data} = predioRes;
 
-            setPredio(data)
+            setPredio(data);
             setLoading(false);
         };
 
@@ -53,7 +53,11 @@ function AsociarPredios() {
 
                 <SearchForm handleSearch={handleSearch} />
 
-                <PredioDetails search={search} predio={predio}/>
+                {predio.map((p)=> {
+                    return(
+                        <PredioDetails search={search} predio={p} key={p._id}/>
+                    );
+                })}
 
             </section>
         </>
