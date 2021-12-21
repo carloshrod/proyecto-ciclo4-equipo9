@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Container({ titulo, children }) {
+function Container({ titulo, className, children }) {
     return (
         <>
-            <div className="container container-center center-v min-vh-100" >
+            <div className={className} >
                 <div className="container">
                     <div>
                         <h1 className="text-center font-weight-bold">{titulo}</h1>

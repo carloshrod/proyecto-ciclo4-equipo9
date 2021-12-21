@@ -1,9 +1,14 @@
+import jwtDecode from 'jwt-decode';
 import React from 'react';
 
 function BodyMyProfile() {
+
+    const token = localStorage.getItem("token");
+    const payload = jwtDecode(token);
+
     return (
         <>
-            <section className="section profile min-vh-100">
+            <section className="section profile">
                 <div className="row">
                     <div className="col-xl-4">
 
@@ -11,8 +16,7 @@ function BodyMyProfile() {
                             <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                <h2>Kevin Anderson</h2>
-                                <h3>Web Designer</h3>
+                                <h2>{payload.nombre}</h2>
                                 <div className="social-links mt-2">
                                     <a href="https://twitter.com" className="twitter"><i className="bi bi-twitter"></i></a>
                                     <a href="https://es-la.facebook.com" className="facebook"><i className="bi bi-facebook"></i></a>
@@ -48,34 +52,28 @@ function BodyMyProfile() {
 
                                         <div className="row">
                                             <div className="col-lg-3 col-md-4 label ">Nombre Completo</div>
-                                            <div className="col-lg-9 col-md-8">Kevin Anderson</div>
+                                            <div className="col-lg-9 col-md-8">{payload.nombre}</div>
                                         </div>
 
                                         <div className="row">
                                             <div className="col-lg-3 col-md-4 label">Número de Documento</div>
-                                            <div className="col-lg-9 col-md-8">1452783015</div>
+                                            <div className="col-lg-9 col-md-8">{payload.nro_doc}</div>
                                         </div>
 
                                         <div className="row">
                                             <div className="col-lg-3 col-md-4 label">Correo Electrónico</div>
-                                            <div className="col-lg-9 col-md-8">k.anderson@example.com</div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-lg-3 col-md-4 label">Usuario</div>
-                                            <div className="col-lg-9 col-md-8">k.anderson</div>
+                                            <div className="col-lg-9 col-md-8">{payload.usuario}</div>
                                         </div>
 
                                         <div className="row">
                                             <div className="col-lg-3 col-md-4 label">Dirección de Residencia</div>
-                                            <div className="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                                            <div className="col-lg-9 col-md-8">{payload.direccion}</div>
                                         </div>
 
                                         <div className="row">
                                             <div className="col-lg-3 col-md-4 label">Teléfono</div>
-                                            <div className="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                                            <div className="col-lg-9 col-md-8">{payload.telefono}</div>
                                         </div>
-
 
                                     </div>
 

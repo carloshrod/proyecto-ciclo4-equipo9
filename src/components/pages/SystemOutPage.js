@@ -43,17 +43,17 @@ function SystemOutPage({ page }) {
       <HeaderSystemOut />
 
       {page === "landingPage" &&
-        <Container titulo="Plataforma de Gestión Catastral">
+        <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100">
           <BodyLandingPage />  {/* Children */}
         </Container>}
 
       {page === "login" &&
-        <Container>
+        <Container className="container container-center center-v min-vh-100">
           <FormLogin />  {/* Children */}
         </Container>}
 
       {page === "register" &&
-        <Container>
+        <Container className="container container-center center-v min-vh-100">
           <FormRegister
             registerUser={registerUser}
             userToRegister={userToRegister}
@@ -62,7 +62,7 @@ function SystemOutPage({ page }) {
         </Container>}
 
       {page === "forgotPassword" &&
-        <Container>
+        <Container className="container container-center center-v min-vh-100">
           <FormForgotPassword />  {/* Children */}
         </Container>}
 

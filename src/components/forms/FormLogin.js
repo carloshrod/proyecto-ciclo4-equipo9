@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 
@@ -43,7 +44,14 @@ function FormLogin() {
       .then(res => {
         if (res.estado === "ok") {
           localStorage.setItem("token",res.token);
-          window.location.href = res.url;
+          const payload = jwtDecode(res.token);
+          if (payload.rol === 3) {
+            window.location.href = res.url;
+          } else if (payload.rol === 2) {
+            window.location.href = res.url;
+          } else if (payload.rol === 1) {
+            window.location.href = res.url;
+          }
         } else {
           setError(true)
           setMsgError(res.msg);

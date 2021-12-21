@@ -1,57 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HeaderUserExt from '../HeaderUserExt';
 import Container from '../Container';
 import BodyHomeUserExt from "../BodyHomeUserExt";
 import BodyMyProfile from '../BodyMyProfile';
 import BodyPagarImpuestos from '../BodyPagarImpuestos';
-import TableAsociarPredios from '../TableAsociarPredios';
+import AsociarPredios from '../AsociarPredios';
 import FormConvenio from '../forms/FormConvenio';
 import Footer from "../Footer";
-// import prediosDB from '../../mocks/predios';
+import { auth } from '../../auth/auth';
+import { Navigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 function UserExtPage({ page }) {
 
-    // API predios:
-    const [prediosDb, setPrediosDb] = useState([]);
+    const tokenIsOk = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const payload = jwtDecode(token);
+            return payload.rol;
+        }
+    }
 
-    useEffect(() => {
-        fetch('http://localhost:8080/listar')
-            .then(response => response.json())
-            .then(data => setPrediosDb(data));
-    }, []);
+    const rol = tokenIsOk();
 
     return (
         <>
-            <HeaderUserExt />
+            {auth() && rol === 3 ?
+                <>
+                    <HeaderUserExt />
 
-            {page === "home" &&
-                <Container titulo="Plataforma de Gestión Catastral">
-                    <BodyHomeUserExt />  {/* Children */}
-                </Container>}
+                    {page === "home" &&
+                        <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100 container-bg">
+                            <BodyHomeUserExt />  {/* Children */}
+                        </Container>}
 
-            {page === "myProfile" &&
-                <Container titulo="Mi Perfil">
-                    <BodyMyProfile />  {/* Children */}
-                </Container>}
+                    {page === "myProfile" &&
+                        <Container titulo="Mi Perfil" className="container container-center center-v min-vh-100 container-bg">
+                            <BodyMyProfile />  {/* Children */}
+                        </Container>}
 
-            {page === "pagar" &&
-                <Container titulo="Pagar Impuesto Predial">
-                    <BodyPagarImpuestos />  {/* Children */}
-                </Container>}
+                    {page === "pagar" &&
+                        <Container titulo="Pagar Impuesto Predial" className="container container-center center-v min-vh-100 container-bg">
+                            <BodyPagarImpuestos />  {/* Children */}
+                        </Container>}
 
-            {page === "asociarPredios" &&
-                <Container titulo="Asociar Predios">
-                    <TableAsociarPredios predios={prediosDb}/>  {/* Children */}
-                </Container>}
+                    {page === "asociarPredios" &&
+                        <Container titulo="Asociar Predios a su Cuenta" className="container container-center center-v min-vh-100 container-bg">
+                            <AsociarPredios/>  {/* Children */}
+                        </Container>}
 
-            {page === "convenio" &&
-                <div className="col-lg-8 m-auto">
-                    <Container titulo="Solicitar Convenio de Pago">
-                        <FormConvenio />  {/* Children */}
-                    </Container>
-                </div>}
+                    {page === "convenio" &&
+                        <div className="col-lg-8 m-auto">
+                            <Container titulo="Solicitar Convenio de Pago" className="container container-center center-v min-vh-100 container-bg">
+                                <FormConvenio />  {/* Children */}
+                            </Container>
+                        </div>}
 
-            <Footer />
+                    <Footer />
+                </>
+
+                :
+                <Navigate to="/login" />
+                
+            }
         </>
     )
 }

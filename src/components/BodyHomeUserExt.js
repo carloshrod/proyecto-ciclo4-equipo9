@@ -13,7 +13,7 @@ function BodyHomeUserExt() {
                 <div className="row">
                     <div className="col-lg-6 px-5">
                         <div className="card card-home">
-                            <Link to="/home-user-ext/profile">
+                            <Link to="/home-user-ext/my-profile">
                                 <h5 className="card-title text-center">Mi Perfil</h5>
                             </Link>
                         </div>

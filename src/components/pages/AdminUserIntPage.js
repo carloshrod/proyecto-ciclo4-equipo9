@@ -17,6 +17,7 @@ import Loader from '../Loader';
 import Message from '../Message';
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 function AdminUserIntPage({ tipo, page }) {
 
@@ -29,10 +30,8 @@ function AdminUserIntPage({ tipo, page }) {
     let api = helpHttp();
     let url = "http://localhost:8080";
 
-    const cantidadUsuarios = a => usersDb.filter((e) =>
-        (e.rol === a)).length; //cuenta los usuarios segun el rol
-
     useEffect(() => {
+        if (usersDb === null) return;
         setLoading(true);
         api.get(`${url}/users/listar`)
             .then((res) => {
@@ -156,8 +155,6 @@ function AdminUserIntPage({ tipo, page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const cantidadPredios = prediosDb.length;
-
     const createPredio = (predio) => {
         predio.estado = 1;
 
@@ -237,9 +234,40 @@ function AdminUserIntPage({ tipo, page }) {
     };
     // ******************* End CRUD predios *******************
 
+    const countUsers = () => {
+        if (usersDb !== null) {
+            const cantUsuarios = a => usersDb.filter((e) =>
+            (e.rol === a)).length; //cuenta los usuarios segun el rol}
+            return cantUsuarios;
+        }
+    }
+
+    const cantidadUsuarios = countUsers();
+
+    const countPredios = () => {
+        if (prediosDb !== null) {
+            const cantPredios = prediosDb.length;
+        return cantPredios;
+        }
+    }
+
+    const cantidadPredios = countPredios();
+
+    const tokenIsOk = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const payload = jwtDecode(token);
+            return payload.rol;
+        }
+    }
+
+    const rol = tokenIsOk();
+
+    console.log(rol)
+
     return (
         <>
-            {auth() ?
+            {auth() && rol !== 3 ?
                 <>
                     <HeaderAdmin />
                     {tipo === "admin" ?

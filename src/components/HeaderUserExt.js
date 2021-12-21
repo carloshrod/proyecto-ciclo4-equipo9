@@ -1,7 +1,11 @@
+import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeaderUserExt() {
+
+    const token = localStorage.getItem("token");
+    const payload = jwtDecode(token);
 
     function logout() {
         localStorage.removeItem("token");
@@ -27,22 +31,13 @@ function HeaderUserExt() {
 
                             <Link className="nav-link nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                <span className="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                                <span className="d-none d-md-block dropdown-toggle ps-2">{payload.usuario}</span>
                             </Link>
                             {/* End Profile Image Icon */}
 
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-                                <li className="dropdown-header">
-                                    <h6>Kevin Anderson</h6>
-                                    <span>Web Designer</span>
-                                </li>
-
                                 <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-
-                                <li>
-                                    <Link to="/home-admin/my-profile">
+                                    <Link to="/home-user-ext/my-profile">
                                         <div className="dropdown-item d-flex align-items-center">
                                             <span className="m-auto">
                                                 <i className="bi bi-person" />

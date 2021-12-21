@@ -40,7 +40,7 @@ function App() {
 
         {/* Usuario Externo */}
         <Route path="/home-user-ext" element={<UserExtPage page="home" />} />
-        <Route path="/home-user-ext/profile" element={<UserExtPage page="myProfile" />} />
+        <Route path="/home-user-ext/my-profile" element={<UserExtPage page="myProfile" />} />
         <Route path="/home-user-ext/pagar" element={<UserExtPage page="pagar" />} />
         <Route path="/home-user-ext/asociar-predios" element={<UserExtPage page="asociarPredios" />} />
         <Route path="/home-user-ext/convenio" element={<UserExtPage page="convenio" />} />
