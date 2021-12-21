@@ -1,13 +1,10 @@
 import React from 'react'
 import './CompStyles.css';
-import SearchForm from './SearchForm';
 
 function BodyPagarImpuestos() {
     return (
         <>
             <section className="section profile">
-
-                <SearchForm/>
 
                 <div className="card mt-3">
 
