@@ -3,7 +3,6 @@ import { helpHttp } from '../helpers/helpHttp';
 import './CompStyles.css';
 import Loader from './Loader';
 import PagoDetails from './PagoDetails';
-import PredioDetails from './PredioDetails';
 import SearchForm from './SearchForm';
 
 function BodyPagarImpuestos() {

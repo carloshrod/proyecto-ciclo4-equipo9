@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Button({ value, action, children }) {
+function Button({ children }) {
     return (
         <>
             <form className="search-form d-flex align-items-center">

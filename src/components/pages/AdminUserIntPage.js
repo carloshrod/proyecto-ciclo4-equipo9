@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HeaderAdmin from "../HeaderAdmin";
 import HeaderUserInt from '../HeaderUserInt';
-import { SidebarAdmin, SidebarUserInt } from "../Sidebar";
+import Sidebar, { SidebarAdmin, SidebarUserInt } from "../Sidebar";
 import ContainerAdmin from '../ContainerAdmin';
 import FooterAdmin from "../FooterAdmin";
 import Dashboard from '../Dashboard';
@@ -18,6 +18,7 @@ import Message from '../Message';
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import SidebarItem from '../SidebarItem';
 
 function AdminUserIntPage({ tipo, page }) {
 
@@ -182,7 +183,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     const updatePredio = (predio) => {
         predio.valor_predial = predio.valor_predio * 0.01;
-        
+
         let endpoint = `${url}/predios/editar`;
         const token = localStorage.getItem("token");
 
@@ -240,7 +241,7 @@ function AdminUserIntPage({ tipo, page }) {
     const countUsers = () => {
         if (usersDb !== null) {
             const cantUsuarios = a => usersDb.filter((e) =>
-            (e.rol === a)).length; //cuenta los usuarios segun el rol}
+                (e.rol === a)).length; //cuenta los usuarios segun el rol}
             return cantUsuarios;
         }
     }
@@ -250,12 +251,13 @@ function AdminUserIntPage({ tipo, page }) {
     const countPredios = () => {
         if (prediosDb !== null) {
             const cantPredios = prediosDb.length;
-        return cantPredios;
+            return cantPredios;
         }
     }
 
     const cantidadPredios = countPredios();
 
+    // Autenticación por rol:
     const tokenIsOk = () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -266,44 +268,105 @@ function AdminUserIntPage({ tipo, page }) {
 
     const rol = tokenIsOk();
 
-    console.log(rol)
+
+    // Toggle-Sidebar:
+    const [inactive, setInactive] = useState(false);
 
     return (
         <>
             {auth() && rol !== 3 ?
                 <>
-                    <HeaderAdmin />
-                    {tipo === "admin" ?
-                        <> <HeaderAdmin />
-                            {SidebarAdmin} </> :
-                        <> <HeaderUserInt />
-                            {SidebarUserInt} </>}
+                    <body className={inactive ? "toggle-sidebar" : ""}>
+                        {tipo === "admin" ?
+                            <> <HeaderAdmin btn={<div onClick={() => { setInactive(!inactive) }}>
+                                <i className="bi bi-list toggle-sidebar-btn"></i>
+                            </div>} />
+                                <Sidebar
+                                    item1={<SidebarItem linkTo="/home-admin" icono="bi bi-grid" titulo="Dashboard" />}
+                                    item2={<SidebarItem linkTo="/home-admin/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
+                                    item3={<SidebarItem linkTo="/home-admin/create-user" icono="bi bi-person-plus-fill" titulo="Crear Usuarios" />}
+                                    item4={<SidebarItem linkTo="/home-admin/manage-users" icono="bi bi-pencil-fill" titulo="Gestionar Usuarios" />}
+                                    item5={<SidebarItem linkTo="/home-admin/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
+                                    item6={<SidebarItem linkTo="/home-admin/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
+                                /> </>
+                            :
+                            <> <HeaderUserInt btn={<div onClick={() => { setInactive(!inactive) }}>
+                                <i className="bi bi-list toggle-sidebar-btn"></i>
+                            </div>} />
+                                <Sidebar
+                                    item1={<SidebarItem linkTo="/home-user-int" icono="bi bi-grid" titulo="Dashboard" />}
+                                    item2={<SidebarItem linkTo="/home-user-int/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
+                                    item5={<SidebarItem linkTo="/home-user-int/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
+                                    item6={<SidebarItem linkTo="/home-user-int/manage-predio" icono="bi bi-pencil-fill" titulo="Gestionar Predios" />}
+                                />
+                            </>
+                        }
 
-                    {page === "home" &&
-                        <ContainerAdmin titulo="Dashboard" subtitulo="Dashboard">
-                            <Dashboard
-                                cantidadUsuarios={cantidadUsuarios}
-                                cantidadPredios={cantidadPredios} />  {/* Children */}
-                        </ContainerAdmin>}
+                        {page === "home" &&
+                            <ContainerAdmin titulo="Dashboard" subtitulo="Dashboard">
+                                <Dashboard
+                                    cantidadUsuarios={cantidadUsuarios}
+                                    cantidadPredios={cantidadPredios} />  {/* Children */}
+                            </ContainerAdmin>}
 
-                    {page === "myProfile" &&
-                        <ContainerAdmin titulo="Mi Perfil" subtitulo="Mi Perfil">
-                            <BodyMyProfile />  {/* Children */}
-                        </ContainerAdmin>}
+                        {page === "myProfile" &&
+                            <ContainerAdmin titulo="Mi Perfil" subtitulo="Mi Perfil">
+                                <BodyMyProfile />  {/* Children */}
+                            </ContainerAdmin>}
 
-                    {page === "createUser" &&
-                        <ContainerAdmin titulo="Crear Usuario" subtitulo="Crear Usuario">
-                            <FormUser
-                                titulo="Ingrese los datos del usuario"
-                                createUser={createUser}
-                                updateUser={updateUser}
-                                setUserToEdit={setUserToEdit}
-                                btn_text="Crear"
-                            />  {/* Children */}
-                        </ContainerAdmin>}
+                        {page === "createUser" &&
+                            <ContainerAdmin titulo="Crear Usuario" subtitulo="Crear Usuario">
+                                <FormUser
+                                    titulo="Ingrese los datos del usuario"
+                                    createUser={createUser}
+                                    updateUser={updateUser}
+                                    setUserToEdit={setUserToEdit}
+                                    btn_text="Crear"
+                                />  {/* Children */}
+                            </ContainerAdmin>}
 
-                    {page === "manageUsers" &&
-                        <ContainerAdmin titulo="Gestionar Usuarios" subtitulo="Gestionar Usuarios">
+                        {page === "manageUsers" &&
+                            <ContainerAdmin titulo="Gestionar Usuarios" subtitulo="Gestionar Usuarios">
+                                {loading && <Loader />}
+                                {error && (
+                                    <Message
+                                        msg={`Error ${error.status}: ${error.statusText}`}
+                                        bgColor="#dc3545"
+                                    />
+                                )}
+                                {usersDb && (
+                                    <TableUsers
+                                        users={usersDb}
+                                        setUserToEdit={setUserToEdit}
+                                        deleteUser={deleteUser}
+                                    />
+                                )}
+                            </ContainerAdmin>}
+
+                        {page === "editUser" &&
+                            <ContainerAdmin titulo="Editar Usuario" subtitulo="Gestionar Usuarios" subtitulo2="Editar Usuario">
+                                <FormUser
+                                    titulo="Datos del usuario a editar"
+                                    createUser={createUser}
+                                    updateUser={updateUser}
+                                    userToEdit={userToEdit}
+                                    setUserToEdit={setUserToEdit}
+                                    btn_text="Editar"
+                                />  {/* Children */}
+                            </ContainerAdmin>}
+
+                        {page === "createPredio" &&
+                            <ContainerAdmin titulo="Crear Predio" subtitulo="Crear Predio">
+                                <FormPredio
+                                    titulo="Ingrese los datos del predio"
+                                    createPredio={createPredio}
+                                    updatePredio={updatePredio}
+                                    setPredioToEdit={setPredioToEdit}
+                                    btn_text="Crear"
+                                />  {/* Children */}
+                            </ContainerAdmin>}
+
+                        {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" subtitulo="Gestionar Predios">
                             {loading && <Loader />}
                             {error && (
                                 <Message
@@ -312,77 +375,38 @@ function AdminUserIntPage({ tipo, page }) {
                                 />
                             )}
                             {usersDb && (
-                                <TableUsers
-                                    users={usersDb}
-                                    setUserToEdit={setUserToEdit}
-                                    deleteUser={deleteUser}
+                                <TablePredios
+                                    predios={prediosDb}
+                                    setPredioToEdit={setPredioToEdit}
+                                    deletePredio={deletePredio}
                                 />
                             )}
                         </ContainerAdmin>}
 
-                    {page === "editUser" &&
-                        <ContainerAdmin titulo="Editar Usuario" subtitulo="Gestionar Usuarios" subtitulo2="Editar Usuario">
-                            <FormUser
-                                titulo="Datos del usuario a editar"
-                                createUser={createUser}
-                                updateUser={updateUser}
-                                userToEdit={userToEdit}
-                                setUserToEdit={setUserToEdit}
-                                btn_text="Editar"
-                            />  {/* Children */}
-                        </ContainerAdmin>}
+                        {page === "editPredio" &&
+                            <ContainerAdmin titulo="Editar Predio" subtitulo="Gestionar Predios" subtitulo2="Editar Predio">
+                                <FormPredio
+                                    titulo="Datos del predio a editar"
+                                    createPredio={createPredio}
+                                    updatePredio={updatePredio}
+                                    predioToEdit={predioToEdit}
+                                    setPredioToEdit={setPredioToEdit}
+                                    btn_text="Editar"
+                                />  {/* Children */}
+                            </ContainerAdmin>}
 
-                    {page === "createPredio" &&
-                        <ContainerAdmin titulo="Crear Predio" subtitulo="Crear Predio">
-                            <FormPredio
-                                titulo="Ingrese los datos del predio"
-                                createPredio={createPredio}
-                                updatePredio={updatePredio}
-                                setPredioToEdit={setPredioToEdit}
-                                btn_text="Crear"
-                            />  {/* Children */}
-                        </ContainerAdmin>}
+                        {page === "fechaPagoDcto" &&
+                            <ContainerAdmin titulo="Definir Fechas de Pago - Descuentos" subtitulo="Gestionar Predios" subtitulo2="Definir Fechas de Pago - Descuentos">
+                                <FormFechaPagoDcto />  {/* Children */}
+                            </ContainerAdmin>}
 
-                    {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" subtitulo="Gestionar Predios">
-                        {loading && <Loader />}
-                        {error && (
-                            <Message
-                                msg={`Error ${error.status}: ${error.statusText}`}
-                                bgColor="#dc3545"
-                            />
-                        )}
-                        {usersDb && (
-                            <TablePredios
-                                predios={prediosDb}
-                                setPredioToEdit={setPredioToEdit}
-                                deletePredio={deletePredio}
-                            />
-                        )}
-                    </ContainerAdmin>}
+                        {page === "algoritmos" &&
+                            <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Ejecutar Algoritmos">
+                                <FormEjecutarAlgoritmo />  {/* Children */}
+                            </ContainerAdmin>}
 
-                    {page === "editPredio" &&
-                        <ContainerAdmin titulo="Editar Predio" subtitulo="Gestionar Predios" subtitulo2="Editar Predio">
-                            <FormPredio
-                                titulo="Datos del predio a editar"
-                                createPredio={createPredio}
-                                updatePredio={updatePredio}
-                                predioToEdit={predioToEdit}
-                                setPredioToEdit={setPredioToEdit}
-                                btn_text="Editar"
-                            />  {/* Children */}
-                        </ContainerAdmin>}
-
-                    {page === "fechaPagoDcto" &&
-                        <ContainerAdmin titulo="Definir Fechas de Pago - Descuentos" subtitulo="Gestionar Predios" subtitulo2="Definir Fechas de Pago - Descuentos">
-                            <FormFechaPagoDcto />  {/* Children */}
-                        </ContainerAdmin>}
-
-                    {page === "algoritmos" &&
-                        <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Ejecutar Algoritmos">
-                            <FormEjecutarAlgoritmo />  {/* Children */}
-                        </ContainerAdmin>}
-
-                    <FooterAdmin />
+                        <FooterAdmin />
+                    </body>
                 </>
 
                 :

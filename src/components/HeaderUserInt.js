@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function HeaderUserInt() {
+function HeaderUserInt({ btn }) {
 
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
@@ -19,9 +19,12 @@ function HeaderUserInt() {
 
                 <div className="d-flex align-items-center justify-content-between">
                     <img src="/img/logo-gov-co.png" alt="" />
-                    <i className="bi bi-list toggle-sidebar-btn"></i>
                 </div>
                 {/* <!-- End Logo --> */}
+
+                {/* Toggle-Sidebar-Btn */}
+                {btn}
+                {/* End Toggle-Sidebar-Btn */}
 
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
