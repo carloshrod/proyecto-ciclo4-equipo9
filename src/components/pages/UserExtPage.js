@@ -27,41 +27,43 @@ function UserExtPage({ page }) {
         <>
             {auth() && rol === 3 ?
                 <>
-                    <HeaderUserExt />
+                    <main className="container-bg">
+                        <HeaderUserExt />
 
-                    {page === "home" &&
-                        <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100 container-bg">
-                            <BodyHomeUserExt />  {/* Children */}
-                        </Container>}
+                        {page === "home" &&
+                            <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100 container-bg">
+                                <BodyHomeUserExt />  {/* Children */}
+                            </Container>}
 
-                    {page === "myProfile" &&
-                        <Container titulo="Mi Perfil" className="container container-center center-v min-vh-100 container-bg">
-                            <BodyMyProfile />  {/* Children */}
-                        </Container>}
+                        {page === "myProfile" &&
+                            <Container titulo="Mi Perfil" className="container container-center center-v min-vh-100 container-bg">
+                                <BodyMyProfile />  {/* Children */}
+                            </Container>}
 
-                    {page === "pagar" &&
-                        <Container titulo="Pagar Impuesto Predial" className="container container-center center-v min-vh-100 container-bg">
-                            <BodyPagarImpuestos />  {/* Children */}
-                        </Container>}
+                        {page === "pagar" &&
+                            <Container titulo="Pagar Impuesto Predial" className="container container-center center-v min-vh-100 container-bg">
+                                <BodyPagarImpuestos />  {/* Children */}
+                            </Container>}
 
-                    {page === "asociarPredios" &&
-                        <Container titulo="Asociar Predios a su Cuenta" className="container container-center center-v min-vh-100 container-bg">
-                            <AsociarPredios/>  {/* Children */}
-                        </Container>}
+                        {page === "asociarPredios" &&
+                            <Container titulo="Asociar Predios a su Cuenta" className="container container-center center-v min-vh-100 container-bg">
+                                <AsociarPredios />  {/* Children */}
+                            </Container>}
 
-                    {page === "convenio" &&
-                        <div className="col-lg-8 m-auto">
-                            <Container titulo="Solicitar Convenio de Pago" className="container container-center center-v min-vh-100 container-bg">
-                                <FormConvenio />  {/* Children */}
-                            </Container>
-                        </div>}
+                        {page === "convenio" &&
+                            <div className="col-lg-8 m-auto">
+                                <Container titulo="Solicitar Convenio de Pago" className="container container-center center-v min-vh-100 container-bg">
+                                    <FormConvenio />  {/* Children */}
+                                </Container>
+                            </div>}
 
-                    <Footer />
+                        <Footer />
+                    </main>
                 </>
 
                 :
                 <Navigate to="/login" />
-                
+
             }
         </>
     )

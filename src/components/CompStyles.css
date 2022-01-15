@@ -10,7 +10,11 @@
 
 .card-home {
   border-radius: 10px;
-  background-color: rgb(255,255,255, .5);
+  background-color: rgba(250, 252, 250, 0.5);
+}
+
+.card-home:hover {
+  background-color: rgba(168, 255, 168, 0.8);
 }
 
 .form-1 {
@@ -43,7 +47,7 @@
 }
 
 .container-bg {
-  background-color: #f3fcf3;
+  background-color: #dbf5db;
 }
 
 .none {
@@ -52,6 +56,16 @@
 
 .btn-100 {
   width: 100%;
+}
+
+.nav-home-ue {
+  color: #08366b;
+  font-weight: bold;
+}
+
+.nav-home-ue:hover {
+  color: #005dc7;
+  font-weight: bold;
 }
 
 /* Loader: */
@@ -95,3 +109,4 @@
     transform: rotate(360deg);
   }
 }
+

@@ -16,7 +16,7 @@ function BodyMyProfile() {
                             <div className="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                <h2>{payload.nombre}</h2>
+                                <h2 className="text-center">{payload.nombre}</h2>
                                 <div className="social-links mt-2">
                                     <a href="https://twitter.com" className="twitter"><i className="bi bi-twitter"></i></a>
                                     <a href="https://es-la.facebook.com" className="facebook"><i className="bi bi-facebook"></i></a>
@@ -36,7 +36,7 @@ function BodyMyProfile() {
                                 <ul className="nav nav-tabs nav-tabs-bordered">
 
                                     <li className="nav-item">
-                                        <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Vista General</button>
+                                        <button className="nav-link" data-bs-toggle="tab" data-bs-target="#profile-overview">Vista General</button>
                                     </li>
 
                                     <li className="nav-item">

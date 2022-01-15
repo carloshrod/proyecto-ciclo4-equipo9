@@ -18,11 +18,28 @@ function HeaderUserExt() {
             <header id="header" className="header d-flex align-items-center">
 
                 <div className="d-flex align-items-center justify-content-between">
-                    <Link to="/home-user-ext" className="d-flex align-items-center">
+                    <Link to="/home-user-ext">
                         <img src="/img/logo-gov-co.png" alt="" />
-                        <span className="d-none d-lg-block"></span>
                     </Link>
                 </div> {/*!-- End Logo -->*/}
+
+                <div className="d-flex align-items-center justify-content-between m-lg-3">
+                    <Link to="/home-user-ext/pagar">
+                        <span className="nav-home-ue d-none d-lg-block">Pagar impuesto predial</span>
+                    </Link>
+                </div>
+
+                <div className="d-flex align-items-center justify-content-between m-lg-3">
+                    <Link to="/home-user-ext/asociar-predios">
+                        <span className="nav-home-ue d-none d-lg-block">Asociar predios</span>
+                    </Link>
+                </div>
+
+                <div className="d-flex align-items-center justify-content-between m-lg-3">
+                    <Link to="/home-user-ext/convenio">
+                        <span className="nav-home-ue d-none d-lg-block">Solicitar convenio de pago</span>
+                    </Link>
+                </div>
 
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
@@ -31,7 +48,7 @@ function HeaderUserExt() {
 
                             <Link className="nav-link nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                <span className="d-none d-md-block dropdown-toggle ps-2">{payload.usuario}</span>
+                                <span className="nav-home-ue d-none d-md-block dropdown-toggle ps-2">{payload.usuario}</span>
                             </Link>
                             {/* End Profile Image Icon */}
 

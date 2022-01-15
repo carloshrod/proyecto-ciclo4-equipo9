@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // export const SidebarAdmin = <Sidebar
 //     item1={<SidebarItem linkTo="/home-admin" icono="bi bi-grid" titulo="Dashboard" />}
@@ -24,8 +24,6 @@ function Sidebar({btn, item1, item2, item3, item4, item5, item6, item7 }) {
         <>
             {/* <!-- ======= Sidebar ======= --> */}
             <aside id="sidebar" className="sidebar">
-
-                {btn}
 
                 <ul className="sidebar-nav" id="sidebar-nav">
                     <li className="nav-item">

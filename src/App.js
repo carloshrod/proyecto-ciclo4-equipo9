@@ -16,7 +16,7 @@ function App() {
         {/* Fin - Fuera del Sistema */}
 
         {/* Administrador */}
-        <Route path="/home-admin" element={<AdminUserIntPage tipo="admin" page="home" />} />  {/* Home - Admin */}
+        <Route path="/home-admin/dashboard" element={<AdminUserIntPage tipo="admin" page="home" />} />  {/* Home - Admin */}
         <Route path="/home-admin/my-profile" element={<AdminUserIntPage tipo="admin" page="myProfile" />} />  {/* Mi Perfil - Admin */}
         <Route path="/home-admin/create-user" element={<AdminUserIntPage tipo="admin" page="createUser" />} />  {/* Crear Usuario - Admin */}
         <Route path="/home-admin/manage-users" element={<AdminUserIntPage tipo="admin" page="manageUsers" />} />  {/* Gestionar Usuarios - Admin */}
@@ -29,7 +29,7 @@ function App() {
         {/* Fin - Administrador */}
 
         {/* Usuario Interno */}
-        <Route path="/home-user-int" element={<AdminUserIntPage page="home" />} />  {/* Home - Usuario Interno */}
+        <Route path="/home-user-int/dashboard" element={<AdminUserIntPage page="home" />} />  {/* Home - Usuario Interno */}
         <Route path="/home-user-int/my-profile" element={<AdminUserIntPage page="myProfile" />} />  {/* Mi Perfil - Usuario Interno */}
         <Route path="/home-user-int/create-predio" element={<AdminUserIntPage page="createPredio" />} />  {/* Crear Predio - Usaurio Interno */}
         <Route path="/home-user-int/manage-predio" element={<AdminUserIntPage page="managePredio" />} />  {/* Gestionar Predios - Usuario Interno */}

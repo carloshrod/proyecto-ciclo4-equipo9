@@ -1,13 +1,15 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function SidebarItem({ linkTo, icono, titulo }) {
     return (
         <>
-            <Link to={linkTo} className="nav-link collapsed">
-                <i className={icono}></i>
-                <span>{titulo}</span>
-            </Link>
+            <div className="">
+                <NavLink exact to={linkTo} className={({ isActive }) => `sidebar-nav nav-link collapsed ${isActive ? "active" : "inactive"}`}>
+                    <i className={icono}></i>
+                    <span>{titulo}</span>
+                </NavLink>
+            </div>
         </>
     )
 };
