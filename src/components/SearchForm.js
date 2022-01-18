@@ -5,7 +5,7 @@ const initialForm = {
 };
 
 
-function SearchForm({ handleSearch }) {
+function SearchForm({ handleSearch, text }) {
 
     const [form, setForm] = useState(initialForm);
     //const [isDisabled, setIsDisabled] = useState(true);
@@ -38,7 +38,7 @@ function SearchForm({ handleSearch }) {
                     <div className="search-bar mb-3">
                         <h5 className="card-title">Buscar Predios</h5>
                         <form onSubmit={handleSubmit} className="search-form d-flex align-items-center">
-                            <label htmlFor="idCodigo">Ingrese el código del predio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <label htmlFor="idCodigo">{text}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                             <input className="form-control w-50" type="text" name="codigo" id="idCodigo" onChange={handleChange} value={form.codigo} />
                             <input className="btn btn-primary m-2" type="submit" value="Buscar" />
                         </form>

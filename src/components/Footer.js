@@ -8,14 +8,14 @@ function Footer() {
                 <div className="row align-items-center justify-content-between">
                     <div className="col-4">
                         <h5 className="text-center">Redes Sociales:&nbsp;&nbsp;
-                        <a href="https://es-la.facebook.com/GobCauca/"><i className="bi bi-facebook"></i></a>&nbsp;&nbsp;
-                        <a href="https://www.instagram.com/GobCauca/"><i className="bi bi-instagram"></i></a>&nbsp;&nbsp;
-                        <a href="https://twitter.com/GobCauca"><i className="bi bi-twitter"></i></a>&nbsp;&nbsp;
-                        <a href="https://www.youtube.com/channel/UCJUgHfrUdzJojR2Ktao7fHw"><i className="bi bi-youtube"></i></a>
+                        <a href="https://es-la.facebook.com/GobCauca/" target="_blank" rel="noreferrer"><i className="bi bi-facebook"></i></a>&nbsp;&nbsp;
+                        <a href="https://www.instagram.com/GobCauca/" target="_blank" rel="noreferrer"><i className="bi bi-instagram"></i></a>&nbsp;&nbsp;
+                        <a href="https://twitter.com/GobCauca" target="_blank" rel="noreferrer"><i className="bi bi-twitter"></i></a>&nbsp;&nbsp;
+                        <a href="https://www.youtube.com/channel/UCJUgHfrUdzJojR2Ktao7fHw" target="_blank" rel="noreferrer"><i className="bi bi-youtube"></i></a>
                         </h5>
                     </div>
                     <div className="col-4">
-                        <a href="https://www.gov.co/home/">
+                        <a href="https://www.gov.co/home/" target="_blank" rel="noreferrer">
                         <img src="/img/logo-footer.png" alt=""/>
                         </a>
                     </div>

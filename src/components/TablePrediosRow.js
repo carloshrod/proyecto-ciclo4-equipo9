@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData }) => {
+const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, linkTo }) => {
     let { codigo, nom_prop, doc_prop, direccion, barrio } = predio || {};
 
     return (
@@ -13,7 +13,7 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData }) =>
             <td>{direccion}</td>
             <td>{barrio}</td>
             <td align="center">
-                <Link to="/home-admin/manage-predio/edit">
+                <Link to={linkTo}>
                     <button className="btn btn-primary" onClick={() => setDataToEdit(predio)}><i className="bi bi-pencil-fill"></i></button>
                 </Link>
                 &nbsp;

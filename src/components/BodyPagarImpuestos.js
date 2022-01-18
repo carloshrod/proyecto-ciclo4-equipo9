@@ -50,7 +50,7 @@ function BodyPagarImpuestos() {
 
             {loading && <Loader />}
 
-                <SearchForm handleSearch={handleSearch} />
+                <SearchForm handleSearch={handleSearch} text="Ingrese el código del predio:" />
 
                 <PagoDetails search={search} predio={predio}/>
 

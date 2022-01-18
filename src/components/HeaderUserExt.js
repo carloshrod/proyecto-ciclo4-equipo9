@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 function HeaderUserExt() {
 
@@ -17,29 +17,33 @@ function HeaderUserExt() {
             {/* <!-- ======= Header ======= --> */}
             <header id="header" className="header d-flex align-items-center">
 
-                <div className="d-flex align-items-center justify-content-between">
-                    <Link to="/home-user-ext">
+                <div className="d-flex align-items-center justify-content-between m-2">
                         <img src="/img/logo-gov-co.png" alt="" />
-                    </Link>
                 </div> {/*!-- End Logo -->*/}
 
-                <div className="d-flex align-items-center justify-content-between m-lg-3">
-                    <Link to="/home-user-ext/pagar">
-                        <span className="nav-home-ue d-none d-lg-block">Pagar impuesto predial</span>
-                    </Link>
-                </div>
+                <NavLink to="/user-ext-home" className={({ isActive }) => `nav-home-ue d-none d-lg-block ${isActive ? "active" : ""}`}>
+                    <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                        <span>Inicio</span>
+                    </div>
+                </NavLink>
 
-                <div className="d-flex align-items-center justify-content-between m-lg-3">
-                    <Link to="/home-user-ext/asociar-predios">
-                        <span className="nav-home-ue d-none d-lg-block">Asociar predios</span>
-                    </Link>
-                </div>
+                <NavLink to="/user-ext/asociar-predios" className={({ isActive }) => `nav-home-ue d-none d-lg-block ${isActive ? "active" : ""}`}>
+                    <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                        <span>Asociar predios</span>
+                    </div>
+                </NavLink>
 
-                <div className="d-flex align-items-center justify-content-between m-lg-3">
-                    <Link to="/home-user-ext/convenio">
-                        <span className="nav-home-ue d-none d-lg-block">Solicitar convenio de pago</span>
-                    </Link>
-                </div>
+                <NavLink to="/user-ext/pagar" className={({ isActive }) => `nav-home-ue d-none d-lg-block ${isActive ? "active" : ""}`}>
+                    <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                        <span>Pagar predial</span>
+                    </div>
+                </NavLink>
+
+                <NavLink to="/user-ext/convenio" className={({ isActive }) => `nav-home-ue d-none d-lg-block ${isActive ? "active" : ""}`}>
+                    <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                        <span>Convenio pago</span>
+                    </div>
+                </NavLink>
 
                 <nav className="header-nav ms-auto">
                     <ul className="d-flex align-items-center">
@@ -54,8 +58,8 @@ function HeaderUserExt() {
 
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li>
-                                    <Link to="/home-user-ext/my-profile">
-                                        <div className="dropdown-item d-flex align-items-center">
+                                    <Link to="/user-ext/my-profile">
+                                        <div className="dropdown-item dditem-hov d-flex align-items-center">
                                             <span className="m-auto">
                                                 <i className="bi bi-person" />
                                                 Mi Perfil
@@ -69,7 +73,7 @@ function HeaderUserExt() {
 
                                 <li>
                                     <div className="dropdown-item d-flex align-items-center">
-                                        <button className="btn btn-100 btn-light btn-primary" type="button" onClick={logout}>
+                                        <button className="btn btn-100 btn-light btn-primary dditem-hov" type="button" onClick={logout}>
                                             <i className="bi bi-box-arrow-right" />
                                             Cerrar Sesión
                                         </button>

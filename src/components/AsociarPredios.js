@@ -50,7 +50,7 @@ function AsociarPredios() {
 
             {loading && <Loader />}
 
-                <SearchForm handleSearch={handleSearch} />
+                <SearchForm handleSearch={handleSearch} text="Ingrese el documento del propietario:"/>
 
                 {predio.map((p)=> {
                     return(

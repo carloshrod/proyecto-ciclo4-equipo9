@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HeaderAdmin from "../HeaderAdmin";
 import HeaderUserInt from '../HeaderUserInt';
-import Sidebar, { SidebarAdmin, SidebarUserInt } from "../Sidebar";
+import Sidebar from "../Sidebar";
 import ContainerAdmin from '../ContainerAdmin';
 import FooterAdmin from "../FooterAdmin";
 import Dashboard from '../Dashboard';
@@ -282,12 +282,13 @@ function AdminUserIntPage({ tipo, page }) {
                                 <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
                             </div>} />
                                 <Sidebar
-                                    item1={<SidebarItem linkTo="/home-admin/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
-                                    item2={<SidebarItem linkTo="/home-admin/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
-                                    item3={<SidebarItem linkTo="/home-admin/create-user" icono="bi bi-person-plus-fill" titulo="Crear Usuarios" />}
-                                    item4={<SidebarItem linkTo="/home-admin/manage-users" icono="bi bi-pencil-fill" titulo="Gestionar Usuarios" />}
-                                    item5={<SidebarItem linkTo="/home-admin/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
-                                    item6={<SidebarItem linkTo="/home-admin/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
+                                    logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
+                                    item1={<SidebarItem linkTo="/admin/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
+                                    item2={<SidebarItem linkTo="/admin/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
+                                    item3={<SidebarItem linkTo="/admin/create-user" icono="bi bi-person-plus-fill" titulo="Crear Usuarios" />}
+                                    item4={<SidebarItem linkTo="/admin/manage-users" icono="bi bi-pencil-fill" titulo="Gestionar Usuarios" />}
+                                    item5={<SidebarItem linkTo="/admin/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
+                                    item6={<SidebarItem linkTo="/admin/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
                                 />
                             </>
                             :
@@ -295,28 +296,29 @@ function AdminUserIntPage({ tipo, page }) {
                                 <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
                             </div>} />
                                 <Sidebar
-                                    item1={<SidebarItem linkTo="/home-user-int/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
-                                    item2={<SidebarItem linkTo="/home-user-int/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
-                                    item5={<SidebarItem linkTo="/home-user-int/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
-                                    item6={<SidebarItem linkTo="/home-user-int/manage-predio" icono="bi bi-pencil-fill" titulo="Gestionar Predios" />}
+                                    logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
+                                    item1={<SidebarItem linkTo="/user-int/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
+                                    item2={<SidebarItem linkTo="/user-int/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
+                                    item5={<SidebarItem linkTo="/user-int/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
+                                    item6={<SidebarItem linkTo="/user-int/manage-predio" icono="bi bi-pencil-fill" titulo="Gestionar Predios" />}
                                 />
                             </>
                         }
 
                         {page === "home" &&
-                            <ContainerAdmin titulo="Dashboard" subtitulo="Dashboard">
+                            <ContainerAdmin titulo="Dashboard" linkTo="#">
                                 <Dashboard
                                     cantidadUsuarios={cantidadUsuarios}
                                     cantidadPredios={cantidadPredios} />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "myProfile" &&
-                            <ContainerAdmin titulo="Mi Perfil" subtitulo="Mi Perfil">
+                            <ContainerAdmin titulo="Mi Perfil" linkTo="#" >
                                 <BodyMyProfile />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "createUser" &&
-                            <ContainerAdmin titulo="Crear Usuario" subtitulo="Crear Usuario">
+                            <ContainerAdmin titulo="Crear Usuario" linkTo="#" >
                                 <FormUser
                                     titulo="Ingrese los datos del usuario"
                                     createUser={createUser}
@@ -327,7 +329,7 @@ function AdminUserIntPage({ tipo, page }) {
                             </ContainerAdmin>}
 
                         {page === "manageUsers" &&
-                            <ContainerAdmin titulo="Gestionar Usuarios" subtitulo="Gestionar Usuarios">
+                            <ContainerAdmin titulo="Gestionar Usuarios" linkTo="#" >
                                 {loading && <Loader />}
                                 {error && (
                                     <Message
@@ -345,7 +347,7 @@ function AdminUserIntPage({ tipo, page }) {
                             </ContainerAdmin>}
 
                         {page === "editUser" &&
-                            <ContainerAdmin titulo="Editar Usuario" subtitulo="Gestionar Usuarios" subtitulo2="Editar Usuario">
+                            <ContainerAdmin titulo="Editar Usuario" linkTo="/admin/manage-users" subtitulo="Gestionar Usuarios" sep="&nbsp;/&nbsp;" subtitulo2="Editar Usuario">
                                 <FormUser
                                     titulo="Datos del usuario a editar"
                                     createUser={createUser}
@@ -357,7 +359,7 @@ function AdminUserIntPage({ tipo, page }) {
                             </ContainerAdmin>}
 
                         {page === "createPredio" &&
-                            <ContainerAdmin titulo="Crear Predio" subtitulo="Crear Predio">
+                            <ContainerAdmin titulo="Crear Predio" linkTo="#">
                                 <FormPredio
                                     titulo="Ingrese los datos del predio"
                                     createPredio={createPredio}
@@ -367,7 +369,7 @@ function AdminUserIntPage({ tipo, page }) {
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
-                        {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" subtitulo="Gestionar Predios">
+                        {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" linkTo="#">
                             {loading && <Loader />}
                             {error && (
                                 <Message
@@ -380,12 +382,18 @@ function AdminUserIntPage({ tipo, page }) {
                                     predios={prediosDb}
                                     setPredioToEdit={setPredioToEdit}
                                     deletePredio={deletePredio}
+                                    linkTo={tipo === "admin" ? "/admin/manage-predio/edit" : "/user-int/manage-predio/edit"}
                                 />
                             )}
                         </ContainerAdmin>}
 
                         {page === "editPredio" &&
-                            <ContainerAdmin titulo="Editar Predio" subtitulo="Gestionar Predios" subtitulo2="Editar Predio">
+                            <ContainerAdmin
+                                titulo="Editar Predio"
+                                linkTo={tipo === "admin" ? "/admin/manage-predio" : "/user-int/manage-predio"}
+                                subtitulo="Gestionar Predios"
+                                sep="&nbsp;/&nbsp;"
+                                subtitulo2="Editar Predio">
                                 <FormPredio
                                     titulo="Datos del predio a editar"
                                     createPredio={createPredio}

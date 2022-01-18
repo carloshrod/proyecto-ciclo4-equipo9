@@ -12,6 +12,10 @@ function SystemOutPage({ page }) {
 
   const [usersDb, setUsersDb] = useState([])
   const [userToRegister, setUserToRegister] = useState(null);
+  const [error, setError] = useState();
+  const [msgError, setMsgError] = useState();
+  const [success, setSuccess] = useState();
+  const [msgSuccess, setMsgSuccess] = useState();
 
   let api = helpHttp();
   let url = "http://localhost:8080";
@@ -28,12 +32,17 @@ function SystemOutPage({ page }) {
     };
 
     api.post(endpoint, options).then((res) => {
-      console.log(res.data)
+      console.log(res)
       console.log(usersDb)
       if (!res.err) {
         setUsersDb([...usersDb, res.data]);
+        setError(false)
+        setSuccess(true);
+        setMsgSuccess("Su cuenta fue creada exitosamente!!!");
       } else {
-        window.alert('Error, tu cuenta no pudo ser creada. Intentalo más tarde.');
+        setSuccess(false);
+        setError(true);
+        setMsgError("Su cuenta no pudo ser creada. Intentelo más tarde!!!");      
       }
     });
   };
@@ -58,6 +67,8 @@ function SystemOutPage({ page }) {
             registerUser={registerUser}
             userToRegister={userToRegister}
             setUserToRegister={setUserToRegister}
+            error={error && <div className=" col-12 alert alert-danger text-center" role="alert">{msgError}</div>}
+            success={success && <div className=" col-12 alert alert-success text-center" role="alert">{msgSuccess}</div>}
           />  {/* Children */}
         </Container>}
 

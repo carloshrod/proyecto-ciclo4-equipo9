@@ -3,9 +3,10 @@
   margin-top: 30px;
 }
 
-.logo-body-home-user-ext {
-  width: 180px;
-  margin-top: 30px;
+.logo-sidebar {
+  display: block;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 .card-home {
@@ -14,7 +15,16 @@
 }
 
 .card-home:hover {
-  background-color: rgba(168, 255, 168, 0.8);
+  background-color: rgba(219, 245, 219, 0.8);
+}
+
+.card-home-ue {
+  border-radius: 10px;
+  background-color: rgba(250, 252, 250, 0.5);
+}
+
+.card-home-ue:hover {
+  background-color: rgba(157, 229, 157, 0.8);
 }
 
 .form-1 {
@@ -61,11 +71,39 @@
 .nav-home-ue {
   color: #08366b;
   font-weight: bold;
+  text-align: center;
 }
 
 .nav-home-ue:hover {
   color: #005dc7;
   font-weight: bold;
+}
+
+.nav-home-ue.active {
+  background-color: #dbf5db;
+  border-radius: 15px 15px 0px 0px;
+  border-width: 1px;
+  border-color: #4E9D4C;
+  border-style: solid;
+  border-bottom: none;
+  max-height: 100%;
+  min-height: 100%;
+  text-align: center;
+}
+
+.dditem-hov:hover {
+  font-weight: bold;
+}
+
+.admin-link-active:hover {
+  color: #08366b;
+  font-weight: bold;
+}
+
+.admin-link {
+  color: #08366b;
+  font-weight: bold;
+  cursor: default;
 }
 
 /* Loader: */

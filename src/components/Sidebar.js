@@ -18,12 +18,14 @@ import React from 'react';
 // // item7={<SidebarItem linkTo="/home-admin/manage-predio/ejecutar-algoritmos" icono="bi bi-cpu" titulo="Ejecutar Algoritmos" />}
 // />
 
-function Sidebar({btn, item1, item2, item3, item4, item5, item6, item7 }) {
+function Sidebar({logo, item1, item2, item3, item4, item5, item6, item7 }) {
 
     return (
         <>
             {/* <!-- ======= Sidebar ======= --> */}
             <aside id="sidebar" className="sidebar">
+
+                {logo}
 
                 <ul className="sidebar-nav" id="sidebar-nav">
                     <li className="nav-item">

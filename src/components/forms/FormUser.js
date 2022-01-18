@@ -140,7 +140,7 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                         <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
                                     </div>
 
-                                    <div className="col-4 m-auto mt-3">
+                                    <div className="col-3 col-md-2 col-lg-2 m-auto mt-3">
                                         <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
                                 </form>

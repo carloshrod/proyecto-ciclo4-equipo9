@@ -12,7 +12,7 @@ const TableUsersRow = ({ user, style, nro_registro, setDataToEdit, deleteData })
             <td>{email}</td>
             <td>{rol}</td>
             <td align="center">
-                <Link to="/home-admin/manage-users/edit">
+                <Link to="/admin/manage-users/edit">
                     <button className="btn btn-primary" onClick={() => setDataToEdit(user)}><i className="bi bi-pencil-fill"></i></button>
                 </Link>
                 &nbsp;

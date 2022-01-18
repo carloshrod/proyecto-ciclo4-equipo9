@@ -37,8 +37,8 @@ function HeaderAdmin({ btn }) {
 
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li>
-                                    <Link to="/home-admin/my-profile">
-                                        <div className="dropdown-item d-flex align-items-center">
+                                    <Link to="/admin/my-profile">
+                                        <div className="dropdown-item dditem-hov d-flex align-items-center">
                                             <span className="m-auto">
                                                 <i className="bi bi-person" />
                                                 Mi Perfil
@@ -52,7 +52,7 @@ function HeaderAdmin({ btn }) {
 
                                 <li>
                                     <div className="dropdown-item d-flex align-items-center">
-                                        <button className="btn btn-100 btn-light btn-primary" type="button" onClick={logout}>
+                                        <button className="btn btn-100 btn-light btn-primary dditem-hov" type="button" onClick={logout}>
                                             <i className="bi bi-box-arrow-right" />
                                             Cerrar Sesión
                                         </button>

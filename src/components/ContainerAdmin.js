@@ -1,6 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-function ContainerAdmin({ titulo, subtitulo, subtitulo2, children }) {
+function ContainerAdmin({ titulo, linkTo, subtitulo, sep, subtitulo2, children }) {
     return (
         <>
             <main id="main" className="main min-vh-100 container-bg">
@@ -8,9 +9,13 @@ function ContainerAdmin({ titulo, subtitulo, subtitulo2, children }) {
                     <h1>{titulo}</h1>
                     <nav>
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Home</li>
-                            <li className="breadcrumb-item active">{subtitulo}</li>
-                            <li className="breadcrumb-item active">{subtitulo2}</li>
+                            <NavLink to={linkTo}>
+                                <div className="admin-link-active">{subtitulo}</div>
+                            </NavLink>
+                            {sep}
+                            <NavLink to="#">
+                                <div className="admin-link">{subtitulo2}</div>
+                            </NavLink>
                         </ol>
                     </nav>
                 </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TablePrediosRow from "./TablePrediosRow";
 
-function TablePredios({predios, setPredioToEdit, deletePredio}) {
+function TablePredios({predios, setPredioToEdit, deletePredio, linkTo}) {
 
     return (
         <>
@@ -66,6 +66,7 @@ function TablePredios({predios, setPredioToEdit, deletePredio}) {
                                                             predio={predio}
                                                             setDataToEdit={setPredioToEdit}
                                                             deleteData={deletePredio}
+                                                            linkTo={linkTo}
                                                             />
                                                         )
                                                     }) : (

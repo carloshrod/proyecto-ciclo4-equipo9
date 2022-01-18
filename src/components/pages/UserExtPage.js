@@ -31,28 +31,28 @@ function UserExtPage({ page }) {
                         <HeaderUserExt />
 
                         {page === "home" &&
-                            <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100 container-bg">
+                            <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100">
                                 <BodyHomeUserExt />  {/* Children */}
                             </Container>}
 
                         {page === "myProfile" &&
-                            <Container titulo="Mi Perfil" className="container container-center center-v min-vh-100 container-bg">
+                            <Container titulo="Mi Perfil" className="container container-center center-v min-vh-100">
                                 <BodyMyProfile />  {/* Children */}
                             </Container>}
 
                         {page === "pagar" &&
-                            <Container titulo="Pagar Impuesto Predial" className="container container-center center-v min-vh-100 container-bg">
+                            <Container titulo="Pagar Impuesto Predial" className="container container-center center-v min-vh-100">
                                 <BodyPagarImpuestos />  {/* Children */}
                             </Container>}
 
                         {page === "asociarPredios" &&
-                            <Container titulo="Asociar Predios a su Cuenta" className="container container-center center-v min-vh-100 container-bg">
+                            <Container titulo="Asociar Predios a su Cuenta" className="container container-center center-v min-vh-100">
                                 <AsociarPredios />  {/* Children */}
                             </Container>}
 
                         {page === "convenio" &&
                             <div className="col-lg-8 m-auto">
-                                <Container titulo="Solicitar Convenio de Pago" className="container container-center center-v min-vh-100 container-bg">
+                                <Container titulo="Solicitar Convenio de Pago" className="container container-center center-v min-vh-100">
                                     <FormConvenio />  {/* Children */}
                                 </Container>
                             </div>}

@@ -12,12 +12,13 @@ export const initialForm = {
   direccion: "",
 };
 
-function FormRegister({ registerUser, userToRegister, setUserToRegister }) {
+function FormRegister({ registerUser, userToRegister, setUserToRegister, error, success }) {
 
   const [form, setForm] = useState(initialForm);
+  const [terms, setTerms] = useState(false);
 
   useEffect(() => {
-      setForm(initialForm);
+    setForm(initialForm);
   }, [userToRegister]);
 
   const handleChange = (e) => {
@@ -30,8 +31,12 @@ function FormRegister({ registerUser, userToRegister, setUserToRegister }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono) {
-      alert("Datos incompletos");
+    if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono || !form.direccion) {
+      alert("Datos incompletos!!!");
+      return;
+    };
+    if (!terms) {
+      alert("Para crear tu cuenta, debes aceptar los términos y condiciones!!!");
       return;
     };
     registerUser(form);
@@ -127,14 +132,19 @@ function FormRegister({ registerUser, userToRegister, setUserToRegister }) {
 
                     <div className="col-12">
                       <div className="form-check">
-                        <input className="form-check-input" name="terminos" type="checkbox"  id="acceptTerms" required />
-                        <label className="form-check-label" htmlFor="acceptTerms">Estoy de acuerdo y acepto los <Link to="">términos y condiciones</Link></label>
+                        <input className="form-check-input" name="terminos" type="checkbox" id="acceptTerms" onChange={(e) => setTerms(e.target.checked)} required />
+                        <label className="form-check-label" htmlFor="acceptTerms">Estoy de acuerdo y acepto los <a href="https://www.mintic.gov.co/portal/715/articles-62124_politica_tratamiento_datos_personales_u20200917.pdf" target="_blank" rel="noreferrer">términos y condiciones</a></label>
                         <div className="invalid-feedback">Debes aceptar los términos y condiciones antes de continuar.</div>
                       </div>
                     </div>
 
-                    <div className="col-4 m-auto mt-3">
+                    <div className="col-5 col-lg-3 m-auto mt-3">
                       <button className="btn btn-primary rounded-pill w-100" type="submit">Crear Cuenta</button>
+                    </div>
+
+                    <div className="col-12">
+                      {error}
+                      {success}
                     </div>
 
                     <div className="col-12 text-center">

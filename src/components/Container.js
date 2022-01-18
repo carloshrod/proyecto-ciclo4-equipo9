@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Container({ titulo, className, children }) {
+function Container({ titulo, className, img, children }) {
     return (
         <>
             <div className={className} >
