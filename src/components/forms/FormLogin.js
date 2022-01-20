@@ -1,6 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
+import Message from '../Message';
 
 function FormLogin() {
 
@@ -33,10 +34,12 @@ function FormLogin() {
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  let url = process.env.REACT_APP_API_URL
+
   function login() {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-    fetch("http://localhost:8080/users/login", {
+    fetch(`${url}/users/login`, {
       headers: { "content-type": "application/json" },
       method: "POST",
       body: JSON.stringify({ email, password })
@@ -56,6 +59,7 @@ function FormLogin() {
         } else {
           setError(true)
           setMsgError(res.msg);
+          setTimeout(() => setError(false), 5000);
         }
       })
   }
@@ -76,7 +80,7 @@ function FormLogin() {
                     <p className="text-center small">Ingresa tu usuario y tu contraseña</p>
                   </div>
 
-                  {error && <div className=" col-12 alert alert-danger text-center" role="alert">{msgError}</div>}
+                  {error && <Message msg={msgError} bgColor="#dc3545"/>}
 
                   {/* ******************** Form Login ******************** */}
                   <form className="row g-3 needs-validation justify-content-center" onSubmit={enviarDatos} noValidate>

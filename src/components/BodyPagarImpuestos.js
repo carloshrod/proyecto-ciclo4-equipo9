@@ -11,7 +11,7 @@ function BodyPagarImpuestos() {
     const [predio, setPredio] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const url = "http://localhost:8080"
+    const url = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         if (search === null) return;
@@ -19,9 +19,9 @@ function BodyPagarImpuestos() {
         const fetchData = async () => {
             
 
-            const {codigo} = search;
+            const {datos} = search;
 
-            let predioUrl = `${url}/predios/consultarP/${codigo}`;
+            let predioUrl = `${url}/predios/consultarP/${datos}`;
 
             setLoading(true);
 
@@ -37,6 +37,7 @@ function BodyPagarImpuestos() {
 
         fetchData();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     const handleSearch = (data) => {

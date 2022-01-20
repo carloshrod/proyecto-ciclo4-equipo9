@@ -41,7 +41,7 @@ function HeaderUserExt() {
 
                 <NavLink to="/user-ext/convenio" className={({ isActive }) => `nav-home-ue d-none d-lg-block ${isActive ? "active" : ""}`}>
                     <div className="d-inline-flex m-3 align-items-center justify-content-between ">
-                        <span>Convenio pago</span>
+                        <span>Convenio de pago</span>
                     </div>
                 </NavLink>
 
@@ -52,7 +52,7 @@ function HeaderUserExt() {
 
                             <Link className="nav-link nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                <span className="nav-home-ue d-none d-md-block dropdown-toggle ps-2">{payload.usuario}</span>
+                                <span className="nav-home-ue d-none d-md-block dropdown-toggle ps-2">{payload.nombre}</span>
                             </Link>
                             {/* End Profile Image Icon */}
 

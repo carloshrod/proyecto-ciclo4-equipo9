@@ -71,6 +71,7 @@
 .nav-home-ue {
   color: #08366b;
   font-weight: bold;
+  font-size: 0.8rem;
   text-align: center;
 }
 
@@ -81,12 +82,12 @@
 
 .nav-home-ue.active {
   background-color: #dbf5db;
+  padding-top: 5px;
   border-radius: 15px 15px 0px 0px;
   border-width: 1px;
   border-color: #4E9D4C;
   border-style: solid;
   border-bottom: none;
-  max-height: 100%;
   min-height: 100%;
   text-align: center;
 }

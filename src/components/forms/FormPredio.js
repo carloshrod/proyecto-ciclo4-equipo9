@@ -15,7 +15,7 @@ export const initialForm = {
     fecha_pago3: "",
 };
 
-function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
+function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text, error, success}) {
 
     const [form, setForm] = useState(initialForm);
 
@@ -163,6 +163,9 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                     <div className="col-3 col-md-2 col-lg-2 m-auto mt-3">
                                         <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
+
+                                    {error}
+                                    {success}
 
                                 </form>
                             </div>

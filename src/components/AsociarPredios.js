@@ -11,7 +11,7 @@ function AsociarPredios() {
     const [predio, setPredio] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const url = "http://localhost:8080"
+    const url = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         if (search === null) return;
@@ -37,6 +37,7 @@ function AsociarPredios() {
 
         fetchData();
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     const handleSearch = (data) => {

@@ -7,6 +7,7 @@ import FormForgotPassword from '../forms/FormForgotPassword'
 import Footer from "../Footer";
 import BodyLandingPage from "../BodyLandingPage";
 import { helpHttp } from '../../helpers/helpHttp';
+import Message from '../Message';
 
 function SystemOutPage({ page }) {
 
@@ -18,7 +19,7 @@ function SystemOutPage({ page }) {
   const [msgSuccess, setMsgSuccess] = useState();
 
   let api = helpHttp();
-  let url = "http://localhost:8080";
+  let url = process.env.REACT_APP_API_URL;
 
   // Registro de usuarios:
   const registerUser = (user) => {
@@ -39,10 +40,12 @@ function SystemOutPage({ page }) {
         setError(false)
         setSuccess(true);
         setMsgSuccess("Su cuenta fue creada exitosamente!!!");
+        setTimeout(() => setSuccess(false), 5000);
       } else {
         setSuccess(false);
         setError(true);
-        setMsgError("Su cuenta no pudo ser creada. Intentelo más tarde!!!");      
+        setMsgError("Su cuenta no pudo ser creada. Intentelo más tarde!!!");
+        setTimeout(() => setError(false), 5000);    
       }
     });
   };
@@ -67,8 +70,8 @@ function SystemOutPage({ page }) {
             registerUser={registerUser}
             userToRegister={userToRegister}
             setUserToRegister={setUserToRegister}
-            error={error && <div className=" col-12 alert alert-danger text-center" role="alert">{msgError}</div>}
-            success={success && <div className=" col-12 alert alert-success text-center" role="alert">{msgSuccess}</div>}
+            error={error && <Message msg={msgError} bgColor="#dc3545"/>}
+            success={success && <Message msg={msgSuccess} bgColor="#45CB67"/>}
           />  {/* Children */}
         </Container>}
 

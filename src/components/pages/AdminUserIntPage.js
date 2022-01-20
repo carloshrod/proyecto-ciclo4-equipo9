@@ -26,11 +26,14 @@ function AdminUserIntPage({ tipo, page }) {
     const [usersDb, setUsersDb] = useState([])
     const [userToEdit, setUserToEdit] = useState(null);
     const [error, setError] = useState(null);
+    const [msgError, setMsgError] = useState();
+    const [success, setSuccess] = useState();
+    const [msgSuccess, setMsgSuccess] = useState();
     const [loading, setLoading] = useState(false);
 
     let api = helpHttp();
-    let url = "http://localhost:8080";
-
+    let url = process.env.REACT_APP_API_URL
+    
     useEffect(() => {
         if (usersDb === null) return;
         setLoading(true);
@@ -51,7 +54,7 @@ function AdminUserIntPage({ tipo, page }) {
     // ********** Crear Usuario **********
     const createUser = (user) => {
         user.rol = 2; // Rol 2 -> Usuario Interno
-        user.password = "User_1234";
+        user.password = process.env.REACT_APP_USER_PASS;
         user.estado = 1;
 
         let endpoint = `${url}/users/guardar/`;
@@ -65,13 +68,17 @@ function AdminUserIntPage({ tipo, page }) {
         };
 
         api.post(endpoint, options).then((res) => {
-            console.log(res)
-            console.log(usersDb)
             if (!res.err) {
                 setUsersDb([...usersDb, res.data]);
-                console.log(usersDb)
+                setError(false);
+                setSuccess(true);
+                setMsgSuccess("El usuario fue creado exitosamente!!!");
+                setTimeout(() => setSuccess(false), 5000);
             } else {
-                setError(res);
+                setSuccess(false);
+                setError(true);
+                setMsgError("Error, el usuario no pudo ser creado!!!");
+                setTimeout(() => setError(false), 5000);
             }
         });
     };
@@ -88,20 +95,24 @@ function AdminUserIntPage({ tipo, page }) {
             }
         };
         api.post(endpoint, options).then((res) => {
-            console.log(res.data)
-            console.log(usersDb)
             if (!res.err) {
                 let newData = usersDb.map((e) => (e._id === user._id ? user : e));
                 setUsersDb(newData);
-                console.log(newData)
+                setError(false);
+                setSuccess(true);
+                setMsgSuccess("El usuario fue editado exitosamente!!!");
+                setTimeout(() => setSuccess(false), 5000);
             } else {
-                setError(res);
+                setSuccess(false);
+                setError(true);
+                setMsgError("Error, el usuario no pudo ser editado!!!");
+                setTimeout(() => setError(false), 5000);
             }
         });
 
     };
 
-    // ********** Borrar Usuario **********
+    // ********** Eliminar Usuario **********
     const deleteUser = (nro_doc) => {
         let isDelete = window.confirm(
             `¿Estás seguro de eliminar el usuario con número de documento '${nro_doc}'?`
@@ -117,20 +128,24 @@ function AdminUserIntPage({ tipo, page }) {
                 },
             };
 
-            console.log(nro_doc)
-
             api.del(endpoint, options).then((res) => {
                 if (!res.err) {
                     let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
                     setUsersDb(newData);
+                    setError(false);
+                    setSuccess(true);
+                    setMsgSuccess("El usuario fue eliminado exitosamente!!!");
+                    setTimeout(() => setSuccess(false), 5000);
                 } else {
-                    setError(res);
+                    setSuccess(false);
+                    setError(true);
+                    setMsgError("Error, el usuario no pudo ser eliminado!!!");
+                    setTimeout(() => setError(false), 5000);
                 }
             });
         } else {
             return;
         }
-
     };
     // ******************** End CRUD Users ********************
 
@@ -156,6 +171,7 @@ function AdminUserIntPage({ tipo, page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // ********** Crear Predio **********
     const createPredio = (predio) => {
         predio.estado = 1;
         predio.valor_predial = predio.valor_predio * 0.01;
@@ -169,18 +185,24 @@ function AdminUserIntPage({ tipo, page }) {
                 "authorization": `Bearer ${token}`
             },
         };
-        console.log(predio);
+
         api.post(endpoint, options).then((res) => {
-            console.log(prediosDb)
-            console.log(res.data)
             if (!res.err) {
                 setPrediosDb([...prediosDb, res.data]);
+                setError(false);
+                setSuccess(true);
+                setMsgSuccess("El predio fue creado exitosamente!!!");
+                setTimeout(() => setSuccess(false), 5000);
             } else {
-                setError(res);
+                setSuccess(false);
+                setError(true);
+                setMsgError("Error, el predio no pudo ser creado!!!");
+                setTimeout(() => setError(false), 5000);
             }
         });
     };
 
+    // ********** Editar Predio **********
     const updatePredio = (predio) => {
         predio.valor_predial = predio.valor_predio * 0.01;
 
@@ -195,19 +217,24 @@ function AdminUserIntPage({ tipo, page }) {
             },
         };
 
-        console.log(predio)
-
         api.post(endpoint, options).then((res) => {
-            console.log(res)
             if (!res.err) {
                 let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
+                setError(false);
+                setSuccess(true);
+                setMsgSuccess("El predio fue editado exitosamente!!!");
+                setTimeout(() => setSuccess(false), 5000);
             } else {
-                setError(res);
+                setSuccess(false);
+                setError(true);
+                setMsgError("Error, el predio no pudo ser editado!!!");
+                setTimeout(() => setError(false), 5000);
             }
         });
     };
 
+    // ********** Eliminar Predio **********
     const deletePredio = (codigo) => {
         let isDelete = window.confirm(
             `¿Estás seguro de eliminar el predio con codigo '${codigo}'?`
@@ -228,8 +255,15 @@ function AdminUserIntPage({ tipo, page }) {
                 if (!res.err) {
                     let newData = prediosDb.filter((el) => el.codigo !== codigo);
                     setPrediosDb(newData);
+                    setError(false);
+                    setSuccess(true);
+                    setMsgSuccess("El predio fue eliminado exitosamente!!!");
+                    setTimeout(() => setSuccess(false), 5000);
                 } else {
-                    setError(res);
+                    setSuccess(false);
+                    setError(true);
+                    setMsgError("Error, el predio no pudo ser eliminado!!!");
+                    setTimeout(() => setError(false), 5000);
                 }
             });
         } else {
@@ -325,23 +359,21 @@ function AdminUserIntPage({ tipo, page }) {
                                     updateUser={updateUser}
                                     setUserToEdit={setUserToEdit}
                                     btn_text="Crear"
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "manageUsers" &&
                             <ContainerAdmin titulo="Gestionar Usuarios" linkTo="#" >
                                 {loading && <Loader />}
-                                {error && (
-                                    <Message
-                                        msg={`Error ${error.status}: ${error.statusText}`}
-                                        bgColor="#dc3545"
-                                    />
-                                )}
                                 {usersDb && (
                                     <TableUsers
                                         users={usersDb}
                                         setUserToEdit={setUserToEdit}
                                         deleteUser={deleteUser}
+                                        error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                        success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                     />
                                 )}
                             </ContainerAdmin>}
@@ -355,6 +387,8 @@ function AdminUserIntPage({ tipo, page }) {
                                     userToEdit={userToEdit}
                                     setUserToEdit={setUserToEdit}
                                     btn_text="Editar"
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
@@ -366,23 +400,21 @@ function AdminUserIntPage({ tipo, page }) {
                                     updatePredio={updatePredio}
                                     setPredioToEdit={setPredioToEdit}
                                     btn_text="Crear"
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" linkTo="#">
                             {loading && <Loader />}
-                            {error && (
-                                <Message
-                                    msg={`Error ${error.status}: ${error.statusText}`}
-                                    bgColor="#dc3545"
-                                />
-                            )}
                             {usersDb && (
                                 <TablePredios
                                     predios={prediosDb}
                                     setPredioToEdit={setPredioToEdit}
                                     deletePredio={deletePredio}
                                     linkTo={tipo === "admin" ? "/admin/manage-predio/edit" : "/user-int/manage-predio/edit"}
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />
                             )}
                         </ContainerAdmin>}
@@ -401,6 +433,8 @@ function AdminUserIntPage({ tipo, page }) {
                                     predioToEdit={predioToEdit}
                                     setPredioToEdit={setPredioToEdit}
                                     btn_text="Editar"
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 

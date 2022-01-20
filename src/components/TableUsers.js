@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import TableUsersRow from './TableUsersRow';
 
-function TableUsers({ users, setUserToEdit, deleteUser }) {
+function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
 
     let style = "none";
 
     return (
         <>
+            {error}
+            {success}
             <section className="section min-vh-100">
                 <div className="row">
                     <div className="col-lg-12">

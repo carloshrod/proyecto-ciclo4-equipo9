@@ -46,7 +46,7 @@ function UserExtPage({ page }) {
                             </Container>}
 
                         {page === "asociarPredios" &&
-                            <Container titulo="Asociar Predios a su Cuenta" className="container container-center center-v min-vh-100">
+                            <Container titulo="Asociar Predios" className="container container-center center-v min-vh-100">
                                 <AsociarPredios />  {/* Children */}
                             </Container>}
 

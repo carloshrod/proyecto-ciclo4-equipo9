@@ -2,8 +2,10 @@ import React from "react";
 
 const Message = ({ msg, bgColor }) => {
     let styles = {
-        padding: "1rem",
+        padding: "0.5rem",
+        paddingTop: "1.5rem",
         marginBottom: "1rem",
+        borderRadius: "1rem",
         textAlign: "center",
         color: "#fff",
         fontWeight: "bold",
@@ -11,10 +13,10 @@ const Message = ({ msg, bgColor }) => {
     };
 
     return (
-        <div style={styles}>
-            {/* <p>{msg}</p> */}
-            <p dangerouslySetInnerHTML={{ __html: msg }} />
-        </div>
+            <div style={styles}>
+                {/* <p>{msg}</p> */}
+                <p dangerouslySetInnerHTML={{ __html: msg }} />
+            </div>
     );
 };
 

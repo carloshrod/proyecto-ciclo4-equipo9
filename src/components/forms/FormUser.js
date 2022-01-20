@@ -12,7 +12,7 @@ export const initialForm = {
     direccion: "",
 };
 
-function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text, error, success }) {
 
     const [form, setForm] = useState(initialForm);
 
@@ -23,7 +23,7 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
             setForm(initialForm);
         }
     }, [userToEdit]);
-    
+
 
     const handleChange = (e) => {
         setForm({
@@ -43,13 +43,13 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
         if (form.estado === null) {
             createUser(form);
         } else {
-            updateUser(form);           
+            updateUser(form);
         }
 
         handleReset();
     };
 
-    const handleReset = (e) => {       
+    const handleReset = (e) => {
         setForm(initialForm);
         setUserToEdit(null);
     };
@@ -143,12 +143,16 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                     <div className="col-3 col-md-2 col-lg-2 m-auto mt-3">
                                         <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
+
+                                    {error}
+                                    {success}
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
         </>
     )
 }

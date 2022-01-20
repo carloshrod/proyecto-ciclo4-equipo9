@@ -5,19 +5,19 @@ function FormConvenio() {
         <>
             <div className="card">
                 <div className="card-body">
-                    <div className="row m-2">
-                        <h5 className="col-4 card-title mb-3 text-center">Código del Predio</h5>
-                        <h5 className="col-4 card-title mb-3 text-center">Propietario del Predio</h5>
-                        <h5 className="col-4 card-title mb-3 text-center">Total a Pagar</h5>
+                    <div className="row m-2 text-center">
+                        <h5 className="col-4 card-title mb-3">Código del Predio</h5>
+                        <h5 className="col-4 card-title mb-3">Propietario del Predio</h5>
+                        <h5 className="col-4 card-title mb-3">Total a Pagar</h5>
                     </div>
 
                     <form className="row g-3 needs-validation justify-content-center" noValidate>
 
-                        <div className="col-3 mt-3 mb-3">
+                        <div className="col-4 col-sm-3 col-xl-4 mt-3 mb-3">
                             <label htmlFor="yourCuotaInicial" className="form-label">Cuota inicial:</label>
                         </div>
 
-                        <div className="col-2 mt-3 mb-3">
+                        <div className="col-4 col-sm-3 col-md-3 col-xl-2 mt-3 mb-3">
                             <select className="form-select text-center" aria-label="Default select example">
                                 <option defaultValue>Sí / No</option>
                                 <option value="1">Sí</option>
@@ -29,11 +29,11 @@ function FormConvenio() {
                             <input type="number" name="cuotaInicial" className="form-control text-center" id="yourCuotaInicial" required />
                         </div>
 
-                        <div className="col-5 mt-3 mb-3">
+                        <div className="col-7 col-sm-5 col-md-5 col-xl-6 mt-3 mb-3">
                             <label htmlFor="yourNroCuotas" className="form-label">Número de cuotas:</label>
                         </div>
 
-                        <div className="col-4 mt-3 mb-3">
+                        <div className="col-5 col-xl-4 mt-3 mb-3">
                             <select name="nroCuotas" className="form-select text-center" id="yourNroCuotas" aria-label="Default select example">
                                 <option defaultValue>Seleccionar</option>
                                 <option value="1">1</option>
@@ -51,11 +51,11 @@ function FormConvenio() {
                             </select>
                         </div>
 
-                        <div className="col-5 mt-3 mb-3">
+                        <div className="col-7 col-sm-5 col-md-5 col-xl-6 mt-3 mb-3">
                             <label htmlFor="yourVrCuotas" className="form-label">Valor de cuotas:</label>
                         </div>
 
-                        <div className="col-4 mt-3 mb-3">
+                        <div className="col-5 col-xl-4 mt-3 mb-3">
                             <div className="input-group has-validation">
                                 <input type="number" name="vrCuotas" className="form-control text-center" id="yourVrCuotas" required />
                             </div>

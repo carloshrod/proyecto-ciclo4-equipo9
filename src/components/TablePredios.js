@@ -2,10 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TablePrediosRow from "./TablePrediosRow";
 
-function TablePredios({predios, setPredioToEdit, deletePredio, linkTo}) {
+function TablePredios({predios, setPredioToEdit, deletePredio, linkTo, error, success}) {
 
     return (
         <>
+            {error}
+            {success}
             <section className="section min-vh-100">
                 <div className="row">
                     <div className="col-lg-12">

@@ -18,10 +18,10 @@ function BodyMyProfile() {
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
                                 <h2 className="text-center">{payload.nombre}</h2>
                                 <div className="social-links mt-2">
-                                    <a href="https://twitter.com" className="twitter"><i className="bi bi-twitter"></i></a>
-                                    <a href="https://es-la.facebook.com" className="facebook"><i className="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com" className="instagram"><i className="bi bi-instagram"></i></a>
-                                    <a href="https://www.linkedin.com" className="linkedin"><i className="bi bi-linkedin"></i></a>
+                                    <a href="https://twitter.com" target="_blank" rel="noreferrer" className="twitter"><i className="bi bi-twitter"></i></a>
+                                    <a href="https://es-la.facebook.com" target="_blank" rel="noreferrer" className="facebook"><i className="bi bi-facebook"></i></a>
+                                    <a href="https://www.instagram.com" target="_blank" rel="noreferrer" className="instagram"><i className="bi bi-instagram"></i></a>
+                                    <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="linkedin"><i className="bi bi-linkedin"></i></a>
                                 </div>
                             </div>
                         </div>
