@@ -33,8 +33,6 @@ function SystemOutPage({ page }) {
     };
 
     api.post(endpoint, options).then((res) => {
-      console.log(res)
-      console.log(usersDb)
       if (!res.err) {
         setUsersDb([...usersDb, res.data]);
         setError(false)

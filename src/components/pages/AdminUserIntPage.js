@@ -33,14 +33,14 @@ function AdminUserIntPage({ tipo, page }) {
 
     let api = helpHttp();
     let url = process.env.REACT_APP_API_URL
-    
+
     useEffect(() => {
         if (usersDb === null) return;
         setLoading(true);
         api.get(`${url}/users/listar`)
             .then((res) => {
                 if (!res.err) {
-                    setUsersDb(res.data);
+                    setUsersDb(res.data.slice(1));
                     setError(null);
                 } else {
                     setUsersDb(null);
@@ -175,6 +175,7 @@ function AdminUserIntPage({ tipo, page }) {
     const createPredio = (predio) => {
         predio.estado = 1;
         predio.valor_predial = predio.valor_predio * 0.01;
+        predio.codigo = "PD" + predio.codigo;
 
         let endpoint = `${url}/predios/guardar/`;
         const token = localStorage.getItem("token");
@@ -305,6 +306,12 @@ function AdminUserIntPage({ tipo, page }) {
 
     // Toggle-Sidebar:
     const [inactive, setInactive] = useState(false);
+
+    // Cerrar sesión:
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+    }
 
     return (
         <>
@@ -453,9 +460,10 @@ function AdminUserIntPage({ tipo, page }) {
                 </>
 
                 :
-
-                <Navigate to="/login" />
-
+                <>
+                    {logout()}
+                    <Navigate to="/login" />
+                </>
             }
         </>
     )

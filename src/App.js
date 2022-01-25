@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SystemOutPage from "./components/pages/SystemOutPage";
 import AdminUserIntPage from "./components/pages/AdminUserIntPage";
 import UserExtPage from "./components/pages/UserExtPage";
+import Error404 from "./components/Error404";
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
         <Route path="/user-ext/convenio" element={<UserExtPage page="convenio" />} />
         {/* Fin - Usuario Externo */}
 
-        <Route path="*" element={<div>Error 404</div>} />
+        <Route path="*" element={<Error404/>} />
       </Routes>
     </Router>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, linkTo }) => {
     let { codigo, nom_prop, doc_prop, direccion, barrio } = predio || {};
@@ -14,11 +15,22 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
             <td>{barrio}</td>
             <td align="center">
                 <Link to={linkTo}>
-                    <button className="btn btn-primary" onClick={() => setDataToEdit(predio)}><i className="bi bi-pencil-fill"></i></button>
+                    <ReactTooltip id="toolTipEdit" place="top" type="dark" effect="solid">
+                        Editar predio
+                    </ReactTooltip>
+                    <button data-tip data-for="toolTipEdit" type="button" className="btn btn-primary" onClick={() => setDataToEdit(predio)}>
+                        <i className="bi bi-pencil-fill"/>
+                    </button>
                 </Link>
                 &nbsp;
-                <button className="btn btn-danger" onClick={() => deleteData(codigo)}><i className="bi bi-trash"></i></button>
-                &nbsp;
+                <Link to="#">
+                    <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
+                        Eliminar predio
+                    </ReactTooltip>
+                    <button data-tip data-for="toolTipDelete" type="button" className="btn btn-danger" onClick={() => deleteData(codigo)}>
+                        <i className="bi bi-trash"/>
+                    </button>
+                </Link>
             </td>
         </tr>
     );

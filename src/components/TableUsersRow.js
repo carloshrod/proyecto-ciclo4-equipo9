@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
-const TableUsersRow = ({ user, style, nro_registro, setDataToEdit, deleteData }) => {
+const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
     let { nombres, apellidos, nro_doc, email, rol } = user || {};
 
     return (
-        <tr className={style}>
+        <tr>
             <th scope="row">{nro_registro}</th>
             <td>{nombres} {apellidos}</td>
             <td>{nro_doc}</td>
@@ -13,10 +14,22 @@ const TableUsersRow = ({ user, style, nro_registro, setDataToEdit, deleteData })
             <td>{rol}</td>
             <td align="center">
                 <Link to="/admin/manage-users/edit">
-                    <button className="btn btn-primary" onClick={() => setDataToEdit(user)}><i className="bi bi-pencil-fill"></i></button>
+                    <ReactTooltip id="toolTipEdit" place="top" type="dark" effect="solid">
+                        Editar usuario
+                    </ReactTooltip>
+                    <button data-tip data-for="toolTipEdit" type="button" className="btn btn-primary" onClick={() => setDataToEdit(user)}>
+                        <i className="bi bi-pencil-fill"/>
+                    </button>
                 </Link>
                 &nbsp;
-                <button className="btn btn-danger" onClick={() => deleteData(nro_doc)}><i className="bi bi-trash"></i></button>
+                <Link to="#">
+                    <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
+                        Eliminar usuario
+                    </ReactTooltip>
+                    <button data-tip data-for="toolTipDelete" type="button" className="btn btn-danger" onClick={() => deleteData(nro_doc)}>
+                        <i className="bi bi-trash"/>
+                    </button>
+                </Link>
             </td>
         </tr>
     );

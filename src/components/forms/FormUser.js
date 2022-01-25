@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 export const initialForm = {
     estado: null,
@@ -69,9 +70,19 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                     <div className="col-12">
                                         <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle center-img" />
                                         <div className="pt-2 text-center m-2">
-                                            <Link to="" className="btn btn-primary" title="Subir nueva imagen de perfil"><i className="bi bi-upload"></i></Link>
+                                            <Link to="" className="btn btn-primary">
+                                                <ReactTooltip id="toolTipUpload" place="top" type="dark" effect="solid">
+                                                    Subir nueva imágen de perfil
+                                                </ReactTooltip>
+                                                <i data-tip data-for="toolTipUpload" className="bi bi-upload" />
+                                            </Link>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Link to="" className="btn btn-danger" title="Eliminar imagen de perfil"><i className="bi bi-trash"></i></Link>
+                                            <Link to="" className="btn btn-danger">
+                                                <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
+                                                    Eliminar imágen de perfil
+                                                </ReactTooltip>
+                                                <i data-tip data-for="toolTipDelete" className="bi bi-trash" />
+                                            </Link>
                                         </div>
                                     </div>
 
@@ -115,15 +126,6 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                             <div className="invalid-feedback">Por favor, ingresa un correo electrónico válido!</div>
                                         </div>
                                     </div>
-
-                                    {/* <div className="col-6">
-                                        <label htmlFor="yourPassword" className="form-label">Contraseña</label>
-                                        <div className="input-group has-validation">
-                                            <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
-                                            <input type="password" name="contraseña" className="form-control" id="yourPassword" onChange={handleChange} value={form.contraseña} required />
-                                            <div className="invalid-feedback">Por favor ingresa tu contraseña!</div>
-                                        </div>
-                                    </div> */}
 
                                     <div className="col-6">
                                         <label htmlFor="yourPhone" className="form-label">Teléfono</label>

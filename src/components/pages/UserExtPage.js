@@ -13,6 +13,7 @@ import jwtDecode from 'jwt-decode';
 
 function UserExtPage({ page }) {
 
+    // Autenticación por rol:
     const tokenIsOk = () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -22,6 +23,12 @@ function UserExtPage({ page }) {
     }
 
     const rol = tokenIsOk();
+
+    // Cerrar sesión:
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+    }
 
     return (
         <>
@@ -62,8 +69,10 @@ function UserExtPage({ page }) {
                 </>
 
                 :
-                <Navigate to="/login" />
-
+                <>
+                    {logout()}
+                    <Navigate to="/login" />
+                </>
             }
         </>
     )
