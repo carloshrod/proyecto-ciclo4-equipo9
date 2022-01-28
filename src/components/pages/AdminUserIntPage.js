@@ -35,16 +35,20 @@ function AdminUserIntPage({ tipo, page }) {
     let url = process.env.REACT_APP_API_URL
 
     useEffect(() => {
-        if (usersDb === null) return;
         setLoading(true);
         api.get(`${url}/users/listar`)
             .then((res) => {
                 if (!res.err) {
-                    setUsersDb(res.data.slice(1));
                     setError(null);
+                    if (res.data) {
+                        setUsersDb(res.data.slice(1));
+                    }
                 } else {
                     setUsersDb(null);
-                    setError(res);
+                    setSuccess(false);
+                    setError(true);
+                    setMsgError("Error, hay un problema con la base de datos!!!");
+                    setTimeout(() => setError(false), 5000);
                 }
                 setLoading(false);
             });
@@ -159,9 +163,11 @@ function AdminUserIntPage({ tipo, page }) {
         api.get(`${url}/predios/listar`)
             .then((res) => {
                 // console.log(res)
-                if (!res.err) {
-                    setPrediosDb(res.data);
+                if (!res.error) {
                     setError(null);
+                    if (res.data) {
+                        setPrediosDb(res.data.slice(1));
+                    }
                 } else {
                     setPrediosDb(null);
                     setError(res);
@@ -274,23 +280,21 @@ function AdminUserIntPage({ tipo, page }) {
     // ******************* End CRUD predios *******************
 
     const countUsers = () => {
-        if (usersDb !== null) {
+        if (usersDb) {
             const cantUsuarios = a => usersDb.filter((e) =>
                 (e.rol === a)).length; //cuenta los usuarios segun el rol}
             return cantUsuarios;
         }
+        return "No hay información!!!"
     }
 
-    const cantidadUsuarios = countUsers();
-
     const countPredios = () => {
-        if (prediosDb !== null) {
+        if (prediosDb) {
             const cantPredios = prediosDb.length;
             return cantPredios;
         }
+        return "No hay información!!!"
     }
-
-    const cantidadPredios = countPredios();
 
     // Autenticación por rol:
     const tokenIsOk = () => {
@@ -302,7 +306,6 @@ function AdminUserIntPage({ tipo, page }) {
     }
 
     const rol = tokenIsOk();
-
 
     // Toggle-Sidebar:
     const [inactive, setInactive] = useState(false);
@@ -348,9 +351,10 @@ function AdminUserIntPage({ tipo, page }) {
 
                         {page === "home" &&
                             <ContainerAdmin titulo="Dashboard" linkTo="#">
+                                {(!usersDb || !prediosDb) && <Message msg="No hay conexión con la base de datos!!!" bgColor="#dc3545" />}
                                 <Dashboard
-                                    cantidadUsuarios={cantidadUsuarios}
-                                    cantidadPredios={cantidadPredios} />  {/* Children */}
+                                    cantidadUsuarios={usersDb ? countUsers() : countUsers}
+                                    cantidadPredios={countPredios()} />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "myProfile" &&
@@ -374,7 +378,7 @@ function AdminUserIntPage({ tipo, page }) {
                         {page === "manageUsers" &&
                             <ContainerAdmin titulo="Gestionar Usuarios" linkTo="#" >
                                 {loading && <Loader />}
-                                {usersDb && (
+                                {usersDb ? (
                                     <TableUsers
                                         users={usersDb}
                                         setUserToEdit={setUserToEdit}
@@ -382,7 +386,7 @@ function AdminUserIntPage({ tipo, page }) {
                                         error={error && <Message msg={msgError} bgColor="#dc3545" />}
                                         success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                     />
-                                )}
+                                ) : <Message msg="No hay conexión con la base de datos!!!" bgColor="#dc3545" />}
                             </ContainerAdmin>}
 
                         {page === "editUser" &&
@@ -414,7 +418,7 @@ function AdminUserIntPage({ tipo, page }) {
 
                         {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" linkTo="#">
                             {loading && <Loader />}
-                            {usersDb && (
+                            {usersDb ? (
                                 <TablePredios
                                     predios={prediosDb}
                                     setPredioToEdit={setPredioToEdit}
@@ -423,7 +427,7 @@ function AdminUserIntPage({ tipo, page }) {
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
                                     success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />
-                            )}
+                            ) : <Message msg="No hay conexión con la base de datos!!!" bgColor="#dc3545" />}
                         </ContainerAdmin>}
 
                         {page === "editPredio" &&

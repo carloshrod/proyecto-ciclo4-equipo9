@@ -1,6 +1,7 @@
 import React from 'react';
 
-function Dashboard(props) {
+function Dashboard({ cantidadUsuarios, cantidadPredios }) {
+    
     return (
         <>
             {/* <!-- Left side columns --> */}
@@ -27,12 +28,12 @@ function Dashboard(props) {
                             <div className="card-body">
                                 <h5 className="card-title">Usuarios Internos</h5>
 
-                                <div className="d-flex align-items-center">
+                                <div className="d-flex align-items-center justify-content-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i className="bi bi-people"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>{props.cantidadUsuarios(2)}</h6>
+                                        <h6>{cantidadUsuarios(2)}</h6>
                                         <span className="text-success small pt-1 fw-bold">Registrados</span>
 
                                     </div>
@@ -62,12 +63,12 @@ function Dashboard(props) {
                             <div className="card-body">
                                 <h5 className="card-title">Usuarios Externos</h5>
 
-                                <div className="d-flex align-items-center">
+                                <div className="d-flex align-items-center justify-content-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i className="bi bi-people"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>{props.cantidadUsuarios(3)}</h6>
+                                        <h6>{cantidadUsuarios(3)}</h6>
                                         <span className="text-success small pt-1 fw-bold">Registrados</span>
 
                                     </div>
@@ -98,12 +99,12 @@ function Dashboard(props) {
                             <div className="card-body">
                                 <h5 className="card-title">Predios</h5>
 
-                                <div className="d-flex align-items-center">
+                                <div className="d-flex align-items-center justify-content-center">
                                     <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i className="bi bi-building"></i>
                                     </div>
                                     <div className="ps-3">
-                                        <h6>{props.cantidadPredios}</h6>
+                                        <h6>{cantidadPredios}</h6>
                                         <span className="text-danger small pt-1 fw-bold">Actuales</span>
 
                                     </div>

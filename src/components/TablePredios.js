@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useSearchParams } from "react-router-dom";
+import TablePrediosHeader from "./TablePrediosHeader";
 import TablePrediosRow from "./TablePrediosRow";
 
 export const initialForm = {
@@ -13,9 +14,19 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
     const filter = searchParams.get("filter") ?? "";
     const [pageNumber, setPageNumber] = useState(0);
     const [prediosPerPage, setPrediosPerPage] = useState(initialForm);
+    const [sorting, setSorting] = useState({ field: "", order: "" });
 
     const firstItemShowedPerPage = pageNumber * prediosPerPage.select;
     const lastItemShowedPerPage = firstItemShowedPerPage + prediosPerPage.select;
+
+    const headers = [
+        { name: "#", field: "index", sortable: false },
+        { name: "Código", field: "codigo", sortable: true },
+        { name: "Nombre Propietario", field: "nom_prop", sortable: true },
+        { name: "C.C. Propietario", field: "doc_prop", sortable: false },
+        { name: "Dirección", field: "direccion", sortable: true },
+        { name: "Barrio", field: "barrio", sortable: true },
+    ];
 
     const handleInputChange = (event) => {
         setPrediosPerPage({
@@ -29,6 +40,7 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
         setSearchParams({ filter: e.target.value })
     }
 
+    // Mostrar Predios:
     const displayPredios = predios.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((predio, index) => {
         return (
             <TablePrediosRow
@@ -42,11 +54,20 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
         )
     })
 
+    // Ordenar predios:
+    if (sorting.field) {
+        const reversed = sorting.order === "asc" ? 1 : -1;
+        predios = predios.sort((a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field]))
+    };
+
+    // Filtrar predios:
     const filterPredios = predios.filter((predio) => {
-        const Predio = predio.codigo.toLowerCase() + predio.nom_prop.toLowerCase() + predio.doc_prop.toString() + predio.direccion.toLowerCase() + predio.barrio.toLowerCase();
-        return Predio.includes(filter.toLowerCase());
+        return predio.codigo.toLowerCase().includes(filter.toLowerCase()) || predio.nom_prop.toLowerCase().includes(filter.toLowerCase()) ||
+            predio.doc_prop.toString().includes(filter.toLowerCase()) || predio.direccion.toLowerCase().includes(filter.toLowerCase()) ||
+            predio.barrio.toLowerCase().includes(filter.toLowerCase());
     });
 
+    // Mostrar predios filtrados:
     const displayFilteredPredios = filterPredios.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((predio, index) => {
         return (
             <TablePrediosRow
@@ -104,19 +125,15 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
                                         </div>
                                     </div>
 
+                                    <div className="dataTable-top">
+                                        <div className="me-3">
+                                            {range()} Predios
+                                        </div>
+                                    </div>
+
                                     <div className="dataTable-container mt-2">
                                         <table className="table datatable table-hover text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Codigo</th>
-                                                    <th scope="col">Nombre Propietario</th>
-                                                    <th scope="col">C.C Propietario</th>
-                                                    <th scope="col">Direccion</th>
-                                                    <th scope="col">Barrio</th>
-                                                    <th scope="col"></th>
-                                                </tr>
-                                            </thead>
+                                            <TablePrediosHeader headers={headers} onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
                                                 {predios.length > 0 ?
                                                     <>{!filter ? displayPredios : displayFilteredPredios}</>

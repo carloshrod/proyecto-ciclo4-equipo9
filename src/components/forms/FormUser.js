@@ -43,11 +43,10 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
 
         if (form.estado === null) {
             createUser(form);
+            handleReset();
         } else {
             updateUser(form);
         }
-
-        handleReset();
     };
 
     const handleReset = (e) => {

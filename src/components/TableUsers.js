@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useSearchParams } from "react-router-dom";
 import ReactTooltip from 'react-tooltip';
+import TableUsersHeader from './TableUsersHeader';
 import TableUsersRow from './TableUsersRow';
 
 export const initialForm = {
@@ -14,9 +15,18 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
     const filter = searchParams.get("filter") ?? "";
     const [pageNumber, setPageNumber] = useState(0);
     const [usersPerPage, setUsersPerPage] = useState(initialForm);
+    const [sorting, setSorting] = useState({ field: "", order: "" });
 
     const firstItemShowedPerPage = pageNumber * usersPerPage.select;
     const lastItemShowedPerPage = firstItemShowedPerPage + usersPerPage.select;
+
+    const headers = [
+        { name: "#", field: "index", sortable: false },
+        { name: "Nombre", field: "nombres", sortable: true },
+        { name: "Nro. Documento", field: "nro_doc", sortable: false },
+        { name: "Email", field: "email", sortable: true },
+        { name: "Rol", field: "rol", sortable: false },
+    ];
 
     const handleInputChange = (event) => {
         setUsersPerPage({
@@ -30,6 +40,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
         setSearchParams({ filter: e.target.value })
     }
 
+    // Mostrar usuarios:
     const displayUsers = users.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((user, index) => {
         return (
             <TableUsersRow
@@ -42,11 +53,20 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
         )
     });
 
+    // Ordenar usuarios:
+    if (sorting.field) {
+        const reversed = sorting.order === "asc" ? 1 : -1;
+        users = users.sort((a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field]))
+    };
+
+    // Filtrar usuarios:
     const filterUsers = users.filter((user) => {
-        const User = user.nombres.toLowerCase() + " " + user.apellidos.toLowerCase() + user.nro_doc.toString() + user.email + (user.rol + " ");
-        return User.includes(filter.toLowerCase());
+        return (user.nombres + " " + user.apellidos).toLowerCase().includes(filter.toLowerCase()) ||
+            user.nro_doc.toString().includes(filter.toLowerCase()) || user.email.includes(filter.toLowerCase()) ||
+            (user.rol + " ").includes(filter.toLowerCase())
     })
 
+    // Mostrar usuarios filtrados:
     const displayFilteredUsers = filterUsers.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((user, index) => {
         return (
             <TableUsersRow
@@ -87,6 +107,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
 
                                 <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                                     {/* <!-- Table with stripped rows --> */}
+
                                     <div className="dataTable-top">
                                         <div className="dataTable-dropdown">
                                             <label>
@@ -98,6 +119,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
                                                     <option value={users.length}>Todos</option>
                                                 </select> Usuarios por página</label>
                                         </div>
+
                                         <div className="dataTable-search">
                                             <ReactTooltip id="toolTipFilter" place="left" type="dark" effect="solid">
                                                 Para filtrar por <em>rol</em> ingrese el valor seguido de un espacio
@@ -106,18 +128,15 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
                                         </div>
                                     </div>
 
-                                    <div className="dataTable-container mt-2">
+                                    <div className="dataTable-top">
+                                        <div className="me-3">
+                                            {range()} Usuarios
+                                        </div>
+                                    </div>
+
+                                    <div className="dataTable-container">
                                         <table className="table datatable table-hover text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Nombre</th>
-                                                    <th scope="col"> Nro. Documento</th>
-                                                    <th scope="col">Email</th>
-                                                    <th scope="col">Rol</th>
-                                                    <th scope="col"></th>
-                                                </tr>
-                                            </thead>
+                                            <TableUsersHeader headers={headers} onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
                                                 {users.length > 0 ?
                                                     <>{!filter ? displayUsers : displayFilteredUsers}</>
@@ -131,6 +150,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
                                         </table>
                                         {/* <!-- End Table with stripped rows --> */}
                                     </div>
+
                                     <div className="dataTable-bottom">
                                         <div className="dataTable-info">
                                             Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?

@@ -44,11 +44,10 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
 
         if (form.estado === null) {
             createPredio(form);
+            handleReset();
         } else {
             updatePredio(form);
         }
-
-        handleReset();
     };
 
     const handleReset = (e) => {

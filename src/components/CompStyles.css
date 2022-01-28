@@ -107,6 +107,11 @@
   cursor: default;
 }
 
+.pointer:hover {
+  color: #3b3d3d;
+  cursor: pointer;
+}
+
 /* Loader: */
 .lds-ring {
   display: inline-block;
