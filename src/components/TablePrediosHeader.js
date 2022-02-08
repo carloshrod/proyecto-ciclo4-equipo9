@@ -16,7 +16,7 @@ function TablePrediosHeader({ headers, onSorting }) {
     return (
         <thead>
             <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
-                Ordenar<i class="bi bi-arrow-down-up" />
+                Ordenar<i className="bi bi-arrow-down-up" />
             </ReactTooltip>
             <tr>
                 {headers.map(({ name, field, sortable }) => (

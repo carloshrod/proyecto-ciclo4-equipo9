@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify'
 
 export const initialForm = {
   nombres: "",
@@ -12,7 +13,7 @@ export const initialForm = {
   direccion: "",
 };
 
-function FormRegister({ registerUser, userToRegister, setUserToRegister, error, success }) {
+function FormRegister({ registerUser, userToRegister, setUserToRegister}) {
 
   const [form, setForm] = useState(initialForm);
   const [terms, setTerms] = useState(false);
@@ -32,11 +33,11 @@ function FormRegister({ registerUser, userToRegister, setUserToRegister, error, 
     e.preventDefault();
 
     if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono || !form.direccion) {
-      alert("Datos incompletos!!!");
+      toast.error("Datos incompletos!!!");
       return;
     };
     if (!terms) {
-      alert("Para crear tu cuenta, debes aceptar los términos y condiciones!!!");
+      toast.error("Para crear tu cuenta, debes aceptar los términos y condiciones!!!");
       return;
     };
     registerUser(form);
@@ -54,11 +55,8 @@ function FormRegister({ registerUser, userToRegister, setUserToRegister, error, 
         <div className="container pt-2">
           <div className="row justify-content-center">
             <div className="col-lg-10 col-md-8 d-flex flex-column align-items-center justify-content-center">
-
               <div className="card form-1">
-
                 <div className="card-body">
-
                   <div className="pt-4 pb-2">
                     <h5 className="card-title text-center pb-0 fs-4">Crea una cuenta</h5>
                     <p className="text-center small">Ingresa tu información personal para crear tu cuenta</p>
@@ -140,11 +138,6 @@ function FormRegister({ registerUser, userToRegister, setUserToRegister, error, 
 
                     <div className="col-5 col-lg-3 m-auto mt-3">
                       <button className="btn btn-primary rounded-pill w-100" type="submit">Crear Cuenta</button>
-                    </div>
-
-                    <div className="col-12">
-                      {error}
-                      {success}
                     </div>
 
                     <div className="col-12 text-center">

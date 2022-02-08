@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 
 export const initialForm = {
     estado: null,
@@ -38,7 +39,7 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
         e.preventDefault();
 
         if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.area_c || !form.area_t | !form.valor_predio || !form.direccion || !form.barrio || !form.fecha_pago || !form.fecha_pago2 || !form.fecha_pago3) {
-            alert("Datos incompletos");
+            toast.error("Datos incompletos");
             return;
         };
 

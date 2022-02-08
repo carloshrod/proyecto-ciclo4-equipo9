@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
+import { toast } from 'react-toastify'
 
 export const initialForm = {
     estado: null,
@@ -13,7 +14,7 @@ export const initialForm = {
     direccion: "",
 };
 
-function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text, error, success }) {
+function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
 
     const [form, setForm] = useState(initialForm);
 
@@ -37,7 +38,7 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
         e.preventDefault();
 
         if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.telefono || !form.direccion) {
-            alert("Datos incompletos");
+            toast.error("Datos incompletos");
             return;
         };
 
@@ -64,16 +65,16 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                             <div className="card-body">
                                 <h5 className="card-title">{titulo}</h5>
 
-                                <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
+                                <form className="row g-3 needs-validation" encType="multipart/form-data" onSubmit={handleSubmit} noValidate>
 
                                     <div className="col-12">
                                         <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle center-img" />
                                         <div className="pt-2 text-center m-2">
+                                            <ReactTooltip id="toolTipUpload" place="top" type="dark" effect="solid">
+                                                Subir nueva imágen de perfil
+                                            </ReactTooltip>
                                             <Link to="" className="btn btn-primary">
-                                                <ReactTooltip id="toolTipUpload" place="top" type="dark" effect="solid">
-                                                    Subir nueva imágen de perfil
-                                                </ReactTooltip>
-                                                <i data-tip data-for="toolTipUpload" className="bi bi-upload" />
+                                            <i data-tip data-for="toolTipUpload" className="bi bi-upload" />
                                             </Link>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <Link to="" className="btn btn-danger">
@@ -144,9 +145,6 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                     <div className="col-3 col-md-2 col-lg-2 m-auto mt-3">
                                         <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
-
-                                    {error}
-                                    {success}
                                 </form>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeaderAdmin from "../HeaderAdmin";
 import HeaderUserInt from '../HeaderUserInt';
 import Sidebar from "../Sidebar";
+import SidebarItem from '../SidebarItem';
 import ContainerAdmin from '../ContainerAdmin';
 import FooterAdmin from "../FooterAdmin";
 import Dashboard from '../Dashboard';
@@ -10,15 +11,15 @@ import FormUser from '../forms/FormUser';
 import TableUsers from '../TableUsers';
 import FormPredio from '../forms/FormPredio';
 import TablePredios from '../TablePredios';
-import FormFechaPagoDcto from '../forms/FormFechaPagoDcto';
-import FormEjecutarAlgoritmo from '../forms/FormEjecutarAlgoritmo';
+// import FormFechaPagoDcto from '../forms/FormFechaPagoDcto';
+// import FormEjecutarAlgoritmo from '../forms/FormEjecutarAlgoritmo';
 import { helpHttp } from '../../helpers/helpHttp';
 import Loader from '../Loader';
 import Message from '../Message';
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
-import SidebarItem from '../SidebarItem';
+import { toast } from 'react-toastify';
 
 function AdminUserIntPage({ tipo, page }) {
 
@@ -27,8 +28,6 @@ function AdminUserIntPage({ tipo, page }) {
     const [userToEdit, setUserToEdit] = useState(null);
     const [error, setError] = useState(null);
     const [msgError, setMsgError] = useState();
-    const [success, setSuccess] = useState();
-    const [msgSuccess, setMsgSuccess] = useState();
     const [loading, setLoading] = useState(false);
 
     let api = helpHttp();
@@ -42,13 +41,12 @@ function AdminUserIntPage({ tipo, page }) {
                     setError(null);
                     if (res.data) {
                         setUsersDb(res.data.slice(1));
+                    } else {
+                        setError(true);
+                        setMsgError("Error, no hay conexión con la base de datos!!!");
                     }
                 } else {
                     setUsersDb(null);
-                    setSuccess(false);
-                    setError(true);
-                    setMsgError("Error, hay un problema con la base de datos!!!");
-                    setTimeout(() => setError(false), 5000);
                 }
                 setLoading(false);
             });
@@ -73,16 +71,14 @@ function AdminUserIntPage({ tipo, page }) {
 
         api.post(endpoint, options).then((res) => {
             if (!res.err) {
-                setUsersDb([...usersDb, res.data]);
-                setError(false);
-                setSuccess(true);
-                setMsgSuccess("El usuario fue creado exitosamente!!!");
-                setTimeout(() => setSuccess(false), 5000);
+                if (res.data) {
+                    setUsersDb([...usersDb, res.data]);
+                    toast.success(res.msg)
+                } else {
+                    toast.error(res.msg)
+                }
             } else {
-                setSuccess(false);
-                setError(true);
-                setMsgError("Error, el usuario no pudo ser creado!!!");
-                setTimeout(() => setError(false), 5000);
+                toast.error(res.msg)
             }
         });
     };
@@ -100,17 +96,15 @@ function AdminUserIntPage({ tipo, page }) {
         };
         api.post(endpoint, options).then((res) => {
             if (!res.err) {
-                let newData = usersDb.map((e) => (e._id === user._id ? user : e));
-                setUsersDb(newData);
-                setError(false);
-                setSuccess(true);
-                setMsgSuccess("El usuario fue editado exitosamente!!!");
-                setTimeout(() => setSuccess(false), 5000);
+                if (res.estado === "ok") {
+                    let newData = usersDb.map((e) => (e._id === user._id ? user : e));
+                    setUsersDb(newData);    
+                    toast.success(res.msg)
+                } else {
+                    toast.error(res.msg)
+                }
             } else {
-                setSuccess(false);
-                setError(true);
-                setMsgError("Error, el usuario no pudo ser editado!!!");
-                setTimeout(() => setError(false), 5000);
+                toast.error(res.msg)
             }
         });
 
@@ -134,23 +128,54 @@ function AdminUserIntPage({ tipo, page }) {
 
             api.del(endpoint, options).then((res) => {
                 if (!res.err) {
-                    let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
-                    setUsersDb(newData);
-                    setError(false);
-                    setSuccess(true);
-                    setMsgSuccess("El usuario fue eliminado exitosamente!!!");
-                    setTimeout(() => setSuccess(false), 5000);
+                    if (res.estado === "ok") {
+                        let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
+                        setUsersDb(newData);
+                        toast.success(res.msg)    
+                    } else {
+                        toast.error(res.msg)
+                    }
                 } else {
-                    setSuccess(false);
-                    setError(true);
-                    setMsgError("Error, el usuario no pudo ser eliminado!!!");
-                    setTimeout(() => setError(false), 5000);
+                    toast.error(res.msg)
                 }
             });
         } else {
             return;
         }
     };
+
+    // ********** Cambiar Contraseña **********
+    const changePassword = (user) => {
+        user.password = user.newPassword;
+
+        let endpoint = `${url}/users/cambiar-password/`;
+        const token = localStorage.getItem("token");
+        const payload = jwtDecode(token);
+        user.nro_doc = payload.nro_doc;
+
+        let options = {
+            body: user,
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        };
+
+        api.post(endpoint, options).then((res) => {
+            if (!res.err) {
+                let newData = usersDb.map((e) => (e.nro_doc === payload.nro_doc ? user : e));
+                setUsersDb(newData);
+                if (res.estado === "ok") {
+                    toast.success(res.msg)
+                } else {
+                    toast.error(res.msg)
+                }
+            } else {
+                toast.error(res.msg)
+            }
+        });
+    };
+
     // ******************** End CRUD Users ********************
 
     // ********************* CRUD predios *********************
@@ -162,15 +187,17 @@ function AdminUserIntPage({ tipo, page }) {
         setLoading(true);
         api.get(`${url}/predios/listar`)
             .then((res) => {
-                // console.log(res)
                 if (!res.error) {
                     setError(null);
                     if (res.data) {
-                        setPrediosDb(res.data.slice(1));
+                        setPrediosDb(res.data);
+                    } else {
+                        setError(true);
+                        setMsgError("Error, no hay conexión con la base de datos!!!");
                     }
                 } else {
                     setPrediosDb(null);
-                    setError(res);
+                    // setError(res);
                 }
                 setLoading(false);
             });
@@ -195,16 +222,14 @@ function AdminUserIntPage({ tipo, page }) {
 
         api.post(endpoint, options).then((res) => {
             if (!res.err) {
-                setPrediosDb([...prediosDb, res.data]);
-                setError(false);
-                setSuccess(true);
-                setMsgSuccess("El predio fue creado exitosamente!!!");
-                setTimeout(() => setSuccess(false), 5000);
+                if (res.data) {
+                    setPrediosDb([...prediosDb, res.data]);
+                    toast.success(res.msg);
+                } else {
+                    toast.error(res.msg);
+                }
             } else {
-                setSuccess(false);
-                setError(true);
-                setMsgError("Error, el predio no pudo ser creado!!!");
-                setTimeout(() => setError(false), 5000);
+                toast.error(res.msg);
             }
         });
     };
@@ -228,15 +253,13 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
-                setError(false);
-                setSuccess(true);
-                setMsgSuccess("El predio fue editado exitosamente!!!");
-                setTimeout(() => setSuccess(false), 5000);
+                if (res.estado === "ok") {
+                    toast.success(res.msg)
+                } else {
+                    toast.error(res.msg)
+                }
             } else {
-                setSuccess(false);
-                setError(true);
-                setMsgError("Error, el predio no pudo ser editado!!!");
-                setTimeout(() => setError(false), 5000);
+                toast.error(res.msg);
             }
         });
     };
@@ -258,19 +281,12 @@ function AdminUserIntPage({ tipo, page }) {
             };
 
             api.del(endpoint, options).then((res) => {
-                //console.log(res);
                 if (!res.err) {
                     let newData = prediosDb.filter((el) => el.codigo !== codigo);
                     setPrediosDb(newData);
-                    setError(false);
-                    setSuccess(true);
-                    setMsgSuccess("El predio fue eliminado exitosamente!!!");
-                    setTimeout(() => setSuccess(false), 5000);
+                    toast.success(res.msg);
                 } else {
-                    setSuccess(false);
-                    setError(true);
-                    setMsgError("Error, el predio no pudo ser eliminado!!!");
-                    setTimeout(() => setError(false), 5000);
+                    toast.error(res.msg);
                 }
             });
         } else {
@@ -285,7 +301,6 @@ function AdminUserIntPage({ tipo, page }) {
                 (e.rol === a)).length; //cuenta los usuarios segun el rol}
             return cantUsuarios;
         }
-        return "No hay información!!!"
     }
 
     const countPredios = () => {
@@ -293,7 +308,6 @@ function AdminUserIntPage({ tipo, page }) {
             const cantPredios = prediosDb.length;
             return cantPredios;
         }
-        return "No hay información!!!"
     }
 
     // Autenticación por rol:
@@ -351,15 +365,18 @@ function AdminUserIntPage({ tipo, page }) {
 
                         {page === "home" &&
                             <ContainerAdmin titulo="Dashboard" linkTo="#">
-                                {(!usersDb || !prediosDb) && <Message msg="No hay conexión con la base de datos!!!" bgColor="#dc3545" />}
                                 <Dashboard
                                     cantidadUsuarios={usersDb ? countUsers() : countUsers}
-                                    cantidadPredios={countPredios()} />  {/* Children */}
+                                    cantidadPredios={countPredios()}
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "myProfile" &&
                             <ContainerAdmin titulo="Mi Perfil" linkTo="#" >
-                                <BodyMyProfile />  {/* Children */}
+                                <BodyMyProfile
+                                    changePassword={changePassword}
+                                    setUserToEdit={setUserToEdit} />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "createUser" &&
@@ -370,23 +387,18 @@ function AdminUserIntPage({ tipo, page }) {
                                     updateUser={updateUser}
                                     setUserToEdit={setUserToEdit}
                                     btn_text="Crear"
-                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "manageUsers" &&
                             <ContainerAdmin titulo="Gestionar Usuarios" linkTo="#" >
                                 {loading && <Loader />}
-                                {usersDb ? (
-                                    <TableUsers
-                                        users={usersDb}
-                                        setUserToEdit={setUserToEdit}
-                                        deleteUser={deleteUser}
-                                        error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                        success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
-                                    />
-                                ) : <Message msg="No hay conexión con la base de datos!!!" bgColor="#dc3545" />}
+                                <TableUsers
+                                    users={usersDb}
+                                    setUserToEdit={setUserToEdit}
+                                    deleteUser={deleteUser}
+                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                />
                             </ContainerAdmin>}
 
                         {page === "editUser" &&
@@ -398,8 +410,6 @@ function AdminUserIntPage({ tipo, page }) {
                                     userToEdit={userToEdit}
                                     setUserToEdit={setUserToEdit}
                                     btn_text="Editar"
-                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
@@ -411,23 +421,18 @@ function AdminUserIntPage({ tipo, page }) {
                                     updatePredio={updatePredio}
                                     setPredioToEdit={setPredioToEdit}
                                     btn_text="Crear"
-                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "managePredio" && <ContainerAdmin titulo="Gestionar Predios" linkTo="#">
                             {loading && <Loader />}
-                            {usersDb ? (
-                                <TablePredios
-                                    predios={prediosDb}
-                                    setPredioToEdit={setPredioToEdit}
-                                    deletePredio={deletePredio}
-                                    linkTo={tipo === "admin" ? "/admin/manage-predio/edit" : "/user-int/manage-predio/edit"}
-                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
-                                />
-                            ) : <Message msg="No hay conexión con la base de datos!!!" bgColor="#dc3545" />}
+                            <TablePredios
+                                predios={prediosDb}
+                                setPredioToEdit={setPredioToEdit}
+                                deletePredio={deletePredio}
+                                linkTo={tipo === "admin" ? "/admin/manage-predio/edit" : "/user-int/manage-predio/edit"}
+                                error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                            />
                         </ContainerAdmin>}
 
                         {page === "editPredio" &&
@@ -444,20 +449,18 @@ function AdminUserIntPage({ tipo, page }) {
                                     predioToEdit={predioToEdit}
                                     setPredioToEdit={setPredioToEdit}
                                     btn_text="Editar"
-                                    error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                    success={success && <Message msg={msgSuccess} bgColor="#45CB67" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 
-                        {page === "fechaPagoDcto" &&
+                        {/* {page === "fechaPagoDcto" &&
                             <ContainerAdmin titulo="Definir Fechas de Pago - Descuentos" subtitulo="Gestionar Predios" subtitulo2="Definir Fechas de Pago - Descuentos">
-                                <FormFechaPagoDcto />  {/* Children */}
-                            </ContainerAdmin>}
+                                <FormFechaPagoDcto />  Children */}
+                            {/* </ContainerAdmin>} */}
 
-                        {page === "algoritmos" &&
+                        {/* {page === "algoritmos" &&
                             <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Ejecutar Algoritmos">
                                 <FormEjecutarAlgoritmo />  {/* Children */}
-                            </ContainerAdmin>}
+                            {/* </ContainerAdmin>} */}
 
                         <FooterAdmin />
                     </main>

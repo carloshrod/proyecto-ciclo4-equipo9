@@ -18,11 +18,16 @@ function TableUsersHeader({ headers, onSorting }) {
             <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
                 Ordenar<i class="bi bi-arrow-down-up" />
             </ReactTooltip>
+            <ReactTooltip id="toolTipInfo" place="top" type="dark" effect="solid">
+                Rol 2: Usuario Interno
+                <br />
+                Rol 3: Usuario Externo
+            </ReactTooltip>
             <tr>
                 {headers.map(({ name, field, sortable }) => (
                     <th
-                        data-tip data-for={(name === "Nombre" || name === "Email" ? "toolTipSort" : "")}
-                        className={name === "Nombre" || name === "Email" ? "pointer" : ""}
+                        data-tip data-for={(name === "Nombre" || name === "Email" ? "toolTipSort" : name === "Rol"  ? "toolTipInfo" : "")}
+                        className={name === "Nombre" || name === "Email" || name === "Rol" ? "pointer" : ""}
                         key={name}
                         onClick={() => sortable ? onSortingChange(field) : null}
                     >

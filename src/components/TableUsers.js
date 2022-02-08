@@ -142,7 +142,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
                                                     <>{!filter ? displayUsers : displayFilteredUsers}</>
                                                     : (
                                                         <tr>
-                                                            <td colSpan={6}><h2 className="text-center">No hay información</h2></td>
+                                                            <td colSpan={6}><h2 className="text-center">¡No hay información!</h2></td>
                                                         </tr>
                                                     )
                                                 }

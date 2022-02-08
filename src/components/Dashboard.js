@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Dashboard({ cantidadUsuarios, cantidadPredios }) {
-    
+function Dashboard({ cantidadUsuarios, cantidadPredios, error }) {
+
     return (
         <>
+            {error}
             {/* <!-- Left side columns --> */}
             <div className="col-lg-8">
                 <div className="row">
@@ -13,12 +14,13 @@ function Dashboard({ cantidadUsuarios, cantidadPredios }) {
                         <div className="card info-card sales-card">
 
                             <div className="filter">
-                                <a className="icon" href="/" data-bs-toggle="dropdown"><i className="bi bi-three-dots"></i></a>
+                                <a className="icon" href="/" data-bs-toggle="dropdown">
+                                    <i className="bi bi-three-dots"></i>
+                                </a>
                                 <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li className="dropdown-header text-start">
                                         <h6>Filter</h6>
                                     </li>
-
                                     <li><a className="dropdown-item" href="/">Today</a></li>
                                     <li><a className="dropdown-item" href="/">This Month</a></li>
                                     <li><a className="dropdown-item" href="/">This Year</a></li>
@@ -144,7 +146,7 @@ function Dashboard({ cantidadUsuarios, cantidadPredios }) {
 
                 </div>
             </div>{/* <!-- End Left side columns --> */}
-            
+
             {/* <!-- Right side columns --> */}
             <div className="col-lg-4">
 

@@ -139,7 +139,7 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
                                                     <>{!filter ? displayPredios : displayFilteredPredios}</>
                                                     : (
                                                         <tr>
-                                                            <td colSpan={7}><h2 className="text-center">No hay información</h2></td>
+                                                            <td colSpan={7}><h2 className="text-center">¡No hay información!</h2></td>
                                                         </tr>
                                                     )
                                                 }

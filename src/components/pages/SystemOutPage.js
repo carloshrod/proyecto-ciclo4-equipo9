@@ -7,16 +7,12 @@ import FormForgotPassword from '../forms/FormForgotPassword'
 import Footer from "../Footer";
 import BodyLandingPage from "../BodyLandingPage";
 import { helpHttp } from '../../helpers/helpHttp';
-import Message from '../Message';
+import { toast } from 'react-toastify'
 
 function SystemOutPage({ page }) {
 
   const [usersDb, setUsersDb] = useState([])
   const [userToRegister, setUserToRegister] = useState(null);
-  const [error, setError] = useState();
-  const [msgError, setMsgError] = useState();
-  const [success, setSuccess] = useState();
-  const [msgSuccess, setMsgSuccess] = useState();
 
   let api = helpHttp();
   let url = process.env.REACT_APP_API_URL;
@@ -33,19 +29,13 @@ function SystemOutPage({ page }) {
     };
 
     api.post(endpoint, options).then((res) => {
-      if (!res.err) {
+      if (res.data) {
         setUsersDb([...usersDb, res.data]);
-        setError(false)
-        setSuccess(true);
-        setMsgSuccess("Su cuenta fue creada exitosamente!!!");
-        setTimeout(() => setSuccess(false), 5000);
+        toast.success(res.msg);
       } else {
-        setSuccess(false);
-        setError(true);
-        setMsgError("Su cuenta no pudo ser creada. Intentelo más tarde!!!");
-        setTimeout(() => setError(false), 5000);    
+        toast.error(res.msg);
       }
-    });
+    })
   };
 
   return (
@@ -68,8 +58,6 @@ function SystemOutPage({ page }) {
             registerUser={registerUser}
             userToRegister={userToRegister}
             setUserToRegister={setUserToRegister}
-            error={error && <Message msg={msgError} bgColor="#dc3545"/>}
-            success={success && <Message msg={msgSuccess} bgColor="#45CB67"/>}
           />  {/* Children */}
         </Container>}
 
