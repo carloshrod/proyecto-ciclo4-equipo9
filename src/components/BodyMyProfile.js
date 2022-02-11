@@ -8,7 +8,7 @@ export const initialForm = {
     renewPassword: "",
 }
 
-function BodyMyProfile({ changePassword, setUserToEdit }) {
+function BodyMyProfile({ changePassword }) {
 
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
@@ -26,9 +26,14 @@ function BodyMyProfile({ changePassword, setUserToEdit }) {
         e.preventDefault();
 
         if (!form.currentPassword || !form.newPassword || !form.renewPassword) {
-            toast.error("Datos incompletos");
+            toast.error("Datos incompletos!!!");
             return;
         };
+
+        if (form.currentPassword === form.newPassword) {
+            toast.error("Ingrese una contraseña que no haya utilizado antes!!!")
+            return;
+        }
 
         if (form.newPassword !== form.renewPassword) {
             toast.error("Las contraseñas no coinciden!!!");

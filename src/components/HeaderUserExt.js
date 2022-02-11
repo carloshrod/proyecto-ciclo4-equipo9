@@ -1,16 +1,12 @@
 import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { logout } from '../tools/logout';
 
 function HeaderUserExt() {
 
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
-
-    function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-    }
 
     return (
         <>
@@ -18,7 +14,7 @@ function HeaderUserExt() {
             <header id="header" className="header d-flex align-items-center">
 
                 <div className="d-flex align-items-center justify-content-between m-2">
-                        <img src="/img/logo-gov-co.png" alt="" />
+                    <img src="/img/logo-gov-co.png" alt="" />
                 </div> {/*!-- End Logo -->*/}
 
                 <NavLink to="/user-ext-home" className={({ isActive }) => `nav-home-ue d-none d-lg-block ${isActive ? "active" : ""}`}>
@@ -73,7 +69,7 @@ function HeaderUserExt() {
 
                                 <li>
                                     <div className="dropdown-item d-flex align-items-center">
-                                        <button className="btn btn-100 btn-light btn-primary dditem-hov" type="button" onClick={logout}>
+                                        <button className="btn btn-100 btn-light btn-primary dditem-hov" type="button" onClick={() => logout()}>
                                             <i className="bi bi-box-arrow-right" />
                                             Cerrar Sesión
                                         </button>

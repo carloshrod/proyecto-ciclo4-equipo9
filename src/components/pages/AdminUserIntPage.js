@@ -20,6 +20,9 @@ import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { generatePassword } from '../../tools/generatePassword';
+import { logout } from '../../tools/logout';
 
 function AdminUserIntPage({ tipo, page }) {
 
@@ -35,7 +38,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     useEffect(() => {
         setLoading(true);
-        api.get(`${url}/users/listar`)
+        api.get(url + process.env.REACT_APP_API_LISTAR)
             .then((res) => {
                 if (!res.err) {
                     setError(null);
@@ -56,10 +59,11 @@ function AdminUserIntPage({ tipo, page }) {
     // ********** Crear Usuario **********
     const createUser = (user) => {
         user.rol = 2; // Rol 2 -> Usuario Interno
-        user.password = process.env.REACT_APP_USER_PASS;
+        user.password = generatePassword(8);
         user.estado = 1;
 
-        let endpoint = `${url}/users/guardar/`;
+        let endpoint = url + process.env.REACT_APP_API_GUARDAR;
+        console.log(endpoint);
         const token = localStorage.getItem("token");
         let options = {
             body: user,
@@ -85,7 +89,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     // ********** Editar Usuario **********
     const updateUser = (user) => {
-        let endpoint = `${url}/users/editar/`;
+        let endpoint = url + process.env.REACT_APP_API_EDITAR;
         const token = localStorage.getItem("token");
         let options = {
             body: user,
@@ -98,7 +102,7 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 if (res.estado === "ok") {
                     let newData = usersDb.map((e) => (e._id === user._id ? user : e));
-                    setUsersDb(newData);    
+                    setUsersDb(newData);
                     toast.success(res.msg)
                 } else {
                     toast.error(res.msg)
@@ -112,46 +116,50 @@ function AdminUserIntPage({ tipo, page }) {
 
     // ********** Eliminar Usuario **********
     const deleteUser = (nro_doc) => {
-        let isDelete = window.confirm(
-            `¿Estás seguro de eliminar el usuario con número de documento '${nro_doc}'?`
-        );
 
-        if (isDelete) {
-            let endpoint = `${url}/users/eliminar/${nro_doc}`;
-            const token = localStorage.getItem("token");
-            let options = {
-                headers: {
-                    "content-type": "application/json",
-                    "authorization": `Bearer ${token}`
-                },
-            };
+        Swal.fire({
+            html: `¿Estás seguro que quieres eliminar el usuario con número de documento <b>${nro_doc}</b>?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#007aff',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Sí, aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then(res => {
+            if (res.isConfirmed) {
+                let endpoint = url + process.env.REACT_APP_API_ELIMINAR + nro_doc;
+                const token = localStorage.getItem("token");
+                let options = {
+                    headers: {
+                        "content-type": "application/json",
+                        "authorization": `Bearer ${token}`
+                    },
+                };
 
-            api.del(endpoint, options).then((res) => {
-                if (!res.err) {
-                    if (res.estado === "ok") {
-                        let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
-                        setUsersDb(newData);
-                        toast.success(res.msg)    
+                api.del(endpoint, options).then((res) => {
+                    if (!res.err) {
+                        if (res.estado === "ok") {
+                            let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
+                            setUsersDb(newData);
+                            toast.success(res.msg)
+                        } else {
+                            toast.error(res.msg)
+                        }
                     } else {
                         toast.error(res.msg)
                     }
-                } else {
-                    toast.error(res.msg)
-                }
-            });
-        } else {
-            return;
-        }
+                });
+            }
+        })
     };
 
     // ********** Cambiar Contraseña **********
     const changePassword = (user) => {
-        user.password = user.newPassword;
-
-        let endpoint = `${url}/users/cambiar-password/`;
+        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         const token = localStorage.getItem("token");
         const payload = jwtDecode(token);
         user.nro_doc = payload.nro_doc;
+        user.password = user.newPassword;
 
         let options = {
             body: user,
@@ -163,8 +171,6 @@ function AdminUserIntPage({ tipo, page }) {
 
         api.post(endpoint, options).then((res) => {
             if (!res.err) {
-                let newData = usersDb.map((e) => (e.nro_doc === payload.nro_doc ? user : e));
-                setUsersDb(newData);
                 if (res.estado === "ok") {
                     toast.success(res.msg)
                 } else {
@@ -185,7 +191,7 @@ function AdminUserIntPage({ tipo, page }) {
 
     useEffect(() => {
         setLoading(true);
-        api.get(`${url}/predios/listar`)
+        api.get(url + process.env.REACT_APP_API_LISTAR_P)
             .then((res) => {
                 if (!res.error) {
                     setError(null);
@@ -210,7 +216,7 @@ function AdminUserIntPage({ tipo, page }) {
         predio.valor_predial = predio.valor_predio * 0.01;
         predio.codigo = "PD" + predio.codigo;
 
-        let endpoint = `${url}/predios/guardar/`;
+        let endpoint = url + process.env.REACT_APP_API_GUARDAR_P;
         const token = localStorage.getItem("token");
         let options = {
             body: predio,
@@ -238,7 +244,7 @@ function AdminUserIntPage({ tipo, page }) {
     const updatePredio = (predio) => {
         predio.valor_predial = predio.valor_predio * 0.01;
 
-        let endpoint = `${url}/predios/editar`;
+        let endpoint = url + process.env.REACT_APP_API_EDITAR_P;
         const token = localStorage.getItem("token");
 
         let options = {
@@ -266,32 +272,36 @@ function AdminUserIntPage({ tipo, page }) {
 
     // ********** Eliminar Predio **********
     const deletePredio = (codigo) => {
-        let isDelete = window.confirm(
-            `¿Estás seguro de eliminar el predio con codigo '${codigo}'?`
-        );
+        Swal.fire({
+            html: `¿Estás seguro que quieres eliminar el predio con código <b>${codigo}</b>?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#007aff',
+            cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Sí, aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then(res => {
+            if (res.isConfirmed) {
+                let endpoint = url + process.env.REACT_APP_API_ELIMINAR_P + codigo;
+                const token = localStorage.getItem("token");
+                let options = {
+                    headers: {
+                        "content-type": "application/json",
+                        "authorization": `Bearer ${token}`
+                    },
+                };
 
-        if (isDelete) {
-            let endpoint = `${url}/predios/eliminar/${codigo}`;
-            const token = localStorage.getItem("token");
-            let options = {
-                headers: {
-                    "content-type": "application/json",
-                    "authorization": `Bearer ${token}`
-                },
-            };
-
-            api.del(endpoint, options).then((res) => {
-                if (!res.err) {
-                    let newData = prediosDb.filter((el) => el.codigo !== codigo);
-                    setPrediosDb(newData);
-                    toast.success(res.msg);
-                } else {
-                    toast.error(res.msg);
-                }
-            });
-        } else {
-            return;
-        }
+                api.del(endpoint, options).then((res) => {
+                    if (!res.err) {
+                        let newData = prediosDb.filter((el) => el.codigo !== codigo);
+                        setPrediosDb(newData);
+                        toast.success(res.msg);
+                    } else {
+                        toast.error(res.msg);
+                    }
+                });
+            }
+        });
     };
     // ******************* End CRUD predios *******************
 
@@ -323,12 +333,6 @@ function AdminUserIntPage({ tipo, page }) {
 
     // Toggle-Sidebar:
     const [inactive, setInactive] = useState(false);
-
-    // Cerrar sesión:
-    function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-    }
 
     return (
         <>
@@ -455,12 +459,12 @@ function AdminUserIntPage({ tipo, page }) {
                         {/* {page === "fechaPagoDcto" &&
                             <ContainerAdmin titulo="Definir Fechas de Pago - Descuentos" subtitulo="Gestionar Predios" subtitulo2="Definir Fechas de Pago - Descuentos">
                                 <FormFechaPagoDcto />  Children */}
-                            {/* </ContainerAdmin>} */}
+                        {/* </ContainerAdmin>} */}
 
                         {/* {page === "algoritmos" &&
                             <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Ejecutar Algoritmos">
                                 <FormEjecutarAlgoritmo />  {/* Children */}
-                            {/* </ContainerAdmin>} */}
+                        {/* </ContainerAdmin>} */}
 
                         <FooterAdmin />
                     </main>
