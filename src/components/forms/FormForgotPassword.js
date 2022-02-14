@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function FormForgotPassword() {
+export const initialForm = {
+  email: ""
+}
+
+function FormForgotPassword({ resetPassword }) {
+  const [form, setForm] = useState(initialForm)
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    resetPassword(form);
+  }
+
+
   return (
     <>
       <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -17,19 +37,19 @@ function FormForgotPassword() {
                     <p className="text-center small">Ingresa tu correo electrónico a continuación y te enviaremos un enlace para restablecer tu contraseña</p>
                   </div>
 
-                  <form className="row g-3 needs-validation justify-content-center" novalidate>
+                  <form className="row g-3 needs-validation justify-content-center" onSubmit={handleSubmit} noValidate>
 
                     <div className="col-9">
-                      <label for="yourUsername" className="form-label">Correo Electrónico</label>
+                      <label htmlFor="yourUsername" className="form-label">Correo Electrónico</label>
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-envelope-fill"></i></span>
-                        <input type="email" name="email" className="form-control" id="yourEmail" required/>
+                        <input type="email" name="email" className="form-control" id="yourEmail" onChange={handleChange} value={form.email} required />
                         <div className="invalid-feedback">Por favor, ingresa un correo electrónico válido!</div>
                       </div>
                     </div>
 
                     <div className="col-7">
-                      <button className="btn btn-primary rounded-pill w-100" type="submit">Restablecer Contraseña</button>
+                      <button className="btn btn-primary rounded-pill w-100" type="submit">Recuperar Contraseña</button>
                     </div>
                   </form>
                 </div>

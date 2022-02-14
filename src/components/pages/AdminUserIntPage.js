@@ -22,7 +22,7 @@ import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { generatePassword } from '../../tools/generatePassword';
-import { logout } from '../../tools/logout';
+import { logout } from '../../auth/logout';
 
 function AdminUserIntPage({ tipo, page }) {
 
@@ -155,12 +155,10 @@ function AdminUserIntPage({ tipo, page }) {
 
     // ********** Cambiar Contraseña **********
     const changePassword = (user) => {
-        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         const token = localStorage.getItem("token");
         const payload = jwtDecode(token);
         user.nro_doc = payload.nro_doc;
-        user.password = user.newPassword;
-
+        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         let options = {
             body: user,
             headers: {
@@ -173,6 +171,9 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 if (res.estado === "ok") {
                     toast.success(res.msg)
+                    setTimeout(() => {
+                        logout();
+                    }, 5000);
                 } else {
                     toast.error(res.msg)
                 }

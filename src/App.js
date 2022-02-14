@@ -16,7 +16,8 @@ function App() {
           <Route exact path="/" element={<SystemOutPage page="landingPage" />} />
           <Route path="/login" element={<SystemOutPage page="login" />} />
           <Route path="/register" element={<SystemOutPage page="register" />} />
-          <Route path="/forgot-password" element={<SystemOutPage page="forgotPassword" />} />
+          <Route path="/reset-password" element={<SystemOutPage page="resetPassword" />} />
+          <Route path="/reset-password/:token" element={<SystemOutPage page="newPassword" />} />
           {/* Fin - Fuera del Sistema */}
 
           {/* Administrador */}

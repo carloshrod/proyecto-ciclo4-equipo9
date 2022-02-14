@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { logout } from '../tools/logout';
+import { logout } from '../auth/logout';
 
 function HeaderUserInt({ btn }) {
 

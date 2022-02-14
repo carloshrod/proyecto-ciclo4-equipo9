@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { logout } from '../tools/logout';
+import { logout } from '../auth/logout';
 
 function HeaderUserExt() {
 
