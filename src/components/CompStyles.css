@@ -112,6 +112,22 @@
   cursor: pointer;
 }
 
+.errorMsg{
+  font-weight: bold;
+  font-size: 10px;
+  padding: 3px;
+  color: red;
+  display: none;
+}
+  
+input:invalid[focused="true"]{
+  border: 1px solid rgba(255, 1, 1, 0.25);
+}
+
+input:invalid[focused="true"] ~ .errorMsg{
+  display: block;
+}
+
 /* Loader: */
 .lds-ring {
   display: inline-block;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, linkTo }) => {
-    let { codigo, nom_prop, doc_prop, direccion, barrio } = predio || {};
+    let { codigo, nom_prop, doc_prop, direccion_predio, barrio } = predio || {};
 
     return (
         <tr>
@@ -11,7 +11,7 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
             <td>{codigo}</td>
             <td>{nom_prop}</td>
             <td>{doc_prop}</td>
-            <td>{direccion}</td>
+            <td>{direccion_predio}</td>
             <td>{barrio}</td>
             <td align="center">
                 <Link to={linkTo}>

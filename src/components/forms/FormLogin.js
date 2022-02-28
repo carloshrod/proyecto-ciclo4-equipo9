@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import Message from '../Message';
 import { toast } from 'react-toastify';
 
 export const initialForm = {
@@ -8,7 +7,7 @@ export const initialForm = {
   password: "",
 }
 
-function FormLogin({ login, error, msgError }) {
+function FormLogin({ login }) {
   const [form, setForm] = useState(initialForm)
 
   const handleInputChange = (e) => {
@@ -35,14 +34,12 @@ function FormLogin({ login, error, msgError }) {
         <div className="container">
           <div className="row justify-content-center">
 
-            {error && <Message msg={msgError} bgColor="#dc3545" />}
-
             <div className="col-lg-5 col-md-7 d-flex flex-column align-items-center justify-content-center">
               <div className="card mb-3 form-1">
                 <div className="card-body">
                   <div className="pt-4 pb-2">
-                    <h5 className="card-title text-center pb-0 fs-4">Bienvenido</h5>
-                    <p className="text-center small">Ingresa tu usuario y tu contraseña</p>
+                    <h5 className="card-title text-center pb-0 fs-4">¡Bienvenido!</h5>
+                    <p className="text-center small">Para iniciar sesión, ingresa tu usuario y tu contraseña</p>
                   </div>
                   {/* ******************** Form Login ******************** */}
                   <form className="row g-3 needs-validation justify-content-center" onSubmit={handleSubmit} noValidate>
@@ -52,8 +49,7 @@ function FormLogin({ login, error, msgError }) {
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-person-fill"></i></span>
                         <input type="email" name="email" className="form-control" id="idUsuario" onChange={handleInputChange} value={form.email}  required />
-                        <div className="invalid-feedback">Por favor, ingresa tu usuario!</div>
-                      </div>
+                        </div>
                     </div>
 
                     <div className="col-10">
@@ -61,7 +57,6 @@ function FormLogin({ login, error, msgError }) {
                       <div className="input-group has-validation">
                         <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
                         <input type="password" name="password" className="form-control" id="idPassword" onChange={handleInputChange} value={form.password} required />
-                        <div className="invalid-feedback">Por favor, ingresa tu contraseña!</div>
                       </div>
                     </div>
 

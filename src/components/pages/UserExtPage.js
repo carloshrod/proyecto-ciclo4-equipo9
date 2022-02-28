@@ -10,8 +10,14 @@ import Footer from "../Footer";
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
+import { helpHttp } from '../../helpers/helpHttp';
+import { toast } from 'react-toastify';
+import { logout } from '../../auth/logout';
 
 function UserExtPage({ page }) {
+
+    let api = helpHttp();
+    let url = process.env.REACT_APP_API_URL
 
     // Autenticación por rol:
     const tokenIsOk = () => {
@@ -22,13 +28,39 @@ function UserExtPage({ page }) {
         }
     }
 
-    const rol = tokenIsOk();
+    const changePassword = (user) => {
+        const token = localStorage.getItem("token");
+        const payload = jwtDecode(token);
+        user.nro_doc = payload.nro_doc;
+        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
+        let options = {
+            body: user,
+            headers: {
+                "content-type": "application/json",
+                "authorization": `Bearer ${token}`
+            }
+        };
 
-    // Cerrar sesión:
-    function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
-    }
+        api.post(endpoint, options).then((res) => {
+            if (!res.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
+            if (!res.err) {
+                if (res.estado === "ok") {
+                    toast.success(res.msg)
+                    setTimeout(() => {
+                        logout();
+                    }, 5000);
+                } else {
+                    toast.error(res.msg)
+                }
+            } else {
+                toast.error(res.msg)
+            }
+        });
+    };
+
+    const rol = tokenIsOk();
 
     return (
         <>
@@ -44,7 +76,9 @@ function UserExtPage({ page }) {
 
                         {page === "myProfile" &&
                             <Container titulo="Mi Perfil" className="container container-center center-v min-vh-100">
-                                <BodyMyProfile />  {/* Children */}
+                                <BodyMyProfile
+                                    changePassword={changePassword}
+                                />  {/* Children */}
                             </Container>}
 
                         {page === "pagar" &&
@@ -67,7 +101,6 @@ function UserExtPage({ page }) {
                         <Footer />
                     </main>
                 </>
-
                 :
                 <>
                     {logout()}

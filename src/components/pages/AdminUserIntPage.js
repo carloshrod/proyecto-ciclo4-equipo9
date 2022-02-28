@@ -74,6 +74,9 @@ function AdminUserIntPage({ tipo, page }) {
         };
 
         api.post(endpoint, options).then((res) => {
+            if (!res.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
             if (!res.err) {
                 if (res.data) {
                     setUsersDb([...usersDb, res.data]);
@@ -99,6 +102,9 @@ function AdminUserIntPage({ tipo, page }) {
             }
         };
         api.post(endpoint, options).then((res) => {
+            if (!res.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
             if (!res.err) {
                 if (res.estado === "ok") {
                     let newData = usersDb.map((e) => (e._id === user._id ? user : e));
@@ -137,6 +143,9 @@ function AdminUserIntPage({ tipo, page }) {
                 };
 
                 api.del(endpoint, options).then((res) => {
+                    if (!res.estado) {
+                        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+                    }
                     if (!res.err) {
                         if (res.estado === "ok") {
                             let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
@@ -168,6 +177,9 @@ function AdminUserIntPage({ tipo, page }) {
         };
 
         api.post(endpoint, options).then((res) => {
+            if (!res.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
             if (!res.err) {
                 if (res.estado === "ok") {
                     toast.success(res.msg)
@@ -214,8 +226,9 @@ function AdminUserIntPage({ tipo, page }) {
     // ********** Crear Predio **********
     const createPredio = (predio) => {
         predio.estado = 1;
-        predio.valor_predial = predio.valor_predio * 0.01;
-        predio.codigo = "PD" + predio.codigo;
+        let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
+        let vrPredial = vrPredio * 0.01;
+        predio.valor_predial = Math.round(vrPredial);
 
         let endpoint = url + process.env.REACT_APP_API_GUARDAR_P;
         const token = localStorage.getItem("token");
@@ -228,6 +241,9 @@ function AdminUserIntPage({ tipo, page }) {
         };
 
         api.post(endpoint, options).then((res) => {
+            if (!res.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
             if (!res.err) {
                 if (res.data) {
                     setPrediosDb([...prediosDb, res.data]);
@@ -243,7 +259,9 @@ function AdminUserIntPage({ tipo, page }) {
 
     // ********** Editar Predio **********
     const updatePredio = (predio) => {
-        predio.valor_predial = predio.valor_predio * 0.01;
+        let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
+        let vrPredial = vrPredio * 0.01;
+        predio.valor_predial = Math.round(vrPredial);
 
         let endpoint = url + process.env.REACT_APP_API_EDITAR_P;
         const token = localStorage.getItem("token");
@@ -257,6 +275,9 @@ function AdminUserIntPage({ tipo, page }) {
         };
 
         api.post(endpoint, options).then((res) => {
+            if (!res.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
             if (!res.err) {
                 let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
@@ -293,6 +314,9 @@ function AdminUserIntPage({ tipo, page }) {
                 };
 
                 api.del(endpoint, options).then((res) => {
+                    if (!res.estado) {
+                        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+                    }
                     if (!res.err) {
                         let newData = prediosDb.filter((el) => el.codigo !== codigo);
                         setPrediosDb(newData);
@@ -306,14 +330,16 @@ function AdminUserIntPage({ tipo, page }) {
     };
     // ******************* End CRUD predios *******************
 
+    // Contar usuarios por rol:
     const countUsers = () => {
         if (usersDb) {
             const cantUsuarios = a => usersDb.filter((e) =>
-                (e.rol === a)).length; //cuenta los usuarios segun el rol}
+                (e.rol === a)).length;
             return cantUsuarios;
         }
     }
 
+    // Contar predios:
     const countPredios = () => {
         if (prediosDb) {
             const cantPredios = prediosDb.length;
@@ -381,7 +407,7 @@ function AdminUserIntPage({ tipo, page }) {
                             <ContainerAdmin titulo="Mi Perfil" linkTo="#" >
                                 <BodyMyProfile
                                     changePassword={changePassword}
-                                    setUserToEdit={setUserToEdit} />  {/* Children */}
+                                />  {/* Children */}
                             </ContainerAdmin>}
 
                         {page === "createUser" &&

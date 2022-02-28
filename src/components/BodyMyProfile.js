@@ -1,6 +1,6 @@
+import React from 'react';
 import jwtDecode from 'jwt-decode';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import FormChangePassword from './forms/FormChangePassword'
 
 export const initialForm = {
     currentPassword: "",
@@ -12,41 +12,6 @@ function BodyMyProfile({ changePassword }) {
 
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
-
-    const [form, setForm] = useState(initialForm);
-
-    const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!form.currentPassword || !form.newPassword || !form.renewPassword) {
-            toast.error("Datos incompletos!!!");
-            return;
-        };
-
-        if (form.currentPassword === form.newPassword) {
-            toast.error("Ingrese una contraseña que no haya utilizado antes!!!")
-            return;
-        }
-
-        if (form.newPassword !== form.renewPassword) {
-            toast.error("Las contraseñas no coinciden!!!");
-            return;
-        }
-
-        changePassword(form);
-        handleReset();
-    };
-
-    const handleReset = (e) => {
-        setForm(initialForm);
-    };
 
     return (
         <>
@@ -71,9 +36,7 @@ function BodyMyProfile({ changePassword }) {
                     <div className="col-12 col-md-8 col-xl-8">
                         <div className="card">
                             <div className="card-body pt-3">
-                                {/* <!-- Bordered Tabs --> */}
                                 <ul className="nav nav-tabs nav-tabs-bordered">
-
                                     <li className="nav-item">
                                         <button className="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Vista General</button>
                                     </li>
@@ -81,10 +44,9 @@ function BodyMyProfile({ changePassword }) {
                                     <li className="nav-item">
                                         <button className="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Cambiar Contraseña</button>
                                     </li>
-
                                 </ul>
-                                <div className="tab-content pt-3">
 
+                                <div className="tab-content pt-3">
                                     <div className="tab-pane fade show active profile-overview" id="profile-overview">
                                         <h5 className="card-title">Detalles del Perfil</h5>
 
@@ -115,36 +77,9 @@ function BodyMyProfile({ changePassword }) {
                                     </div>
 
                                     <div className="tab-pane fade pt-3" id="profile-change-password">
-                                        {/* <!-- Change Password Form --> */}
-                                        <form onSubmit={handleSubmit} noValidate>
-                                            <div className="row mb-3 justify-content-center">
-                                                <label htmlFor="currentPassword" className="col-md-5 col-lg-4 col-form-label">Contraseña Actual</label>
-                                                <div className="col-md-5 col-lg-6">
-                                                    <input name="currentPassword" type="password" className="form-control" id="currentPassword" onChange={handleChange} value={form.currentPassword} />
-                                                </div>
-                                            </div>
-
-                                            <div className="row mb-3 justify-content-center">
-                                                <label htmlFor="newPassword" className="col-md-5 col-lg-4 col-form-label">Contraseña Nueva</label>
-                                                <div className="col-md-5 col-lg-6">
-                                                    <input name="newPassword" type="password" className="form-control" id="newPassword" onChange={handleChange} value={form.newPassword} />
-                                                </div>
-                                            </div>
-
-                                            <div className="row mb-3 justify-content-center">
-                                                <label htmlFor="renewPassword" className="col-md-5 col-lg-4 col-form-label">Reingresar Contraseña Nueva</label>
-                                                <div className="col-md-5 col-lg-6">
-                                                    <input name="renewPassword" type="password" className="form-control" id="renewPassword" onChange={handleChange} value={form.renewPassword} />
-                                                </div>
-                                            </div>
-
-                                            <div className="text-center">
-                                                <button type="submit" className="btn btn-primary rounded-pill">Cambiar Contraseña</button>
-                                            </div>
-                                        </form>{/* <!-- End Change Password Form --> */}
+                                        <FormChangePassword changePassword={changePassword} />
                                     </div>
                                 </div>
-                                {/* {/* <!-- End Bordered Tabs --> */}
                             </div>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useSearchParams } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
 import TablePrediosHeader from "./TablePrediosHeader";
 import TablePrediosRow from "./TablePrediosRow";
 
@@ -132,6 +133,9 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
                                     </div>
 
                                     <div className="dataTable-container mt-2">
+                                        <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
+                                            Ordenar<i className="bi bi-arrow-down-up" />
+                                        </ReactTooltip>
                                         <table className="table datatable table-hover text-center">
                                             <TablePrediosHeader headers={headers} onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>

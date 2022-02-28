@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import ReactTooltip from 'react-tooltip';
 
 function TableUsersHeader({ headers, onSorting }) {
-
     const [sortingField, setSortingField] = useState("");
     const [sortingOrder, setSortingOrder] = useState("asc");
 
@@ -15,14 +13,6 @@ function TableUsersHeader({ headers, onSorting }) {
 
     return (
         <thead>
-            <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
-                Ordenar<i class="bi bi-arrow-down-up" />
-            </ReactTooltip>
-            <ReactTooltip id="toolTipInfo" place="top" type="dark" effect="solid">
-                Rol 2: Usuario Interno
-                <br />
-                Rol 3: Usuario Externo
-            </ReactTooltip>
             <tr>
                 {headers.map(({ name, field, sortable }) => (
                     <th

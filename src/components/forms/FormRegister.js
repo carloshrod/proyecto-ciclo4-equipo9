@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify'
+import { useFormRegister } from '../../hooks/useFormRegister';
+import { inputUsersRegister } from '../../tools/inputProps';
+import InputForm from '../InputForm';
+import Message from '../Message';
 
 export const initialForm = {
   nombres: "",
@@ -13,122 +16,47 @@ export const initialForm = {
   direccion: "",
 };
 
-function FormRegister({ registerUser, userToRegister, setUserToRegister}) {
+function FormRegister({ registerUser, userToRegister, setUserToRegister, error, msgError }) {
 
-  const [form, setForm] = useState(initialForm);
   const [terms, setTerms] = useState(false);
 
-  useEffect(() => {
-    setForm(initialForm);
-  }, [userToRegister]);
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!form.nombres || !form.apellidos || !form.tipo_doc || !form.nro_doc || !form.email || !form.password || !form.telefono || !form.direccion) {
-      toast.error("Datos incompletos!!!");
-      return;
-    };
-    if (!terms) {
-      toast.error("Para crear tu cuenta, debes aceptar los términos y condiciones!!!");
-      return;
-    };
-    registerUser(form);
-    handleReset();
-  };
-
-  const handleReset = (e) => {
-    setForm(initialForm);
-    setUserToRegister(null);
-  };
+  const {
+    form,
+    reset,
+    handleChange,
+    handleSubmit
+  } = useFormRegister(initialForm, registerUser, userToRegister, setUserToRegister, terms)
 
   return (
     <>
       <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
         <div className="container pt-2">
           <div className="row justify-content-center">
+
+          {error && <Message msg={msgError} bgColor="#dc3545" />}
+
             <div className="col-lg-10 col-md-8 d-flex flex-column align-items-center justify-content-center">
               <div className="card form-1">
                 <div className="card-body">
                   <div className="pt-4 pb-2">
-                    <h5 className="card-title text-center pb-0 fs-4">Crea una cuenta</h5>
+                    <h5 className="card-title text-center pb-0 fs-4">¡Registrate!</h5>
                     <p className="text-center small">Ingresa tu información personal para crear tu cuenta</p>
                   </div>
 
-                  <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
-                    <div className="col-6">
-                      <label htmlFor="yourName" className="form-label">Nombres</label>
-                      <input type="text" name="nombres" className="form-control" id="yourName" onChange={handleChange} value={form.nombres} required />
-                      <div className="invalid-feedback">Por favor, ingresa tus nombres!</div>
-                    </div>
+                  <form className="row g-3 needs-validation mt-1" onSubmit={handleSubmit} noValidate>
 
-                    <div className="col-6">
-                      <label htmlFor="yourLastname" className="form-label">Apellidos</label>
-                      <input type="text" name="apellidos" className="form-control" id="yourLastname" onChange={handleChange} value={form.apellidos} required />
-                      <div className="invalid-feedback">Por favor, ingresa tus apellidos!</div>
-                    </div>
+                    {inputUsersRegister.map((input) => (
+                      <InputForm
+                        key={input.id}
+                        type={input.type}
+                        {...input}
+                        value={form[input.name]}
+                        onChange={handleChange}
+                        reset={reset}
+                      />
+                    ))}
 
-                    <div className="col-6">
-                      <label htmlFor="idTipoDoc" className="form-label">Tipo de Documento</label>
-                      <select className="form-select" name="tipo_doc" aria-label="Default select example" id="idTipoDoc" onChange={handleChange} value={form.tipo_doc} required>
-                        <option defaultValue>Seleccionar</option>
-                        <option value="1">CC</option>
-                        <option value="2">CE</option>
-                        <option value="3">Pasaporte</option>
-                      </select>
-                      <div className="invalid-feedback"></div>
-                    </div>
-
-                    <div className="col-6">
-                      <label htmlFor="yourUsername" className="form-label">Nro. Documento</label>
-                      <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-fingerprint"></i></span>
-                        <input type="number" name="nro_doc" className="form-control" id="yourUsername" onChange={handleChange} value={form.nro_doc} required />
-                        <div className="invalid-feedback">Por favor, ingresa tu usuario!</div>
-                      </div>
-                    </div>
-
-                    <div className="col-6">
-                      <label htmlFor="yourEmail" className="form-label">Correo Electrónico</label>
-                      <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-envelope-fill"></i></span>
-                        <input type="email" name="email" className="form-control" id="yourEmail" onChange={handleChange} value={form.email} required />
-                        <div className="invalid-feedback">Por favor, ingresa un correo electrónico válido!</div>
-                      </div>
-                    </div>
-
-                    <div className="col-6">
-                      <label htmlFor="yourPassword" className="form-label">Contraseña</label>
-                      <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
-                        <input type="password" name="password" className="form-control" id="yourPassword" onChange={handleChange} value={form.password} required />
-                        <div className="invalid-feedback">Por favor ingresa tu contraseña!</div>
-                      </div>
-                    </div>
-
-                    <div className="col-6">
-                      <label htmlFor="yourPhone" className="form-label">Teléfono</label>
-                      <div className="input-group has-validation">
-                        <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-telephone-fill"></i></span>
-                        <input type="number" name="telefono" className="form-control" id="yourPhone" onChange={handleChange} value={form.telefono} required />
-                        <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
-                      </div>
-                    </div>
-
-                    <div className="col-6">
-                      <label htmlFor="yourAdress" className="form-label">Dirección</label>
-                      <input type="text" name="direccion" className="form-control" id="yourAdress" onChange={handleChange} value={form.direccion} required />
-                      <div className="invalid-feedback">Por favor, ingresa tu número de documento!</div>
-                    </div>
-
-                    <div className="col-12">
+                    <div className="col-12 ms-5">
                       <div className="form-check">
                         <input className="form-check-input" name="terminos" type="checkbox" id="acceptTerms" onChange={(e) => setTerms(e.target.checked)} required />
                         <label className="form-check-label" htmlFor="acceptTerms">Estoy de acuerdo y acepto los <a href="https://www.mintic.gov.co/portal/715/articles-62124_politica_tratamiento_datos_personales_u20200917.pdf" target="_blank" rel="noreferrer">términos y condiciones</a></label>

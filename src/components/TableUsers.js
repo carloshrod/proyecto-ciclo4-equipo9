@@ -135,6 +135,14 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
                                     </div>
 
                                     <div className="dataTable-container">
+                                        <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
+                                            Ordenar<i className="bi bi-arrow-down-up" />
+                                        </ReactTooltip>
+                                        <ReactTooltip id="toolTipInfo" place="top" type="dark" effect="solid">
+                                            Rol 2: Usuario Interno
+                                            <br />
+                                            Rol 3: Usuario Externo
+                                        </ReactTooltip>
                                         <table className="table datatable table-hover text-center">
                                             <TableUsersHeader headers={headers} onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
