@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const initialForm = {
-    codigo: "",
+    datos: "",
 };
 
 
@@ -20,7 +20,7 @@ function SearchForm({ handleSearch, text }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!form.codigo) {
+        if (!form.datos) {
             alert("Datos Incompletos");
             //setIsDisabled(true);
             return;
@@ -33,14 +33,14 @@ function SearchForm({ handleSearch, text }) {
 
     return (
         <>
-            <div className="card col-8 m-auto mt-1 mb-4">
+            <div className="card col-12 col-md-10 col-lg-8 col-xl-6 m-auto mt-3 mb-4 d-flex align-items-center">
                 <div className="card-body">
                     <div className="search-bar mb-3">
                         <h5 className="card-title">Buscar Predios</h5>
                         <form onSubmit={handleSubmit} className="search-form d-flex align-items-center">
-                            <label htmlFor="idCodigo">{text}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                            <input className="form-control w-50" type="text" name="codigo" id="idCodigo" onChange={handleChange} value={form.codigo} />
-                            <input className="btn btn-primary m-2" type="submit" value="Buscar" />
+                            <label htmlFor="idDatos">{text}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            <input className="col-6 form-control w-50" type="text" name="datos" id="idDatos" onChange={handleChange} value={form.datos} />
+                            <input className="btn btn-primary ms-4" type="submit" value="Buscar" />
                         </form>
                     </div>
                 </div>

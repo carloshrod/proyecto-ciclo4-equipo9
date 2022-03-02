@@ -48,14 +48,6 @@
   margin-top: 75px;
 }
 
-.center-v {
-  align-items: center;
-}
-
-.container-center {
-  display: flex;
-}
-
 .container-bg {
   background-color: #dbf5db;
 }

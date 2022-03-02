@@ -52,7 +52,7 @@ function FormConvenio() {
                         </div>
 
                         <div className="col-7 col-sm-5 col-md-5 col-xl-6 mt-3 mb-3">
-                            <label htmlFor="yourVrCuotas" className="form-label">Valor de cuotas:</label>
+                            <label htmlFor="yourVrCuotas" className="form-label">Valor de cuota:</label>
                         </div>
 
                         <div className="col-5 col-xl-4 mt-3 mb-3">
@@ -62,7 +62,7 @@ function FormConvenio() {
                         </div>
 
                         <div className="col-4 m-auto mt-3 mb-3">
-                            <button className="btn btn-primary rounded-pill w-100" type="submit">Enviar</button>
+                            <button className="btn btn-primary rounded-pill w-100" type="submit">Solicitar</button>
                         </div>
                     </form>
                 </div>

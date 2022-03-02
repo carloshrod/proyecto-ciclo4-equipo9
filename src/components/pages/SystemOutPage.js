@@ -96,19 +96,19 @@ function SystemOutPage({ page }) {
       <HeaderSystemOut />
 
       {page === "landingPage" &&
-        <Container titulo="Plataforma de Gestión Catastral" className="container container-center center-v min-vh-100">
+        <Container titulo="Plataforma de Gestión Catastral" className="container d-flex align-items-center min-vh-100 mt-5">
           <BodyLandingPage />  {/* Children */}
         </Container>}
 
       {page === "login" &&
-        <Container className="container container-center center-v min-vh-100">
+        <Container className="container d-flex align-items-center min-vh-100">
           <FormLogin
             login={login}
           />  {/* Children */}
         </Container>}
 
       {page === "register" &&
-        <Container className="container container-center center-v min-vh-100">
+        <Container className="container d-flex align-items-center min-vh-100">
           <FormRegister
             registerUser={registerUser}
             userToRegister={userToRegister}
@@ -117,14 +117,14 @@ function SystemOutPage({ page }) {
         </Container>}
 
       {page === "resetPassword" &&
-        <Container className="container container-center center-v min-vh-100">
+        <Container className="container d-flex align-items-center min-vh-100">
           <FormForgotPassword
             resetPassword={resetPassword}
           />  {/* Children */}
         </Container>}
 
       {page === "newPassword" &&
-        <Container className="container container-center center-v min-vh-100">
+        <Container className="container d-flex align-items-center min-vh-100">
           <FormNewPassword
             newPassword={newPassword}
           />  {/* Children */}

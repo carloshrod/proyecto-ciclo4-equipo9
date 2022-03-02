@@ -9,7 +9,7 @@ function BodyLandingPage() {
                 <img src="img/logo-escudo-cauca.png" alt="" />
             </div>
 
-            <section className="section mt-5 mb-4">
+            <div className="container mt-5 mb-4">
                 <div className="row">
                     <div className="col-lg-6">
                         <div className="card card-home">
@@ -27,7 +27,7 @@ function BodyLandingPage() {
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </>
     )
 }
