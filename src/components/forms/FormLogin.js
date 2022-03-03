@@ -20,7 +20,6 @@ function FormLogin({ login }) {
   }
 
   const handleShow = (e) => {
-    e.preventDefault();
     setShowPassword(!showPassword)
   }
 
@@ -63,7 +62,7 @@ function FormLogin({ login }) {
                     <div className="input-group has-validation">
                       <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
                       <input type={showPassword ? "text" : "password"} name="password" className="form-control" id="idPassword" onChange={handleInputChange} value={form.password} required />
-                      <button className="input-group-text" onClick={handleShow}>
+                      <button className="btn-show-pass input-group-text" type="button" onMouseOver={handleShow} onMouseOut={handleShow}>
                         <i className="bi bi-eye-fill"></i>
                       </button>
                     </div>

@@ -10,7 +10,6 @@ const InputForm = ({ id, name, type, logo, errorMessage, label, onChange, reset,
     };
 
     const handleShow = (e) => {
-        e.preventDefault();
         setShowPassword(!showPassword)
     }
 
@@ -61,7 +60,7 @@ const InputForm = ({ id, name, type, logo, errorMessage, label, onChange, reset,
                                     focused={focused.toString()}
                                 />
                                 {type === "password" &&
-                                    <button className="input-group-text" onClick={handleShow}>
+                                    <button className="btn-show-pass input-group-text" type="button" onMouseOver={handleShow} onMouseOut={handleShow}>
                                         <i className="bi bi-eye-fill"></i>
                                     </button>
                                 }

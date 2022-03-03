@@ -120,6 +120,10 @@ input:invalid[focused="true"] ~ .errorMsg{
   display: block;
 }
 
+.btn-show-pass:hover {
+  color: #404652
+}
+
 /* Loader: */
 .lds-ring {
   display: inline-block;
