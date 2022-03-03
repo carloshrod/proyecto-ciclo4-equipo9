@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
-const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
+const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData, userRol }) => {
     let { nombres, apellidos, nro_doc, email, rol } = user || {};
 
     return (
@@ -13,12 +13,16 @@ const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
             <td>{email}</td>
             <td>{rol}</td>
             <td align="center">
-                <Link to="/admin/manage-users/edit">
+                <Link to={userRol !== 1 ? "#" : "/admin/manage-users/edit"}>
                     <ReactTooltip id="toolTipEdit" place="top" type="dark" effect="solid">
                         Editar usuario
                     </ReactTooltip>
-                    <button data-tip data-for="toolTipEdit" type="button" className="btn btn-primary" onClick={() => setDataToEdit(user)}>
-                        <i className="bi bi-pencil-fill"/>
+                    <button
+                        data-tip data-for="toolTipEdit"
+                        type="button" className="btn btn-primary"
+                        disabled={userRol !== 1 ? true : false}
+                        onClick={() => setDataToEdit(user)}>
+                        <i className="bi bi-pencil-fill" />
                     </button>
                 </Link>
                 &nbsp;
@@ -26,8 +30,13 @@ const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
                     <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
                         Eliminar usuario
                     </ReactTooltip>
-                    <button data-tip data-for="toolTipDelete" type="button" className="btn btn-danger" onClick={() => deleteData(nro_doc)}>
-                        <i className="bi bi-trash"/>
+                    <button
+                        data-tip data-for="toolTipDelete"
+                        type="button"
+                        className="btn btn-danger"
+                        disabled={userRol === 2 ? true : false}
+                        onClick={() => deleteData(nro_doc)}>
+                        <i className="bi bi-trash" />
                     </button>
                 </Link>
             </td>

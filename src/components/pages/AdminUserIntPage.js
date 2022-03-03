@@ -375,7 +375,7 @@ function AdminUserIntPage({ tipo, page }) {
                                     item1={<SidebarItem linkTo="/admin/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
                                     item2={<SidebarItem linkTo="/admin/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
                                     item3={<SidebarItem linkTo="/admin/create-user" icono="bi bi-person-plus-fill" titulo="Crear Usuarios" />}
-                                    item4={<SidebarItem linkTo="/admin/manage-users" icono="bi bi-pencil-fill" titulo="Gestionar Usuarios" />}
+                                    item4={<SidebarItem linkTo="/admin/manage-users" icono="bi bi-people-fill" titulo="Gestionar Usuarios" />}
                                     item5={<SidebarItem linkTo="/admin/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
                                     item6={<SidebarItem linkTo="/admin/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
                                 />
@@ -388,8 +388,9 @@ function AdminUserIntPage({ tipo, page }) {
                                     logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
                                     item1={<SidebarItem linkTo="/user-int/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
                                     item2={<SidebarItem linkTo="/user-int/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
+                                    item4={<SidebarItem linkTo="/user-int/manage-users" icono="bi bi-people-fill" titulo="Gestionar Usuarios" />}
                                     item5={<SidebarItem linkTo="/user-int/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
-                                    item6={<SidebarItem linkTo="/user-int/manage-predio" icono="bi bi-pencil-fill" titulo="Gestionar Predios" />}
+                                    item6={<SidebarItem linkTo="/user-int/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
                                 />
                             </>
                         }
@@ -429,6 +430,7 @@ function AdminUserIntPage({ tipo, page }) {
                                     setUserToEdit={setUserToEdit}
                                     deleteUser={deleteUser}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
+                                    userRol={rol}
                                 />
                             </ContainerAdmin>}
 

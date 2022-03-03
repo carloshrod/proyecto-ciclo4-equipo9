@@ -36,7 +36,8 @@ function App() {
           {/* Usuario Interno */}
           <Route path="/user-int/dashboard" element={<AdminUserIntPage page="home" />} />  {/* Home - Usuario Interno */}
           <Route path="/user-int/my-profile" element={<AdminUserIntPage page="myProfile" />} />  {/* Mi Perfil - Usuario Interno */}
-          <Route path="/user-int/create-predio" element={<AdminUserIntPage page="createPredio" />} />  {/* Crear Predio - Usaurio Interno */}
+          <Route path="/user-int/manage-users" element={<AdminUserIntPage page="manageUsers" />} />  {/* Gestionar Usuarios - Usuario Interno */}
+          <Route path="/user-int/create-predio" element={<AdminUserIntPage page="createPredio" />} />  {/* Crear Predio - Usuario Interno */}
           <Route path="/user-int/manage-predio" element={<AdminUserIntPage page="managePredio" />} />  {/* Gestionar Predios - Usuario Interno */}
           <Route path="/user-int/manage-predio/edit" element={<AdminUserIntPage page="editPredio" />} />  {/* Editar Predio - Usuario Interno */}
           {/* <Route path="/user-int/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage page="fechaPagoDcto" />} />  Definir Fechas de Pago / Dctos - Usuario Interno */}

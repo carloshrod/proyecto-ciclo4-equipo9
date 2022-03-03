@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 
-const InputForm2 = ({ id, name, logo, errorMessage, label, onChange, reset, ...inputProps }) => {
+const InputForm2 = ({ id, name, type, logo, errorMessage, label, onChange, reset, ...inputProps }) => {
     const [focused, setFocused] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleBlur = (e) => {
         setFocused(true);
     };
+
+    const handleShow = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword)
+    }
 
     useEffect(() => {
         setFocused(false);
@@ -24,11 +30,15 @@ const InputForm2 = ({ id, name, logo, errorMessage, label, onChange, reset, ...i
                         {...inputProps}
                         id={id}
                         name={name}
+                        type={showPassword ? "text" : type}
                         className="form-control"
                         onChange={onChange}
                         onBlur={handleBlur}
                         focused={focused.toString()}
                     />
+                    <button className="input-group-text" onClick={handleShow}>
+                        <i className="bi bi-eye-fill"></i>
+                    </button>
                     <span className="errorMsg col-12">{errorMessage}</span>
                 </div>
             </div>

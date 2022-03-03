@@ -9,12 +9,19 @@ export const initialForm = {
 
 function FormLogin({ login }) {
   const [form, setForm] = useState(initialForm)
+  const [showPassword, setShowPassword] = useState(false)
+  console.log(showPassword)
 
   const handleInputChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     })
+  }
+
+  const handleShow = (e) => {
+    e.preventDefault();
+    setShowPassword(!showPassword)
   }
 
   const handleSubmit = (e) => {
@@ -55,7 +62,10 @@ function FormLogin({ login }) {
                     <label htmlFor="idPassword" className="form-label">Contraseña</label>
                     <div className="input-group has-validation">
                       <span className="input-group-text" id="inputGroupPrepend"><i className="bi bi-lock-fill"></i></span>
-                      <input type="password" name="password" className="form-control" id="idPassword" onChange={handleInputChange} value={form.password} required />
+                      <input type={showPassword ? "text" : "password"} name="password" className="form-control" id="idPassword" onChange={handleInputChange} value={form.password} required />
+                      <button className="input-group-text" onClick={handleShow}>
+                        <i className="bi bi-eye-fill"></i>
+                      </button>
                     </div>
                   </div>
 

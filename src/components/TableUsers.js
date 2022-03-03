@@ -9,7 +9,7 @@ export const initialForm = {
     select: 10
 }
 
-function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
+function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const filter = searchParams.get("filter") ?? "";
@@ -49,6 +49,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
                 user={user}
                 setDataToEdit={setUserToEdit}
                 deleteData={deleteUser}
+                userRol={userRol}
             />
         )
     });
@@ -96,7 +97,6 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, success }) {
     return (
         <>
             {error}
-            {success}
             <section className="section min-vh-100">
                 <div className="row">
                     <div className="col-lg-12">

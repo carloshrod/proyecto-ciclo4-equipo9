@@ -96,7 +96,7 @@ function SystemOutPage({ page }) {
       <HeaderSystemOut />
 
       {page === "landingPage" &&
-        <Container titulo="Plataforma de Gestión Catastral" className="container d-flex align-items-center min-vh-100 mt-5">
+        <Container titulo="Plataforma de Gestión Catastral" className="container d-flex align-items-center min-vh-100">
           <BodyLandingPage />  {/* Children */}
         </Container>}
 

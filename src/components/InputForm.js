@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import MaskedInput from 'react-text-mask'
 
-const InputForm = ({ id, name, logo, errorMessage, label, onChange, reset, mask, ...inputProps }) => {
+const InputForm = ({ id, name, type, logo, errorMessage, label, onChange, reset, mask, ...inputProps }) => {
     const [focused, setFocused] = useState(false);
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleBlur = (e) => {
         setFocused(true);
     };
+
+    const handleShow = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword)
+    }
 
     useEffect(() => {
         setFocused(false);
@@ -47,12 +53,18 @@ const InputForm = ({ id, name, logo, errorMessage, label, onChange, reset, mask,
                                 <input
                                     {...inputProps}
                                     id={id}
+                                    type={(type === "password" && showPassword) ? "text" : type}
                                     name={name}
                                     className="form-control"
                                     onChange={onChange}
                                     onBlur={handleBlur}
                                     focused={focused.toString()}
                                 />
+                                {type === "password" &&
+                                    <button className="input-group-text" onClick={handleShow}>
+                                        <i className="bi bi-eye-fill"></i>
+                                    </button>
+                                }
                                 <span className="errorMsg col-12">{errorMessage}</span>
                             </div>
                         </>
