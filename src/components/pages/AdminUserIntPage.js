@@ -430,7 +430,6 @@ function AdminUserIntPage({ tipo, page }) {
                                     setUserToEdit={setUserToEdit}
                                     deleteUser={deleteUser}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
-                                    userRol={rol}
                                 />
                             </ContainerAdmin>}
 

@@ -49,7 +49,6 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
                 user={user}
                 setDataToEdit={setUserToEdit}
                 deleteData={deleteUser}
-                userRol={userRol}
             />
         )
     });

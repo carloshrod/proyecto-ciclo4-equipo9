@@ -18,8 +18,12 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
                     <ReactTooltip id="toolTipEdit" place="top" type="dark" effect="solid">
                         Editar predio
                     </ReactTooltip>
-                    <button data-tip data-for="toolTipEdit" type="button" className="btn btn-primary" onClick={() => setDataToEdit(predio)}>
-                        <i className="bi bi-pencil-fill"/>
+                    <button
+                        data-tip data-for="toolTipEdit"
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => setDataToEdit(predio)}>
+                        <i className="bi bi-pencil-fill" />
                     </button>
                 </Link>
                 &nbsp;
@@ -27,8 +31,12 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
                     <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
                         Eliminar predio
                     </ReactTooltip>
-                    <button data-tip data-for="toolTipDelete" type="button" className="btn btn-danger" onClick={() => deleteData(codigo)}>
-                        <i className="bi bi-trash"/>
+                    <button
+                        data-tip data-for="toolTipDelete"
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => deleteData(codigo)}>
+                        <i className="bi bi-trash" />
                     </button>
                 </Link>
             </td>

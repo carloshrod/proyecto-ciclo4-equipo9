@@ -10,7 +10,6 @@ export const initialForm = {
 function FormLogin({ login }) {
   const [form, setForm] = useState(initialForm)
   const [showPassword, setShowPassword] = useState(false)
-  console.log(showPassword)
 
   const handleInputChange = (e) => {
     setForm({
