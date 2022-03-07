@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 function BodyHomeUserExt() {
     return (
         <>
-            <div className="mx-auto logo-body-home mg-t-50px">
-                <img src="img/logo-escudo.png" alt="" />
-            </div>
+            <img className="d-block mx-auto img-fluid mt-5" src="img/logo-escudo.png" alt="" />
 
             <section className="section mb-4 mg-t-75px">
                 <div className="row">
@@ -28,7 +26,7 @@ function BodyHomeUserExt() {
                     </div>
                 </div>
 
-                <div className="row justify-content-center mg-t-25px">
+                <div className="row justify-content-center">
                     <div className="col-lg-6 px-5">
                         <div className="card card-home-ue">
                             <Link to="/user-ext/convenio">

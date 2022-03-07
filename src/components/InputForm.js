@@ -19,7 +19,7 @@ const InputForm = ({ id, name, type, logo, errorMessage, label, onChange, reset,
 
     return (
         <>
-            <div className={`${(id === 7 && name === "direccion") ? "col-11" : "col-5"} m-auto mt-2 mb-2`}>
+            <div className={`${(id === 7 && name === "direccion") ? "col-10 col-md-11 col-lg-11" : "col-10 col-md-5 col-lg-5"} m-auto mt-2 mb-2`}>
                 <label htmlFor={id} className="form-label">{label}</label>
                 {name === "tipo_doc"
                     ?

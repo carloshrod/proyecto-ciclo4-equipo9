@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 
-function TableUsersHeader({ headers, onSorting }) {
+function TableUsersHeader({ onSorting }) {
+
+    const headers = [
+        { name: "#", field: "index", sortable: false },
+        { name: "Nombre", field: "nombres", sortable: true, className: "pointer" },
+        { name: "Nro. Documento", field: "nro_doc", sortable: false },
+        { name: "Email", field: "email", sortable: true,className: "d-none d-sm-table-cell pointer" },
+        { name: "Rol", field: "rol", sortable: false, className: "d-none d-sm-table-cell pointer" },
+    ];
+
     const [sortingField, setSortingField] = useState("");
     const [sortingOrder, setSortingOrder] = useState("asc");
 
@@ -14,10 +23,10 @@ function TableUsersHeader({ headers, onSorting }) {
     return (
         <thead>
             <tr>
-                {headers.map(({ name, field, sortable }) => (
+                {headers.map(({ name, field, sortable, className }) => (
                     <th
                         data-tip data-for={(name === "Nombre" || name === "Email" ? "toolTipSort" : name === "Rol"  ? "toolTipInfo" : "")}
-                        className={name === "Nombre" || name === "Email" || name === "Rol" ? "pointer" : ""}
+                        className={className}
                         key={name}
                         onClick={() => sortable ? onSortingChange(field) : null}
                     >

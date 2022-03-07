@@ -1,16 +1,17 @@
 import React from 'react';
+import UsersChart from './UsersChart';
 
-function Dashboard({ cantidadUsuarios, cantidadPredios, error }) {
+function Dashboard({ usersDb, cantidadUsuarios, cantidadPredios, error }) {
 
     return (
         <>
             {error}
             {/* <!-- Left side columns --> */}
-            <div className="col-lg-8">
+            <div className="col-lg-12">
                 <div className="row">
 
-                    {/* <!-- Sales Card --> */}
-                    <div className="col-xxl-4 col-md-6">
+                    {/* <!-- Usuarios Internos --> */}
+                    <div className="col-xxl-4 col-md-4">
                         <div className="card info-card sales-card">
 
                             <div className="filter">
@@ -43,10 +44,10 @@ function Dashboard({ cantidadUsuarios, cantidadPredios, error }) {
                             </div>
 
                         </div>
-                    </div>{/* <!-- End Sales Card --> */}
+                    </div>{/* <!-- End Usuarios Internos --> */}
 
-                    {/* <!-- Revenue Card --> */}
-                    <div className="col-xxl-4 col-md-6">
+                    {/* <!-- Usuarios Externos --> */}
+                    <div className="col-xxl-4 col-md-4">
                         <div className="card info-card revenue-card">
 
                             <div className="filter">
@@ -78,10 +79,10 @@ function Dashboard({ cantidadUsuarios, cantidadPredios, error }) {
                             </div>
 
                         </div>
-                    </div>{/* <!-- End Revenue Card --> */}
+                    </div>{/* <!-- End Usuarios Externos --> */}
 
-                    {/* <!-- Customers Card --> */}
-                    <div className="col-xxl-4 col-xl-12">
+                    {/* <!-- Predios--> */}
+                    <div className="col-xxl-4 col-md-4">
 
                         <div className="card info-card customers-card">
 
@@ -107,48 +108,47 @@ function Dashboard({ cantidadUsuarios, cantidadPredios, error }) {
                                     </div>
                                     <div className="ps-3">
                                         <h6>{cantidadPredios}</h6>
-                                        <span className="text-danger small pt-1 fw-bold">Actuales</span>
+                                        <span className="text-success small pt-1 fw-bold">Registrados</span>
 
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
-                    </div>{/* <!-- End Customers Card --> */}
-
-                    {/* <!-- Reports --> */}
-                    <div className="col-12">
-                        <div className="card">
-
-                            <div className="filter">
-                                <a className="icon" href="/" data-bs-toggle="dropdown"><i className="bi bi-three-dots"></i></a>
-                                <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li className="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a className="dropdown-item" href="/">Today</a></li>
-                                    <li><a className="dropdown-item" href="/">This Month</a></li>
-                                    <li><a className="dropdown-item" href="/">This Year</a></li>
-                                </ul>
-                            </div>
-
-                            <div className="card-body">
-                                <h5 className="card-title">Reportes <span>/Today</span></h5>
-
-                                {/* <!-- Line Chart --> */}
-                                <div id="reportsChart"></div>
-                            </div>
-
-                        </div>
-                    </div>{/* <!-- End Reports --> */}
-
+                    </div>{/* <!-- End Predios --> */}
                 </div>
             </div>{/* <!-- End Left side columns --> */}
 
+            {/* <!-- Gráfica --> */}
+            <div className="col-12 col-md-8">
+                <div className="card">
+
+                    <div className="filter">
+                        <a className="icon" href="/" data-bs-toggle="dropdown"><i className="bi bi-three-dots"></i></a>
+                        <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li className="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+
+                            <li><a className="dropdown-item" href="/">Today</a></li>
+                            <li><a className="dropdown-item" href="/">This Month</a></li>
+                            <li><a className="dropdown-item" href="/">This Year</a></li>
+                        </ul>
+                    </div>
+
+                    <div className="card-body">
+                        <h5 className="card-title">Actividad Usuarios Internos<span>/Today</span></h5>
+
+                        <UsersChart usersDb={usersDb}/>
+
+                        <div id="reportsChart"></div>
+                    </div>
+
+                </div>
+            </div>{/* <!-- End Gráfica --> */}
+
             {/* <!-- Right side columns --> */}
-            <div className="col-lg-4">
+            <div className="col-12 col-md-4">
 
                 {/* <!-- Recent Activity --> */}
                 <div className="card">

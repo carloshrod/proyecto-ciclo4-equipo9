@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { logout } from '../auth/logout';
 
 function HeaderAdmin({ btn }) {
-
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
 
@@ -13,7 +12,7 @@ function HeaderAdmin({ btn }) {
             {/* {/* <!-- ======= Header ======= --> */}
             <header id="header" className="header fixed-top d-flex align-items-center">
 
-                <div className="d-flex align-items-center justify-content-between">
+                <div className="d-flex d-none d-sm-block align-items-center justify-content-between">
                     <img src="/img/logo-gov-co.png" alt="" />
                 </div>
                 {/* <!-- End Logo --> */}
@@ -28,12 +27,12 @@ function HeaderAdmin({ btn }) {
 
                             <Link to="/" className="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
-                                <span className="nav-home-ue d-none d-md-block dropdown-toggle ps-2">{payload.nombre}</span>
+                                <span className="nav-home-ue dropdown-toggle ps-2">{payload.nombre}</span>
                             </Link>{/* <!-- End Profile Image Icon --> */}
 
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li>
-                                    <Link to="/admin/my-profile">
+                                    <Link to={payload.rol === 1 ? "/admin/my-profile" : "/user-int/my-profile"}>
                                         <div className="dropdown-item dditem-hov d-flex align-items-center">
                                             <span className="m-auto">
                                                 <i className="bi bi-person" />

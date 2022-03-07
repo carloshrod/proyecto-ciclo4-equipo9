@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderUserExt from '../HeaderUserExt';
+import Header from '../Header';
 import Container from '../Container';
 import BodyHomeUserExt from "../BodyHomeUserExt";
 import BodyMyProfile from '../BodyMyProfile';
@@ -67,7 +67,7 @@ function UserExtPage({ page }) {
             {auth() && rol === 3 ?
                 <>
                     <main className="container-bg">
-                        <HeaderUserExt />
+                        <Header />
 
                         {page === "home" &&
                             <Container titulo="Plataforma de Gestión Catastral" className="container d-flex align-items-center min-vh-100">

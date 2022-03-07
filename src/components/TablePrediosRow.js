@@ -3,17 +3,16 @@ import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, linkTo }) => {
-    let { codigo, nom_prop, doc_prop, direccion_predio, barrio } = predio || {};
+    let { codigo, nom_prop, doc_prop, direccion_predio } = predio || {};
 
     return (
         <tr>
-            <th scope="row">{nro_registro}</th>
-            <td>{codigo}</td>
-            <td>{nom_prop}</td>
-            <td>{doc_prop}</td>
-            <td>{direccion_predio}</td>
-            <td>{barrio}</td>
-            <td align="center">
+            <th className="align-middle">{nro_registro}</th>
+            <td className="align-middle">{codigo}</td>
+            <td className="align-middle">{nom_prop}</td>
+            <td className="align-middle d-none d-sm-table-cell">{doc_prop}</td>
+            <td className="align-middle d-none d-sm-table-cell">{direccion_predio}</td>
+            <td >
                 <Link to={linkTo}>
                     <ReactTooltip id="toolTipEdit" place="top" type="dark" effect="solid">
                         Editar predio
@@ -21,12 +20,11 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
                     <button
                         data-tip data-for="toolTipEdit"
                         type="button"
-                        className="btn btn-primary"
+                        className="btn btn-primary m-1"
                         onClick={() => setDataToEdit(predio)}>
                         <i className="bi bi-pencil-fill" />
                     </button>
                 </Link>
-                &nbsp;
                 <Link to="#">
                     <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
                         Eliminar predio

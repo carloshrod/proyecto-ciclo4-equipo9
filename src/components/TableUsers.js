@@ -20,14 +20,6 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
     const firstItemShowedPerPage = pageNumber * usersPerPage.select;
     const lastItemShowedPerPage = firstItemShowedPerPage + usersPerPage.select;
 
-    const headers = [
-        { name: "#", field: "index", sortable: false },
-        { name: "Nombre", field: "nombres", sortable: true },
-        { name: "Nro. Documento", field: "nro_doc", sortable: false },
-        { name: "Email", field: "email", sortable: true },
-        { name: "Rol", field: "rol", sortable: false },
-    ];
-
     const handleInputChange = (event) => {
         setUsersPerPage({
             [event.target.name]: parseInt(event.target.value)
@@ -107,31 +99,27 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
                                 <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                                     {/* <!-- Table with stripped rows --> */}
 
-                                    <div className="dataTable-top">
-                                        <div className="dataTable-dropdown">
-                                            <label>
-                                                <select name="select" ref={selectRef} className="dataTable-selector text-center" value={usersPerPage.select} onChange={handleInputChange}>
-                                                    <option value="10">10</option>
-                                                    <option value="20">20</option>
-                                                    <option value="30">30</option>
-                                                    <option value="40">40</option>
-                                                    <option value={users.length}>Todos</option>
-                                                </select> Usuarios por página</label>
+                                    <div className="dataTable-top mb-2">
+                                        <div className="col-4 col-sm-6 col-md-4 dataTable-dropdown">
+                                            <select name="select" ref={selectRef} className="dataTable-selector text-center" value={usersPerPage.select} onChange={handleInputChange}>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="40">40</option>
+                                                <option value={users.length}>Todos</option>
+                                            </select>
+                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}> Usuarios por página</label>
                                         </div>
 
-                                        <div className="dataTable-search">
+                                        <div className="col-4 col-sm-6 col-md-4 dataTable-search">
                                             <ReactTooltip id="toolTipFilter" place="left" type="dark" effect="solid">
                                                 Para filtrar por <em>rol</em> ingrese el valor seguido de un espacio
                                             </ReactTooltip>
-                                            <input data-tip data-for="toolTipFilter" value={filter} onChange={handleFilter} className="dataTable-input" placeholder="Filtrar..." type="text" />
+                                            <input data-tip data-for="toolTipFilter" className="col-12 col-sm-7 col-md-7 col-lg-8 dataTable-input" placeholder="Filtrar..." type="text" value={filter} onChange={handleFilter} />
+                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}>{range()} {range() === 1 ? "Usuario" : "Usuarios"}</label>
                                         </div>
                                     </div>
 
-                                    <div className="dataTable-top">
-                                        <div className="me-3">
-                                            {range()} Usuarios
-                                        </div>
-                                    </div>
 
                                     <div className="dataTable-container">
                                         <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
@@ -143,7 +131,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
                                             Rol 3: Usuario Externo
                                         </ReactTooltip>
                                         <table className="table datatable table-hover text-center">
-                                            <TableUsersHeader headers={headers} onSorting={(field, order) => setSorting({ field, order })} />
+                                            <TableUsersHeader onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
                                                 {users.length > 0 ?
                                                     <>{!filter ? displayUsers : displayFilteredUsers}</>
@@ -159,13 +147,14 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
                                     </div>
 
                                     <div className="dataTable-bottom">
-                                        <div className="dataTable-info">
-                                            Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
+                                        <div className="dataTable-info d-none d-sm-block mt-4">
+                                            <span style={{ fontSize: "12px" }}>Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
                                                 range()
                                                 :
-                                                lastItemShowedPerPage} de {range()} usuarios
+                                                lastItemShowedPerPage} de {range()}
+                                            </span>
                                         </div>
-                                        <nav className="dataTable-pagination">
+                                        <nav className="dataTable-pagination mt-3">
                                             <ul className="dataTable-pagination-list">
                                                 <ReactPaginate
                                                     breakLabel="..."

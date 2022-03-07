@@ -20,15 +20,6 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
     const firstItemShowedPerPage = pageNumber * prediosPerPage.select;
     const lastItemShowedPerPage = firstItemShowedPerPage + prediosPerPage.select;
 
-    const headers = [
-        { name: "#", field: "index", sortable: false },
-        { name: "Código", field: "codigo", sortable: true },
-        { name: "Nombre Propietario", field: "nom_prop", sortable: true },
-        { name: "C.C. Propietario", field: "doc_prop", sortable: false },
-        { name: "Dirección", field: "direccion", sortable: true },
-        { name: "Barrio", field: "barrio", sortable: true },
-    ];
-
     const handleInputChange = (event) => {
         setPrediosPerPage({
             [event.target.name]: parseInt(event.target.value)
@@ -64,8 +55,7 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
     // Filtrar predios:
     const filterPredios = predios.filter((predio) => {
         return predio.codigo.toLowerCase().includes(filter.toLowerCase()) || predio.nom_prop.toLowerCase().includes(filter.toLowerCase()) ||
-            predio.doc_prop.toString().includes(filter.toLowerCase()) || predio.direccion.toLowerCase().includes(filter.toLowerCase()) ||
-            predio.barrio.toLowerCase().includes(filter.toLowerCase());
+            predio.doc_prop.toString().includes(filter.toLowerCase()) || predio.direccion_predio.toLowerCase().includes(filter.toLowerCase())
     });
 
     // Mostrar predios filtrados:
@@ -110,25 +100,20 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
 
                                 <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
                                     {/* <!-- Table with stripped rows --> */}
-                                    <div className="dataTable-top">
-                                        <div className="dataTable-dropdown">
-                                            <label>
-                                                <select name="select" ref={selectRef} className="dataTable-selector text-center" value={prediosPerPage.select} onChange={handleInputChange}>
-                                                    <option value="10">10</option>
-                                                    <option value="20">20</option>
-                                                    <option value="30">30</option>
-                                                    <option value="40">40</option>
-                                                    <option value={predios.length}>Todos</option>
-                                                </select> Predios por página</label>
+                                    <div className="dataTable-top mb-2">
+                                        <div className="col-4 col-sm-6 col-md-4 dataTable-dropdown">
+                                            <select name="select" ref={selectRef} className="dataTable-selector text-center" value={prediosPerPage.select} onChange={handleInputChange}>
+                                                <option value="10">10</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                                <option value="40">40</option>
+                                                <option value={predios.length}>Todos</option>
+                                            </select>
+                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}>Predios por página</label>
                                         </div>
-                                        <div className="dataTable-search">
-                                            <input value={filter} onChange={handleFilter} className="dataTable-input" placeholder="Filtrar..." type="text" />
-                                        </div>
-                                    </div>
-
-                                    <div className="dataTable-top">
-                                        <div className="me-3">
-                                            {range()} Predios
+                                        <div className="col-4 col-sm-6 col-md-4 dataTable-search">
+                                            <input className="col-12 col-sm-7 col-md-7 col-lg-8 dataTable-input" placeholder="Filtrar..." type="text" value={filter} onChange={handleFilter} />
+                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}>{range()} {range() === 1 ? "Predio" : "Predios"}</label>
                                         </div>
                                     </div>
 
@@ -137,7 +122,7 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
                                             Ordenar<i className="bi bi-arrow-down-up" />
                                         </ReactTooltip>
                                         <table className="table datatable table-hover text-center">
-                                            <TablePrediosHeader headers={headers} onSorting={(field, order) => setSorting({ field, order })} />
+                                            <TablePrediosHeader onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
                                                 {predios.length > 0 ?
                                                     <>{!filter ? displayPredios : displayFilteredPredios}</>
@@ -152,13 +137,14 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
                                         {/* <!-- End Table with stripped rows --> */}
                                     </div>
                                     <div className="dataTable-bottom">
-                                        <div className="dataTable-info">
-                                            Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
+                                        <div className="dataTable-info d-none d-sm-block mt-4">
+                                            <span style={{ fontSize: "12px" }}>Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
                                                 range()
                                                 :
-                                                lastItemShowedPerPage} de {range()} predios
+                                                lastItemShowedPerPage} de {range()}
+                                            </span>
                                         </div>
-                                        <nav className="dataTable-pagination">
+                                        <nav className="dataTable-pagination mt-3">
                                             <ul className="dataTable-pagination-list">
                                                 <ReactPaginate
                                                     breakLabel="..."

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HeaderSystemOut from "../HeaderSystemOut";
+import Header from '../Header';
 import Container from '../Container';
 import FormLogin from '../forms/FormLogin'
 import FormRegister from '../forms/FormRegister';
@@ -36,7 +36,7 @@ function SystemOutPage({ page }) {
         setUsersDb([...usersDb, res.data]);
         toast.success(res.msg);
         setTimeout(() => {
-          window.location.href = "http://localhost:3000/login"
+          window.location.href = "http://192.168.1.65:3000/login"
         }, 5000);
       } else {
         toast.error(res.msg);
@@ -67,20 +67,18 @@ function SystemOutPage({ page }) {
   // Restablecer contraseña:
   const newPassword = (user, token) => {
     user.sentToken = token;
-    console.log(token);
     let endpoint = url + process.env.REACT_APP_API_NEW_PASSWORD;
     let options = {
       body: user,
       headers: { "content-type": "application/json" },
     }
-    console.log(user);
 
     api.post(endpoint, options).then((res) => {
       if (!res.error) {
         if (res.estado === "ok") {
           toast.success(res.msg)
           setTimeout(() => {
-            window.location.href = "http://localhost:3000/login"
+            window.location.href = "http://192.168.1.65:3000/login"
           }, 5000);
         } else {
           toast.error(res.msg)
@@ -93,7 +91,7 @@ function SystemOutPage({ page }) {
 
   return (
     <>
-      <HeaderSystemOut />
+      <Header />
 
       {page === "landingPage" &&
         <Container titulo="Plataforma de Gestión Catastral" className="container d-flex align-items-center min-vh-100">

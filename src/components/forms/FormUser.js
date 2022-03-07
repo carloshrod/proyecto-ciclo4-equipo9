@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import { useFormUser } from '../../hooks/useFormUser';
 import { inputUsers } from '../../tools/inputProps';
 import InputForm from '../InputForm';
+import jwtDecode from 'jwt-decode';
 
 const initialForm = {
     estado: null,
@@ -24,6 +25,9 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
         handleChange,
         handleSubmit
     } = useFormUser(initialForm, createUser, updateUser, userToEdit, setUserToEdit);
+
+    const token = localStorage.getItem("token");
+    const payload = jwtDecode(token);
 
     return (
         <>
@@ -65,8 +69,8 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                         />
                                     ))}
 
-                                    <div className="col-3 col-md-2 col-lg-2 m-auto mt-3">
-                                        <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
+                                    <div className="col-5 col-sm-3 col-md-2 col-lg-2 m-auto mt-3">
+                                        <button className="btn btn-primary rounded-pill w-100" type="submit" disabled={payload.rol !== 1 ? true : false}>{btn_text}</button>
                                     </div>
                                 </form>
                             </div>

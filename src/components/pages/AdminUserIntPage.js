@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import HeaderAdmin from "../HeaderAdmin";
-import HeaderUserInt from '../HeaderUserInt';
 import Sidebar from "../Sidebar";
 import SidebarItem from '../SidebarItem';
 import ContainerAdmin from '../ContainerAdmin';
@@ -34,7 +33,7 @@ function AdminUserIntPage({ tipo, page }) {
     const [loading, setLoading] = useState(false);
 
     let api = helpHttp();
-    let url = process.env.REACT_APP_API_URL
+    let url = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         setLoading(true);
@@ -61,9 +60,7 @@ function AdminUserIntPage({ tipo, page }) {
         user.rol = 2; // Rol 2 -> Usuario Interno
         user.password = generatePassword(8);
         user.estado = 1;
-
         let endpoint = url + process.env.REACT_APP_API_GUARDAR;
-        console.log(endpoint);
         const token = localStorage.getItem("token");
         let options = {
             body: user,
@@ -117,8 +114,8 @@ function AdminUserIntPage({ tipo, page }) {
                 toast.error(res.msg)
             }
         });
-
     };
+
 
     // ********** Eliminar Usuario **********
     const deleteUser = (nro_doc) => {
@@ -163,12 +160,12 @@ function AdminUserIntPage({ tipo, page }) {
     };
 
     // ********** Cambiar Contraseña **********
-    const changePassword = (user) => {
+    const changePassword = (user) => {     
+        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         const token = localStorage.getItem("token");
         const payload = jwtDecode(token);
         user.nro_doc = payload.nro_doc;
-        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
-        let options = {
+            let options = {
             body: user,
             headers: {
                 "content-type": "application/json",
@@ -223,15 +220,37 @@ function AdminUserIntPage({ tipo, page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const updateUserInt = (user, accion) => {
+        const token = localStorage.getItem("token");
+        const payload = jwtDecode(token);
+        user.nro_doc = payload.nro_doc;
+        user.accion = accion;
+        let endpoint = url + "/users/actualizar-user-int";
+        let options = {
+            body: user,
+            headers: { "content-type": "application/json" },
+        }
+
+        api.post(endpoint, options).then((res) => {
+            if (!res.error) {
+                let newData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
+                setUsersDb(newData)
+                toast.info(res.msg)
+            } else {
+                toast.info(res.msg)
+            }
+        })
+    }
+
     // ********** Crear Predio **********
     const createPredio = (predio) => {
         predio.estado = 1;
         let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
         let vrPredial = vrPredio * 0.01;
         predio.valor_predial = Math.round(vrPredial);
-
         let endpoint = url + process.env.REACT_APP_API_GUARDAR_P;
         const token = localStorage.getItem("token");
+        const payload = jwtDecode(token);
         let options = {
             body: predio,
             headers: {
@@ -247,6 +266,7 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 if (res.data) {
                     setPrediosDb([...prediosDb, res.data]);
+                    updateUserInt(payload, "crear")
                     toast.success(res.msg);
                 } else {
                     toast.error(res.msg);
@@ -262,10 +282,9 @@ function AdminUserIntPage({ tipo, page }) {
         let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
         let vrPredial = vrPredio * 0.01;
         predio.valor_predial = Math.round(vrPredial);
-
         let endpoint = url + process.env.REACT_APP_API_EDITAR_P;
         const token = localStorage.getItem("token");
-
+        const payload = jwtDecode(token);
         let options = {
             body: predio,
             headers: {
@@ -281,6 +300,7 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
+                updateUserInt(payload, "editar")
                 if (res.estado === "ok") {
                     toast.success(res.msg)
                 } else {
@@ -306,7 +326,8 @@ function AdminUserIntPage({ tipo, page }) {
             if (res.isConfirmed) {
                 let endpoint = url + process.env.REACT_APP_API_ELIMINAR_P + codigo;
                 const token = localStorage.getItem("token");
-                let options = {
+                const payload = jwtDecode(token);
+                        let options = {
                     headers: {
                         "content-type": "application/json",
                         "authorization": `Bearer ${token}`
@@ -320,6 +341,7 @@ function AdminUserIntPage({ tipo, page }) {
                     if (!res.err) {
                         let newData = prediosDb.filter((el) => el.codigo !== codigo);
                         setPrediosDb(newData);
+                        updateUserInt(payload, "borrar")
                         toast.success(res.msg);
                     } else {
                         toast.error(res.msg);
@@ -358,6 +380,8 @@ function AdminUserIntPage({ tipo, page }) {
 
     const rol = tokenIsOk();
 
+    console.log(rol)
+
     // Toggle-Sidebar:
     const [inactive, setInactive] = useState(false);
 
@@ -366,10 +390,11 @@ function AdminUserIntPage({ tipo, page }) {
             {auth() && rol !== 3 ?
                 <>
                     <main className={inactive ? "toggle-sidebar" : ""}>
+                        <HeaderAdmin btn={<div onClick={() => { setInactive(!inactive) }}>
+                            <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
+                        </div>} />
                         {tipo === "admin" ?
-                            <> <HeaderAdmin btn={<div onClick={() => { setInactive(!inactive) }}>
-                                <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
-                            </div>} />
+                            <>
                                 <Sidebar
                                     logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
                                     item1={<SidebarItem linkTo="/admin/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
@@ -381,9 +406,7 @@ function AdminUserIntPage({ tipo, page }) {
                                 />
                             </>
                             :
-                            <> <HeaderUserInt btn={<div onClick={() => { setInactive(!inactive) }}>
-                                <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
-                            </div>} />
+                            <>
                                 <Sidebar
                                     logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
                                     item1={<SidebarItem linkTo="/user-int/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
@@ -400,6 +423,7 @@ function AdminUserIntPage({ tipo, page }) {
                                 <Dashboard
                                     cantidadUsuarios={usersDb ? countUsers() : countUsers}
                                     cantidadPredios={countPredios()}
+                                    usersDb={usersDb}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
@@ -497,7 +521,6 @@ function AdminUserIntPage({ tipo, page }) {
                         <FooterAdmin />
                     </main>
                 </>
-
                 :
                 <>
                     {logout()}

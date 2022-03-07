@@ -19,8 +19,8 @@ const InputForm2 = ({ id, name, type, logo, errorMessage, label, onChange, reset
     return (
         <>
             <div className="mb-3 justify-content-center d-flex align-items-center">
-                <label htmlFor={id} className="col-4 form-label ms-5">{label}</label>
-                <div className="input-group has-validation mt-2 mb-2 me-5">
+                <label htmlFor={id} className="col-4 form-label ms-sm-5 ms-md-4 ms-lg-5">{label}</label>
+                <div className="input-group has-validation mt-2 mb-2 me-sm-5 me-md-4 me-lg-5">
                     {logo && <span className="input-group-text" id="inputGroupPrepend">
                         <i className={logo}></i>
                     </span>
