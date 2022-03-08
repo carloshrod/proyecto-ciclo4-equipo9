@@ -1,0 +1,73 @@
+import React from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const options = {
+    fill: true,
+    responsive: true,
+    plugins: {
+        legend: {
+            display: true,
+        },
+    },
+};
+
+function PrediosChart({ prediosDb }) {
+    const men100 = prediosDb.filter((predio) => predio.valor_predio.replace(/[$.]/g, '') < 100000000)
+    const may100men200 = prediosDb.filter((predio) => predio.valor_predio.replace(/[$.]/g, '') >= 100000000
+        && predio.valor_predio.replace(/[$.]/g, '') <= 200000000)
+    const may200 = prediosDb.filter((predio) => predio.valor_predio.replace(/[$.]/g, '') >= 200000000)
+
+    const data = {
+        labels: ['< $100M', '[$100M - $200M]', '> $200M'],
+        datasets: [
+            {
+                data: [men100.length, may100men200.length, may200.length],
+                backgroundColor: [
+                    'rgba(25, 135, 84, 0.5)',
+                    'rgba(255, 194, 8, 0.5)',
+                    'rgba(219, 52, 69, 0.5)',
+                ],
+            },
+        ],
+    };
+
+    const aMen100 = prediosDb.filter((predio) => predio.area_t < 100)
+    const aMay100Men150 = prediosDb.filter((predio) => predio.area_t >= 100 && predio.area_t <= 150)
+    const may150 = prediosDb.filter((predio) => predio.area_t > 150)
+
+    const data2 = {
+        labels: ['< 100m²', '[100m² - 150m²]', '> 150m²'],
+        datasets: [
+            {
+                data: [aMen100.length, aMay100Men150.length, may150.length],
+                backgroundColor: [
+                    'rgba(25, 135, 84, 0.5)',
+                    'rgba(255, 194, 8, 0.5)',
+                    'rgba(219, 52, 69, 0.5)',
+                ],
+            },
+        ],
+    };
+
+    return (
+        <div className="App row">
+            <div className="col-6">
+                <div className="text-center">
+                    <span className="card-title" style={{fontSize: "12px"}}>Valor</span>
+                </div>
+                <Pie data={data} options={options} />
+            </div>
+            <div className="col-6">
+                <div className="text-center">
+                    <span className="card-title" style={{fontSize: "12px"}}>Área Total</span>
+                </div>
+                <Pie data={data2} options={options} />
+            </div>
+        </div>
+    );
+}
+
+export default PrediosChart;

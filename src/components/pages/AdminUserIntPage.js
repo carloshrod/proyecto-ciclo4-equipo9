@@ -232,12 +232,10 @@ function AdminUserIntPage({ tipo, page }) {
         }
 
         api.post(endpoint, options).then((res) => {
+            console.log(res)
             if (!res.error) {
                 let newData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
                 setUsersDb(newData)
-                toast.info(res.msg)
-            } else {
-                toast.info(res.msg)
             }
         })
     }
@@ -380,8 +378,6 @@ function AdminUserIntPage({ tipo, page }) {
 
     const rol = tokenIsOk();
 
-    console.log(rol)
-
     // Toggle-Sidebar:
     const [inactive, setInactive] = useState(false);
 
@@ -424,6 +420,7 @@ function AdminUserIntPage({ tipo, page }) {
                                     cantidadUsuarios={usersDb ? countUsers() : countUsers}
                                     cantidadPredios={countPredios()}
                                     usersDb={usersDb}
+                                    prediosDb={prediosDb}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}

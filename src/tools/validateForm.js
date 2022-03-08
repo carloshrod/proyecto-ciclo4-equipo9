@@ -103,7 +103,7 @@ export const validateFormPredio = (form) => {
         return false;
     }
 
-    if (parseFloat(form.area_c) >= parseFloat(form.area_t)) {
+    if (parseFloat(form.area_c) > parseFloat(form.area_t)) {
         toast.error("El area construída debe ser menor o igual al area total!!!")
         return false;
     }

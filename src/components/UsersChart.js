@@ -1,31 +1,11 @@
 import React from 'react';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-    Filler,
-} from "chart.js";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-    Filler
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend, Filler);
 
 const options = {
     fill: true,
-    animations: false,
     scales: {
         y: {
             min: 0,
@@ -39,7 +19,7 @@ const options = {
     },
 };
 
-function UsersChart({ usersDb}) {
+function UsersChart({ usersDb }) {
     const usersInt = usersDb.filter((user) => user.rol === 2)
     const labels = usersInt.map((user) => {
         return user.nombres
@@ -57,24 +37,24 @@ function UsersChart({ usersDb}) {
     });
 
     const data = {
-            datasets: [
-                {
-                    label: "Predios creados",
-                    data: scores1,
-                    backgroundColor: "rgba(25, 135, 84, 0.8)",
-                },
-                {
-                    label: "Predios editados",
-                    data: scores2,
-                    backgroundColor: "rgba(255, 194, 8, 0.8)",
-                },
-                {
-                    label: "Predios eliminados",
-                    data: scores3,
-                    backgroundColor: "rgba(219, 52, 69, 0.8)",
-                },
-            ],
-            labels
+        datasets: [
+            {
+                label: "Predios creados",
+                data: scores1,
+                backgroundColor: "rgba(25, 135, 84, 0.7)",
+            },
+            {
+                label: "Predios editados",
+                data: scores2,
+                backgroundColor: "rgba(255, 194, 8, 0.7)",
+            },
+            {
+                label: "Predios eliminados",
+                data: scores3,
+                backgroundColor: "rgba(219, 52, 69, 0.7)",
+            },
+        ],
+        labels
     }
 
     return (
