@@ -12,33 +12,37 @@ function Dashboard({ usersDb, prediosDb, cantidadUsuarios, cantidadPredios, erro
         <>
             {error}
             {/* <!-- Left side columns --> */}
-            <div className="col-lg-12">
+            <div className="dashboard col-lg-12">
                 <div className="row">
 
-                    {/* <!-- Usuarios Internos --> */}
-                    <div className="col-xxl-4 col-md-4">
-                        <div className="card info-card sales-card">
+                    {payload.rol === 1 &&
+                        <>
+                            {/* <!-- Usuarios Internos --> */}
+                            < div className="col-xxl-4 col-md-4">
+                                <div className="card info-card sales-card">
 
-                            <div className="card-body">
-                                <h5 className="card-title">Usuarios Internos</h5>
+                                    <div className="card-body">
+                                        <h5 className="card-title">Usuarios Internos</h5>
 
-                                <div className="d-flex align-items-center justify-content-center">
-                                    <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i className="bi bi-people"></i>
+                                        <div className="d-flex align-items-center justify-content-center">
+                                            <div className="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                                <i className="bi bi-people"></i>
+                                            </div>
+                                            <div className="ps-3">
+                                                <h6>{cantidadUsuarios(2)}</h6>
+                                                <span className="text-success small pt-1 fw-bold">Registrados</span>
+
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="ps-3">
-                                        <h6>{cantidadUsuarios(2)}</h6>
-                                        <span className="text-success small pt-1 fw-bold">Registrados</span>
 
-                                    </div>
                                 </div>
-                            </div>
-
-                        </div>
-                    </div>{/* <!-- End Usuarios Internos --> */}
+                            </div>{/* <!-- End Usuarios Internos --> */}
+                        </>
+                    }
 
                     {/* <!-- Usuarios Externos --> */}
-                    <div className="col-xxl-4 col-md-4">
+                    <div className={payload.rol !== 1 ? "col-xxl-6 col-md-6" : "col-xxl-4 col-md-4"}>
                         <div className="card info-card revenue-card">
 
                             <div className="card-body">
@@ -60,7 +64,7 @@ function Dashboard({ usersDb, prediosDb, cantidadUsuarios, cantidadPredios, erro
                     </div>{/* <!-- End Usuarios Externos --> */}
 
                     {/* <!-- Predios--> */}
-                    <div className="col-xxl-4 col-md-4">
+                    <div className={payload.rol !== 1 ? "col-xxl-6 col-md-6" : "col-xxl-4 col-md-4"}>
 
                         <div className="card info-card customers-card">
 
@@ -98,7 +102,7 @@ function Dashboard({ usersDb, prediosDb, cantidadUsuarios, cantidadPredios, erro
 
                 <div className="card">
                     <div className="ms-4">
-                    <h5 className="card-title">Estadísticas | Predios</h5>
+                        <h5 className="card-title">Estadísticas | Predios</h5>
                     </div>
                     <div className="row">
                         <div className="card-body">
@@ -110,7 +114,7 @@ function Dashboard({ usersDb, prediosDb, cantidadUsuarios, cantidadPredios, erro
             </div>{/* <!-- End Gráfica --> */}
 
             {/* <!-- Right side columns --> */}
-            <div className="col-12 col-md-4">
+            <div className="dashboard col-12 col-md-4">
                 {/* <!-- Recent Activity --> */}
                 <div className="card">
                     <div className="card-body">

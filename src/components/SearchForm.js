@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const initialForm = {
     datos: "",
@@ -21,7 +22,7 @@ function SearchForm({ handleSearch, text }) {
         e.preventDefault();
 
         if (!form.datos) {
-            alert("Datos Incompletos");
+            toast.error("Por favor, ingrese los datos solicitados!!!", {position: "bottom-center"});
             //setIsDisabled(true);
             return;
         }
@@ -40,7 +41,7 @@ function SearchForm({ handleSearch, text }) {
                         <form onSubmit={handleSubmit} className="search-form d-flex align-items-center">
                             <label htmlFor="idDatos">{text}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                             <input className="col-6 form-control w-50" type="text" name="datos" id="idDatos" onChange={handleChange} value={form.datos} />
-                            <input className="btn btn-primary ms-4" type="submit" value="Buscar" />
+                            <input className="btn my-btn-success ms-4" type="submit" value="Buscar" />
                         </form>
                     </div>
                 </div>

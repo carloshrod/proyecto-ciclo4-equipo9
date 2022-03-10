@@ -20,11 +20,9 @@ function ContainerAdmin({ titulo, linkTo, subtitulo, sep, subtitulo2, children }
                     </nav>
                 </div>
 
-                <section className="section dashboard">
-                    <div className="row">
-                        {children}
-                    </div>
-                </section>
+                <div className="row">
+                    {children}
+                </div>
             </main>{/* <!-- End #main --> */}
         </>
     )

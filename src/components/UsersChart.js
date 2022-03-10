@@ -14,7 +14,7 @@ const options = {
     responsive: true,
     plugins: {
         legend: {
-            display: true,
+            display: false,
         },
     },
 };
@@ -26,30 +26,30 @@ function UsersChart({ usersDb }) {
     })
 
     const scores1 = usersInt.map((user) => {
-        return user.created_users
+        return user.created_predios
     });
 
     const scores2 = usersInt.map((user) => {
-        return user.edited_users
+        return user.edited_predios
     });
     const scores3 = usersInt.map((user) => {
-        return user.deleted_users
+        return user.deleted_predios
     });
 
     const data = {
         datasets: [
             {
-                label: "Predios creados",
+                label: " Predios creados",
                 data: scores1,
                 backgroundColor: "rgba(25, 135, 84, 0.7)",
             },
             {
-                label: "Predios editados",
+                label: " Predios editados",
                 data: scores2,
                 backgroundColor: "rgba(255, 194, 8, 0.7)",
             },
             {
-                label: "Predios eliminados",
+                label: " Predios eliminados",
                 data: scores3,
                 backgroundColor: "rgba(219, 52, 69, 0.7)",
             },

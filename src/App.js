@@ -27,8 +27,8 @@ function App() {
           <Route path="/admin/manage-users" element={<AdminUserIntPage tipo="admin" page="manageUsers" />} />  {/* Gestionar Usuarios - Admin */}
           <Route path="/admin/manage-users/edit" element={<AdminUserIntPage tipo="admin" page="editUser" />} />  {/* Editar Usuariop - Admin */}
           <Route path="/admin/create-predio" element={<AdminUserIntPage tipo="admin" page="createPredio" />} />  {/* Crear Predio - Admin */}
-          <Route path="/admin/manage-predio" element={<AdminUserIntPage tipo="admin" page="managePredio" />} />  {/* Gestionar Predios - Admin */}
-          <Route path="/admin/manage-predio/edit" element={<AdminUserIntPage tipo="admin" page="editPredio" />} />  {/* Editar Predio - Admin */}
+          <Route path="/admin/manage-predios" element={<AdminUserIntPage tipo="admin" page="managePredio" />} />  {/* Gestionar Predios - Admin */}
+          <Route path="/admin/manage-predios/edit" element={<AdminUserIntPage tipo="admin" page="editPredio" />} />  {/* Editar Predio - Admin */}
           {/* <Route path="/admin/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage tipo="admin" page="fechaPagoDcto" />} />  Definir Fechas de Pago / Dctos - Admin */}
           <Route path="/admin/manage-predio/ejecutar-algoritmos" element={<AdminUserIntPage tipo="admin" page="algoritmos" />} /> {/* Ejecutar Algoritmos - Admin */}
           {/* Fin - Administrador */}
@@ -38,8 +38,8 @@ function App() {
           <Route path="/user-int/my-profile" element={<AdminUserIntPage page="myProfile" />} />  {/* Mi Perfil - Usuario Interno */}
           <Route path="/user-int/manage-users" element={<AdminUserIntPage page="manageUsers" />} />  {/* Gestionar Usuarios - Usuario Interno */}
           <Route path="/user-int/create-predio" element={<AdminUserIntPage page="createPredio" />} />  {/* Crear Predio - Usuario Interno */}
-          <Route path="/user-int/manage-predio" element={<AdminUserIntPage page="managePredio" />} />  {/* Gestionar Predios - Usuario Interno */}
-          <Route path="/user-int/manage-predio/edit" element={<AdminUserIntPage page="editPredio" />} />  {/* Editar Predio - Usuario Interno */}
+          <Route path="/user-int/manage-predios" element={<AdminUserIntPage page="managePredio" />} />  {/* Gestionar Predios - Usuario Interno */}
+          <Route path="/user-int/manage-predios/edit" element={<AdminUserIntPage page="editPredio" />} />  {/* Editar Predio - Usuario Interno */}
           {/* <Route path="/user-int/manage-predio/fecha-pago-descuentos" element={<AdminUserIntPage page="fechaPagoDcto" />} />  Definir Fechas de Pago / Dctos - Usuario Interno */}
           <Route path="/user-int/manage-predio/ejecutar-algoritmos" element={<AdminUserIntPage page="algoritmos" />} />  {/* Ejecutar Algoritmos - Usuario Interno */}
           {/* Fin - Usuario Interno */}

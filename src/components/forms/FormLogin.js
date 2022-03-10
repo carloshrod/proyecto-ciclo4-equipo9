@@ -34,7 +34,7 @@ function FormLogin({ login }) {
   }
 
   return (
-    <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+    <section className="section min-vh-100 d-flex flex-column align-items-center justify-content-center">
       <div className="container">
         <div className="row justify-content-center">
 
@@ -68,15 +68,15 @@ function FormLogin({ login }) {
                   </div>
 
                   <div className="col-6">
-                    <button className="btn btn-primary rounded-pill w-100" type="submit">Iniciar Sesión</button>
+                    <button className="btn my-btn-success rounded-pill w-100" type="submit">Iniciar Sesión</button>
                   </div>
 
                   <div className="col-10 text-center">
-                    <p className="small mb-0">¿No tienes una cuenta? <Link to="/register" style={{ fontWeight: 'bold' }}>Registrate aquí!</Link></p>
+                    <p className="small mb-0">¿No tienes una cuenta? <Link to="/register" className="form-link">Registrate aquí!</Link></p>
                   </div>
 
                   <div className="col-10 text-center">
-                    <p className="small mb-0">¿Olvidaste tu contraseña? <Link to="/reset-password" style={{ fontWeight: 'bold' }}>Recuperala aquí!</Link></p>
+                    <p className="small mb-0">¿Olvidaste tu contraseña? <Link to="/reset-password" className="form-link">Recuperala aquí!</Link></p>
                   </div>
                 </form>
                 {/* ******************** End Form Login ******************** */}

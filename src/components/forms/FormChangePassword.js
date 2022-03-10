@@ -18,7 +18,7 @@ function FormChangePassword({ changePassword }) {
       name: "currentPassword",
       type: "password",
       logo: "bi bi-lock-fill",
-      label: "Contraseña actual",
+      label: "Contraseña actual:",
       required: true,
     },
     {
@@ -27,7 +27,7 @@ function FormChangePassword({ changePassword }) {
       type: "password",
       logo: "bi bi-lock-fill",
       errorMessage: "La contraseña debe tener una longitud mínima de 8; contener al menos 1 mayuscula, 1 minuscula, 1 número y un caracter especial!!!",
-      label: "Nueva contraseña",
+      label: "Nueva contraseña:",
       pattern: "^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])((?=.*\\W)|(?=.*_)).*$",
       required: true,
     },
@@ -37,7 +37,7 @@ function FormChangePassword({ changePassword }) {
       type: "password",
       logo: "bi bi-lock-fill",
       errorMessage: "Las contraseñas no coinciden!!!",
-      label: "Confirmar nueva contraseña",
+      label: "Confirmar nueva contraseña:",
       pattern: form.newPassword,
       required: true,
     },
@@ -79,7 +79,7 @@ function FormChangePassword({ changePassword }) {
           />
         ))}
         <div className="text-center">
-          <button type="submit" className="btn btn-primary rounded-pill">Cambiar Contraseña</button>
+          <button type="submit" className="btn my-btn-success rounded-pill">Cambiar Contraseña</button>
         </div>
       </form>
 

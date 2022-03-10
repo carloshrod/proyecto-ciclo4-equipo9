@@ -9,7 +9,7 @@ const options = {
     responsive: true,
     plugins: {
         legend: {
-            display: true,
+            display: false,
         },
     },
 };
@@ -21,7 +21,7 @@ function PrediosChart({ prediosDb }) {
     const may200 = prediosDb.filter((predio) => predio.valor_predio.replace(/[$.]/g, '') >= 200000000)
 
     const data = {
-        labels: ['< $100M', '[$100M - $200M]', '> $200M'],
+        labels: [' Mayor a $100M', ' Entre $100M y $200M', ' Mayor a $200M'],
         datasets: [
             {
                 data: [men100.length, may100men200.length, may200.length],
@@ -39,7 +39,7 @@ function PrediosChart({ prediosDb }) {
     const may150 = prediosDb.filter((predio) => predio.area_t > 150)
 
     const data2 = {
-        labels: ['< 100m²', '[100m² - 150m²]', '> 150m²'],
+        labels: [' Menos de 100m² ', ' Entre 100m² y 150m² ', ' Más de 150m² '],
         datasets: [
             {
                 data: [aMen100.length, aMay100Men150.length, may150.length],

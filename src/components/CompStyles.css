@@ -8,22 +8,74 @@
   border-radius: 10px;
   background-color: rgba(250, 252, 250, 0.5);
 }
-
 .card-home:hover {
-  background-color: rgba(219, 245, 219, 0.8);
+  background-color: rgba(22, 151, 61, 0.3);
 }
 
 .card-home-ue {
   border-radius: 10px;
   background-color: rgba(250, 252, 250, 0.5);
 }
-
 .card-home-ue:hover {
-  background-color: rgba(157, 229, 157, 0.8);
+  background-color: rgba(22, 151, 61, 0.3);
 }
 
 .form-1 {
   border-radius: 20px;
+}
+
+.my-btn-success{
+  background-color: #0b295e;
+  color: #ffffff
+}
+.my-btn-success:hover {
+  background-color: rgba(11, 41, 94, 0.95);
+  color: #ffffff
+}
+.my-btn-success:active {
+  transform: translateY(3px)
+}
+
+.my-btn-edit {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #0000002f;
+}
+.my-btn-edit:hover {
+  background-color: #0b295e;
+  color: #ffffff;
+  border: 1px solid;
+}
+.my-btn-edit:active {
+  transform: translateY(3px)
+}
+
+.my-btn-delete {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #0000002f;
+}
+.my-btn-delete:hover {
+  background-color: #be0d1f;
+  color: #ffffff;
+  border: 1px solid;
+}
+.my-btn-delete:active {
+  transform: translateY(3px)
+}
+
+.paginate:hover {
+  color:#0b295e;
+}
+
+.form-link {
+  color:#0e6dfb;
+  font-weight: bold;
+}
+
+.form-link:hover {
+  color:rgba(14, 109, 251, 0.9);
+  font-weight: bold;
 }
 
 .center-img {
@@ -111,6 +163,12 @@
 	background-color: #ffffff;
 }
 
+.vh-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mg-t-25px {
   margin-top: 25px;
 }
@@ -136,27 +194,29 @@
 }
 
 .nav-home-ue {
-  color: #08366b;
+  color: #08366a;
   font-weight: bold;
 }
 
 .nav-home-ue:hover {
-  color: #005dc7;
-  font-weight: bold;
+  color:#144191;
 }
 
 .nav-home-ue.active {
-  background-color: #479246;
+  background-color: #148f39;
   border-radius: 10px;
-  border-width: 1px;
-  border-color: #4E9D4C;
-  border-style: solid;
   min-height: 100%;
   text-align: center;
 }
 
-.dditem-hov:hover {
-  font-weight: bold;
+.dditem {
+  color: #08366a;
+  font-weight: 600;
+}
+
+.dditem:hover {
+  color: #08366a;
+  font-weight: 700;
 }
 
 .admin-link-active:hover {

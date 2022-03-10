@@ -20,7 +20,7 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
                     <button
                         data-tip data-for="toolTipEdit"
                         type="button"
-                        className="btn btn-primary m-1"
+                        className="btn my-btn-edit m-1"
                         onClick={() => setDataToEdit(predio)}>
                         <i className="bi bi-pencil-fill" />
                     </button>
@@ -32,7 +32,7 @@ const TablePrediosRow = ({ predio, nro_registro, setDataToEdit, deleteData, link
                     <button
                         data-tip data-for="toolTipDelete"
                         type="button"
-                        className="btn btn-danger"
+                        className="btn my-btn-delete"
                         onClick={() => deleteData(codigo)}>
                         <i className="bi bi-trash" />
                     </button>

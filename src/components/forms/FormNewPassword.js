@@ -83,7 +83,7 @@ function FormNewPassword({ newPassword }) {
                       />
                     ))}
                     <div className="text-center">
-                      <button type="submit" className="btn btn-primary rounded-pill">Restablecer Contraseña</button>
+                      <button type="submit" className="btn my-btn-success rounded-pill">Restablecer Contraseña</button>
                     </div>
                   </form>
 

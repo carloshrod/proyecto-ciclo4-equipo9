@@ -155,18 +155,18 @@ function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
                                             </span>
                                         </div>
                                         <nav className="dataTable-pagination mt-3">
-                                            <ul className="dataTable-pagination-list">
-                                                <ReactPaginate
-                                                    breakLabel="..."
-                                                    previousLabel={<i className="bi bi-caret-left-fill" />}
-                                                    nextLabel={<i className="bi bi-caret-right-fill" />}
-                                                    marginPagesDisplayed={0}
-                                                    pageRangeDisplayed={5}
-                                                    pageCount={pageCount()}
-                                                    onPageChange={changePage}
-                                                    activeClassName="active"
-                                                />
-                                            </ul>
+                                            <ReactPaginate
+                                                breakLabel="..."
+                                                previousLabel={<i className="bi bi-caret-left-fill" />}
+                                                nextLabel={<i className="bi bi-caret-right-fill" />}
+                                                marginPagesDisplayed={0}
+                                                pageRangeDisplayed={5}
+                                                pageCount={pageCount()}
+                                                onPageChange={changePage}
+                                                previousLinkClassName="paginate"
+                                                nextLinkClassName="paginate"
+                                                activeClassName="active"
+                                            />
                                         </nav>
                                     </div>
                                 </div>

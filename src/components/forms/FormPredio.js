@@ -68,7 +68,7 @@ function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit,
                                     ))}
 
                                     <div className="col-5 col-sm-3 col-md-2 col-lg-2 m-auto mt-2">
-                                        <button className="btn btn-primary rounded-pill w-100" type="submit">{btn_text}</button>
+                                        <button className="btn my-btn-success rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
 
                                 </form>

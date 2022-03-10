@@ -62,7 +62,7 @@ function FormConvenio() {
                         </div>
 
                         <div className="col-4 m-auto mt-3 mb-3">
-                            <button className="btn btn-primary rounded-pill w-100" type="submit">Solicitar</button>
+                            <button className="btn my-btn-success rounded-pill w-100" type="submit">Solicitar</button>
                         </div>
                     </form>
                 </div>

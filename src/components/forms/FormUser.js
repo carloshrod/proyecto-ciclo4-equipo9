@@ -45,15 +45,15 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                             <ReactTooltip id="toolTipUpload" place="top" type="dark" effect="solid">
                                                 Subir nueva imágen de perfil
                                             </ReactTooltip>
-                                            <Link to="" className="btn btn-primary">
-                                                <i data-tip data-for="toolTipUpload" className="bi bi-upload" />
+                                            <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
+                                                Eliminar imágen de perfil
+                                            </ReactTooltip>
+                                            <Link to="" data-tip data-for="toolTipUpload" className="btn my-btn-edit">
+                                                <i className="bi bi-upload" />
                                             </Link>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <Link to="" className="btn btn-danger">
-                                                <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
-                                                    Eliminar imágen de perfil
-                                                </ReactTooltip>
-                                                <i data-tip data-for="toolTipDelete" className="bi bi-trash" />
+                                            <Link to="" data-tip data-for="toolTipDelete" className="btn my-btn-delete">
+                                                <i className="bi bi-trash" />
                                             </Link>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@ function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, b
                                     ))}
 
                                     <div className="col-5 col-sm-3 col-md-2 col-lg-2 m-auto mt-3">
-                                        <button className="btn btn-primary rounded-pill w-100" type="submit" disabled={payload.rol !== 1 ? true : false}>{btn_text}</button>
+                                        <button className="btn my-btn-success rounded-pill w-100" type="submit" disabled={payload.rol !== 1 ? true : false}>{btn_text}</button>
                                     </div>
                                 </form>
                             </div>

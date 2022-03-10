@@ -53,7 +53,7 @@ function Header() {
                         <nav className="header-nav ms-auto">
                             <ul className="d-flex align-items-center">
                                 <li className="nav-item dropdown pe-3">
-                                    <Link className="nav-link nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
+                                    <Link className="nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
                                         <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
                                         <span className="nav-home-ue dropdown-toggle ps-2">{payload.nombre}</span>
                                     </Link>
@@ -61,7 +61,7 @@ function Header() {
                                     <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                         <li>
                                             <Link to="/user-ext/my-profile">
-                                                <div className="dropdown-item dditem-hov d-flex align-items-center">
+                                                <div className="dropdown-item dditem d-flex align-items-center">
                                                     <span className="m-auto">
                                                         <i className="bi bi-person" />
                                                         Mi Perfil
@@ -75,7 +75,7 @@ function Header() {
 
                                         <li>
                                             <div className="dropdown-item d-flex align-items-center">
-                                                <button className="btn btn-100 btn-light btn-primary dditem-hov" type="button" onClick={() => logout()}>
+                                                <button className="btn btn-100 btn-light btn-primary dditem" type="button" onClick={() => logout()}>
                                                     <i className="bi bi-box-arrow-right" />
                                                     Cerrar Sesión
                                                 </button>

@@ -19,7 +19,7 @@ function Button({ msg, children }) {
             <form className="search-form d-flex align-items-center">
                 <div className="m-auto">
                     {/* <input className="btn btn-success m-4" type="button" value={value} OnClick={action} /> */}
-                    <button type="button" className="btn btn-primary m-3" onClick={successMsg}>
+                    <button type="button" className="btn my-btn-success m-3" onClick={successMsg}>
                         {children}
                     </button>
                 </div>

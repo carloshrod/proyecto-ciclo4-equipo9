@@ -124,8 +124,8 @@ function AdminUserIntPage({ tipo, page }) {
             html: `¿Estás seguro que quieres eliminar el usuario con número de documento <b>${nro_doc}</b>?`,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#007aff',
-            cancelButtonColor: '#dc3545',
+            confirmButtonColor: '#0b295e',
+            cancelButtonColor: '#be0d1f',
             confirmButtonText: 'Sí, aceptar',
             cancelButtonText: 'Cancelar'
         }).then(res => {
@@ -160,12 +160,10 @@ function AdminUserIntPage({ tipo, page }) {
     };
 
     // ********** Cambiar Contraseña **********
-    const changePassword = (user) => {     
+    const changePassword = (user) => {
         let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         const token = localStorage.getItem("token");
-        const payload = jwtDecode(token);
-        user.nro_doc = payload.nro_doc;
-            let options = {
+        let options = {
             body: user,
             headers: {
                 "content-type": "application/json",
@@ -220,26 +218,6 @@ function AdminUserIntPage({ tipo, page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const updateUserInt = (user, accion) => {
-        const token = localStorage.getItem("token");
-        const payload = jwtDecode(token);
-        user.nro_doc = payload.nro_doc;
-        user.accion = accion;
-        let endpoint = url + "/users/actualizar-user-int";
-        let options = {
-            body: user,
-            headers: { "content-type": "application/json" },
-        }
-
-        api.post(endpoint, options).then((res) => {
-            console.log(res)
-            if (!res.error) {
-                let newData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
-                setUsersDb(newData)
-            }
-        })
-    }
-
     // ********** Crear Predio **********
     const createPredio = (predio) => {
         predio.estado = 1;
@@ -248,7 +226,6 @@ function AdminUserIntPage({ tipo, page }) {
         predio.valor_predial = Math.round(vrPredial);
         let endpoint = url + process.env.REACT_APP_API_GUARDAR_P;
         const token = localStorage.getItem("token");
-        const payload = jwtDecode(token);
         let options = {
             body: predio,
             headers: {
@@ -262,10 +239,11 @@ function AdminUserIntPage({ tipo, page }) {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
             if (!res.err) {
-                if (res.data) {
-                    setPrediosDb([...prediosDb, res.data]);
-                    updateUserInt(payload, "crear")
+                if (res.data1) {
+                    setPrediosDb([...prediosDb, res.data1]);
                     toast.success(res.msg);
+                    let newData = usersDb.map((e) => (e._id === res.data2._id ? res.data2 : e));
+                    setUsersDb(newData)
                 } else {
                     toast.error(res.msg);
                 }
@@ -282,7 +260,6 @@ function AdminUserIntPage({ tipo, page }) {
         predio.valor_predial = Math.round(vrPredial);
         let endpoint = url + process.env.REACT_APP_API_EDITAR_P;
         const token = localStorage.getItem("token");
-        const payload = jwtDecode(token);
         let options = {
             body: predio,
             headers: {
@@ -298,7 +275,8 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
-                updateUserInt(payload, "editar")
+                let newUsersData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
+                setUsersDb(newUsersData)
                 if (res.estado === "ok") {
                     toast.success(res.msg)
                 } else {
@@ -316,31 +294,31 @@ function AdminUserIntPage({ tipo, page }) {
             html: `¿Estás seguro que quieres eliminar el predio con código <b>${codigo}</b>?`,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#007aff',
-            cancelButtonColor: '#dc3545',
+            confirmButtonColor: '#0b295e',
+            cancelButtonColor: '#be0d1f',
             confirmButtonText: 'Sí, aceptar',
             cancelButtonText: 'Cancelar'
         }).then(res => {
             if (res.isConfirmed) {
                 let endpoint = url + process.env.REACT_APP_API_ELIMINAR_P + codigo;
                 const token = localStorage.getItem("token");
-                const payload = jwtDecode(token);
-                        let options = {
+                let options = {
                     headers: {
                         "content-type": "application/json",
                         "authorization": `Bearer ${token}`
                     },
                 };
 
-                api.del(endpoint, options).then((res) => {
+                api.post(endpoint, options).then((res) => {
                     if (!res.estado) {
                         toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
                     }
                     if (!res.err) {
                         let newData = prediosDb.filter((el) => el.codigo !== codigo);
                         setPrediosDb(newData);
-                        updateUserInt(payload, "borrar")
                         toast.success(res.msg);
+                        let newUsersData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
+                        setUsersDb(newUsersData)        
                     } else {
                         toast.error(res.msg);
                     }
@@ -392,24 +370,12 @@ function AdminUserIntPage({ tipo, page }) {
                         {tipo === "admin" ?
                             <>
                                 <Sidebar
-                                    logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
-                                    item1={<SidebarItem linkTo="/admin/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
-                                    item2={<SidebarItem linkTo="/admin/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
-                                    item3={<SidebarItem linkTo="/admin/create-user" icono="bi bi-person-plus-fill" titulo="Crear Usuarios" />}
-                                    item4={<SidebarItem linkTo="/admin/manage-users" icono="bi bi-people-fill" titulo="Gestionar Usuarios" />}
-                                    item5={<SidebarItem linkTo="/admin/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
-                                    item6={<SidebarItem linkTo="/admin/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
                                 />
                             </>
                             :
                             <>
                                 <Sidebar
-                                    logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
-                                    item1={<SidebarItem linkTo="/user-int/dashboard" icono="bi bi-grid" titulo="Dashboard" />}
-                                    item2={<SidebarItem linkTo="/user-int/my-profile" icono="bi bi-person-circle" titulo="Mi Perfil" />}
-                                    item4={<SidebarItem linkTo="/user-int/manage-users" icono="bi bi-people-fill" titulo="Gestionar Usuarios" />}
-                                    item5={<SidebarItem linkTo="/user-int/create-predio" icono="bi bi-plus-circle-fill" titulo="Crear Predio" />}
-                                    item6={<SidebarItem linkTo="/user-int/manage-predio" icono="bi bi-building" titulo="Gestionar Predios" />}
+                                    // logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
                                 />
                             </>
                         }
@@ -483,7 +449,7 @@ function AdminUserIntPage({ tipo, page }) {
                                 predios={prediosDb}
                                 setPredioToEdit={setPredioToEdit}
                                 deletePredio={deletePredio}
-                                linkTo={tipo === "admin" ? "/admin/manage-predio/edit" : "/user-int/manage-predio/edit"}
+                                linkTo={tipo === "admin" ? "/admin/manage-predios/edit" : "/user-int/manage-predios/edit"}
                                 error={error && <Message msg={msgError} bgColor="#dc3545" />}
                             />
                         </ContainerAdmin>}
@@ -491,7 +457,7 @@ function AdminUserIntPage({ tipo, page }) {
                         {page === "editPredio" &&
                             <ContainerAdmin
                                 titulo="Editar Predio"
-                                linkTo={tipo === "admin" ? "/admin/manage-predio" : "/user-int/manage-predio"}
+                                linkTo={tipo === "admin" ? "/admin/manage-predios" : "/user-int/manage-predios"}
                                 subtitulo="Gestionar Predios"
                                 sep="&nbsp;/&nbsp;"
                                 subtitulo2="Editar Predio">

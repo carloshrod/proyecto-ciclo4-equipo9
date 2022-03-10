@@ -25,7 +25,7 @@ function HeaderAdmin({ btn }) {
                     <ul className="d-flex align-items-center">
                         <li className="nav-item dropdown pe-3">
 
-                            <Link to="/" className="nav-link nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
+                            <Link to="/" className="nav-profile d-flex align-items-center pe-0" data-bs-toggle="dropdown">
                                 <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
                                 <span className="nav-home-ue dropdown-toggle ps-2">{payload.nombre}</span>
                             </Link>{/* <!-- End Profile Image Icon --> */}
@@ -33,7 +33,7 @@ function HeaderAdmin({ btn }) {
                             <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                                 <li>
                                     <Link to={payload.rol === 1 ? "/admin/my-profile" : "/user-int/my-profile"}>
-                                        <div className="dropdown-item dditem-hov d-flex align-items-center">
+                                        <div className="dropdown-item dditem d-flex align-items-center">
                                             <span className="m-auto">
                                                 <i className="bi bi-person" />
                                                 Mi Perfil
@@ -47,9 +47,9 @@ function HeaderAdmin({ btn }) {
 
                                 <li>
                                     <div className="dropdown-item d-flex align-items-center">
-                                        <button className="btn btn-100 btn-light btn-primary dditem-hov" type="button" onClick={()=>logout()}>
+                                        <button className="btn btn-100 btn-light btn-primary dditem" type="button" onClick={()=>logout()}>
                                             <i className="bi bi-box-arrow-right" />
-                                            Cerrar Sesión
+                                            <span>Cerrar Sesión</span>
                                         </button>
                                     </div>
                                 </li>

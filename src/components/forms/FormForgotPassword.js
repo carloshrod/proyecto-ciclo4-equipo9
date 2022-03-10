@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const initialForm = {
   email: ""
@@ -17,13 +18,18 @@ function FormForgotPassword({ resetPassword }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!form.email) {
+      toast.error("Por favor, ingresa tu correo electrónico!!!");
+      return;
+    }
+
     resetPassword(form);
   }
 
 
   return (
     <>
-      <section className="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <section className="section min-vh-100 d-flex flex-column align-items-center justify-content-center">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
@@ -49,7 +55,7 @@ function FormForgotPassword({ resetPassword }) {
                     </div>
 
                     <div className="col-7">
-                      <button className="btn btn-primary rounded-pill w-100" type="submit">Recuperar Contraseña</button>
+                      <button className="btn my-btn-success rounded-pill w-100" type="submit">Recuperar Contraseña</button>
                     </div>
                   </form>
                 </div>
