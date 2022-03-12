@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HeaderAdmin from "../HeaderAdmin";
 import Sidebar from "../Sidebar";
-import SidebarItem from '../SidebarItem';
 import ContainerAdmin from '../ContainerAdmin';
 import FooterAdmin from "../FooterAdmin";
 import Dashboard from '../Dashboard';
@@ -42,7 +41,7 @@ function AdminUserIntPage({ tipo, page }) {
                 if (!res.err) {
                     setError(null);
                     if (res.data) {
-                        setUsersDb(res.data.slice(1));
+                        setUsersDb(res.data);
                     } else {
                         setError(true);
                         setMsgError("Error, no hay conexión con la base de datos!!!");
@@ -195,7 +194,7 @@ function AdminUserIntPage({ tipo, page }) {
     // ********************* CRUD predios *********************
     const [prediosDb, setPrediosDb] = useState([])
     const [predioToEdit, setPredioToEdit] = useState(null);
-
+    const [historial, setHistorial] = useState([])
 
     useEffect(() => {
         setLoading(true);
@@ -203,8 +202,9 @@ function AdminUserIntPage({ tipo, page }) {
             .then((res) => {
                 if (!res.error) {
                     setError(null);
-                    if (res.data) {
-                        setPrediosDb(res.data);
+                    if (res.data1) {
+                        setPrediosDb(res.data1);
+                        setHistorial(res.data2)
                     } else {
                         setError(true);
                         setMsgError("Error, no hay conexión con la base de datos!!!");
@@ -243,7 +243,8 @@ function AdminUserIntPage({ tipo, page }) {
                     setPrediosDb([...prediosDb, res.data1]);
                     toast.success(res.msg);
                     let newData = usersDb.map((e) => (e._id === res.data2._id ? res.data2 : e));
-                    setUsersDb(newData)
+                    setUsersDb(newData);
+                    setHistorial([...historial, res.data3]);
                 } else {
                     toast.error(res.msg);
                 }
@@ -275,8 +276,9 @@ function AdminUserIntPage({ tipo, page }) {
             if (!res.err) {
                 let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
                 setPrediosDb(newData);
-                let newUsersData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
-                setUsersDb(newUsersData)
+                let newUsersData = usersDb.map((e) => (e._id === res.data1._id ? res.data1 : e));
+                setUsersDb(newUsersData);
+                setHistorial([...historial, res.data2]);
                 if (res.estado === "ok") {
                     toast.success(res.msg)
                 } else {
@@ -317,8 +319,9 @@ function AdminUserIntPage({ tipo, page }) {
                         let newData = prediosDb.filter((el) => el.codigo !== codigo);
                         setPrediosDb(newData);
                         toast.success(res.msg);
-                        let newUsersData = usersDb.map((e) => (e._id === res.data._id ? res.data : e));
-                        setUsersDb(newUsersData)        
+                        let newUsersData = usersDb.map((e) => (e._id === res.data1._id ? res.data1 : e));
+                        setUsersDb(newUsersData);
+                        setHistorial([...historial, res.data2]);    
                     } else {
                         toast.error(res.msg);
                     }
@@ -387,6 +390,7 @@ function AdminUserIntPage({ tipo, page }) {
                                     cantidadPredios={countPredios()}
                                     usersDb={usersDb}
                                     prediosDb={prediosDb}
+                                    historial={historial}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
@@ -413,7 +417,7 @@ function AdminUserIntPage({ tipo, page }) {
                             <ContainerAdmin titulo="Gestionar Usuarios" linkTo="#" >
                                 {loading && <Loader />}
                                 <TableUsers
-                                    users={usersDb}
+                                    usersDb={usersDb}
                                     setUserToEdit={setUserToEdit}
                                     deleteUser={deleteUser}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}

@@ -22,6 +22,7 @@ function SystemOutPage({ page }) {
   // Registro de usuarios:
   const registerUser = (user) => {
     user.rol = 3; // Rol 3 -> Usuario Externo
+    user.estado = 1;
     let endpoint = url + process.env.REACT_APP_API_REGISTRO;
     let options = {
       body: user,

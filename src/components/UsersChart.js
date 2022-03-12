@@ -20,7 +20,7 @@ const options = {
 };
 
 function UsersChart({ usersDb }) {
-    const usersInt = usersDb.filter((user) => user.rol === 2)
+    const usersInt = usersDb.filter((user) => user.rol === 1 || user.rol === 2)
     const labels = usersInt.map((user) => {
         return user.nombres
     })

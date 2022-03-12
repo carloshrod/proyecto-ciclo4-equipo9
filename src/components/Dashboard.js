@@ -2,11 +2,21 @@ import React from 'react';
 import PrediosChart from './PrediosChart';
 import UsersChart from './UsersChart';
 import jwtDecode from 'jwt-decode';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json'
+import es from 'javascript-time-ago/locale/es.json';
+import ReactTimeAgo from 'react-time-ago';
 
-function Dashboard({ usersDb, prediosDb, cantidadUsuarios, cantidadPredios, error }) {
+TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(es)
+
+function Dashboard({ usersDb, prediosDb, historial, cantidadUsuarios, cantidadPredios, error }) {
 
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);
+
+    const activityAdmin = historial.filter((e) => e.author !== "Administrador" && e).slice(-12).reverse()
+    const activityUserInt = historial.filter((e) => e.author !== "Administrador" && e).slice(-6).reverse()
 
     return (
         <>
@@ -120,105 +130,32 @@ function Dashboard({ usersDb, prediosDb, cantidadUsuarios, cantidadPredios, erro
                     <div className="card-body">
                         <h5 className="card-title">Actividad Reciente</h5>
                         <div className="activity">
-
-                            <div className="activity-item d-flex">
-                                <div className="activite-label">32 min</div>
-                                <i className='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                <div className="activity-content">
-                                    Quia quae rerum <a href="/" className="fw-bold text-dark">explicabo officiis</a> beatae
-                                </div>
-                            </div>{/* <!-- End activity item--> */}
-
-                            <div className="activity-item d-flex">
-                                <div className="activite-label">56 min</div>
-                                <i className='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                                <div className="activity-content">
-                                    Voluptatem blanditiis blanditiis eveniet
-                                </div>
-                            </div>{/* <!-- End activity item--> */}
-
-                            <div className="activity-item d-flex">
-                                <div className="activite-label">2 hrs</div>
-                                <i className='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                                <div className="activity-content">
-                                    Voluptates corrupti molestias voluptatem
-                                </div>
-                            </div>{/* <!-- End activity item--> */}
-
-                            <div className="activity-item d-flex">
-                                <div className="activite-label">1 day</div>
-                                <i className='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                                <div className="activity-content">
-                                    Tempore autem saepe <a href="/" className="fw-bold text-dark">occaecati voluptatem</a> tempore
-                                </div>
-                            </div>{/* <!-- End activity item--> */}
-
-                            <div className="activity-item d-flex">
-                                <div className="activite-label">2 days</div>
-                                <i className='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                                <div className="activity-content">
-                                    Est sit eum reiciendis exercitationem
-                                </div>
-                            </div>{/* <!-- End activity item--> */}
-
-                            <div className="activity-item d-flex">
-                                <div className="activite-label">4 weeks</div>
-                                <i className='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                                <div className="activity-content">
-                                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                                </div>
-                            </div>{/* <!-- End activity item--> */}
-
-                            {payload.rol === 1 &&
-                                <>
-                                    <div className="activity-item d-flex">
-                                        <div className="activite-label">2 days</div>
-                                        <i className='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                            {payload.rol === 1 ?
+                                activityAdmin.map((item) => (
+                                    <div key={item._id} className="activity-item d-flex">
+                                        <div className="activite-label"><ReactTimeAgo date={new Date (item.fecha).getTime()} locale="es-ES" timeStyle="twitter" /></div>
+                                        <i className={`bi bi-circle-fill activity-badge align-self-start
+                                    ${(item.action === "creó" && "text-success") ||
+                                            (item.action === "editó" && "text-warning") ||
+                                            (item.action === "eliminó" && "text-danger")}`}></i>
                                         <div className="activity-content">
-                                            Est sit eum reiciendis exercitationem
+                                            <b>{item.author}</b> {item.action} el predio con código <b>{item.code}</b>
                                         </div>
-                                    </div>{/* <!-- End activity item--> */}
-
-                                    <div className="activity-item d-flex">
-                                        <div className="activite-label">32 min</div>
-                                        <i className='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                    </div>
+                                ))
+                                :
+                                activityUserInt.map((item) => (
+                                    <div key={item._id} className="activity-item d-flex">
+                                        <div className="activite-label"><ReactTimeAgo date={new Date (item.fecha).getTime()} locale="es-ES" timeStyle="twitter" /></div>
+                                        <i className={`bi bi-circle-fill activity-badge align-self-start
+                                        ${(item.action === "creó" && "text-success") ||
+                                            (item.action === "editó" && "text-warning") ||
+                                            (item.action === "eliminó" && "text-danger")}`}></i>
                                         <div className="activity-content">
-                                            Quia quae rerum <a href="/" className="fw-bold text-dark">explicabo officiis</a> beatae
+                                            <b>{item.author}</b> {item.action} el predio con código <b>{item.code}</b>
                                         </div>
-                                    </div>{/* <!-- End activity item--> */}
-
-                                    <div className="activity-item d-flex">
-                                        <div className="activite-label">56 min</div>
-                                        <i className='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                                        <div className="activity-content">
-                                            Voluptatem blanditiis blanditiis eveniet
-                                        </div>
-                                    </div>{/* <!-- End activity item--> */}
-
-                                    <div className="activity-item d-flex">
-                                        <div className="activite-label">2 hrs</div>
-                                        <i className='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                                        <div className="activity-content">
-                                            Voluptates corrupti molestias voluptatem
-                                        </div>
-                                    </div>{/* <!-- End activity item--> */}
-
-                                    <div className="activity-item d-flex">
-                                        <div className="activite-label">1 day</div>
-                                        <i className='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                                        <div className="activity-content">
-                                            Tempore autem saepe <a href="/" className="fw-bold text-dark">occaecati voluptatem</a> tempore
-                                        </div>
-                                    </div>{/* <!-- End activity item--> */}
-
-                                    <div className="activity-item d-flex">
-                                        <div className="activite-label">2 days</div>
-                                        <i className='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                                        <div className="activity-content">
-                                            Est sit eum reiciendis exercitationem
-                                        </div>
-                                    </div>{/* <!-- End activity item--> */}
-                                </>
+                                    </div>
+                                ))
                             }
                         </div>
 

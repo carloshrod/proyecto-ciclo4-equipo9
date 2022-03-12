@@ -9,7 +9,8 @@ export const initialForm = {
     select: 10
 }
 
-function TableUsers({ users, setUserToEdit, deleteUser, error, userRol }) {
+function TableUsers({ usersDb, setUserToEdit, deleteUser, error }) {
+    const users = usersDb.filter((user) => user.rol !== 1)
 
     const [searchParams, setSearchParams] = useSearchParams();
     const filter = searchParams.get("filter") ?? "";
