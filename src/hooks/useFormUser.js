@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { validateFormUser } from '../tools/validateForm';
 
-export const useFormUser = (initialForm, createUser, updateUser, userToEdit, setUserToEdit) => {
+export const useFormUser = (initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit) => {
     const [form, setForm] = useState(initialForm);
     const [reset, setReset] = useState(false)
 
@@ -29,7 +29,7 @@ export const useFormUser = (initialForm, createUser, updateUser, userToEdit, set
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        if (validateFormUser(form) === true) {
+        if (validateFormUser(form, usersDb,userToEdit) === true) {
             if (form.estado === null) {
                 createUser(form);
                 handleReset();

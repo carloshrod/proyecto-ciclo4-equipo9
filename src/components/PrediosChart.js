@@ -26,9 +26,9 @@ function PrediosChart({ prediosDb }) {
             {
                 data: [men100.length, may100men200.length, may200.length],
                 backgroundColor: [
-                    'rgba(25, 135, 84, 0.5)',
-                    'rgba(255, 194, 8, 0.5)',
-                    'rgba(219, 52, 69, 0.5)',
+                    'rgba(25, 135, 84, 0.7)',
+                    'rgba(255, 194, 8, 0.7)',
+                    'rgba(219, 52, 69, 0.7)',
                 ],
             },
         ],
@@ -44,9 +44,9 @@ function PrediosChart({ prediosDb }) {
             {
                 data: [aMen100.length, aMay100Men150.length, may150.length],
                 backgroundColor: [
-                    'rgba(25, 135, 84, 0.5)',
-                    'rgba(255, 194, 8, 0.5)',
-                    'rgba(219, 52, 69, 0.5)',
+                    'rgba(25, 135, 84, 0.7)',
+                    'rgba(255, 194, 8, 0.7)',
+                    'rgba(219, 52, 69, 0.7)',
                 ],
             },
         ],

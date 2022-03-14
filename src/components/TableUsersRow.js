@@ -47,19 +47,17 @@ const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
                         <i className="bi bi-pencil-fill" />
                     </button>
                 </Link>
-                <Link to="#">
-                    <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
-                        Eliminar usuario
-                    </ReactTooltip>
-                    <button
-                        data-tip data-for="toolTipDelete"
-                        type="button"
-                        className="btn my-btn-delete"
-                        disabled={payload.rol !== 1 ? true : false}
-                        onClick={handleDelete}>
-                        <i className="bi bi-trash" />
-                    </button>
-                </Link>
+                <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
+                    Eliminar usuario
+                </ReactTooltip>
+                <button
+                    data-tip data-for="toolTipDelete"
+                    type="button"
+                    className="btn my-btn-delete"
+                    disabled={payload.rol !== 1 ? true : false}
+                    onClick={handleDelete}>
+                    <i className="bi bi-trash" />
+                </button>
             </td>
         </tr>
     );

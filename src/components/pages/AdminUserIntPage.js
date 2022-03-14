@@ -406,8 +406,8 @@ function AdminUserIntPage({ tipo, page }) {
                             <ContainerAdmin titulo="Crear Usuario" linkTo="#" >
                                 <FormUser
                                     titulo="Ingrese los datos del usuario"
+                                    usersDb={usersDb}
                                     createUser={createUser}
-                                    updateUser={updateUser}
                                     setUserToEdit={setUserToEdit}
                                     btn_text="Crear"
                                 />  {/* Children */}
@@ -417,7 +417,7 @@ function AdminUserIntPage({ tipo, page }) {
                             <ContainerAdmin titulo="Gestionar Usuarios" linkTo="#" >
                                 {loading && <Loader />}
                                 <TableUsers
-                                    usersDb={usersDb}
+                                    users={usersDb.filter((user) => user.rol !== 1)}
                                     setUserToEdit={setUserToEdit}
                                     deleteUser={deleteUser}
                                     error={error && <Message msg={msgError} bgColor="#dc3545" />}
@@ -428,7 +428,7 @@ function AdminUserIntPage({ tipo, page }) {
                             <ContainerAdmin titulo="Editar Usuario" linkTo="/admin/manage-users" subtitulo="Gestionar Usuarios" sep="&nbsp;/&nbsp;" subtitulo2="Editar Usuario">
                                 <FormUser
                                     titulo="Datos del usuario a editar"
-                                    createUser={createUser}
+                                    usersDb={usersDb}
                                     updateUser={updateUser}
                                     userToEdit={userToEdit}
                                     setUserToEdit={setUserToEdit}
@@ -440,6 +440,7 @@ function AdminUserIntPage({ tipo, page }) {
                             <ContainerAdmin titulo="Crear Predio" linkTo="#">
                                 <FormPredio
                                     titulo="Ingrese los datos del predio"
+                                    prediosDb={prediosDb}
                                     createPredio={createPredio}
                                     updatePredio={updatePredio}
                                     setPredioToEdit={setPredioToEdit}
@@ -467,6 +468,7 @@ function AdminUserIntPage({ tipo, page }) {
                                 subtitulo2="Editar Predio">
                                 <FormPredio
                                     titulo="Datos del predio a editar"
+                                    prediosDb={prediosDb}
                                     createPredio={createPredio}
                                     updatePredio={updatePredio}
                                     predioToEdit={predioToEdit}

@@ -10,7 +10,7 @@ let regexCod = /^[P][D][-][0-9]{9}$/
 let regexCur = /^[1-9][0-9.]*$/
 let regexDir = /^(([C][a][l][l][e]\s)|([C][a][r][r][e][r][a]\s))[1-9]([0-9]+)?([a-z])?\s[#]\s[1-9]([0-9]+)?([a-z])?\s[-]\s[1-9]([0-9]+)?$/
 
-export const validateFormUser = (form) => {
+export const validateFormUser = (form, usersDb, userToEdit) => {
     if (!form.nombres || !form.apellidos || !form.tipo_doc ||
         !form.nro_doc || !form.email || !form.telefono || !form.direccion) {
         toast.error("Todos los campos son requeridos!!!")
@@ -21,6 +21,40 @@ export const validateFormUser = (form) => {
         !regexEmail.test(form.email) || !regexTel.test(form.telefono) || !regexDir.test(form.direccion)) {
         toast.error("Por favor, revise que todos los datos tengan el formato correcto!!!")
         return false;
+    }
+
+    if (form.estado === null) {
+        const existingNroDoc = usersDb.filter((user) => user.nro_doc === parseInt(form.nro_doc))
+        const existingEmail = usersDb.filter((user) => user.email === form.email)
+
+        if (existingNroDoc.length > 0) {
+            toast.error("Ya existe un usuario con ese número de documento!!!")
+            return false
+        }
+
+        if (existingEmail.length > 0) {
+            toast.error("Ya existe un usuario con ese correo electrónico!!!")
+            return false
+        }
+    } else {
+        if ((userToEdit.nro_doc !== form.nro_doc) || (userToEdit.email !== form.email)) {
+            const existingNroDoc = usersDb.filter((user) => user.nro_doc === parseInt(form.nro_doc))
+            const existingEmail = usersDb.filter((user) => user.email === form.email)
+
+            if (existingNroDoc.length > 0) {
+                if (existingNroDoc[0].nro_doc !== userToEdit.nro_doc) {
+                    toast.error("Ya existe un usuario con ese número de documento!!!")
+                    return false
+                }
+            }
+
+            if (existingEmail.length > 0) {
+                if (existingEmail[0].email !== userToEdit.email) {
+                    toast.error("Ya existe un usuario con ese correo electrónico!!!")
+                    return false
+                }
+            }
+        }
     }
 
     return true;
@@ -86,7 +120,7 @@ export const validateFormNewPassword = (form) => {
     return true;
 }
 
-export const validateFormPredio = (form) => {
+export const validateFormPredio = (form, prediosDb, predioToEdit) => {
     if (!form.codigo || !form.nom_prop || !form.doc_prop || !form.area_c ||
         !form.area_t | !form.valor_predio || !form.direccion_predio || !form.barrio) {
         toast.error("Todos los campos son requeridos!!!")
@@ -106,6 +140,40 @@ export const validateFormPredio = (form) => {
     if (parseFloat(form.area_c) > parseFloat(form.area_t)) {
         toast.error("El area construída debe ser menor o igual al area total!!!")
         return false;
+    }
+
+    if (form.estado === null) {
+        const existingCodigo = prediosDb.filter((predio) => predio.codigo === form.codigo)
+        const existingDirPredio = prediosDb.filter((predio) => predio.direccion_predio === form.direccion_predio)
+
+        if (existingCodigo.length > 0) {
+            toast.error("Ya existe un predio con ese código!!!")
+            return false
+        }
+
+        if (existingDirPredio.length > 0) {
+            toast.error("Ya existe un predio con esa dirección!!!")
+            return false
+        }
+    } else {
+        if ((predioToEdit.codigo !== form.codigo) || (predioToEdit.direccion_predio !== form.direccion_predio)) {
+            const existingCodigo = prediosDb.filter((predio) => predio.codigo === form.codigo)
+            const existingDirPredio = prediosDb.filter((predio) => predio.direccion_predio === form.direccion_predio)
+
+            if (existingCodigo.length > 0) {
+                if (existingCodigo[0].codigo !== predioToEdit.codigo) {
+                    toast.error("Ya existe un predio con ese código!!!")
+                    return false        
+                }
+            }
+
+            if (existingDirPredio.length > 0) {
+                if (existingDirPredio[0].direccion_predio !== predioToEdit.direccion_predio) {
+                    toast.error("Ya existe un predio con esa dirección!!!")
+                    return false        
+                }
+            }
+        }
     }
 
     return true;

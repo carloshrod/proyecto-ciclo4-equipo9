@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { validateFormPredio } from '../tools/validateForm';
 
-export const useFormPredio = (initialForm, createPredio, updatePredio, predioToEdit, setPredioToEdit) => {
+export const useFormPredio = (initialForm, prediosDb, createPredio, updatePredio, predioToEdit, setPredioToEdit) => {
     const [form, setForm] = useState(initialForm);
     const [reset, setReset] = useState(false)
 
@@ -29,7 +29,7 @@ export const useFormPredio = (initialForm, createPredio, updatePredio, predioToE
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        if (validateFormPredio(form)) {
+        if (validateFormPredio(form, prediosDb, predioToEdit)) {
             if (form.estado === null) {
                 createPredio(form);
                 handleReset();

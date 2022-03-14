@@ -7,7 +7,7 @@ function TablePrediosHeader({ onSorting }) {
         { name: "Código", field: "codigo", sortable: true, className: "pointer" },
         { name: "Nombre Propietario", field: "nom_prop", sortable: true, className: "pointer" },
         { name: "Doc. Propietario", field: "doc_prop", sortable: false, className: "d-none d-sm-table-cell" },
-        { name: "Dirección", field: "direccion-predio", sortable: true, className: "d-none d-sm-table-cell pointer" },
+        { name: "Dirección", field: "direccion_predio", sortable: false, className: "d-none d-sm-table-cell" },
     ];
 
     const [sortingField, setSortingField] = useState("");
@@ -25,7 +25,7 @@ function TablePrediosHeader({ onSorting }) {
             <tr>
                 {headers.map(({ name, field, sortable, className }) => (
                     <th
-                        data-tip data-for={(name === "Código" || name === "Nombre Propietario" || name === "Dirección" ? "toolTipSort" : "")}
+                        data-tip data-for={(name === "Código" || name === "Nombre Propietario" ? "toolTipSort" : "")}
                         className={className}
                         key={name}
                         onClick={() => sortable ? onSortingChange(field) : null}

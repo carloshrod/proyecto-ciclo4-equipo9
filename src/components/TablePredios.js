@@ -33,24 +33,18 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
     }
 
     // Mostrar Predios:
-    const displayPredios = predios.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((predio, index) => {
-        return (
-            <TablePrediosRow
-                key={predio._id}
-                nro_registro={index + 1 + firstItemShowedPerPage}
-                predio={predio}
-                setDataToEdit={setPredioToEdit}
-                deleteData={deletePredio}
-                linkTo={linkTo}
-            />
-        )
-    })
-
-    // Ordenar predios:
-    if (sorting.field) {
-        const reversed = sorting.order === "asc" ? 1 : -1;
-        predios = predios.sort((a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field]))
-    };
+    // const displayPredios = predios.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((predio, index) => {
+    //     return (
+    //         <TablePrediosRow
+    //             key={predio._id}
+    //             nro_registro={index + 1 + firstItemShowedPerPage}
+    //             predio={predio}
+    //             setDataToEdit={setPredioToEdit}
+    //             deleteData={deletePredio}
+    //             linkTo={linkTo}
+    //         />
+    //     )
+    // })
 
     // Filtrar predios:
     const filterPredios = predios.filter((predio) => {
@@ -59,7 +53,7 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
     });
 
     // Mostrar predios filtrados:
-    const displayFilteredPredios = filterPredios.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((predio, index) => {
+    const displayPredios = filterPredios.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((predio, index) => {
         return (
             <TablePrediosRow
                 key={predio._id}
@@ -71,6 +65,12 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
             />
         )
     });
+
+    // Ordenar predios:
+    if (sorting.field) {
+        const reversed = sorting.order === "asc" ? 1 : -1;
+        predios = predios.sort((a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field]))
+    };
 
     const pageCount = () => {
         if (!filter) return Math.ceil(predios.length / prediosPerPage.select);
@@ -125,7 +125,7 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
                                             <TablePrediosHeader onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
                                                 {predios.length > 0 ?
-                                                    <>{!filter ? displayPredios : displayFilteredPredios}</>
+                                                    <>{displayPredios}</>
                                                     : (
                                                         <tr>
                                                             <td colSpan={7}><h2 className="text-center">¡No hay información!</h2></td>

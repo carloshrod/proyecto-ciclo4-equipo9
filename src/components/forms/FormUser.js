@@ -17,14 +17,14 @@ const initialForm = {
     direccion: "",
 };
 
-function FormUser({ createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
 
     const {
         form,
         reset,
         handleChange,
         handleSubmit
-    } = useFormUser(initialForm, createUser, updateUser, userToEdit, setUserToEdit);
+    } = useFormUser(initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit);
 
     const token = localStorage.getItem("token");
     const payload = jwtDecode(token);

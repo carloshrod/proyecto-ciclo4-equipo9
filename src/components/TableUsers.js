@@ -9,9 +9,7 @@ export const initialForm = {
     select: 10
 }
 
-function TableUsers({ usersDb, setUserToEdit, deleteUser, error }) {
-    const users = usersDb.filter((user) => user.rol !== 1)
-
+function TableUsers({ users, setUserToEdit, deleteUser, error }) {
     const [searchParams, setSearchParams] = useSearchParams();
     const filter = searchParams.get("filter") ?? "";
     const [pageNumber, setPageNumber] = useState(0);
@@ -33,8 +31,28 @@ function TableUsers({ usersDb, setUserToEdit, deleteUser, error }) {
         setSearchParams({ filter: e.target.value })
     }
 
-    // Mostrar usuarios:
-    const displayUsers = users.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((user, index) => {
+    // // Mostrar usuarios:
+    // const displayUsers = users.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((user, index) => {
+    //     return (
+    //         <TableUsersRow
+    //             key={user._id}
+    //             nro_registro={index + 1 + firstItemShowedPerPage}
+    //             user={user}
+    //             setDataToEdit={setUserToEdit}
+    //             deleteData={deleteUser}
+    //         />
+    //     )
+    // });
+
+    // Filtrar usuarios:
+    const filterUsers = users.filter((user) => {
+        return (user.nombres + " " + user.apellidos).toLowerCase().includes(filter.toLowerCase()) ||
+            user.nro_doc.toString().includes(filter.toLowerCase()) || user.email.includes(filter.toLowerCase()) ||
+            (user.rol + " ").includes(filter.toLowerCase())
+    })
+
+    // Mostrar usuarios filtrados:
+    const displayUsers = filterUsers.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((user, index) => {
         return (
             <TableUsersRow
                 key={user._id}
@@ -51,26 +69,6 @@ function TableUsers({ usersDb, setUserToEdit, deleteUser, error }) {
         const reversed = sorting.order === "asc" ? 1 : -1;
         users = users.sort((a, b) => reversed * a[sorting.field].localeCompare(b[sorting.field]))
     };
-
-    // Filtrar usuarios:
-    const filterUsers = users.filter((user) => {
-        return (user.nombres + " " + user.apellidos).toLowerCase().includes(filter.toLowerCase()) ||
-            user.nro_doc.toString().includes(filter.toLowerCase()) || user.email.includes(filter.toLowerCase()) ||
-            (user.rol + " ").includes(filter.toLowerCase())
-    })
-
-    // Mostrar usuarios filtrados:
-    const displayFilteredUsers = filterUsers.slice(firstItemShowedPerPage, lastItemShowedPerPage).map((user, index) => {
-        return (
-            <TableUsersRow
-                key={user._id}
-                nro_registro={index + 1 + firstItemShowedPerPage}
-                user={user}
-                setDataToEdit={setUserToEdit}
-                deleteData={deleteUser}
-            />
-        )
-    });
 
     const pageCount = () => {
         if (!filter) return Math.ceil(users.length / usersPerPage.select);
@@ -135,7 +133,7 @@ function TableUsers({ usersDb, setUserToEdit, deleteUser, error }) {
                                             <TableUsersHeader onSorting={(field, order) => setSorting({ field, order })} />
                                             <tbody>
                                                 {users.length > 0 ?
-                                                    <>{!filter ? displayUsers : displayFilteredUsers}</>
+                                                    <>{displayUsers}</>
                                                     : (
                                                         <tr>
                                                             <td colSpan={6}><h2 className="text-center">¡No hay información!</h2></td>

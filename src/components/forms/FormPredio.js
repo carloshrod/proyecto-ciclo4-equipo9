@@ -19,14 +19,14 @@ export const initialForm = {
     fecha_pago3: "",
 };
 
-function FormPredio({ createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
+function FormPredio({ prediosDb, createPredio, updatePredio, predioToEdit, setPredioToEdit, titulo, btn_text }) {
 
     const {
         form,
         reset,
         handleChange,
         handleSubmit
-    } = useFormPredio(initialForm, createPredio, updatePredio, predioToEdit, setPredioToEdit);
+    } = useFormPredio(initialForm, prediosDb, createPredio, updatePredio, predioToEdit, setPredioToEdit);
 
     return (
         <>
