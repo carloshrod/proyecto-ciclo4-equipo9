@@ -54,7 +54,7 @@ function Header() {
                             <ul className="d-flex align-items-center">
                                 <li className="nav-item dropdown pe-3">
                                     <Link className="nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
-                                        <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
+                                        <img src={payload.avatar || "http://192.168.1.65:8080/default-avatar.png"} alt="Profile" className="rounded-circle" />
                                         <span className="nav-home-ue dropdown-toggle ps-2">{payload.nombre}</span>
                                     </Link>
 

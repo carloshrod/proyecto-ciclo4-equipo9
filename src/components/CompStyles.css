@@ -83,6 +83,11 @@
   display: block;
 }
 
+.avatar {
+  max-width: 120px;
+  max-height: 120px;
+}
+
 .footer-col{
   width: 25%;
   padding: 0 15px;

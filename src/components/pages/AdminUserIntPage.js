@@ -19,8 +19,8 @@ import { Navigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
-import { generatePassword } from '../../tools/generatePassword';
 import { logout } from '../../auth/logout';
+import axios from 'axios';
 
 function AdminUserIntPage({ tipo, page }) {
 
@@ -55,62 +55,57 @@ function AdminUserIntPage({ tipo, page }) {
     }, []);
 
     // ********** Crear Usuario **********
-    const createUser = (user) => {
-        user.rol = 2; // Rol 2 -> Usuario Interno
-        user.password = generatePassword(8);
-        user.estado = 1;
+    const createUser = async (user) => {
         let endpoint = url + process.env.REACT_APP_API_GUARDAR;
         const token = localStorage.getItem("token");
         let options = {
-            body: user,
             headers: {
-                "content-type": "application/json",
                 "authorization": `Bearer ${token}`
             },
         };
 
-        api.post(endpoint, options).then((res) => {
-            if (!res.estado) {
+        await axios.post(endpoint, user, options).then((res) => {
+            console.log(res)
+            if (!res.data.estado) {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
             if (!res.err) {
                 if (res.data) {
-                    setUsersDb([...usersDb, res.data]);
-                    toast.success(res.msg)
+                    setUsersDb([...usersDb, res.data.user]);
+                    toast.success(res.data.msg)
                 } else {
-                    toast.error(res.msg)
+                    toast.error(res.data.msg)
                 }
             } else {
-                toast.error(res.msg)
+                toast.error(res.data.msg)
             }
         });
     };
 
     // ********** Editar Usuario **********
-    const updateUser = (user) => {
+    const updateUser = async (formData) => {
         let endpoint = url + process.env.REACT_APP_API_EDITAR;
         const token = localStorage.getItem("token");
         let options = {
-            body: user,
             headers: {
-                "content-type": "application/json",
                 "authorization": `Bearer ${token}`
             }
         };
-        api.post(endpoint, options).then((res) => {
-            if (!res.estado) {
+        await axios.post(endpoint, formData, options).then((res) => {
+            console.log(res)
+            if (!res.data.estado) {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
             if (!res.err) {
-                if (res.estado === "ok") {
-                    let newData = usersDb.map((e) => (e._id === user._id ? user : e));
+                if (res.data.estado === "ok") {
+                    let newData = usersDb.map((e) => (e._id === res.data.user._id ? res.data.user : e));
                     setUsersDb(newData);
-                    toast.success(res.msg)
+                    toast.success(res.data.msg)
                 } else {
-                    toast.error(res.msg)
+                    toast.error(res.data.msg)
                 }
             } else {
-                toast.error(res.msg)
+                toast.error(res.data.msg)
             }
         });
     };

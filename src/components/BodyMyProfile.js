@@ -32,7 +32,7 @@ function BodyMyProfile({ changePassword }) {
                                 <h5 className="card-title">Detalles del Perfil</h5>
 
                                 <div className="card-body profile-card d-flex flex-column align-items-center">
-                                    <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
+                                    <img src={payload.avatar || "http://192.168.1.65:8080/default-avatar.png"} alt="Profile" className="img-fluid rounded-circle avatar" />
                                     <h2 className="text-center mt-3">{payload.nombre}</h2>
                                     <div className="social-links mt-3 mb-3">
                                         <a href="https://twitter.com" target="_blank" rel="noreferrer" className="twitter"><i className="bi bi-twitter"></i></a>
@@ -41,7 +41,6 @@ function BodyMyProfile({ changePassword }) {
                                         <a href="https://www.linkedin.com" target="_blank" rel="noreferrer" className="linkedin"><i className="bi bi-linkedin"></i></a>
                                     </div>
                                 </div>
-
 
                                 <div className="col-12 col-sm-8 text-center mx-auto">
                                     <div className="row justify-content-center">
@@ -73,7 +72,7 @@ function BodyMyProfile({ changePassword }) {
 
                             <div className="tab-pane fade pt-3" id="profile-change-password">
                                 <div className="card-body profile-card d-flex flex-column align-items-center">
-                                    <img src="/img/profile-img.jpg" alt="Profile" className="rounded-circle" />
+                                    <img src={payload.avatar || "http://192.168.1.65:8080/default-avatar.png"} alt="Profile" className="img-fluid rounded-circle avatar" />
                                     <h2 className="text-center mt-3">{payload.nombre}</h2>
                                     <div className="social-links mt-3 mb-3">
                                         <a href="https://twitter.com" target="_blank" rel="noreferrer" className="twitter"><i className="bi bi-twitter"></i></a>
