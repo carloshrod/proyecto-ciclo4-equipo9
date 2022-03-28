@@ -15,7 +15,7 @@ function FormNewPassword({ newPassword }) {
 
   const inputNewPassword = [
     {
-      id: 1,
+      id: "IdNewPassword",
       name: "newPassword",
       type: "password",
       logo: "bi bi-lock-fill",
@@ -25,7 +25,7 @@ function FormNewPassword({ newPassword }) {
       required: true,
     },
     {
-      id: 2,
+      id: "IdRenewPassword",
       name: "renewPassword",
       type: "password",
       logo: "bi bi-lock-fill",

@@ -14,17 +14,19 @@ function FormChangePassword({ changePassword }) {
 
   const inputChangePassword = [
     {
-      id: 1,
+      id: "IdCurrentPassword",
       name: "currentPassword",
       type: "password",
+      className: "mt-2 mb-2 me-md-4 me-lg-5",
       logo: "bi bi-lock-fill",
       label: "Contraseña actual:",
       required: true,
     },
     {
-      id: 2,
+      id: "IdNewPassword",
       name: "newPassword",
       type: "password",
+      className: "mt-2 mb-2 me-md-4 me-lg-5",
       logo: "bi bi-lock-fill",
       errorMessage: "La contraseña debe tener una longitud mínima de 8; contener al menos 1 mayuscula, 1 minuscula, 1 número y un caracter especial!!!",
       label: "Nueva contraseña:",
@@ -32,9 +34,10 @@ function FormChangePassword({ changePassword }) {
       required: true,
     },
     {
-      id: 3,
+      id: "IdRenewPassword",
       name: "renewPassword",
       type: "password",
+      className: "mt-2 mb-2 me-md-4 me-lg-5",
       logo: "bi bi-lock-fill",
       errorMessage: "Las contraseñas no coinciden!!!",
       label: "Confirmar nueva contraseña:",

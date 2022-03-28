@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
 
-const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
+const TableUsersRow = ({ user, nro_registro, setUserToEdit, deleteData }) => {
     let { nombres, apellidos, nro_doc, email, rol } = user || {};
 
     const token = localStorage.getItem("token");
@@ -12,7 +12,7 @@ const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
 
     const handleEdit = (e) => {
         if (payload.rol === 1) {
-            setDataToEdit(user);
+            setUserToEdit(user);
         } else {
             toast.error("No estás autorizado para realizar esta acción!!!!!!")
         }
@@ -50,14 +50,16 @@ const TableUsersRow = ({ user, nro_registro, setDataToEdit, deleteData }) => {
                 <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
                     Eliminar usuario
                 </ReactTooltip>
-                <button
-                    data-tip data-for="toolTipDelete"
-                    type="button"
-                    className="btn my-btn-delete"
-                    disabled={payload.rol !== 1 ? true : false}
-                    onClick={handleDelete}>
-                    <i className="bi bi-trash" />
-                </button>
+                <Link to="#">
+                    <button
+                        data-tip data-for="toolTipDelete"
+                        type="button"
+                        className="btn my-btn-delete"
+                        disabled={payload.rol !== 1 ? true : false}
+                        onClick={handleDelete}>
+                        <i className="bi bi-trash" />
+                    </button>
+                </Link>
             </td>
         </tr>
     );

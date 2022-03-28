@@ -58,7 +58,7 @@ function TableUsers({ users, setUserToEdit, deleteUser, error }) {
                 key={user._id}
                 nro_registro={index + 1 + firstItemShowedPerPage}
                 user={user}
-                setDataToEdit={setUserToEdit}
+                setUserToEdit={setUserToEdit}
                 deleteData={deleteUser}
             />
         )

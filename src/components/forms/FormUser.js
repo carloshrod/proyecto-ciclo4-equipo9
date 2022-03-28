@@ -4,7 +4,6 @@ import ReactTooltip from 'react-tooltip';
 import { useFormUser } from '../../hooks/useFormUser';
 import { inputUsers } from '../../tools/inputProps';
 import InputForm from '../InputForm';
-import jwtDecode from 'jwt-decode';
 
 const initialForm = {
     estado: null,
@@ -27,9 +26,6 @@ function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, 
         handleSubmit
     } = useFormUser(initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit);
 
-    const token = localStorage.getItem("token");
-    const payload = jwtDecode(token);
-
     return (
         <>
             <section className="section min-vh-100">
@@ -41,18 +37,16 @@ function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, 
                                 <h5 className="card-title">{titulo}</h5>
                                 <form className="row g-3 needs-validation" encType="multipart/form-data" onSubmit={handleSubmit} noValidate>
 
-                                    <div className="col-12 pt-2 text-center m-2">
-                                        <div className="col-4 m-auto">
-                                            <img src={pathImage} alt="Profile" className="img-fluid rounded-circle center-img avatar mb-2" />
+                                    <div className="col-12 pt-2 text-center">
+                                        <img src={pathImage} alt="Profile" className="img-fluid rounded-circle center-img avatar mb-2" />
+                                        <label data-tip data-for="toolTipUpload" className="btn my-btn-edit custom-file-upload m-1">
                                             <ReactTooltip id="toolTipUpload" place="top" type="dark" effect="solid">
                                                 Subir nueva imágen de perfil
                                             </ReactTooltip>
-                                            {/* <i className="bi bi-upload" /> */}
-                                            <div data-tip data-for="toolTipUpload" className="input-group mb-3">
-                                                <input type="file" filename="avatar" className="form-control" id="inputGroupFile02" onChange={onChangeFile} />
-                                            </div>
-                                        </div>
-                                        <Link to="" data-tip data-for="toolTipDelete" className="btn my-btn-delete">
+                                            <input type="file" filename="avatar" onChange={onChangeFile} />
+                                            <i className="bi bi-upload" />
+                                        </label>
+                                        <Link to="" data-tip data-for="toolTipDelete" className="btn my-btn-delete m-1">
                                             <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
                                                 Eliminar imágen de perfil
                                             </ReactTooltip>
@@ -72,7 +66,7 @@ function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, 
                                     ))}
 
                                     <div className="col-5 col-sm-3 col-md-2 col-lg-2 m-auto mt-3">
-                                        <button className="btn my-btn-success rounded-pill w-100" type="submit" disabled={payload.rol !== 1 ? true : false}>{btn_text}</button>
+                                        <button className="btn my-btn-success rounded-pill w-100" type="submit">{btn_text}</button>
                                     </div>
                                 </form>
                             </div>

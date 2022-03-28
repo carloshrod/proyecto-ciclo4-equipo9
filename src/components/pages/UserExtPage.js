@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import Container from '../Container';
 import BodyHomeUserExt from "../BodyHomeUserExt";
@@ -9,28 +9,61 @@ import FormConvenio from '../forms/FormConvenio';
 import Footer from "../Footer";
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import { helpHttp } from '../../helpers/helpHttp';
 import { toast } from 'react-toastify';
 import { logout } from '../../auth/logout';
+import axios from 'axios';
+import FormUser from '../forms/FormUser';
+import { getToken } from '../../auth/getToken';
 
 function UserExtPage({ page }) {
-
+    const [usersDb, setUsersDb] = useState([])
+    const [userToEdit, setUserToEdit] = useState(null);
     let api = helpHttp();
     let url = process.env.REACT_APP_API_URL
+    const { token, payload } = getToken()
 
-    // Autenticación por rol:
-    const tokenIsOk = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const payload = jwtDecode(token);
-            return payload.rol;
-        }
-    }
+    useEffect(() => {
+        api.get(url + process.env.REACT_APP_API_LISTAR)
+            .then((res) => {
+                if (!res.err) {
+                    if (res.data) {
+                        setUsersDb(res.data);
+                    }
+                } else {
+                    setUsersDb(null);
+                }
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const updateUser = async (formData) => {
+        let endpoint = url + process.env.REACT_APP_API_EDITAR;
+        let options = {
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        };
+        await axios.post(endpoint, formData, options).then((res) => {
+            if (!res.data.estado) {
+                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
+            }
+            if (!res.err) {
+                if (res.data.estado === "ok") {
+                    let newData = usersDb.map((e) => (e._id === res.data.user._id ? res.data.user : e));
+                    setUsersDb(newData);
+                    toast.success(res.data.msg)
+                } else {
+                    toast.error(res.data.msg)
+                }
+            } else {
+                toast.error(res.data.msg)
+            }
+        });
+    };
 
     const changePassword = (user) => {
         const token = localStorage.getItem("token");
-        const payload = jwtDecode(token);
         user.nro_doc = payload.nro_doc;
         let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         let options = {
@@ -60,7 +93,8 @@ function UserExtPage({ page }) {
         });
     };
 
-    const rol = tokenIsOk();
+    // Autenticación por rol:
+    const rol = payload.rol;
 
     return (
         <>
@@ -77,7 +111,19 @@ function UserExtPage({ page }) {
                         {page === "myProfile" &&
                             <Container titulo="Mi Perfil" className="container d-flex align-items-center min-vh-100">
                                 <BodyMyProfile
+                                    payload={payload}
+                                    usersDb={usersDb}
                                     changePassword={changePassword}
+                                    setUserToEdit={setUserToEdit}
+                                    formEdit={
+                                        <FormUser
+                                            titulo="Datos del usuario a editar"
+                                            usersDb={usersDb}
+                                            updateUser={updateUser}
+                                            userToEdit={userToEdit}
+                                            setUserToEdit={setUserToEdit}
+                                            btn_text="Editar"
+                                        />}
                                 />  {/* Children */}
                             </Container>}
 

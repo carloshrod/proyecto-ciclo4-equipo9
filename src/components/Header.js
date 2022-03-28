@@ -27,26 +27,20 @@ function Header() {
                         </a >
 
                         <NavLink to="/user-ext-home" className={({ isActive }) => `d-flex nav-home-ue ${isActive ? "active" : ""}`}>
-                            <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                            <div className="d-inline-flex align-items-center m-3">
                                 <span style={{ fontSize: "16px" }}>Inicio</span>
                             </div>
                         </NavLink>
 
                         <NavLink to="/user-ext/asociar-predios" className={({ isActive }) => `nav-home-ue d-none d-md-block ${isActive ? "active" : ""}`}>
-                            <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                            <div className="d-inline-flex align-items-center m-3">
                                 <span style={{ fontSize: "16px" }}>Asociar Predios</span>
                             </div>
                         </NavLink>
 
                         <NavLink to="/user-ext/pagar" className={({ isActive }) => `nav-home-ue d-none d-md-block ${isActive ? "active" : ""}`}>
-                            <div className="d-inline-flex m-3 align-items-center justify-content-between ">
+                            <div className="d-inline-flex align-items-center m-3">
                                 <span style={{ fontSize: "16px" }}>Pagar Impuesto</span>
-                            </div>
-                        </NavLink>
-
-                        <NavLink to="/user-ext/convenio" className={({ isActive }) => `nav-home-ue d-none d-md-block ${isActive ? "active" : ""}`}>
-                            <div className="d-inline-flex m-3 align-items-center justify-content-between ">
-                                <span style={{ fontSize: "16px" }}>Convenios</span>
                             </div>
                         </NavLink>
 

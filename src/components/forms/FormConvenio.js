@@ -1,68 +1,92 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { inputConvenio } from '../../tools/inputProps';
+import Button from '../Button';
+import InputForm3 from '../InputForm3';
 
-function FormConvenio() {
+export const initialForm = {
+    cuotaInicial: "",
+    vrCuotaInicial: "",
+    nroCuotas: "",
+    vrCuotas: "",
+}
+
+function FormConvenio({ predio }) {
+    const [form, setForm] = useState(initialForm)
+
+    if (form.cuotaInicial === "2") {
+        form.vrCuotaInicial = "0"
+    }
+
+    if (form.nroCuotas !== "Seleccionar") {
+        form.vrCuotas = Math.ceil((predio.valor_predial - form.vrCuotaInicial.replace(/[$.]/g, '')) / form.nroCuotas)
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm({
+            ...form,
+            [name]: value
+        })
+    };
+
+    const successMsg = () => {
+        if (form.cuotaInicial === "1") {
+            if (!form.cuotaInicial || !form.vrCuotaInicial || !form.nroCuotas || !form.vrCuotas) {
+                toast.error("Todos los campos son requeridos!!!")
+                return false
+            }    
+        } else {
+            if (!form.nroCuotas || !form.vrCuotas) {
+                toast.error("Todos los campos son requeridos!!!")
+                return false
+            }    
+        }
+        Swal.fire({
+            html: `<b>Su solicitud fue recibida satisfactoriamente y será respondida dentro de un plazo de 3 a 5 días hábiles!!!</b>`,
+            icon: 'success',
+            showCloseButton: true,
+            showConfirmButton: false,
+            timer: 10000,
+            timerProgressBar: true,
+        })
+        setForm(initialForm)
+    }
+
     return (
         <>
             <div className="card">
                 <div className="card-body">
-                    <div className="row m-2 text-center">
-                        <h5 className="col-4 card-title mb-3">Código del Predio</h5>
-                        <h5 className="col-4 card-title mb-3">Propietario del Predio</h5>
-                        <h5 className="col-4 card-title mb-3">Total a Pagar</h5>
+                    <div className="row text-center mb-5">
+                        <h5 className="card-title">Solicitar Convenio de Pago</h5>
+                        <div className="col-6 col-lg-3 col-md-3 label mt-3">Código del Predio:</div>
+                        <div className="col-6 col-lg-3 col-md-3 mt-3"><b>{predio.codigo}</b></div>
+                        <div className="col-6 col-lg-3 col-md-3 label mt-3">Nombre del Propietario:</div>
+                        <div className="col-6 col-lg-3 col-md-3 mt-3"><b>{predio.nom_prop}</b></div>
+                        <div className="col-6 col-lg-3 col-md-3 label mt-3">Valor del predio:</div>
+                        <div className="col-6 col-lg-3 col-md-3 mt-3"><b>${predio.valor_predio}</b></div>
+                        <div className="col-6 col-lg-3 col-md-3 label mt-3">Valor a pagar:</div>
+                        <div className="col-6 col-lg-3 col-md-3 mt-3"><b>${predio.valor_predial}</b></div>
                     </div>
 
-                    <form className="row g-3 needs-validation justify-content-center" noValidate>
+                    <form className="container g-3 needs-validation" noValidate>
 
-                        <div className="col-4 col-sm-3 col-xl-4 mt-3 mb-3">
-                            <label htmlFor="yourCuotaInicial" className="form-label">Cuota inicial:</label>
-                        </div>
+                        {inputConvenio.map((input) => (
+                            <InputForm3
+                                key={input.id}
+                                type={input.type}
+                                {...input}
+                                value={form[input.name]}
+                                onChange={handleChange}
+                            />
+                        ))}
 
-                        <div className="col-4 col-sm-3 col-md-3 col-xl-2 mt-3 mb-3">
-                            <select className="form-select text-center" aria-label="Default select example">
-                                <option defaultValue>Sí / No</option>
-                                <option value="1">Sí</option>
-                                <option value="2">No</option>
-                            </select>
-                        </div>
-
-                        <div className="col-4 mt-3 mb-3">
-                            <input type="number" name="cuotaInicial" className="form-control text-center" id="yourCuotaInicial" required />
-                        </div>
-
-                        <div className="col-7 col-sm-5 col-md-5 col-xl-6 mt-3 mb-3">
-                            <label htmlFor="yourNroCuotas" className="form-label">Número de cuotas:</label>
-                        </div>
-
-                        <div className="col-5 col-xl-4 mt-3 mb-3">
-                            <select name="nroCuotas" className="form-select text-center" id="yourNroCuotas" aria-label="Default select example">
-                                <option defaultValue>Seleccionar</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
-                        </div>
-
-                        <div className="col-7 col-sm-5 col-md-5 col-xl-6 mt-3 mb-3">
-                            <label htmlFor="yourVrCuotas" className="form-label">Valor de cuota:</label>
-                        </div>
-
-                        <div className="col-5 col-xl-4 mt-3 mb-3">
-                            <div className="input-group has-validation">
-                                <input type="number" name="vrCuotas" className="form-control text-center" id="yourVrCuotas" required />
-                            </div>
-                        </div>
-
-                        <div className="col-4 m-auto mt-3 mb-3">
-                            <button className="btn my-btn-success rounded-pill w-100" type="submit">Solicitar</button>
+                        <div className="col-4 col-lg-2 m-auto mt-5">
+                            <Button onClick={successMsg}
+                                btnClass="btn my-btn-success rounded-pill w-100">
+                                Solicitar
+                            </Button>
                         </div>
                     </form>
                 </div>

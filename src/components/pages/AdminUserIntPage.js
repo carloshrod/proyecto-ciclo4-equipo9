@@ -316,7 +316,7 @@ function AdminUserIntPage({ tipo, page }) {
                         toast.success(res.msg);
                         let newUsersData = usersDb.map((e) => (e._id === res.data1._id ? res.data1 : e));
                         setUsersDb(newUsersData);
-                        setHistorial([...historial, res.data2]);    
+                        setHistorial([...historial, res.data2]);
                     } else {
                         toast.error(res.msg);
                     }
@@ -351,7 +351,6 @@ function AdminUserIntPage({ tipo, page }) {
             return payload.rol;
         }
     }
-
     const rol = tokenIsOk();
 
     // Toggle-Sidebar:
@@ -373,7 +372,7 @@ function AdminUserIntPage({ tipo, page }) {
                             :
                             <>
                                 <Sidebar
-                                    // logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
+                                // logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
                                 />
                             </>
                         }
@@ -393,7 +392,18 @@ function AdminUserIntPage({ tipo, page }) {
                         {page === "myProfile" &&
                             <ContainerAdmin titulo="Mi Perfil" linkTo="#" >
                                 <BodyMyProfile
+                                    usersDb={usersDb}
+                                    setUserToEdit={setUserToEdit}
                                     changePassword={changePassword}
+                                    formEdit={
+                                        <FormUser
+                                            titulo="Datos del usuario a editar"
+                                            usersDb={usersDb}
+                                            updateUser={updateUser}
+                                            userToEdit={userToEdit}
+                                            setUserToEdit={setUserToEdit}
+                                            btn_text="Editar"
+                                        />}
                                 />  {/* Children */}
                             </ContainerAdmin>}
 

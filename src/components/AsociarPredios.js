@@ -6,12 +6,6 @@ import Loader from './Loader';
 import PredioDetails from './PredioDetails';
 import SearchForm from './SearchForm';
 
-const Msg = ({ datos }) => (
-    <div>
-        <p>No se encontraron resultados para el documento <b><em>{datos}</em></b>.</p>
-    </div>
-)
-
 function AsociarPredios() {
     const [search, setSearch] = useState(null);
     const [predio, setPredio] = useState([]);
@@ -32,11 +26,11 @@ function AsociarPredios() {
                     setPredio(data);
                     setLoading(false);    
                 } else {
-                    toast.error(<Msg datos={datos} />, {position: "bottom-center"});
+                    toast.error(<p>No se encontraron resultados para el documento <b><em>{datos}</em></b>.</p>, {position: "bottom-center"});
                     setLoading(false);
                 }
             } else {
-                toast.error(<Msg datos={datos} />, {position: "bottom-center"});
+                toast.error(<p>No se encontraron resultados para el documento <b><em>{datos}</em></b>.</p>, {position: "bottom-center"});
                 setLoading(false);
             }
         };
