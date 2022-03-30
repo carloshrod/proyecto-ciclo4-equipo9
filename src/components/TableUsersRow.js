@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 import ReactTooltip from 'react-tooltip';
+import { getPayload } from '../auth/getPayload';
 
 const TableUsersRow = ({ user, nro_registro, setUserToEdit, deleteData }) => {
     let { nombres, apellidos, nro_doc, email, rol } = user || {};
 
-    const token = localStorage.getItem("token");
-    const payload = jwtDecode(token);
+    const payload = getPayload()
 
     const handleEdit = (e) => {
         if (payload.rol === 1) {
@@ -43,7 +42,8 @@ const TableUsersRow = ({ user, nro_registro, setUserToEdit, deleteData }) => {
                         type="button"
                         className="btn my-btn-edit m-1"
                         disabled={payload.rol !== 1 ? true : false}
-                        onClick={handleEdit}>
+                        onClick={handleEdit}
+                    >
                         <i className="bi bi-pencil-fill" />
                     </button>
                 </Link>
@@ -56,7 +56,8 @@ const TableUsersRow = ({ user, nro_registro, setUserToEdit, deleteData }) => {
                         type="button"
                         className="btn my-btn-delete"
                         disabled={payload.rol !== 1 ? true : false}
-                        onClick={handleDelete}>
+                        onClick={handleDelete}
+                    >
                         <i className="bi bi-trash" />
                     </button>
                 </Link>

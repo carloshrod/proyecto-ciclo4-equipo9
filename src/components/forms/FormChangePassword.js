@@ -10,7 +10,6 @@ export const initialForm = {
 
 function FormChangePassword({ changePassword }) {
   const [form, setForm] = useState(initialForm);
-  const [reset, setReset] = useState(false)
 
   const inputChangePassword = [
     {
@@ -54,17 +53,12 @@ function FormChangePassword({ changePassword }) {
     });
   };
 
-  const handleReset = (e) => {
-    setForm(initialForm);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateFormChangePassword(form)){
       changePassword(form);
-      handleReset();
-      setReset(true);
     }
   };
 
@@ -78,7 +72,6 @@ function FormChangePassword({ changePassword }) {
             {...input}
             value={form[input.name]}
             onChange={handleChange}
-            reset={reset}
           />
         ))}
         <div className="text-center">

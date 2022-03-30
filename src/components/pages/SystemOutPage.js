@@ -6,89 +6,19 @@ import FormRegister from '../forms/FormRegister';
 import FormForgotPassword from '../forms/FormForgotPassword'
 import Footer from "../Footer";
 import BodyLandingPage from "../BodyLandingPage";
-import { helpHttp } from '../../helpers/helpHttp';
-import { toast } from 'react-toastify'
 import FormNewPassword from '../forms/FormNewPassword';
 import { login } from '../../auth/login';
+import { useCrudUsers } from '../../services/useCrudUsers';
 
 function SystemOutPage({ page }) {
-
   const [usersDb, setUsersDb] = useState([])
   const [userToRegister, setUserToRegister] = useState(null);
 
-  let api = helpHttp();
-  let url = process.env.REACT_APP_API_URL;
-
-  // Registro de usuarios:
-  const registerUser = (user) => {
-    user.rol = 3; // Rol 3 -> Usuario Externo
-    user.estado = 1;
-    let endpoint = url + process.env.REACT_APP_API_REGISTRO;
-    let options = {
-      body: user,
-      headers: { "content-type": "application/json" },
-    };
-
-    api.post(endpoint, options).then((res) => {
-      if (!res.estado) {
-        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-      }
-      if (res.data) {
-        setUsersDb([...usersDb, res.data]);
-        toast.success(res.msg);
-        setTimeout(() => {
-          window.location.href = "http://192.168.1.65:3000/login"
-        }, 5000);
-      } else {
-        toast.error(res.msg);
-      }
-    })
-  };
-
-  // Recuperar contraseña:
-  const resetPassword = (user) => {
-    let endpoint = url + process.env.REACT_APP_API_RESET_PASSWORD;
-    let options = {
-      body: user,
-      headers: { "content-type": "application/json" },
-    }
-
-    api.post(endpoint, options).then((res) => {
-      if (!res.estado) {
-        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-      }
-      if (!res.error) {
-        toast.info(res.msg)
-      } else {
-        toast.info(res.msg)
-      }
-    })
-  }
-
-  // Restablecer contraseña:
-  const newPassword = (user, token) => {
-    user.sentToken = token;
-    let endpoint = url + process.env.REACT_APP_API_NEW_PASSWORD;
-    let options = {
-      body: user,
-      headers: { "content-type": "application/json" },
-    }
-
-    api.post(endpoint, options).then((res) => {
-      if (!res.error) {
-        if (res.estado === "ok") {
-          toast.success(res.msg)
-          setTimeout(() => {
-            window.location.href = "http://192.168.1.65:3000/login"
-          }, 5000);
-        } else {
-          toast.error(res.msg)
-        }
-      } else {
-        toast.error(res.msg)
-      }
-    })
-  }
+  const {
+    registerUser, // Registro de usuarios externos
+    resetPassword, // Recuperar contraseña
+    newPassword // Restablecer contraseña
+  } = useCrudUsers(usersDb, setUsersDb)
 
   return (
     <>

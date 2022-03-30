@@ -10,7 +10,7 @@ export function auth() {
                 resp = true;
         }
     } catch (error) {
-
+        console.log(error)
     }
     return resp;
 }

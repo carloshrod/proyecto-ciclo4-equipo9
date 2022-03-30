@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { generatePassword } from '../tools/generatePassword';
 import { validateFormUser } from '../tools/validateForm';
 
-export const useFormUser = (initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit) => {
+export const useFormUser = (initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit, deleteAvatar) => {
     const [form, setForm] = useState(initialForm);
     const [file, setFile] = useState("");
     const [pathImage, setPathImage] = useState("http://192.168.1.65:8080/default-avatar.png")
@@ -29,6 +29,11 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
                 setFile(avatar)
             }
         }
+    }
+
+    const handleDeleteAvatar = (e) => {
+        deleteAvatar(form.nro_doc);
+        setPathImage("http://192.168.1.65:8080/default-avatar.png")
     }
 
     const handleChange = (e) => {
@@ -86,6 +91,7 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
         reset,
         handleChange,
         onChangeFile,
+        handleDeleteAvatar,
         handleSubmit
     }
 }

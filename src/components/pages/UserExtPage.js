@@ -10,18 +10,17 @@ import Footer from "../Footer";
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
 import { helpHttp } from '../../helpers/helpHttp';
-import { toast } from 'react-toastify';
 import { logout } from '../../auth/logout';
-import axios from 'axios';
 import FormUser from '../forms/FormUser';
-import { getToken } from '../../auth/getToken';
+import { getPayload } from '../../auth/getPayload';
+import { useCrudUsers } from '../../services/useCrudUsers';
 
 function UserExtPage({ page }) {
     const [usersDb, setUsersDb] = useState([])
     const [userToEdit, setUserToEdit] = useState(null);
     let api = helpHttp();
     let url = process.env.REACT_APP_API_URL
-    const { token, payload } = getToken()
+    const payload = getPayload();
 
     useEffect(() => {
         api.get(url + process.env.REACT_APP_API_LISTAR)
@@ -37,64 +36,21 @@ function UserExtPage({ page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const updateUser = async (formData) => {
-        let endpoint = url + process.env.REACT_APP_API_EDITAR;
-        let options = {
-            headers: {
-                "authorization": `Bearer ${token}`
-            }
-        };
-        await axios.post(endpoint, formData, options).then((res) => {
-            if (!res.data.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                if (res.data.estado === "ok") {
-                    let newData = usersDb.map((e) => (e._id === res.data.user._id ? res.data.user : e));
-                    setUsersDb(newData);
-                    toast.success(res.data.msg)
-                } else {
-                    toast.error(res.data.msg)
-                }
-            } else {
-                toast.error(res.data.msg)
-            }
-        });
-    };
-
-    const changePassword = (user) => {
-        const token = localStorage.getItem("token");
-        user.nro_doc = payload.nro_doc;
-        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
-        let options = {
-            body: user,
-            headers: {
-                "content-type": "application/json",
-                "authorization": `Bearer ${token}`
-            }
-        };
-
-        api.post(endpoint, options).then((res) => {
-            if (!res.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                if (res.estado === "ok") {
-                    toast.success(res.msg)
-                    setTimeout(() => {
-                        logout();
-                    }, 5000);
-                } else {
-                    toast.error(res.msg)
-                }
-            } else {
-                toast.error(res.msg)
-            }
-        });
-    };
+    const { 
+        updateUser, // Editar mi perfil
+        deleteAvatar, // Eliminar imágen de perfil
+        changePassword // Cambiar contraseña
+    } = useCrudUsers(usersDb, setUsersDb)
 
     // Autenticación por rol:
-    const rol = payload.rol;
+    const getRol = () => {
+        if (payload) {
+            return payload.rol
+        } else {
+            return 0
+        }
+    }
+    const rol = getRol();
 
     return (
         <>
@@ -122,6 +78,7 @@ function UserExtPage({ page }) {
                                             updateUser={updateUser}
                                             userToEdit={userToEdit}
                                             setUserToEdit={setUserToEdit}
+                                            deleteAvatar={deleteAvatar}
                                             btn_text="Editar"
                                         />}
                                 />  {/* Children */}

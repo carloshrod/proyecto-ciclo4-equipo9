@@ -119,7 +119,7 @@ export const inputUsersRegister = [
     {
         id: "IdTipo_doc",
         name: "tipo_doc",
-        type: "text",
+        type: "select",
         className: "col-10 col-md-5 col-lg-5 m-auto mt-2 mb-2",
         errorMessage: "Por favor, ingrese un tipo de documento válido!!!",
         label: "Tipo de Documento",

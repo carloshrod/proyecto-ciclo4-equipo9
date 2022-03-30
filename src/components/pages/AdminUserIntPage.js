@@ -9,31 +9,32 @@ import FormUser from '../forms/FormUser';
 import TableUsers from '../TableUsers';
 import FormPredio from '../forms/FormPredio';
 import TablePredios from '../TablePredios';
-// import FormFechaPagoDcto from '../forms/FormFechaPagoDcto';
-// import FormEjecutarAlgoritmo from '../forms/FormEjecutarAlgoritmo';
 import { helpHttp } from '../../helpers/helpHttp';
 import Loader from '../Loader';
 import Message from '../Message';
 import { auth } from '../../auth/auth';
 import { Navigate } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
-import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
 import { logout } from '../../auth/logout';
-import axios from 'axios';
+import { getPayload } from '../../auth/getPayload';
+import { useCrudUsers } from '../../services/useCrudUsers';
+import { useCrudPredios } from '../../services/useCrudPredios';
 
 function AdminUserIntPage({ tipo, page }) {
-
-    // ******************** CRUD Users ********************
     const [usersDb, setUsersDb] = useState([])
     const [userToEdit, setUserToEdit] = useState(null);
+    const [prediosDb, setPrediosDb] = useState([])
+    const [predioToEdit, setPredioToEdit] = useState(null);
+    const [historial, setHistorial] = useState([])
     const [error, setError] = useState(null);
     const [msgError, setMsgError] = useState();
     const [loading, setLoading] = useState(false);
-
+    const [inactive, setInactive] = useState(false); // Toggle-Sidebar
     let api = helpHttp();
     let url = process.env.REACT_APP_API_URL;
+    const payload = getPayload();
 
+    // ******************** CRUD Users ********************
+    // Obtener usuarios:
     useEffect(() => {
         setLoading(true);
         api.get(url + process.env.REACT_APP_API_LISTAR)
@@ -54,143 +55,17 @@ function AdminUserIntPage({ tipo, page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // ********** Crear Usuario **********
-    const createUser = async (user) => {
-        let endpoint = url + process.env.REACT_APP_API_GUARDAR;
-        const token = localStorage.getItem("token");
-        let options = {
-            headers: {
-                "authorization": `Bearer ${token}`
-            },
-        };
-
-        await axios.post(endpoint, user, options).then((res) => {
-            console.log(res)
-            if (!res.data.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                if (res.data) {
-                    setUsersDb([...usersDb, res.data.user]);
-                    toast.success(res.data.msg)
-                } else {
-                    toast.error(res.data.msg)
-                }
-            } else {
-                toast.error(res.data.msg)
-            }
-        });
-    };
-
-    // ********** Editar Usuario **********
-    const updateUser = async (formData) => {
-        let endpoint = url + process.env.REACT_APP_API_EDITAR;
-        const token = localStorage.getItem("token");
-        let options = {
-            headers: {
-                "authorization": `Bearer ${token}`
-            }
-        };
-        await axios.post(endpoint, formData, options).then((res) => {
-            console.log(res)
-            if (!res.data.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                if (res.data.estado === "ok") {
-                    let newData = usersDb.map((e) => (e._id === res.data.user._id ? res.data.user : e));
-                    setUsersDb(newData);
-                    toast.success(res.data.msg)
-                } else {
-                    toast.error(res.data.msg)
-                }
-            } else {
-                toast.error(res.data.msg)
-            }
-        });
-    };
-
-
-    // ********** Eliminar Usuario **********
-    const deleteUser = (nro_doc) => {
-
-        Swal.fire({
-            html: `¿Estás seguro que quieres eliminar el usuario con número de documento <b>${nro_doc}</b>?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#0b295e',
-            cancelButtonColor: '#be0d1f',
-            confirmButtonText: 'Sí, aceptar',
-            cancelButtonText: 'Cancelar'
-        }).then(res => {
-            if (res.isConfirmed) {
-                let endpoint = url + process.env.REACT_APP_API_ELIMINAR + nro_doc;
-                const token = localStorage.getItem("token");
-                let options = {
-                    headers: {
-                        "content-type": "application/json",
-                        "authorization": `Bearer ${token}`
-                    },
-                };
-
-                api.del(endpoint, options).then((res) => {
-                    if (!res.estado) {
-                        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-                    }
-                    if (!res.err) {
-                        if (res.estado === "ok") {
-                            let newData = usersDb.filter((el) => el.nro_doc !== nro_doc);
-                            setUsersDb(newData);
-                            toast.success(res.msg)
-                        } else {
-                            toast.error(res.msg)
-                        }
-                    } else {
-                        toast.error(res.msg)
-                    }
-                });
-            }
-        })
-    };
-
-    // ********** Cambiar Contraseña **********
-    const changePassword = (user) => {
-        let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
-        const token = localStorage.getItem("token");
-        let options = {
-            body: user,
-            headers: {
-                "content-type": "application/json",
-                "authorization": `Bearer ${token}`
-            }
-        };
-
-        api.post(endpoint, options).then((res) => {
-            if (!res.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                if (res.estado === "ok") {
-                    toast.success(res.msg)
-                    setTimeout(() => {
-                        logout();
-                    }, 5000);
-                } else {
-                    toast.error(res.msg)
-                }
-            } else {
-                toast.error(res.msg)
-            }
-        });
-    };
-
+    const {
+        createUser, // Crear usuarios
+        updateUser, // Editar usuarios
+        deleteUser, // Eliminar usuarios
+        deleteAvatar, // Eliminar imágen de perfil
+        changePassword // Cambiar contraseña
+    } = useCrudUsers(usersDb, setUsersDb)
     // ******************** End CRUD Users ********************
 
     // ********************* CRUD predios *********************
-    const [prediosDb, setPrediosDb] = useState([])
-    const [predioToEdit, setPredioToEdit] = useState(null);
-    const [historial, setHistorial] = useState([])
-
+    // Obtener predios:
     useEffect(() => {
         setLoading(true);
         api.get(url + process.env.REACT_APP_API_LISTAR_P)
@@ -213,117 +88,11 @@ function AdminUserIntPage({ tipo, page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // ********** Crear Predio **********
-    const createPredio = (predio) => {
-        predio.estado = 1;
-        let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
-        let vrPredial = vrPredio * 0.01;
-        predio.valor_predial = Math.round(vrPredial);
-        let endpoint = url + process.env.REACT_APP_API_GUARDAR_P;
-        const token = localStorage.getItem("token");
-        let options = {
-            body: predio,
-            headers: {
-                "content-type": "application/json",
-                "authorization": `Bearer ${token}`
-            },
-        };
-
-        api.post(endpoint, options).then((res) => {
-            if (!res.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                if (res.data1) {
-                    setPrediosDb([...prediosDb, res.data1]);
-                    toast.success(res.msg);
-                    let newData = usersDb.map((e) => (e._id === res.data2._id ? res.data2 : e));
-                    setUsersDb(newData);
-                    setHistorial([...historial, res.data3]);
-                } else {
-                    toast.error(res.msg);
-                }
-            } else {
-                toast.error(res.msg);
-            }
-        });
-    };
-
-    // ********** Editar Predio **********
-    const updatePredio = (predio) => {
-        let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
-        let vrPredial = vrPredio * 0.01;
-        predio.valor_predial = Math.round(vrPredial);
-        let endpoint = url + process.env.REACT_APP_API_EDITAR_P;
-        const token = localStorage.getItem("token");
-        let options = {
-            body: predio,
-            headers: {
-                "content-type": "application/json",
-                "authorization": `Bearer ${token}`
-            },
-        };
-
-        api.post(endpoint, options).then((res) => {
-            if (!res.estado) {
-                toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-            }
-            if (!res.err) {
-                let newData = prediosDb.map((e) => (e._id === predio._id ? predio : e));
-                setPrediosDb(newData);
-                let newUsersData = usersDb.map((e) => (e._id === res.data1._id ? res.data1 : e));
-                setUsersDb(newUsersData);
-                setHistorial([...historial, res.data2]);
-                if (res.estado === "ok") {
-                    toast.success(res.msg)
-                } else {
-                    toast.error(res.msg)
-                }
-            } else {
-                toast.error(res.msg);
-            }
-        });
-    };
-
-    // ********** Eliminar Predio **********
-    const deletePredio = (codigo) => {
-        Swal.fire({
-            html: `¿Estás seguro que quieres eliminar el predio con código <b>${codigo}</b>?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#0b295e',
-            cancelButtonColor: '#be0d1f',
-            confirmButtonText: 'Sí, aceptar',
-            cancelButtonText: 'Cancelar'
-        }).then(res => {
-            if (res.isConfirmed) {
-                let endpoint = url + process.env.REACT_APP_API_ELIMINAR_P + codigo;
-                const token = localStorage.getItem("token");
-                let options = {
-                    headers: {
-                        "content-type": "application/json",
-                        "authorization": `Bearer ${token}`
-                    },
-                };
-
-                api.post(endpoint, options).then((res) => {
-                    if (!res.estado) {
-                        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-                    }
-                    if (!res.err) {
-                        let newData = prediosDb.filter((el) => el.codigo !== codigo);
-                        setPrediosDb(newData);
-                        toast.success(res.msg);
-                        let newUsersData = usersDb.map((e) => (e._id === res.data1._id ? res.data1 : e));
-                        setUsersDb(newUsersData);
-                        setHistorial([...historial, res.data2]);
-                    } else {
-                        toast.error(res.msg);
-                    }
-                });
-            }
-        });
-    };
+    const {
+        createPredio, // Crear predios
+        updatePredio, // Editar predios
+        deletePredio // Eliminar predios
+    } = useCrudPredios(prediosDb, setPrediosDb, usersDb, setUsersDb, historial, setHistorial)
     // ******************* End CRUD predios *******************
 
     // Contar usuarios por rol:
@@ -344,17 +113,14 @@ function AdminUserIntPage({ tipo, page }) {
     }
 
     // Autenticación por rol:
-    const tokenIsOk = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const payload = jwtDecode(token);
-            return payload.rol;
+    const getRol = () => {
+        if (payload) {
+            return payload
+        } else {
+            return 0
         }
     }
-    const rol = tokenIsOk();
-
-    // Toggle-Sidebar:
-    const [inactive, setInactive] = useState(false);
+    const rol = getRol();
 
     return (
         <>
@@ -364,18 +130,8 @@ function AdminUserIntPage({ tipo, page }) {
                         <HeaderAdmin btn={<div onClick={() => { setInactive(!inactive) }}>
                             <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
                         </div>} />
-                        {tipo === "admin" ?
-                            <>
-                                <Sidebar
-                                />
-                            </>
-                            :
-                            <>
-                                <Sidebar
-                                // logo={<img src="../img/logo.png" alt="" className="logo-sidebar" />}
-                                />
-                            </>
-                        }
+
+                        <Sidebar/>
 
                         {page === "home" &&
                             <ContainerAdmin titulo="Dashboard" linkTo="#">
@@ -392,6 +148,7 @@ function AdminUserIntPage({ tipo, page }) {
                         {page === "myProfile" &&
                             <ContainerAdmin titulo="Mi Perfil" linkTo="#" >
                                 <BodyMyProfile
+                                    payload={payload}
                                     usersDb={usersDb}
                                     setUserToEdit={setUserToEdit}
                                     changePassword={changePassword}
@@ -437,6 +194,7 @@ function AdminUserIntPage({ tipo, page }) {
                                     updateUser={updateUser}
                                     userToEdit={userToEdit}
                                     setUserToEdit={setUserToEdit}
+                                    deleteAvatar={deleteAvatar}
                                     btn_text="Editar"
                                 />  {/* Children */}
                             </ContainerAdmin>}
@@ -481,16 +239,6 @@ function AdminUserIntPage({ tipo, page }) {
                                     btn_text="Editar"
                                 />  {/* Children */}
                             </ContainerAdmin>}
-
-                        {/* {page === "fechaPagoDcto" &&
-                            <ContainerAdmin titulo="Definir Fechas de Pago - Descuentos" subtitulo="Gestionar Predios" subtitulo2="Definir Fechas de Pago - Descuentos">
-                                <FormFechaPagoDcto />  Children */}
-                        {/* </ContainerAdmin>} */}
-
-                        {/* {page === "algoritmos" &&
-                            <ContainerAdmin titulo="Ejecutar Algoritmos" subtitulo="Ejecutar Algoritmos">
-                                <FormEjecutarAlgoritmo />  {/* Children */}
-                        {/* </ContainerAdmin>} */}
 
                         <FooterAdmin />
                     </main>

@@ -1,20 +1,11 @@
-import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { auth } from '../auth/auth';
+import { getPayload } from '../auth/getPayload';
 import { logout } from '../auth/logout';
 
 function Header() {
-
-    const tokenIsOk = () => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            const payload = jwtDecode(token);
-            return payload;
-        }
-    }
-
-    const payload = tokenIsOk();
+    const payload = getPayload();
 
     return (
         <>

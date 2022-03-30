@@ -16,15 +16,16 @@ const initialForm = {
     direccion: "",
 };
 
-function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, titulo, btn_text }) {
+function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, deleteAvatar, titulo, btn_text }) {
     const {
         form,
         pathImage,
         reset,
         handleChange,
         onChangeFile,
+        handleDeleteAvatar,
         handleSubmit
-    } = useFormUser(initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit);
+    } = useFormUser(initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit, deleteAvatar);
 
     return (
         <>
@@ -46,12 +47,17 @@ function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, 
                                             <input type="file" filename="avatar" onChange={onChangeFile} />
                                             <i className="bi bi-upload" />
                                         </label>
-                                        <Link to="" data-tip data-for="toolTipDelete" className="btn my-btn-delete m-1">
-                                            <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
-                                                Eliminar imágen de perfil
-                                            </ReactTooltip>
+                                        <ReactTooltip id="toolTipDelete" place="top" type="dark" effect="solid">
+                                            Eliminar imágen de perfil
+                                        </ReactTooltip>
+                                        <button
+                                            data-tip data-for="toolTipDelete"
+                                            type="button"
+                                            className="btn my-btn-delete m-1"
+                                            onClick={handleDeleteAvatar}
+                                        >
                                             <i className="bi bi-trash" />
-                                        </Link>
+                                        </button>
                                     </div>
 
                                     {inputUsers.map((input) => (
