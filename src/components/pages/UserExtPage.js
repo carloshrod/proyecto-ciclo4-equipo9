@@ -38,7 +38,6 @@ function UserExtPage({ page }) {
 
     const { 
         updateUser, // Editar mi perfil
-        deleteAvatar, // Eliminar imágen de perfil
         changePassword // Cambiar contraseña
     } = useCrudUsers(usersDb, setUsersDb)
 
@@ -78,7 +77,6 @@ function UserExtPage({ page }) {
                                             updateUser={updateUser}
                                             userToEdit={userToEdit}
                                             setUserToEdit={setUserToEdit}
-                                            deleteAvatar={deleteAvatar}
                                             btn_text="Editar"
                                         />}
                                 />  {/* Children */}

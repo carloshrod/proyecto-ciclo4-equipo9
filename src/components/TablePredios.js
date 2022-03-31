@@ -90,84 +90,75 @@ function TablePredios({ predios, setPredioToEdit, deletePredio, linkTo, error, s
         <>
             {error}
             {success}
-            <section className="section min-vh-100">
-                <div className="row">
-                    <div className="col-lg-12">
+            <div className="row">
+                <div className="col-lg-12">
 
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Predios Registrados</h5>
+                    <h5 className="card-title">Predios Registrados</h5>
 
-                                <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    {/* <!-- Table with stripped rows --> */}
-                                    <div className="dataTable-top mb-2">
-                                        <div className="col-4 col-sm-6 col-md-4 dataTable-dropdown">
-                                            <select name="select" ref={selectRef} className="dataTable-selector text-center" value={prediosPerPage.select} onChange={handleInputChange}>
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
-                                                <option value="40">40</option>
-                                                <option value={predios.length}>Todos</option>
-                                            </select>
-                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}>Predios por página</label>
-                                        </div>
-                                        <div className="col-4 col-sm-6 col-md-4 dataTable-search">
-                                            <input className="col-12 col-sm-7 col-md-7 col-lg-8 dataTable-input" placeholder="Filtrar..." type="text" value={filter} onChange={handleFilter} />
-                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}>{range()} {range() === 1 ? "Predio" : "Predios"}</label>
-                                        </div>
-                                    </div>
-
-                                    <div className="dataTable-container mt-2">
-                                        <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
-                                            Ordenar<i className="bi bi-arrow-down-up" />
-                                        </ReactTooltip>
-                                        <table className="table datatable table-hover text-center">
-                                            <TablePrediosHeader onSorting={(field, order) => setSorting({ field, order })} />
-                                            <tbody>
-                                                {predios.length > 0 ?
-                                                    <>{displayPredios}</>
-                                                    : (
-                                                        <tr>
-                                                            <td colSpan={7}><h2 className="text-center">¡No hay información!</h2></td>
-                                                        </tr>
-                                                    )
-                                                }
-                                            </tbody>
-                                        </table>
-                                        {/* <!-- End Table with stripped rows --> */}
-                                    </div>
-                                    <div className="dataTable-bottom">
-                                        <div className="dataTable-info d-none d-sm-block mt-4">
-                                            <span style={{ fontSize: "12px" }}>Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
-                                                range()
-                                                :
-                                                lastItemShowedPerPage} de {range()}
-                                            </span>
-                                        </div>
-                                        <nav className="dataTable-pagination mt-3">
-                                            <ul className="dataTable-pagination-list">
-                                                <ReactPaginate
-                                                    breakLabel="..."
-                                                    previousLabel={<i className="bi bi-caret-left-fill" />}
-                                                    nextLabel={<i className="bi bi-caret-right-fill" />}
-                                                    marginPagesDisplayed={0}
-                                                    pageRangeDisplayed={5}
-                                                    pageCount={pageCount()}
-                                                    onPageChange={changePage}
-                                                    activeClassName="active"
-                                                />
-                                            </ul>
-                                        </nav>
-                                    </div>
-
-                                </div>
-
+                    <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                        {/* <!-- Table with stripped rows --> */}
+                        <div className="dataTable-top mb-2">
+                            <div className="col-4 col-sm-6 col-md-4 dataTable-dropdown">
+                                <select name="select" ref={selectRef} className="dataTable-selector text-center" value={prediosPerPage.select} onChange={handleInputChange}>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value={predios.length}>Todos</option>
+                                </select>
+                                <label style={{ fontSize: "12px", marginLeft: "5px" }}>Predios por página</label>
+                            </div>
+                            <div className="col-4 col-sm-6 col-md-4 dataTable-search">
+                                <input className="col-12 col-sm-7 col-md-7 col-lg-8 dataTable-input" placeholder="Filtrar..." type="text" value={filter} onChange={handleFilter} />
+                                <label style={{ fontSize: "12px", marginLeft: "5px" }}>{range()} {range() === 1 ? "Predio" : "Predios"}</label>
                             </div>
                         </div>
 
+                        <div className="dataTable-container mt-2">
+                            <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
+                                Ordenar<i className="bi bi-arrow-down-up" />
+                            </ReactTooltip>
+                            <table className="table datatable table-hover text-center">
+                                <TablePrediosHeader onSorting={(field, order) => setSorting({ field, order })} />
+                                <tbody>
+                                    {predios.length > 0 ?
+                                        <>{displayPredios}</>
+                                        : (
+                                            <tr>
+                                                <td colSpan={7}><h2 className="text-center">¡No hay información!</h2></td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                            {/* <!-- End Table with stripped rows --> */}
+                        </div>
+                        <div className="dataTable-bottom">
+                            <div className="dataTable-info d-none d-sm-block mt-4">
+                                <span style={{ fontSize: "12px" }}>Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
+                                    range()
+                                    :
+                                    lastItemShowedPerPage} de {range()}
+                                </span>
+                            </div>
+                            <nav className="dataTable-pagination mt-3">
+                                <ul className="dataTable-pagination-list">
+                                    <ReactPaginate
+                                        breakLabel="..."
+                                        previousLabel={<i className="bi bi-caret-left-fill" />}
+                                        nextLabel={<i className="bi bi-caret-right-fill" />}
+                                        marginPagesDisplayed={0}
+                                        pageRangeDisplayed={5}
+                                        pageCount={pageCount()}
+                                        onPageChange={changePage}
+                                        activeClassName="active"
+                                    />
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </>
     )
 }

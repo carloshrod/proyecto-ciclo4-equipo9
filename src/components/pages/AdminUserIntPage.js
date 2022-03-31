@@ -59,7 +59,6 @@ function AdminUserIntPage({ tipo, page }) {
         createUser, // Crear usuarios
         updateUser, // Editar usuarios
         deleteUser, // Eliminar usuarios
-        deleteAvatar, // Eliminar imágen de perfil
         changePassword // Cambiar contraseña
     } = useCrudUsers(usersDb, setUsersDb)
     // ******************** End CRUD Users ********************
@@ -154,7 +153,6 @@ function AdminUserIntPage({ tipo, page }) {
                                     changePassword={changePassword}
                                     formEdit={
                                         <FormUser
-                                            titulo="Datos del usuario a editar"
                                             usersDb={usersDb}
                                             updateUser={updateUser}
                                             userToEdit={userToEdit}
@@ -194,7 +192,6 @@ function AdminUserIntPage({ tipo, page }) {
                                     updateUser={updateUser}
                                     userToEdit={userToEdit}
                                     setUserToEdit={setUserToEdit}
-                                    deleteAvatar={deleteAvatar}
                                     btn_text="Editar"
                                 />  {/* Children */}
                             </ContainerAdmin>}

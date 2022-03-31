@@ -30,53 +30,45 @@ function FormPredio({ prediosDb, createPredio, updatePredio, predioToEdit, setPr
 
     return (
         <>
-            <section className="section min-vh-100">
-                <div className="row">
-                    <div className="col-lg-12">
+            <div className="row">
+                <div className="col-lg-12">
+                    <h5 className="card-title">{titulo}</h5>
+                    <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
 
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">{titulo}</h5>
+                        {inputPredios.map((input) => (
+                            <InputForm
+                                key={input.id}
+                                type={input.type}
+                                {...input}
+                                value={form[input.name]}
+                                onChange={handleChange}
+                                reset={reset}
+                            />
+                        ))}
 
-                                <form className="row g-3 needs-validation" onSubmit={handleSubmit} noValidate>
-
-                                    {inputPredios.map((input) => (
-                                        <InputForm
-                                            key={input.id}
-                                            type={input.type}
-                                            {...input}
-                                            value={form[input.name]}
-                                            onChange={handleChange}
-                                            reset={reset}
-                                        />
-                                    ))}
-
-                                    <div>
-                                    <hr className="divider" />
-                                    <h5 className="card-title">Fecha de Pago / Descuentos</h5>
-                                    </div>
-
-                                    {inputFechas.map((input) => (
-                                        <InputForm2
-                                            key={input.id}
-                                            type={input.type}
-                                            {...input}
-                                            value={form[input.name]}
-                                            onChange={handleChange}
-                                            reset={reset}
-                                        />
-                                    ))}
-
-                                    <div className="col-5 col-sm-3 col-md-2 col-lg-2 m-auto mt-2">
-                                        <button className="btn my-btn-success rounded-pill w-100" type="submit">{btn_text}</button>
-                                    </div>
-
-                                </form>
-                            </div>
+                        <div>
+                            <hr className="divider" />
+                            <h5 className="card-title">Fecha de Pago / Descuentos</h5>
                         </div>
-                    </div>
+
+                        {inputFechas.map((input) => (
+                            <InputForm2
+                                key={input.id}
+                                type={input.type}
+                                {...input}
+                                value={form[input.name]}
+                                onChange={handleChange}
+                                reset={reset}
+                            />
+                        ))}
+
+                        <div className="col-5 col-sm-3 col-md-2 col-lg-2 m-auto mt-2">
+                            <button className="btn my-btn-success rounded-pill w-100" type="submit">{btn_text}</button>
+                        </div>
+
+                    </form>
                 </div>
-            </section>
+            </div>
         </>
     )
 }

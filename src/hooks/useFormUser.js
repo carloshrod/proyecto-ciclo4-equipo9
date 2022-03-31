@@ -2,16 +2,20 @@ import { useEffect, useState } from 'react';
 import { generatePassword } from '../tools/generatePassword';
 import { validateFormUser } from '../tools/validateForm';
 
+const defaultAvatar = process.env.REACT_APP_DEFAULT_AVATAR;
+
 export const useFormUser = (initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit, deleteAvatar) => {
     const [form, setForm] = useState(initialForm);
     const [file, setFile] = useState("");
-    const [pathImage, setPathImage] = useState("http://192.168.1.65:8080/default-avatar.png")
+    const [imgUrl, setImgUrl] = useState("")
+    const [pathImage, setPathImage] = useState(defaultAvatar)
     const [reset, setReset] = useState(false);
 
     useEffect(() => {
         if (userToEdit) {
             setForm(userToEdit);
-            setPathImage(form.imgUrl || "http://192.168.1.65:8080/default-avatar.png")
+            setPathImage(form.imgUrl || defaultAvatar)
+            setImgUrl(form.imgUrl)
         } else {
             setForm(initialForm);
         }
@@ -32,8 +36,9 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
     }
 
     const handleDeleteAvatar = (e) => {
-        deleteAvatar(form.nro_doc);
-        setPathImage("http://192.168.1.65:8080/default-avatar.png")
+        setFile("")
+        setImgUrl("borrar")
+        setPathImage(defaultAvatar)
     }
 
     const handleChange = (e) => {
@@ -68,7 +73,7 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
                 formData.append("avatar", file)
                 createUser(formData);
                 handleReset();
-                setReset(!reset)
+                setReset(!reset);
             } else {
                 const formData = new FormData();
                 formData.append("nombres", form.nombres)
@@ -78,9 +83,10 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
                 formData.append("email", form.email)
                 formData.append("telefono", form.telefono)
                 formData.append("direccion", form.direccion)
-                formData.append("imgUrl", form.imgUrl)
+                formData.append("imgUrl", imgUrl)
                 formData.append("avatar", file)
                 updateUser(formData);
+                setFile("");
             }
         }
     };

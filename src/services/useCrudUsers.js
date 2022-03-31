@@ -127,44 +127,6 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
         })
     };
 
-    const deleteAvatar = (nro_doc) => {
-        Swal.fire({
-            html: `¿Estás seguro que quieres eliminar esta imágen de perfil?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#0b295e',
-            cancelButtonColor: '#be0d1f',
-            confirmButtonText: 'Sí, aceptar',
-            cancelButtonText: 'Cancelar'
-        }).then(res => {
-            if (res.isConfirmed) {
-                let endpoint = `${url}/users/eliminar-avatar/${nro_doc}`;
-                let options = {
-                    headers: {
-                        "content-type": "application/json",
-                        "authorization": `Bearer ${token}`
-                    },
-                };
-                api.del(endpoint, options).then((res) => {
-                    if (!res.estado) {
-                        toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
-                    }
-                    if (!res.err) {
-                        if (res.estado === "ok") {
-                            let newData = usersDb.map((e) => (e.nro_doc === res.user.nro_doc ? res.user : e));
-                            setUsersDb(newData);
-                            toast.success(res.msg)
-                        } else {
-                            toast.error(res.msg)
-                        }
-                    } else {
-                        toast.error(res.msg)
-                    }
-                });
-            }
-        })
-    }
-
     const changePassword = (user) => {
         let endpoint = url + process.env.REACT_APP_API_CAMBIAR_PASSWORD;
         let options = {
@@ -243,7 +205,6 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
         registerUser,
         updateUser,
         deleteUser,
-        deleteAvatar,
         changePassword,
         resetPassword,
         newPassword

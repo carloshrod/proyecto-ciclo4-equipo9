@@ -87,93 +87,87 @@ function TableUsers({ users, setUserToEdit, deleteUser, error }) {
     return (
         <>
             {error}
-            <section className="section min-vh-100">
-                <div className="row">
-                    <div className="col-lg-12">
+            <div className="row">
+                <div className="col-lg-12">
 
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Usuarios Registrados</h5>
+                    <h5 className="card-title">Usuarios Registrados</h5>
 
-                                <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-                                    {/* <!-- Table with stripped rows --> */}
+                    <div className="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                        {/* <!-- Table with stripped rows --> */}
 
-                                    <div className="dataTable-top mb-2">
-                                        <div className="col-4 col-sm-6 col-md-4 dataTable-dropdown">
-                                            <select name="select" ref={selectRef} className="dataTable-selector text-center" value={usersPerPage.select} onChange={handleInputChange}>
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
-                                                <option value="30">30</option>
-                                                <option value="40">40</option>
-                                                <option value={users.length}>Todos</option>
-                                            </select>
-                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}> Usuarios por página</label>
-                                        </div>
-
-                                        <div className="col-4 col-sm-6 col-md-4 dataTable-search">
-                                            <ReactTooltip id="toolTipFilter" place="left" type="dark" effect="solid">
-                                                Para filtrar por <em>rol</em> ingrese el valor seguido de un espacio
-                                            </ReactTooltip>
-                                            <input data-tip data-for="toolTipFilter" className="col-12 col-sm-7 col-md-7 col-lg-8 dataTable-input" placeholder="Filtrar..." type="text" value={filter} onChange={handleFilter} />
-                                            <label style={{ fontSize: "12px", marginLeft: "5px" }}>{range()} {range() === 1 ? "Usuario" : "Usuarios"}</label>
-                                        </div>
-                                    </div>
-
-
-                                    <div className="dataTable-container">
-                                        <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
-                                            Ordenar<i className="bi bi-arrow-down-up" />
-                                        </ReactTooltip>
-                                        <ReactTooltip id="toolTipInfo" place="top" type="dark" effect="solid">
-                                            Rol 2: Usuario Interno
-                                            <br />
-                                            Rol 3: Usuario Externo
-                                        </ReactTooltip>
-                                        <table className="table datatable table-hover text-center">
-                                            <TableUsersHeader onSorting={(field, order) => setSorting({ field, order })} />
-                                            <tbody>
-                                                {users.length > 0 ?
-                                                    <>{displayUsers}</>
-                                                    : (
-                                                        <tr>
-                                                            <td colSpan={6}><h2 className="text-center">¡No hay información!</h2></td>
-                                                        </tr>
-                                                    )
-                                                }
-                                            </tbody>
-                                        </table>
-                                        {/* <!-- End Table with stripped rows --> */}
-                                    </div>
-
-                                    <div className="dataTable-bottom">
-                                        <div className="dataTable-info d-none d-sm-block mt-4">
-                                            <span style={{ fontSize: "12px" }}>Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
-                                                range()
-                                                :
-                                                lastItemShowedPerPage} de {range()}
-                                            </span>
-                                        </div>
-                                        <nav className="dataTable-pagination mt-3">
-                                            <ReactPaginate
-                                                breakLabel="..."
-                                                previousLabel={<i className="bi bi-caret-left-fill" />}
-                                                nextLabel={<i className="bi bi-caret-right-fill" />}
-                                                marginPagesDisplayed={0}
-                                                pageRangeDisplayed={5}
-                                                pageCount={pageCount()}
-                                                onPageChange={changePage}
-                                                previousLinkClassName="paginate"
-                                                nextLinkClassName="paginate"
-                                                activeClassName="active"
-                                            />
-                                        </nav>
-                                    </div>
-                                </div>
+                        <div className="dataTable-top mb-2">
+                            <div className="col-4 col-sm-6 col-md-4 dataTable-dropdown">
+                                <select name="select" ref={selectRef} className="dataTable-selector text-center" value={usersPerPage.select} onChange={handleInputChange}>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value={users.length}>Todos</option>
+                                </select>
+                                <label style={{ fontSize: "12px", marginLeft: "5px" }}> Usuarios por página</label>
                             </div>
+
+                            <div className="col-4 col-sm-6 col-md-4 dataTable-search">
+                                <ReactTooltip id="toolTipFilter" place="left" type="dark" effect="solid">
+                                    Para filtrar por <em>rol</em> ingrese el valor seguido de un espacio
+                                </ReactTooltip>
+                                <input data-tip data-for="toolTipFilter" className="col-12 col-sm-7 col-md-7 col-lg-8 dataTable-input" placeholder="Filtrar..." type="text" value={filter} onChange={handleFilter} />
+                                <label style={{ fontSize: "12px", marginLeft: "5px" }}>{range()} {range() === 1 ? "Usuario" : "Usuarios"}</label>
+                            </div>
+                        </div>
+
+
+                        <div className="dataTable-container">
+                            <ReactTooltip id="toolTipSort" place="top" type="dark" effect="solid">
+                                Ordenar<i className="bi bi-arrow-down-up" />
+                            </ReactTooltip>
+                            <ReactTooltip id="toolTipInfo" place="top" type="dark" effect="solid">
+                                Rol 2: Usuario Interno
+                                <br />
+                                Rol 3: Usuario Externo
+                            </ReactTooltip>
+                            <table className="table datatable table-hover text-center">
+                                <TableUsersHeader onSorting={(field, order) => setSorting({ field, order })} />
+                                <tbody>
+                                    {users.length > 0 ?
+                                        <>{displayUsers}</>
+                                        : (
+                                            <tr>
+                                                <td colSpan={6}><h2 className="text-center">¡No hay información!</h2></td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                            {/* <!-- End Table with stripped rows --> */}
+                        </div>
+
+                        <div className="dataTable-bottom">
+                            <div className="dataTable-info d-none d-sm-block mt-4">
+                                <span style={{ fontSize: "12px" }}>Mostrando {firstItemShowedPerPage + 1} a {pageNumber + 1 === pageCount() ?
+                                    range()
+                                    :
+                                    lastItemShowedPerPage} de {range()}
+                                </span>
+                            </div>
+                            <nav className="dataTable-pagination mt-3">
+                                <ReactPaginate
+                                    breakLabel="..."
+                                    previousLabel={<i className="bi bi-caret-left-fill" />}
+                                    nextLabel={<i className="bi bi-caret-right-fill" />}
+                                    marginPagesDisplayed={0}
+                                    pageRangeDisplayed={5}
+                                    pageCount={pageCount()}
+                                    onPageChange={changePage}
+                                    previousLinkClassName="paginate"
+                                    nextLinkClassName="paginate"
+                                    activeClassName="active"
+                                />
+                            </nav>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </>
     )
 }
