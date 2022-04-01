@@ -37,7 +37,7 @@ function FormUser({ usersDb, createUser, updateUser, userToEdit, setUserToEdit, 
                             <img src={pathImage} alt="Profile" className="img-fluid rounded-circle center-img avatar mb-2" />
                             <label data-tip data-for="toolTipUpload" className="btn my-btn-edit custom-file-upload m-1">
                                 <ReactTooltip id="toolTipUpload" place="top" type="dark" effect="solid">
-                                    Subir nueva imágen de perfil
+                                    Subir imágen de perfil
                                 </ReactTooltip>
                                 <input type="file" filename="avatar" onChange={onChangeFile} />
                                 <i className="bi bi-upload" />

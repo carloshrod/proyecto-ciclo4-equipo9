@@ -1,5 +1,4 @@
 import { helpHttp } from '../helpers/helpHttp';
-import jwtDecode from 'jwt-decode';
 import { toast } from 'react-toastify';
 
 let api = helpHttp();
@@ -18,14 +17,7 @@ export const login = (user) => {
         }
         if (res.estado === "ok") {
             localStorage.setItem("token", res.token);
-            const payload = jwtDecode(res.token);
-            if (payload.rol === 3) {
-                window.location.href = res.url;
-            } else if (payload.rol === 2) {
-                window.location.href = res.url;
-            } else if (payload.rol === 1) {
-                window.location.href = res.url;
-            }
+            window.location.href = res.url;
         } else {
             toast.error(res.msg)
         }

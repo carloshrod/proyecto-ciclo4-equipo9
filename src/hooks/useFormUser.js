@@ -4,7 +4,7 @@ import { validateFormUser } from '../tools/validateForm';
 
 const defaultAvatar = process.env.REACT_APP_DEFAULT_AVATAR;
 
-export const useFormUser = (initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit, deleteAvatar) => {
+export const useFormUser = (initialForm, usersDb, createUser, updateUser, userToEdit, setUserToEdit) => {
     const [form, setForm] = useState(initialForm);
     const [file, setFile] = useState("");
     const [imgUrl, setImgUrl] = useState("")

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getLoggedUser } from '../auth/getLoggedUser';
 import FormChangePassword from './forms/FormChangePassword'
 
 export const initialForm = {
@@ -9,12 +10,12 @@ export const initialForm = {
 
 const defaultAvatar = process.env.REACT_APP_DEFAULT_AVATAR;
 
-function BodyMyProfile({ payload, usersDb, setUserToEdit, formEdit, changePassword }) {
-    const user = usersDb.filter((user) => user.nro_doc === payload.nro_doc)
-    const currentUser = user[0]
+function BodyMyProfile({ usersDb, payload, setUserToEdit, formEdit, changePassword }) {
+    const loggedUser = getLoggedUser(usersDb, payload)
+    const {imgUrl, nombres, apellidos, nro_doc, email, telefono, direccion} = loggedUser || [];
 
     const handleEdit = (e) => {
-        setUserToEdit(currentUser);
+        setUserToEdit(loggedUser);
     }
 
     return (
@@ -37,8 +38,8 @@ function BodyMyProfile({ payload, usersDb, setUserToEdit, formEdit, changePasswo
                 <div className="tab-pane fade show active profile-overview" id="profile-overview">
 
                     <div className="card-body profile-card d-flex flex-column align-items-center mt-3">
-                        <img src={payload.avatar || defaultAvatar} alt="Profile" className="img-fluid rounded-circle avatar" />
-                        <h2 className="text-center mt-3">{payload.nombre}</h2>
+                        <img src={imgUrl || defaultAvatar} alt="Profile" className="img-fluid rounded-circle avatar" />
+                        <h2 className="text-center mt-3">{nombres+" "+apellidos}</h2>
                         <div className="social-links mt-3 mb-3">
                             <a href="https://twitter.com" target="_blank" rel="noreferrer" className="twitter"><i className="bi bi-twitter"></i></a>
                             <a href="https://es-la.facebook.com" target="_blank" rel="noreferrer" className="facebook"><i className="bi bi-facebook"></i></a>
@@ -50,27 +51,27 @@ function BodyMyProfile({ payload, usersDb, setUserToEdit, formEdit, changePasswo
                     <div className="col-12 col-sm-8 text-center mx-auto">
                         <div className="row justify-content-center">
                             <div className="col-5 col-sm-5 col-md-4 col-lg-4 label">Nombre Completo:</div>
-                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{payload.nombre}</div>
+                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{nombres+" "+apellidos}</div>
                         </div>
 
                         <div className="row justify-content-center">
                             <div className="col-5 col-sm-5 col-md-4 col-lg-4 label">Número de Documento:</div>
-                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{payload.nro_doc}</div>
+                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{nro_doc}</div>
                         </div>
 
                         <div className="row justify-content-center">
                             <div className="col-5 col-sm-5 col-md-4 col-lg-4 label">Correo Electrónico:</div>
-                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{payload.usuario}</div>
+                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{email}</div>
                         </div>
 
                         <div className="row justify-content-center">
                             <div className="col-5 col-sm-5 col-md-4 col-lg-4 label">Dirección de Residencia:</div>
-                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{payload.direccion}</div>
+                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{direccion}</div>
                         </div>
 
                         <div className="row justify-content-center">
                             <div className="col-5 col-sm-5 col-md-4 col-lg-4 label">Teléfono:</div>
-                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{payload.telefono}</div>
+                            <div className="col-7 col-sm-5 col-md-6 col-lg-6 vh-center">{telefono}</div>
                         </div>
                     </div>
 
@@ -82,8 +83,8 @@ function BodyMyProfile({ payload, usersDb, setUserToEdit, formEdit, changePasswo
 
                 <div className="tab-pane fade pt-3" id="profile-change-password">
                     <div className="card-body profile-card d-flex flex-column align-items-center">
-                        <img src={payload.avatar || defaultAvatar} alt="Profile" className="img-fluid rounded-circle avatar" />
-                        <h2 className="text-center mt-3">{payload.nombre}</h2>
+                        <img src={imgUrl || defaultAvatar} alt="Profile" className="img-fluid rounded-circle avatar" />
+                        <h2 className="text-center mt-3">{nombres+" "+apellidos}</h2>
                         <div className="social-links mt-3 mb-3">
                             <a href="https://twitter.com" target="_blank" rel="noreferrer" className="twitter"><i className="bi bi-twitter"></i></a>
                             <a href="https://es-la.facebook.com" target="_blank" rel="noreferrer" className="facebook"><i className="bi bi-facebook"></i></a>

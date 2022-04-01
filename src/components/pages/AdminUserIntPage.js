@@ -126,11 +126,15 @@ function AdminUserIntPage({ tipo, page }) {
             {auth() && rol !== 3 ?
                 <>
                     <main className={inactive ? "toggle-sidebar" : ""}>
-                        <HeaderAdmin btn={<div onClick={() => { setInactive(!inactive) }}>
-                            <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
-                        </div>} />
+                        <HeaderAdmin
+                            btn={<div onClick={() => { setInactive(!inactive) }}>
+                                <i className="nav-home-ue bi bi-list toggle-sidebar-btn"></i>
+                            </div>}
+                            usersDb={usersDb}
+                            payload={payload}
+                        />
 
-                        <Sidebar/>
+                        <Sidebar />
 
                         {page === "home" &&
                             <ContainerAdmin titulo="Dashboard" linkTo="#">
@@ -147,13 +151,12 @@ function AdminUserIntPage({ tipo, page }) {
                         {page === "myProfile" &&
                             <ContainerAdmin titulo="Mi Perfil" linkTo="#" >
                                 <BodyMyProfile
-                                    payload={payload}
                                     usersDb={usersDb}
+                                    payload={payload}
                                     setUserToEdit={setUserToEdit}
                                     changePassword={changePassword}
                                     formEdit={
                                         <FormUser
-                                            usersDb={usersDb}
                                             updateUser={updateUser}
                                             userToEdit={userToEdit}
                                             setUserToEdit={setUserToEdit}

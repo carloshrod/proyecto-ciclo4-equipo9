@@ -36,7 +36,7 @@ function UserExtPage({ page }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { 
+    const {
         updateUser, // Editar mi perfil
         changePassword // Cambiar contraseña
     } = useCrudUsers(usersDb, setUsersDb)
@@ -56,7 +56,7 @@ function UserExtPage({ page }) {
             {auth() && rol === 3 ?
                 <>
                     <main className="container-bg">
-                        <Header />
+                        <Header usersDb={usersDb} payload={payload} />
 
                         {page === "home" &&
                             <Container titulo="Plataforma de Gestión Catastral" className="container d-flex align-items-center min-vh-100">
@@ -66,14 +66,12 @@ function UserExtPage({ page }) {
                         {page === "myProfile" &&
                             <Container titulo="Mi Perfil" className="container d-flex align-items-center min-vh-100">
                                 <BodyMyProfile
-                                    payload={payload}
                                     usersDb={usersDb}
+                                    payload={payload}
                                     changePassword={changePassword}
                                     setUserToEdit={setUserToEdit}
                                     formEdit={
                                         <FormUser
-                                            titulo="Datos del usuario a editar"
-                                            usersDb={usersDb}
                                             updateUser={updateUser}
                                             userToEdit={userToEdit}
                                             setUserToEdit={setUserToEdit}

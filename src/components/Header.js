@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { auth } from '../auth/auth';
-import { getPayload } from '../auth/getPayload';
 import { logout } from '../auth/logout';
+import { getLoggedUser } from '../auth/getLoggedUser';
 
 const defaultAvatar = process.env.REACT_APP_DEFAULT_AVATAR;
 
-function Header() {
-    const payload = getPayload();
+function Header({ usersDb, payload }) {
+    const { imgUrl, nombres } = getLoggedUser(usersDb, payload) || [];
 
     return (
         <>
@@ -41,8 +41,8 @@ function Header() {
                             <ul className="d-flex align-items-center">
                                 <li className="nav-item dropdown pe-3">
                                     <Link className="nav-profile d-flex align-items-center pe-0" to="" data-bs-toggle="dropdown">
-                                        <img src={payload.avatar || defaultAvatar} alt="Profile" className="rounded-circle" />
-                                        <span className="nav-home-ue dropdown-toggle ps-2">{payload.nombre}</span>
+                                        <img src={imgUrl || defaultAvatar} alt="Profile" className="rounded-circle" />
+                                        <span className="nav-home-ue dropdown-toggle ps-2">{nombres}</span>
                                     </Link>
 
                                     <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
