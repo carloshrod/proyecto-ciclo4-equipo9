@@ -71,8 +71,8 @@ const InputForm = ({ id, name, type, className, logo, errorMessage, label, onCha
                                     focused={focused.toString()}
                                 />}
                             {type === "password" &&
-                                <button className="btn-show-pass input-group-text" type="button" onMouseOver={handleShow} onMouseOut={handleShow}>
-                                    <i className="bi bi-eye-fill"></i>
+                                <button className="btn-show-pass input-group-text" type="button" onClick={handleShow}>
+                                    <i className={showPassword ? "bi bi-eye-slash-fill":"bi bi-eye-fill"}></i>
                                 </button>
                             }
                             <span className="errorMsg col-12">{errorMessage}</span>

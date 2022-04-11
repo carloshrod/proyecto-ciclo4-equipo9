@@ -60,7 +60,6 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
         if (validateFormUser(form, usersDb, userToEdit) === true) {
             if (form.estado === null) {
                 const formData = new FormData();
-                formData.append("estado", 1)
                 formData.append("nombres", form.nombres)
                 formData.append("apellidos", form.apellidos)
                 formData.append("tipo_doc", form.tipo_doc)
@@ -70,7 +69,11 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
                 formData.append("telefono", form.telefono)
                 formData.append("direccion", form.direccion)
                 formData.append("rol", 2)
-                formData.append("avatar", file)
+                formData.append("estado", 1)
+                formData.append("created_predios", 0)
+                formData.append("edited_predios", 0)
+                formData.append("deleted_predios", 0)        
+                formData.append("avatar", file) // Archivo de imágen
                 createUser(formData);
                 handleReset();
                 setReset(!reset);
@@ -84,7 +87,7 @@ export const useFormUser = (initialForm, usersDb, createUser, updateUser, userTo
                 formData.append("telefono", form.telefono)
                 formData.append("direccion", form.direccion)
                 formData.append("imgUrl", imgUrl)
-                formData.append("avatar", file)
+                formData.append("avatar", file) // Archivo de imágen
                 updateUser(formData);
                 setFile("");
             }

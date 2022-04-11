@@ -11,9 +11,6 @@ export const useCrudPredios = (prediosDb, setPrediosDb, usersDb, setUsersDb, his
     // ********** Crear Predio **********
     const createPredio = (predio) => {
         predio.estado = 1;
-        // let vrPredio = predio.valor_predio.replace(/[$.]/g, '');
-        // let vrPredial = vrPredio * 0.01;
-        // predio.valor_predial = Math.round(vrPredial);
         let endpoint = url + process.env.REACT_APP_API_GUARDAR_P;
         let options = {
             body: predio,

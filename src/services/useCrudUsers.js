@@ -50,7 +50,7 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
             if (res.data) {
-                toast.success(res.msg);
+                toast.success(res.msg, { autoClose: 3000 });
                 setTimeout(() => {
                     window.location.href = process.env.REACT_APP_URL_LOGIN
                 }, 3000);
@@ -140,7 +140,7 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
             }
             if (!res.err) {
                 if (res.estado === "ok") {
-                    toast.success(res.msg, {autoClose: 3000})
+                    toast.success(res.msg, { autoClose: 3000 })
                     setTimeout(() => {
                         logout();
                     }, 3000);
@@ -189,7 +189,7 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
         api.post(endpoint, options).then((res) => {
             if (!res.error) {
                 if (res.estado === "ok") {
-                    toast.success(res.msg, {autoClose: 3000})
+                    toast.success(res.msg, { autoClose: 3000 })
                     setTimeout(() => {
                         window.location.href = process.env.REACT_APP_URL_LOGIN
                     }, 3000);
