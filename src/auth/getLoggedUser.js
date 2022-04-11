@@ -9,6 +9,6 @@ export const getLoggedUser = (usersDb, payload) => {
             return false
         }    
     } catch (error) {
-        console.log(error)
+        return false
     }
 }

@@ -13,6 +13,8 @@ export const useFormPredio = (initialForm, prediosDb, createPredio, updatePredio
         }
     }, [predioToEdit, initialForm]);
 
+    form.valor_predial = Math.round((form.valor_predio.replace(/[$.]/g, '')) * 0.01) || "";
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm({
@@ -28,7 +30,7 @@ export const useFormPredio = (initialForm, prediosDb, createPredio, updatePredio
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         if (validateFormPredio(form, prediosDb, predioToEdit)) {
             if (form.estado === null) {
                 createPredio(form);
@@ -36,7 +38,7 @@ export const useFormPredio = (initialForm, prediosDb, createPredio, updatePredio
                 setReset(!reset)
             } else {
                 updatePredio(form);
-            }    
+            }
         }
     };
 

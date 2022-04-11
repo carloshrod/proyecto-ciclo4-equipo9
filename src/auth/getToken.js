@@ -1,4 +1,8 @@
 export function getToken() {
-    const token = localStorage.getItem("token");
-    return token
+    try {
+        const token = localStorage.getItem("token");
+        return token    
+    } catch (error) {
+        console.log(error)
+    }
 }

@@ -19,7 +19,6 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
             },
         };
         await axios.post(endpoint, user, options).then((res) => {
-            console.log(res)
             if (!res.data.estado) {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
@@ -51,11 +50,10 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
             if (res.data) {
-                setUsersDb([...usersDb, res.data]);
                 toast.success(res.msg);
                 setTimeout(() => {
                     window.location.href = process.env.REACT_APP_URL_LOGIN
-                }, 5000);
+                }, 3000);
             } else {
                 toast.error(res.msg);
             }
@@ -142,10 +140,10 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
             }
             if (!res.err) {
                 if (res.estado === "ok") {
-                    toast.success(res.msg)
+                    toast.success(res.msg, {autoClose: 3000})
                     setTimeout(() => {
                         logout();
-                    }, 5000);
+                    }, 3000);
                 } else {
                     toast.error(res.msg)
                 }
@@ -168,9 +166,13 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
                 toast.error("No hay conexión con la base de datos!!!", { autoClose: 10000, theme: "colored" })
             }
             if (!res.error) {
-                toast.info(res.msg)
+                if (res.estado === "ok") {
+                    toast.info(res.msg)
+                } else {
+                    toast.error(res.msg)
+                }
             } else {
-                toast.info(res.msg)
+                toast.error(res.msg)
             }
         })
     }
@@ -187,10 +189,10 @@ export const useCrudUsers = (usersDb, setUsersDb) => {
         api.post(endpoint, options).then((res) => {
             if (!res.error) {
                 if (res.estado === "ok") {
-                    toast.success(res.msg)
+                    toast.success(res.msg, {autoClose: 3000})
                     setTimeout(() => {
                         window.location.href = process.env.REACT_APP_URL_LOGIN
-                    }, 5000);
+                    }, 3000);
                 } else {
                     toast.error(res.msg)
                 }
